@@ -1,0 +1,30 @@
+<script src='{{ 'button.js' | asset_url }}' type='module' defer='defer'></script>
+
+{% assign button_type = button_type | default: 'button' %}
+{% assign button_text = button_text | default: 'Button' %}
+{% assign button_url = button_url | default: '#' %}
+{% assign button_onclick = button_onclick | default: null %}
+
+{% assign styles = 'tw-border tw-border-black tw-flex tw-text-black tw-items-center tw-justify-center tw-uppercase tw-py-[10px] tw-px-[20px]' %}
+
+<button-component>
+  {%- if button_type == 'link' %}
+    <a
+      id='button'
+      class='{{ styles }}'
+      href='{{ button_url }}'
+    >
+      <span class=''>{{ button_text }}</span>
+    </a>
+  {% else %}
+    <button
+      style='border-radius: 50px;'
+      id='button'
+      class='{{ styles }}'
+      onclick='{%if button_onclick != null%}{{button_onclick}}{%endif %}'
+      type='{% if button_action_type != null %}{{button_action_type}}{% endif %}'
+    >
+      <span class=''>{{ button_text }}</span>
+    </button>
+  {% endif %}
+</button-component>

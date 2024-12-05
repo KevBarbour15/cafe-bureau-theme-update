@@ -1,0 +1,83 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
+  <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+{%- endif -%}
+
+<div class='tw-container tw-pt-[80px]'>
+  {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
+  <div>
+    {%- if collection.products.size == 0 -%}
+      <h2>No products found</h2>
+    {%- else -%}
+      <ul
+        id='product-grid'
+        data-id='{{ section.id }}'
+        class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-3'
+      >
+        {%- for product in collection.products -%}
+          {% if product.type == 'Clothing' or product.type == 'Accessories' %}
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 4 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
+
+            {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+            {% if product_colors and product_colors.values.size > 1 %}
+              {% for color in product_colors.values %}
+                {% for variant in product.variants %}
+                  {% if variant.option2 == color %}
+                    <li class='tw-bg-red-500'>
+                      <a href='{{ variant.url }}' class='tw-cursor-pointer'>
+                        {% render 'card-product-og',
+                          title: product.title,
+                          color: color,
+                          colors: product_colors.values,
+                          lazy_load: lazy_load,
+                          product: product,
+                          variant: variant
+                        %}
+                      </a>
+                    </li>
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% else %}
+              <li class='tw-bg-blue-500'>
+                <a href='{{ product.selected_or_first_available_variant.url }}' class='tw-cursor-pointer'>
+                  {% render 'card-product-og',
+                    title: product.title,
+                    color: product_colors.values.first,
+                    colors: product_colors.values,
+                    lazy_load: lazy_load,
+                    product: product,
+                    variant: product.selected_or_first_available_variant
+                  %}
+                </a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "section"
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+<div class='tw-w-screen tw-h-dvh tw-bg-black'>
+  {%- if section.settings.video != blank -%}
+    <div class='tw-w-full tw-h-full '>
+      {{
+        section.settings.video
+        | video_tag:
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          class: 'tw-w-full tw-h-full tw-object-cover tw-object-center'
+      }}
+    </div>
+  {% elsif section.settings.image != blank %}
+    <img
+      src='{{ section.settings.image | image_url: width: 1000 }}'
+      alt='{{ product.title }}'
+      class='tw-w-full tw-h-full tw-object-cover'
+      width='100%'
+      height='100%'
+    >
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Media Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Media Banner"
+    }
+  ]
+}
+{% endschema %}

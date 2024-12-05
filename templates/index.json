@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "media_banner": {
+      "type": "media-banner",
+    },
+
+  },
+  "order": [
+    "media_banner",
+  ]
+}

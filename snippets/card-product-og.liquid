@@ -1,0 +1,41 @@
+{% assign title = title %}
+{% assign color = color %}
+{% assign lazy_load = lazy_load %}
+{% assign product = product %}
+{% assign variant = variant %}
+
+<div class='tw-flex tw-flex-col tw-gap-2 tw-justify-between tw-h-full tw-border tw-border-black'>
+  {% if title == 'Fernet Crewneck' or title == 'Biker Babe' %}
+    <script>
+      console.log({{ product | json }});
+    </script>
+  {% endif %}
+
+  {% if variant.featured_media.preview_image != blank %}
+    <img
+      src='{{ variant.featured_media.preview_image | image_url: width: 1000 }}'
+      alt='{{ product.title }}'
+      class='tw-w-full tw-h-auto tw-object-cover'
+      width='100%'
+      height='auto'
+      {% if lazy_load %}
+        loading='lazy'
+      {% endif %}
+    >
+  {% elsif product.featured_image != blank %}
+    <img
+      src='{{ product.featured_image | image_url: width: 1000 }}'
+      alt='{{ product.title }}'
+      class='tw-w-full tw-h-auto tw-object-cover'
+      width='100%'
+      height='auto'
+      {% if lazy_load %}
+        loading='lazy'
+      {% endif %}
+    >
+  {% endif %}
+  <div class='tw-block'>
+    <p class='tw-text-base'>{{ title }}</p>
+    <p class='tw-text-base'>{{ color }}</p>
+  </div>
+</div>

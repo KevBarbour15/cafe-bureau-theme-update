@@ -1,0 +1,30 @@
+{% assign variant_images = variant_images | default: blank %}
+{% assign hover_video = hover_video | default: blank %}
+
+<media-gallery>
+  {% if hover_video != blank %}
+    <div class='tw-w-full tw-h-auto tw-aspect-square tw-relative'>
+      <video
+        src='{{ hover_video | file_url }}'
+        autoplay
+        muted
+        playsinline
+        loop
+        class='tw-w-full tw-h-full tw-object-cover'
+      ></video>
+    </div>
+  {% endif %}
+  {% if variant_images != blank %}
+    <div class='tw-w-full tw-h-auto tw-aspect-square'>
+      {% for image in variant_images %}
+        <img
+          src='{{ image | image_url: width: 1000 }}'
+          alt='{{ product.title }}'
+          class='tw-w-full tw-h-full tw-object-cover'
+          width='100%'
+          height='auto'
+        >
+      {% endfor %}
+    </div>
+  {% endif %}
+</media-gallery>

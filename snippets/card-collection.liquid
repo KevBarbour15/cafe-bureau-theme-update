@@ -1,0 +1,71 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+  - placeholder_image: {String} Placeholder image when collection is empty (optional)
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{%- liquid
+  assign ratio = 1
+  if card_collection.featured_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif card_collection.featured_image and media_aspect_ratio == 'adapt'
+    assign ratio = card_collection.featured_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+  assign card_color_scheme = settings.card_color_scheme
+  assign card_style = settings.card_style
+  if wrapper_class == null or wrapper_class == 'none'
+    assign card_color_scheme = settings.collection_card_color_scheme
+    assign card_style = settings.collection_card_style
+  endif
+-%}
+
+<div class="">
+  <div class="card card--{{ settings.card_style }} card--collection{% if variant.image == nil %} card--text-only card--soft{% endif %}">
+    <div class="card__inner">
+      {%- if variant.image -%}
+        <div class="media media--transparent media--hover-effect">
+          <img
+            srcset="{%- if variant.image.width >= 165 -%}{{ variant.image | image_url: width: 165 }} 165w,{%- endif -%}
+              {%- if variant.image.width >= 360 -%}{{ variant.image | image_url: width: 360 }} 360w,{%- endif -%}
+              {%- if variant.image.width >= 533 -%}{{ variant.image | image_url: width: 533 }} 533w,{%- endif -%}
+              {%- if variant.image.width >= 720 -%}{{ variant.image | image_url: width: 720 }} 720w,{%- endif -%}
+              {{ variant.image | image_url }} {{ variant.image.width }}w"
+            src="{{ variant.image | image_url: width: 533 }}"
+            sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+            alt="{{ variant.title | escape }}"
+            loading="lazy"
+            width="{{ variant.image.width }}"
+            height="{{ variant.image.height }}"
+            class="motion-reduce"
+          >
+        </div>
+      {%- endif -%}
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading">
+            <a href="{{ product.url }}?variant={{ variant.id }}" class="full-unstyled-link">
+              {{ product.title }} - {{ variant.title }}
+            </a>
+          </h3>
+          {%- if variant.price -%}
+            <div class="card__price">
+              {% render 'price', product: product, variant: variant %}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

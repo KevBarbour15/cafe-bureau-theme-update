@@ -1,0 +1,73 @@
+<script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
+<script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
+<script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+
+<product-info
+  data-section='{{ section.id }}'
+  data-product-id='{{ product.id }}'
+  data-update-url='true'
+  data-url='{{ product.url }}'
+  data-variants='{{ product.variants | json }}'
+>
+  <div class='tw-container'>
+    <div class='tw-w-full tw-h-auto md:tw-flex tw-pt-[80px] tw-relative tw-overflow-y-auto md:tw-min-h-screen'>
+      <div class='md:tw-w-1/2 tw-h-screen'>
+        {% assign images = product.images | map: 'src' %}
+        {% assign hover_video = product.metafields.custom.hover_video %}
+        {% assign selected_variant = product.selected_or_first_available_variant %}
+
+        {% if hover_video != blank or images != blank %}
+          {% render 'product-media-gallery', variant_images: images, hover_video: hover_video %}
+        {% endif %}
+      </div>
+
+      <div style='position: sticky; top: 80px;' class='md:tw-w-1/2 md:tw-h-fit tw-top-[80px] tw-sticky '>
+        <div class='tw-h-fit tw-w-full md:tw-pl-md'>
+          {% if product.title != blank or product.price != blank %}
+            <div class='tw-flex tw-flex-col tw-gap-lg tw-mb-lg'>
+              <p class='p3'>{{ product.title }}</p>
+              <p class='p3'>{{ product.price | money }}</p>
+            </div>
+          {% endif %}
+
+          <script>
+            console.log({{ product | json }});
+          </script>
+
+          <div class='tw-flex tw-flex-col tw-gap-lg'></div>
+          {% render 'button', button_type: 'button', button_text: 'Add to Cart' %}
+          {% if product.description != blank %}
+            <accordion-component>
+              <div
+                id='accordion-header'
+                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-pb-sm tw-mt-md'
+              >
+                <p>Product Description</p>
+                <div
+                  id='down-icon'
+                  class='tw-transform tw-rotate-180 tw-text-3xl'
+                >
+                  ↑
+                </div>
+              </div>
+              <div
+                id='accordion-content'
+                class='tw-max-h-0 tw-overflow-hidden tw-opacity-0 tw-pr-sm md:tw-pr-md tw-pb-sm tw-border-b tw-border-transparent'
+              >
+                <span id='accordion-text' class='tw-text-balance'>{{ product.description }}</span>
+              </div>
+            </accordion-component>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</product-info>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "section"
+}
+{% endschema %}
