@@ -36,10 +36,10 @@
     <script src='{{ 'MorphSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'ScrambleTextPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'SplitText.min.js' | asset_url }}' defer='defer'></script>
-
+    <script src='{{ 'ScrollTrigger.min.js' | asset_url }}' defer='defer'></script>
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
-        gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, ScrambleTextPlugin, SplitText);
+        gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, ScrambleTextPlugin, SplitText, ScrollTrigger);
 
         gsap.config({
           nullTargetWarn: false,

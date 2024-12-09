@@ -9,6 +9,8 @@ class Button extends HTMLElement {
       borderRadius: '2px',
       duration: 0.2,
       ease: 'linear',
+      backgroundColor: '#000',
+      color: '#fff',
       paused: true,
     });
 

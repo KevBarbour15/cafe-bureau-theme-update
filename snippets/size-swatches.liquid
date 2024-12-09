@@ -1,0 +1,31 @@
+{% assign size_options = size_options %}
+{% assign active_size = active_size | default: size_options.values.first %}
+
+{% if size_options.values.size > 1 %}
+  <script src='{{ 'size-swatches.js' | asset_url }}' type='module' defer='defer'></script>
+{% endif %}
+
+<size-swatches-component>
+  <div class='tw-flex tw-flex-wrap tw-gap-6' role='radiogroup'>
+    {% for size in size_options.values %}
+      <label class='size-swatch tw-cursor-pointer'>
+        <input
+          type='radio'
+          name='size-choice'
+          value='{{ size }}'
+          class='tw-sr-only'
+          {% if size == active_size %}
+            checked
+          {% endif %}
+        >
+        <span
+          style='background-color: white; border-radius: {% if size != active_size %}50px; {%else%}2px;{% endif %}'
+          aria-hidden='true'
+          class='size-swatch-border tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-py-[10px] tw-px-[10px] tw-min-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black'
+        >
+          {{ size }}
+        </span>
+      </label>
+    {% endfor %}
+  </div>
+</size-swatches-component>

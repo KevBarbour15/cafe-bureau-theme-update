@@ -1,3 +1,4 @@
+<script src='{{ 'product-animation.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
@@ -10,42 +11,63 @@
   data-variants='{{ product.variants | json }}'
 >
   <div class='tw-container'>
-    <div class='tw-w-full tw-h-auto md:tw-flex tw-pt-[80px] tw-relative tw-overflow-y-auto md:tw-min-h-screen'>
-      <div class='md:tw-w-1/2 tw-h-screen'>
+    <div id='image-container' class='tw-w-full md:tw-flex tw-h-fit'>
+      <div class='md:tw-w-1/2 tw-pt-[80px]'>
         {% assign images = product.images | map: 'src' %}
-        {% assign hover_video = product.metafields.custom.hover_video %}
-        {% assign selected_variant = product.selected_or_first_available_variant %}
+        {% assign product_video = product.metafields.custom.product_video %}
+        {% assign product_details_video = product.metafields.custom.product_details_video %}
+        {% assign product_image_front = product.metafields.custom.product_image_front %}
+        {% assign product_image_back = product.metafields.custom.product_image_back %}
 
-        {% if hover_video != blank or images != blank %}
-          {% render 'product-media-gallery', variant_images: images, hover_video: hover_video %}
+        {% if product_video != blank or images != blank %}
+          {% render 'product-media-gallery',
+            variant_images: images,
+            product_video: product_video,
+            product_details_video: product_details_video,
+            product_image_front: product_image_front,
+            product_image_back: product_image_back
+          %}
         {% endif %}
       </div>
 
-      <div style='position: sticky; top: 80px;' class='md:tw-w-1/2 md:tw-h-fit tw-top-[80px] tw-sticky '>
-        <div class='tw-h-fit tw-w-full md:tw-pl-md'>
+      <div
+        id='details-container'
+        class='md:tw-w-1/2  tw-pt-[80px] tw-h-fit'
+      >
+        <div class='tw-h-fit tw-w-full md:tw-px-md tw-block'>
           {% if product.title != blank or product.price != blank %}
-            <div class='tw-flex tw-flex-col tw-gap-lg tw-mb-lg'>
-              <p class='p3'>{{ product.title }}</p>
+            <div class='tw-mb-lg'>
+              <p class='p3 tw-mb-lg'>{{ product.title }}</p>
               <p class='p3'>{{ product.price | money }}</p>
             </div>
           {% endif %}
 
-          <script>
-            console.log({{ product | json }});
-          </script>
+          {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+          {% if product_colors != blank %}
+            <div class='tw-mb-lg'>
+              {% render 'color-swatches', color_options: product_colors %}
+            </div>
+          {% endif %}
 
-          <div class='tw-flex tw-flex-col tw-gap-lg'></div>
+          {% assign product_sizes = product.options_with_values | where: 'name', 'Size' | first %}
+          {% if product_sizes != blank %}
+            <div class='tw-mb-lg'>
+              {% render 'size-swatches', size_options: product_sizes %}
+            </div>
+          {% endif %}
+
           {% render 'button', button_type: 'button', button_text: 'Add to Cart' %}
+
           {% if product.description != blank %}
             <accordion-component>
               <div
                 id='accordion-header'
-                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-pb-sm tw-mt-md'
+                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-pb-sm tw-mt-md tw-gap-md'
               >
                 <p>Product Description</p>
                 <div
                   id='down-icon'
-                  class='tw-transform tw-rotate-180 tw-text-3xl'
+                  class='tw-transform tw-rotate-90 tw-text-3xl'
                 >
                   ↑
                 </div>

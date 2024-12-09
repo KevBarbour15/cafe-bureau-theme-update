@@ -14,66 +14,74 @@
   <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
   <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
 {%- endif -%}
+<script src='{{ 'product-card-hover.js' | asset_url }}' defer='defer'></script>
 
-<div class='tw-container tw-pt-[80px]'>
-  {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-  <div>
-    {%- if collection.products.size == 0 -%}
-      <h2>No products found</h2>
-    {%- else -%}
-      <ul
-        id='product-grid'
-        data-id='{{ section.id }}'
-        class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-3'
-      >
-        {%- for product in collection.products -%}
-          {% if product.type == 'Clothing' or product.type == 'Accessories' %}
-            {% assign lazy_load = false %}
-            {%- if forloop.index > 4 -%}
-              {%- assign lazy_load = true -%}
-            {%- endif -%}
+<product-card-hover-component>
+  <div class='tw-container tw-pt-[80px]'>
+    {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
+    <div>
+      {%- if collection.products.size == 0 -%}
+        <h2>No products found</h2>
+      {%- else -%}
+        <ul
+          id='product-grid'
+          data-id='{{ section.id }}'
+          class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-3'
+        >
+          {%- for product in collection.products -%}
+            {% if product.type == 'Clothing' or product.type == 'Accessories' %}
+              {% assign lazy_load = false %}
+              {%- if forloop.index > 3 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
 
-            {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
-            {% if product_colors and product_colors.values.size > 1 %}
-              {% for color in product_colors.values %}
-                {% for variant in product.variants %}
-                  {% if variant.option2 == color %}
-                    <li class='tw-bg-red-500'>
-                      <a href='{{ variant.url }}' class='tw-cursor-pointer'>
-                        {% render 'card-product-og',
-                          title: product.title,
-                          color: color,
-                          colors: product_colors.values,
-                          lazy_load: lazy_load,
-                          product: product,
-                          variant: variant
-                        %}
-                      </a>
-                    </li>
-                    {% break %}
-                  {% endif %}
+              {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+              {% if product_colors and product_colors.values.size > 1 %}
+                {% for color in product_colors.values %}
+                  {% for variant in product.variants %}
+                    {% if variant.option2 == color %}
+                      <li class=''>
+                        <a
+                          href='{{ product.url }}?variant={{ variant.id }}'
+                          class='tw-cursor-pointer'
+                        >
+                          {% render 'card-product-og',
+                            title: product.title,
+                            variant_color: color,
+                            variant_colors: product_colors,
+                            lazy_load: lazy_load,
+                            product: product,
+                            variant: variant,
+                            idx: forloop.index0
+                          %}
+                        </a>
+                      </li>
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            {% else %}
-              <li class='tw-bg-blue-500'>
-                <a href='{{ product.selected_or_first_available_variant.url }}' class='tw-cursor-pointer'>
-                  {% render 'card-product-og',
-                    title: product.title,
-                    color: product_colors.values.first,
-                    colors: product_colors.values,
-                    lazy_load: lazy_load,
-                    product: product,
-                    variant: product.selected_or_first_available_variant
-                  %}
-                </a>
-              </li>
+              {% else %}
+                <li class=''>
+                  <a href='{{ product.first_available_variant.url }}' class='tw-cursor-pointer'>
+                    {% render 'card-product-og',
+                      title: product.title,
+                      variant_color: product_colors.values.first,
+                      variant_colors: product_colors,
+                      lazy_load: lazy_load,
+                      product: product,
+                      variant: product.selected_or_first_available_variant,
+                      idx: forloop.index0
+                    %}
+                  </a>
+                </li>
+              {% endif %}
             {% endif %}
-          {% endif %}
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
-</div>
+</product-card-hover-component>
 
 {% schema %}
 {
