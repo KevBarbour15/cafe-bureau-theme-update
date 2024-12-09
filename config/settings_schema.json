@@ -1311,9 +1311,9 @@
       },
       {
         "type": "text",
-        "id": "social_facebook_link",
-        "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_facebook_link.info"
+        "id": "social_meta_link",
+        "label": "t:settings_schema.social-media.settings.social_meta_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_meta_link.info"
       },
       {
         "type": "text",
@@ -1335,9 +1335,9 @@
       },
       {
         "type": "text",
-        "id": "social_twitter_link",
-        "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_twitter_link.info"
+        "id": "social_x_link",
+        "label": "t:settings_schema.social-media.settings.social_x_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_x_link.info"
       },
       {
         "type": "text",
