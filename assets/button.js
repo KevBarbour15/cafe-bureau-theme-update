@@ -4,7 +4,7 @@ class Button extends HTMLElement {
   }
 
   connectedCallback() {
-    this.button = document.getElementById('button');
+    this.button = this.querySelector('#button');
     this.hoverAnimation = gsap.to(this.button, {
       borderRadius: '2px',
       duration: 0.2,

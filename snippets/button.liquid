@@ -1,7 +1,7 @@
 <script src='{{ 'button.js' | asset_url }}' type='module' defer='defer'></script>
 
 {% assign button_type = button_type | default: 'button' %}
-{% assign button_text = button_text | default: 'Button' %}
+{% assign button_cta = button_cta | default: 'Button' %}
 {% assign button_url = button_url | default: '#' %}
 {% assign button_onclick = button_onclick | default: null %}
 
@@ -14,7 +14,7 @@
       class='{{ styles }}'
       href='{{ button_url }}'
     >
-      <span class=''>{{ button_text }}</span>
+      <span class=''>{{ button_cta }}</span>
     </a>
   {% else %}
     <button
@@ -24,7 +24,7 @@
       onclick='{%if button_onclick != null%}{{button_onclick}}{%endif %}'
       type='{% if button_action_type != null %}{{button_action_type}}{% endif %}'
     >
-      <span class='tw-leading-none'>{{ button_text }}</span>
+      <span class='tw-leading-none'>{{ button_cta }}</span>
     </button>
   {% endif %}
 </button-component>

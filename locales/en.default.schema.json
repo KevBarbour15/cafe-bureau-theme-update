@@ -249,11 +249,11 @@
         "header": {
           "content": "Social accounts"
         },
-        "social_twitter_link": {
+        "social_x_link": {
           "label": "X / Twitter",
           "info": "https://x.com/shopify"
         },
-        "social_facebook_link": {
+        "social_meta_link": {
           "label": "Facebook",
           "info": "https://facebook.com/shopify"
         },
