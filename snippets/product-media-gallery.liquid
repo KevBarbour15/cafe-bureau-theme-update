@@ -4,7 +4,7 @@
 {% assign product_image_front = product_image_front | default: blank %}
 {% assign product_image_back = product_image_back | default: blank %}
 
-<media-gallery class='tw-h-full'>
+<div class='tw-h-full tw-z-[1]'>
   {% if product_video != blank %}
     <div class='tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/4.5;'>
       <video
@@ -44,7 +44,7 @@
 
   {% if product_details_video != blank %}
     {% assign product_details_video = product_details_video %}
-    <div class='tw-w-full tw-h-auto tw-relative ' style='aspect-ratio: 4/4.5;'>
+    <div class='tw-w-full tw-h-auto tw-relative '>
       <video
         src='{{ product_details_video | file_url }}'
         autoplay
@@ -55,4 +55,4 @@
       ></video>
     </div>
   {% endif %}
-</media-gallery>
+</div>

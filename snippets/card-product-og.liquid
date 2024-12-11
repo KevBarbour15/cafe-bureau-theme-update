@@ -6,9 +6,9 @@
 {% assign variant = variant %}
 {% assign idx = idx %}
 
-<div class='tw-flex tw-flex-col tw-justify-between tw-h-full'>
+<div class='tw-flex tw-flex-col tw-justify-between tw-h-auto'>
   {% if variant.featured_media.preview_image != blank and product.metafields.custom.product_video != blank %}
-    <div class='product-card'>
+    <div class='product-card '>
       <div class='product-image tw-w-full tw-relative' style='aspect-ratio: 4/5;'>
         <img
           src='{{ variant.featured_media.preview_image | image_url: width: 1000 }}'
@@ -32,17 +32,6 @@
         ></video>
       </div>
     </div>
-  {% elsif variant.featured_media.preview_image != blank %}
-    <img
-      src='{{ variant.featured_media.preview_image | img_url: 'master' }}'
-      alt='{{ product.title }}'
-      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
-      width='100%'
-      height='auto'
-      {% if lazy_load %}
-        loading='lazy'
-      {% endif %}
-    >
   {% elsif product.featured_image != blank %}
     <img
       src='{{ product.featured_image | img_url: 'master' }}'
@@ -54,11 +43,24 @@
         loading='lazy'
       {% endif %}
     >
+  {% elsif variant.featured_media.preview_image != blank %}
+    <img
+      src='{{ variant.featured_media.preview_image | img_url: 'master' }}'
+      alt='{{ product.title }}'
+      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
+      width='100%'
+      height='auto'
+      {% if lazy_load %}
+        loading='lazy'
+      {% endif %}
+    >
   {% endif %}
 
-  <div class='md:tw-flex tw-flex-col tw-gap-3 tw-hidden tw-border-t tw-border-black tw-pt-3'>
-    <p class='p3'>{{ title }}</p>
-    <p class='p3'>{{ product.price | money }}</p>
-    {% render 'color-swatches', color_options: variant_colors, active_color: variant_color %}
+  <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-flex-1 tw-pr-3 '>
+    <p class='p1 tw-text-black tw-uppercase tw-truncate'>{{ product.title }}</p>
+    <p class='p1 tw-text-black tw-uppercase '>{{ product.price | money }}</p>
+   
+      {% render 'color-swatches', color_options: variant_colors, active_color: variant_color %}
+ 
   </div>
 </div>

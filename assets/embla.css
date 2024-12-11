@@ -1,0 +1,67 @@
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  min-width: 0;
+}
+
+.embla__button {
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #000;
+  padding: 0;
+  z-index: 1;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+  z-index: auto;
+}
+
+.embla__dot {
+  border-radius: 50%;
+  background-color: var(--color-primary-black);
+  touch-action: manipulation;
+  display: inline-flex;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0 5px 0 5px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__dot:after {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  content: '';
+}
+
+.embla__dot--selected:after {
+  background-color: var(--color-primary-white);
+  height: 16px;
+  width: 16px;
+}

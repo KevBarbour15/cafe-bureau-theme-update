@@ -2837,7 +2837,7 @@
         },
         "paragraph__1": {
           "content": "Dynamic recommendations use order and product information to change and improve over time. [Learn more](https://help.shopify.com/themes/development/recommended-products)",
-          "default": "You may also like"
+          "default": ""
         },
         "header__2": {
           "content": "Product card"

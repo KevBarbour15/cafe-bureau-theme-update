@@ -6,7 +6,6 @@ class ProductPageScroll extends HTMLElement {
   connectedCallback() {
     this.detailsContainer = document.getElementById('details-container');
     this.imageContainer = document.getElementById('image-container');
-
     this.animation = gsap.to(this.detailsContainer, {
       ease: "none",
       scrollTrigger: {
@@ -15,11 +14,17 @@ class ProductPageScroll extends HTMLElement {
         end: "bottom bottom",
         pin: this.detailsContainer,
         scrub: true,
-        markers: true
+        pinSpacing: false,
+        preventOverlaps: true,
+        fastScrollEnd: true,
+        onUpdate: self => {
+          // Ensure z-index hierarchy is maintained during animation
+          this.detailsContainer.style.zIndex = '1';
+          this.imageContainer.style.zIndex = '1';
+        }
       }
     });
   }
-
 }
 
 customElements.define('product-page-scroll', ProductPageScroll);

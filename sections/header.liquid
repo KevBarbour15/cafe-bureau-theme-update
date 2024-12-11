@@ -7,16 +7,16 @@
 <script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign styles = 'tw-fixed tw-top-0 tw-w-full tw-h-[80px] tw-z-[100]' %}
+{% assign styles = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[100] tw-px-8' %}
 {% assign hamburger_styles = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
 {% assign cart_link_styles = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
 {% if request.page_type == 'index' %}
   {% assign hamburger_styles = hamburger_styles | append: ' tw-bg-white' %}
   {% assign cart_link_styles = cart_link_styles | append: ' tw-text-white' %}
 {% else %}
-  {% assign styles = styles | append: ' tw-mix-blend-difference tw-invert' %}
-  {% assign hamburger_styles = hamburger_styles | append: ' tw-bg-black' %}
-  {% assign cart_link_styles = cart_link_styles | append: ' tw-text-black' %}
+  {% assign styles = styles | append: ' tw-bg-white' %}
+  {% assign hamburger_styles = hamburger_styles | append: ' tw-bg-black ' %}
+  {% assign cart_link_styles = cart_link_styles | append: ' tw-text-black ' %}
 {% endif %}
 
 <menu-overlay>
@@ -26,7 +26,7 @@
     class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[99] tw-bg-black  md:tw-w-[50vh] tw-p-lg'
   >
     <ul
-      class='tw-flex tw-flex-col  tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-lg tw-h-full'
+      class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-8 tw-h-full'
     >
       <li class='menu-link'>
         <a
@@ -60,7 +60,7 @@
     </ul>
   </div>
   <header class='{{ styles }}'>
-    <div class='tw-flex tw-items-center tw-justify-between tw-h-full tw-py-lg tw-px-lg'>
+    <div class='tw-flex tw-items-center tw-justify-between tw-h-full'>
       <div
         id='hamburger'
         class='tw-relative tw-w-[24px] tw-h-[15px] tw-cursor-pointer tw-z-[101]'
@@ -144,6 +144,10 @@
       </a>
     </div>
   </header>
+
+  {% if request.page_type == 'collection' or request.page_type == 'product' %}
+    {% render 'filter', filter_links: linklists[section.settings.collection_menu].links %}
+  {% endif %}
 </menu-overlay>
 
 {%- if settings.cart_type == 'notification' -%}
@@ -197,6 +201,12 @@
       "label": "Menu",
       "info": "Select the menu to display in the header navigation",
       "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "collection_menu",
+      "label": "Collection Menu",
+      "info": "Select the filter menu to display in the header navigation for collection pages"
     }
   ]
 }

@@ -24,12 +24,17 @@
 
     {% render 'meta-tags' %}
 
+    <script defer src='https://unpkg.com/embla-carousel/embla-carousel.umd.js'></script>
+    <script defer src='https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js'></script>
+    <script defer src='https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js'></script>
+
     <script src='{{ 'constants.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'pubsub.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'details-disclosure.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'details-modal.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'search-form.js' | asset_url }}' defer='defer'></script>
+    <script defer src='{{ 'item-slider.js' | asset_url }}'></script>
 
     <script src='{{ 'gsap.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'DrawSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
@@ -282,6 +287,7 @@
     {{ 'lazer-typography.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'app-tailwind.css' | asset_url | stylesheet_tag }}
+    {{ 'embla.css' | asset_url | stylesheet_tag }}
     <link rel='stylesheet' href='{{ 'component-cart-items.css' | asset_url }}' media='print' onload='this.media="all"'>
     <link rel='stylesheet' href='{{ 'app-tailwind.css' | asset_url }}'>
 

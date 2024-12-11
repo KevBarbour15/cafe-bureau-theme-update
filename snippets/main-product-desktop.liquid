@@ -1,0 +1,77 @@
+{% assign product_video = product_video %}
+{% assign product_details_video = product_details_video %}
+{% assign product_image_front = product_image_front %}
+{% assign product_image_back = product_image_back %}
+
+<script src='{{ 'product-animation.js' | asset_url }}' type='module' defer='defer'></script>
+
+<accordion-component>
+  <product-page-scroll>
+    <div id='image-container' class='tw-w-full md:tw-flex tw-h-fit'>
+      <div class='md:tw-w-1/2 tw-pt-[120px]'>
+        {% assign images = product.images | map: 'src' %}
+
+        {% if product_video != blank or images != blank %}
+          {% render 'product-media-gallery',
+            variant_images: images,
+            product_video: product_video,
+            product_details_video: product_details_video,
+            product_image_front: product_image_front,
+            product_image_back: product_image_back
+          %}
+        {% endif %}
+      </div>
+
+      <div
+        id='details-container'
+        class='md:tw-w-1/2  tw-pt-[120px] tw-h-fit'
+      >
+        <div class='tw-h-fit tw-w-full md:tw-px-md tw-block md:tw-mt-lg'>
+          {% if product.title != blank or product.price != blank %}
+            <div class='tw-mb-lg'>
+              <p class='p3 tw-mb-lg'>{{ product.title }}</p>
+              <p class='p3'>{{ product.price | money }}</p>
+            </div>
+          {% endif %}
+
+          {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+          {% if product_colors != blank %}
+            <div class='tw-mb-lg'>
+              {% render 'color-swatches', color_options: product_colors %}
+            </div>
+          {% endif %}
+
+          {% assign product_sizes = product.options_with_values | where: 'name', 'Size' | first %}
+          {% if product_sizes != blank %}
+            <div class='tw-mb-lg'>
+              {% render 'size-swatches', size_options: product_sizes %}
+            </div>
+          {% endif %}
+
+          {% render 'button', button_type: 'button', button_cta: 'Add to Cart' %}
+
+          {% if product.description != blank %}
+            <div
+              id='accordion-header'
+              class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-pb-sm tw-mt-md tw-gap-md'
+            >
+              <p>Product Description</p>
+              <div
+                id='down-icon'
+                class='tw-transform tw-rotate-180 tw-text-3xl'
+              >
+                ↑
+              </div>
+            </div>
+            <div
+              id='accordion-content'
+              class='tw-max-h-0 tw-overflow-hidden tw-opacity-0 tw-pr-sm md:tw-pr-md tw-pb-sm tw-border-b tw-border-transparent'
+            >
+              <span id='accordion-text' class='tw-text-balance'>{{ product.description }}</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </product-page-scroll>
+</accordion-component>

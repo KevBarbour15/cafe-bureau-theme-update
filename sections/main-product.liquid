@@ -1,4 +1,3 @@
-<script src='{{ 'product-animation.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
@@ -10,79 +9,85 @@
   data-url='{{ product.url }}'
   data-variants='{{ product.variants | json }}'
 >
-  <div class='tw-container'>
-    <div id='image-container' class='tw-w-full md:tw-flex tw-h-fit'>
-      <div class='md:tw-w-1/2 tw-pt-[80px]'>
-        {% assign images = product.images | map: 'src' %}
-        {% assign product_video = product.metafields.custom.product_video %}
-        {% assign product_details_video = product.metafields.custom.product_details_video %}
-        {% assign product_image_front = product.metafields.custom.product_image_front %}
-        {% assign product_image_back = product.metafields.custom.product_image_back %}
+  {% assign product_video = product.metafields.custom.product_video %}
+  {% assign product_details_video = product.metafields.custom.product_details_video %}
+  {% assign product_image_front = product.metafields.custom.product_image_front %}
+  {% assign product_image_back = product.metafields.custom.product_image_back %}
 
-        {% if product_video != blank or images != blank %}
-          {% render 'product-media-gallery',
-            variant_images: images,
-            product_video: product_video,
-            product_details_video: product_details_video,
-            product_image_front: product_image_front,
-            product_image_back: product_image_back
-          %}
-        {% endif %}
-      </div>
+  <div class='tw-hidden md:tw-block tw-container tw-pb-lg'>
+    {% render 'main-product-desktop',
+      product_video: product_video,
+      product_details_video: product_details_video,
+      product_image_front: product_image_front,
+      product_image_back: product_image_back
+    %}
+  </div>
 
-      <div
-        id='details-container'
-        class='md:tw-w-1/2  tw-pt-[80px] tw-h-fit'
-      >
-        <div class='tw-h-fit tw-w-full md:tw-px-md tw-block'>
-          {% if product.title != blank or product.price != blank %}
-            <div class='tw-mb-lg'>
-              <p class='p3 tw-mb-lg'>{{ product.title }}</p>
-              <p class='p3'>{{ product.price | money }}</p>
+  {% comment %}
+    Mobile Product Slider
+  {% endcomment %}
+  <div class='md:tw-hidden tw-pt-[120px]'>
+
+    
+    <item-slider data-show-buttons>
+      <div class='embla'>
+        <div class='embla__container'>
+          {% if product_video != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+              <video
+                src='{{ product_video | file_url }}'
+                autoplay
+                muted
+                playsinline
+                loop
+                class='tw-w-full tw-h-full tw-object-cover'
+              ></video>
             </div>
           {% endif %}
 
-          {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
-          {% if product_colors != blank %}
-            <div class='tw-mb-lg'>
-              {% render 'color-swatches', color_options: product_colors %}
-            </div>
-          {% endif %}
-
-          {% assign product_sizes = product.options_with_values | where: 'name', 'Size' | first %}
-          {% if product_sizes != blank %}
-            <div class='tw-mb-lg'>
-              {% render 'size-swatches', size_options: product_sizes %}
-            </div>
-          {% endif %}
-
-          {% render 'button', button_type: 'button', button_cta: 'Add to Cart' %}
-
-          {% if product.description != blank %}
-            <accordion-component>
-              <div
-                id='accordion-header'
-                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-pb-sm tw-mt-md tw-gap-md'
+          {% if product_image_front != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+              <img
+                src='{{ product_image_front | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover'
+                width='100%'
+                height='auto'
               >
-                <p>Product Description</p>
-                <div
-                  id='down-icon'
-                  class='tw-transform tw-rotate-90 tw-text-3xl'
-                >
-                  ↑
-                </div>
-              </div>
-              <div
-                id='accordion-content'
-                class='tw-max-h-0 tw-overflow-hidden tw-opacity-0 tw-pr-sm md:tw-pr-md tw-pb-sm tw-border-b tw-border-transparent'
+            </div>
+          {% endif %}
+
+          {% if product_image_back != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+              <img
+                src='{{ product_image_back | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover'
+                width='100%'
+                height='auto'
               >
-                <span id='accordion-text' class='tw-text-balance'>{{ product.description }}</span>
-              </div>
-            </accordion-component>
+            </div>
+          {% endif %}
+
+          {% if product_details_video != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+              <video
+                src='{{ product_details_video | file_url }}'
+                autoplay
+                muted
+                playsinline
+                loop
+                class='tw-object-center tw-w-auto '
+              ></video>
+            </div>
           {% endif %}
         </div>
       </div>
-    </div>
+      <div class='embla__buttons tw-flex tw-justify-center tw-py-sm'>
+        {% render 'prev-button' %}
+        {% render 'next-button' %}
+      </div>
+    </item-slider>
   </div>
 </product-info>
 

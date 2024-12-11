@@ -2,9 +2,7 @@
   "sections": {
     "product-grid": {
       "type": "main-collection-product-grid",
-    }
+    },
   },
-  "order": [
-    "product-grid"
-  ]
+  "order": [ "product-grid"]
 }
