@@ -6,7 +6,9 @@ class ProductPageScroll extends HTMLElement {
   connectedCallback() {
     this.detailsContainer = document.getElementById('details-container');
     this.imageContainer = document.getElementById('image-container');
-    this.animation = gsap.to(this.detailsContainer, {
+    this.scrollArrow = document.getElementById('scroll-arrow');
+
+    this.pinDetailsAnimation = gsap.to(this.detailsContainer, {
       ease: "none",
       scrollTrigger: {
         trigger: this.imageContainer,
@@ -18,12 +20,23 @@ class ProductPageScroll extends HTMLElement {
         preventOverlaps: true,
         fastScrollEnd: true,
         onUpdate: self => {
-          // Ensure z-index hierarchy is maintained during animation
           this.detailsContainer.style.zIndex = '1';
           this.imageContainer.style.zIndex = '1';
         }
       }
     });
+
+    this.pinImageAnimation = gsap.to(this.scrollArrow, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: this.imageContainer,
+        start: "top top",
+        end: "top+=1 top",
+        scrub: true
+      }
+    });
+
+
   }
 }
 

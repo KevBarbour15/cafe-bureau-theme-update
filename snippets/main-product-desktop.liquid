@@ -1,5 +1,5 @@
 {% assign active_variant = active_variant %}
-<script src='{{ 'product-animation.js' | asset_url }}' type='module' defer='defer'></script>
+<script src='{{ 'product-scroll.js' | asset_url }}' type='module' defer='defer'></script>
 
 <accordion-component>
   <script>
@@ -8,23 +8,34 @@
   <product-page-scroll>
     <div class='tw-w-full tw-block tw-h-full'>
       <div class='tw-w-full tw-flex'>
-        <div id='image-container' class='tw-w-1/2 tw-pt-[120px]'>
+        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative'>
           {% assign images = product.images | map: 'src' %}
 
           {% if product_video != blank or images != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
+          <div id='scroll-arrow' class='tw-w-full tw-h-screen tw-absolute tw-top-0 tw-left-0 tw-z-[1]'>
+            <div
+              class='tw-w-14 tw-h-14 tw-bg-white tw-flex tw-justify-center tw-items-center tw-border tw-border-black tw-text-black tw-rounded-full tw-tracking-widest tw-absolute tw-bottom-md tw-left-1/2 tw-transform tw--translate-x-1/2 tw-shadow-md'
+            >
+              <span
+                class='tw-transform tw-rotate-180'
+              >
+                ↑
+              </span>
+            </div>
+          </div>
         </div>
 
         <div
           id='details-container'
           class='md:tw-w-1/2 tw-h-fit tw-pt-[120px]'
         >
-          <div class='tw-h-fit tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-lg'>
+          <div class='tw-h-fit tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
             {% if product.title != blank or product.price != blank %}
               <div class='tw-mb-lg'>
-                <p class='p3 tw-mb-lg'>{{ product.title }}</p>
-                <p class='p3'>{{ product.price | money }}</p>
+                <p class='h3 tw-mb-lg'>{{ product.title }}</p>
+                <p class='h3'>{{ product.price | money }}</p>
               </div>
             {% endif %}
 
