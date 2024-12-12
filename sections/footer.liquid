@@ -88,10 +88,11 @@
               </a>
             </li>
           {% endif %}
+
           {%- for link in section.settings.footer_menu.links %}
             {%- if link != blank -%}
-              <li class='tw-uppercase tw-text-left md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
-                <a href='{{ link.url }}'>{{ link.title | escape }}</a>
+              <li>
+                {% render 'link-hover', link: link, text_style: 'tw-uppercase p3', arrow_style: 'tw-fill-black' %}
               </li>
             {%- endif -%}
           {%- endfor -%}

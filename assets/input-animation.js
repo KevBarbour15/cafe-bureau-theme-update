@@ -7,7 +7,7 @@ class InputAnimation extends HTMLElement {
     this.input = document.getElementsByClassName('subscribe-input');
 
 
-    console.log(this.input);
+    
 
     if (!this.input) return;
 

@@ -1,0 +1,95 @@
+{% assign active_variant = active_variant %}
+<script src='{{ 'product-scroll.js' | asset_url }}' type='module' defer='defer'></script>
+
+<accordion-component>
+  <script>
+    console.log('{{ active_variant | json }}');
+  </script>
+  <product-page-scroll>
+    <div class='tw-w-full tw-block tw-h-full'>
+      <div class='tw-w-full tw-flex'>
+        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative'>
+          {% assign images = product.images | map: 'src' %}
+
+          {% if product_video != blank or images != blank %}
+            {% render 'product-media-gallery', active_variant: active_variant %}
+          {% endif %}
+          <div id='scroll-arrow' class='tw-w-full tw-h-screen tw-absolute tw-top-0 tw-left-0 tw-z-[1]'>
+            <div
+              class='tw-w-14 tw-h-14 tw-bg-white tw-flex tw-justify-center tw-items-center tw-border tw-border-black tw-text-black tw-rounded-full tw-tracking-widest tw-absolute tw-bottom-md tw-left-1/2 tw-transform tw--translate-x-1/2 tw-shadow-md'
+            >
+              <span
+                class='tw-transform tw-rotate-180'
+              >
+                ↑
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id='details-container'
+          class='md:tw-w-1/2 tw-h-fit tw-pt-[120px]'
+        >
+          <div class='tw-h-fit tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
+            {% if product.title != blank or product.price != blank %}
+              <div class='tw-mb-lg'>
+                <p class='h3 tw-mb-lg'>{{ product.title }}</p>
+                <p class='h3'>{{ product.price | money }}</p>
+              </div>
+            {% endif %}
+
+            {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+            {% if product_colors != blank %}
+              <div class='tw-mb-lg'>
+                {% render 'color-swatches', color_options: product_colors %}
+              </div>
+            {% endif %}
+
+            {% assign product_sizes = product.options_with_values | where: 'name', 'Size' | first %}
+            {% if product_sizes != blank %}
+              <div class='tw-mb-lg'>
+                {% render 'size-swatches', size_options: product_sizes %}
+              </div>
+            {% endif %}
+
+            {% render 'button', button_type: 'button', button_cta: 'Add to Cart' %}
+
+            {% if product.description != blank %}
+              <div
+                id='accordion-header'
+                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black tw-pb-sm'
+              >
+                <p>Product Description</p>
+                <div
+                  id='down-icon'
+                  class='tw-transform tw-rotate-180 tw-text-3xl'
+                >
+                  ↑
+                </div>
+              </div>
+              <div
+                id='accordion-content'
+                class='tw-max-h-0 tw-overflow-hidden tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent'
+              >
+                <span id='accordion-text' class='tw-text-balance'>{{ product.description }}</span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% if active_variant.metafields.custom.variant_details_video != blank %}
+        <div class='tw-p-8 tw-m-auto tw-w-fit tw-h-fit'>
+          <video
+            src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'
+            autoplay
+            muted
+            playsinline
+            loop
+            class='tw-object-center tw-object-cover tw-max-h-[calc(100dvh-120px-64px)] tw-w-auto tw-border-8 tw-border-black'
+          ></video>
+        </div>
+      {% endif %}
+    </div>
+  </product-page-scroll>
+</accordion-component>

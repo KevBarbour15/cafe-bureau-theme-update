@@ -1,37 +1,54 @@
-{% assign title = title %}
-{% assign variant_color = variant_color %}
-{% assign variant_colors = variant_colors %}
-{% assign lazy_load = lazy_load %}
 {% assign product = product %}
 {% assign variant = variant %}
-{% assign idx = idx %}
+{% assign product_url = product_url %}
+{% assign lazy_load = lazy_load %}
 
-<div class='tw-flex tw-flex-col tw-justify-between tw-h-full'>
-  {% if variant.featured_media.preview_image != blank and product.metafields.custom.product_video != blank %}
-    <div class='product-card'>
-      <div class='product-image tw-w-full tw-relative' style='aspect-ratio: 4/5;'>
-        <img
-          src='{{ variant.featured_media.preview_image | image_url: width: 1000 }}'
-          alt='{{ product.title }}'
-          class='tw-w-full tw-h-full tw-absolute tw-inset-0 tw-object-cover'
-          width='100%'
-          height='100%'
-          {% if lazy_load %}
-            loading='lazy'
-          {% endif %}
-        >
+<div class='tw-flex tw-flex-col tw-justify-between tw-h-auto'>
+  {% if variant.metafields.custom.variant_front_image != blank
+    and variant.metafields.custom.variant_product_video != blank
+  %}
+    <product-card-hover-component>
+      <div class='product-card '>
+        <a href='{{ product_url }}'>
+          <div class='product-image tw-w-full tw-relative' style='aspect-ratio: 4/5;'>
+            <img
+              src='{{ variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-absolute tw-inset-0 tw-object-cover'
+              width='100%'
+              height='100%'
+              {% if lazy_load %}
+                loading='lazy'
+              {% endif %}
+            >
+          </div>
+          <div
+            class='product-video-container tw-w-full tw-relative'
+            style='display: none; aspect-ratio: 4/5;'
+            data-src='{{ variant.metafields.custom.variant_product_video | file_url }}'
+          >
+            <video
+              src=''
+              muted
+              playsinline
+              loop
+              class='product-video tw-w-full tw-h-full tw-absolute tw-inset-0 tw-object-cover tw-object-center'
+            ></video>
+          </div>
+        </a>
       </div>
-      <div class='product-video tw-w-full tw-relative' style='opacity: 0; display: none; aspect-ratio: 4/5;'>
-        <video
-          src='{{ product.metafields.custom.product_video | file_url }}'
-          autoplay
-          muted
-          playsinline
-          loop
-          class='tw-w-full tw-h-full tw-absolute tw-inset-0 tw-object-cover tw-object-center'
-        ></video>
-      </div>
-    </div>
+    </product-card-hover-component>
+  {% elsif variant.featured_media.preview_image != blank %}
+    <img
+      src='{{ product.featured_image | img_url: 'master' }}'
+      alt='{{ product.title }}'
+      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
+      width='100%'
+      height='auto'
+      {% if lazy_load %}
+        loading='lazy'
+      {% endif %}
+    >
   {% elsif variant.featured_media.preview_image != blank %}
     <img
       src='{{ variant.featured_media.preview_image | img_url: 'master' }}'
@@ -43,22 +60,10 @@
         loading='lazy'
       {% endif %}
     >
-  {% elsif product.featured_image != blank %}
-    <img
-      src='{{ product.featured_image | img_url: 'master' }}'
-      alt='{{ product.title }}'
-      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
-      width='100%'
-      height='auto'
-      {% if lazy_load %}
-        loading='lazy'
-      {% endif %}
-    >
   {% endif %}
 
-  <div class='md:tw-flex tw-flex-col tw-gap-3 tw-hidden tw-border-t tw-border-black tw-pt-3'>
-    <p class='p3'>{{ title }}</p>
-    <p class='p3'>{{ product.price | money }}</p>
-    {% render 'color-swatches', color_options: variant_colors, active_color: variant_color %}
+  <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-flex-1 tw-items-center tw-border-t tw-border-black tw-w-[85%] tw-m-auto'>
+    <p class='p1 tw-text-black tw-uppercase tw-truncate tw-text-center'>{{ product.title }}</p>
+    <p class='p1 tw-text-black tw-uppercase tw-text-center'>{{ product.price | money }}</p>
   </div>
 </div>

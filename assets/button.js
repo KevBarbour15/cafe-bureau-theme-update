@@ -6,7 +6,7 @@ class Button extends HTMLElement {
   connectedCallback() {
     this.button = this.querySelector('#button');
     this.hoverAnimation = gsap.to(this.button, {
-      borderRadius: '2px',
+      borderRadius: '0px',
       duration: 0.2,
       ease: 'linear',
       backgroundColor: '#000',
@@ -16,6 +16,8 @@ class Button extends HTMLElement {
 
     this.button.addEventListener('mouseover', () => this.onMouseOver());
     this.button.addEventListener('mouseout', () => this.onMouseOut());
+    this.button.addEventListener('touchstart', () => this.onMouseOver());
+    this.button.addEventListener('touchend', () => this.onMouseOut());
   }
 
   onMouseOver() {

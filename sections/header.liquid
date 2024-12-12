@@ -7,16 +7,19 @@
 <script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign styles = 'tw-fixed tw-top-0 tw-w-full tw-h-[80px] tw-z-[100]' %}
-{% assign hamburger_styles = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
-{% assign cart_link_styles = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[100] tw-px-8' %}
+{% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
+{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
+
 {% if request.page_type == 'index' %}
-  {% assign hamburger_styles = hamburger_styles | append: ' tw-bg-white' %}
-  {% assign cart_link_styles = cart_link_styles | append: ' tw-text-white' %}
+  {% assign hamburger_style = hamburger_style | append: ' tw-bg-white' %}
+  {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
 {% else %}
-  {% assign styles = styles | append: ' tw-mix-blend-difference tw-invert' %}
-  {% assign hamburger_styles = hamburger_styles | append: ' tw-bg-black' %}
-  {% assign cart_link_styles = cart_link_styles | append: ' tw-text-black' %}
+  {% assign header_style = header_style
+    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-50 tw-backdrop-blur-md'
+  %}
+  {% assign hamburger_style = hamburger_style | append: ' tw-bg-black ' %}
+  {% assign cart_link_style = cart_link_style | append: ' tw-text-black ' %}
 {% endif %}
 
 <menu-overlay>
@@ -26,20 +29,8 @@
     class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[99] tw-bg-black  md:tw-w-[50vh] tw-p-lg'
   >
     <ul
-      class='tw-flex tw-flex-col  tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-lg tw-h-full'
+      class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-8 tw-h-full'
     >
-      <li class='menu-link'>
-        <a
-          class=' tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer'
-          href='/'
-          aria-label='Return to home page'
-        >
-          <span style='color: white;' class='h2 menu-link-text'>Home</span>
-          <span class='menu-link-arrow tw-opacity-0' aria-hidden='true'>
-            {%- render 'right-arrow', style: 'tw-fill-white', size: 28 -%}
-          </span>
-        </a>
-      </li>
       {% for link in linklists[section.settings.menu].links %}
         <li class='menu-link'>
           <a
@@ -59,27 +50,27 @@
       {% endfor %}
     </ul>
   </div>
-  <header class='{{ styles }}'>
-    <div class='tw-flex tw-items-center tw-justify-between tw-h-full tw-py-lg tw-px-lg'>
+  <header class='{{ header_style }}'>
+    <div class='tw-flex tw-items-center tw-justify-between tw-h-full'>
       <div
         id='hamburger'
         class='tw-relative tw-w-[24px] tw-h-[15px] tw-cursor-pointer tw-z-[101]'
       >
         <div
           id='hamburger-bar-1'
-          class='{{ hamburger_styles }} tw-top-0'
+          class='{{ hamburger_style }} tw-top-0'
         >
           &nbsp;
         </div>
         <div
           id='hamburger-bar-2'
-          class='{{ hamburger_styles }} tw-top-[7px]'
+          class='{{ hamburger_style }} tw-top-[7px]'
         >
           &nbsp;
         </div>
         <div
           id='hamburger-bar-3'
-          class='{{ hamburger_styles }} tw-bottom-0'
+          class='{{ hamburger_style }} tw-bottom-0'
         >
           &nbsp;
         </div>
@@ -119,7 +110,7 @@
 
       <a
         href='{{ routes.cart_url }}'
-        class='{{ cart_link_styles }}'
+        class='{{ cart_link_style }}'
         id='cart-link'
         aria-label='View shopping cart{% if cart.item_count > 0 %} with {{ cart.item_count }} items{% endif %}'
       >
@@ -144,6 +135,10 @@
       </a>
     </div>
   </header>
+
+  {% if request.page_type == 'collection' or request.page_type == 'product' %}
+    {% render 'filter', filter_links: linklists[section.settings.collection_menu].links %}
+  {% endif %}
 </menu-overlay>
 
 {%- if settings.cart_type == 'notification' -%}
@@ -197,6 +192,12 @@
       "label": "Menu",
       "info": "Select the menu to display in the header navigation",
       "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "collection_menu",
+      "label": "Collection Menu",
+      "info": "Select the filter menu to display in the header navigation for collection pages"
     }
   ]
 }
