@@ -8,7 +8,6 @@ class ColorSwatches extends HTMLElement {
     this.colorSwatchBorders = document.querySelectorAll('.color-swatch-border');
 
     this.colorSwatches.forEach((colorSwatch, idx) => {
-
       const colorSwatchBorder = this.colorSwatchBorders[idx];
 
       const hoverAnimation = gsap.to(colorSwatchBorder, {

@@ -9,33 +9,23 @@
   data-url='{{ product.url }}'
   data-variants='{{ product.variants | json }}'
 >
-  {% assign product_video = product.metafields.custom.product_video %}
-  {% assign product_details_video = product.metafields.custom.product_details_video %}
-  {% assign product_image_front = product.metafields.custom.product_image_front %}
-  {% assign product_image_back = product.metafields.custom.product_image_back %}
+  {% assign active_variant = product.selected_or_first_available_variant %}
 
-  <div class='tw-hidden md:tw-block tw-container tw-pb-lg'>
-    {% render 'main-product-desktop',
-      product_video: product_video,
-      product_details_video: product_details_video,
-      product_image_front: product_image_front,
-      product_image_back: product_image_back
-    %}
+  <div class='tw-hidden md:tw-block tw-container tw-pb-sm tw-h-full'>
+    {% render 'main-product-desktop', active_variant: active_variant %}
   </div>
 
   {% comment %}
     Mobile Product Slider
   {% endcomment %}
-  <div class='md:tw-hidden tw-pt-[120px]'>
-
-    
+  <div class='md:tw-hidden tw-pt-[100px]'>
     <item-slider data-show-buttons>
       <div class='embla'>
         <div class='embla__container'>
-          {% if product_video != blank %}
+          {% if active_variant.metafields.custom.variant_product_video != blank %}
             <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
               <video
-                src='{{ product_video | file_url }}'
+                src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
                 autoplay
                 muted
                 playsinline
@@ -45,10 +35,10 @@
             </div>
           {% endif %}
 
-          {% if product_image_front != blank %}
+          {% if active_variant.metafields.custom.variant_front_image != blank %}
             <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
               <img
-                src='{{ product_image_front | image_url: width: 1000 }}'
+                src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
                 alt='{{ product.title }}'
                 class='tw-w-full tw-h-full tw-object-cover'
                 width='100%'
@@ -57,10 +47,10 @@
             </div>
           {% endif %}
 
-          {% if product_image_back != blank %}
+          {% if active_variant.metafields.custom.variant_rear_image != blank %}
             <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
               <img
-                src='{{ product_image_back | image_url: width: 1000 }}'
+                src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
                 alt='{{ product.title }}'
                 class='tw-w-full tw-h-full tw-object-cover'
                 width='100%'
@@ -69,15 +59,15 @@
             </div>
           {% endif %}
 
-          {% if product_details_video != blank %}
-            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+          {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-px-8 tw-pt-8'>
               <video
-                src='{{ product_details_video | file_url }}'
+                src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
                 autoplay
                 muted
                 playsinline
                 loop
-                class='tw-object-center tw-w-auto '
+                class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
               ></video>
             </div>
           {% endif %}

@@ -1,14 +1,10 @@
-{% assign variant_images = variant_images | default: blank %}
-{% assign product_video = product_video | default: blank %}
-{% assign product_details_video = product_details_video | default: blank %}
-{% assign product_image_front = product_image_front | default: blank %}
-{% assign product_image_back = product_image_back | default: blank %}
+{% assign active_variant = active_variant %}
 
 <div class='tw-h-full tw-z-[1]'>
-  {% if product_video != blank %}
+  {% if active_variant.metafields.custom.variant_product_video != blank %}
     <div class='tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/4.5;'>
       <video
-        src='{{ product_video | file_url }}'
+        src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
         autoplay
         muted
         playsinline
@@ -18,10 +14,10 @@
     </div>
   {% endif %}
 
-  {% if product_image_front != blank %}
+  {% if active_variant.metafields.custom.variant_front_image != blank %}
     <div class='tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/4.5;'>
       <img
-        src='{{ product_image_front | image_url: width: 1000 }}'
+        src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
         alt='{{ product.title }}'
         class='tw-w-full tw-h-full tw-object-cover '
         width='100%'
@@ -30,29 +26,15 @@
     </div>
   {% endif %}
 
-  {% if product_image_back != blank %}
+  {% if active_variant.metafields.custom.variant_rear_image != blank %}
     <div class='tw-w-full tw-h-auto tw-relative ' style='aspect-ratio: 4/4.5;'>
       <img
-        src='{{ product_image_back | image_url: width: 1000 }}'
+        src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
         alt='{{ product.title }}'
         class='tw-w-full tw-h-full tw-object-cover'
         width='100%'
         height='auto'
       >
-    </div>
-  {% endif %}
-
-  {% if product_details_video != blank %}
-    {% assign product_details_video = product_details_video %}
-    <div class='tw-w-full tw-h-auto tw-relative '>
-      <video
-        src='{{ product_details_video | file_url }}'
-        autoplay
-        muted
-        playsinline
-        loop
-        class='tw-object-center tw-object-cover tw-w-full tw-h-full'
-      ></video>
     </div>
   {% endif %}
 </div>

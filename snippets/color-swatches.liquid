@@ -1,3 +1,4 @@
+{% assign variants = variants %}
 {% assign color_options = color_options %}
 {% assign active_color = active_color | default: color_options.values.first %}
 
@@ -14,16 +15,16 @@
           name='color-choice'
           value='{{ color }}'
           class='tw-sr-only'
-          {% if color == active_color %}
-            checked
-          {% endif %}
         >
-        <span
-          style='background-color: {{ color }}; border-radius: {% if color != active_color %}50px;{% endif %}'
-          class='color-swatch-border tw-block tw-border-[0.5px] tw-h-8 tw-w-8 tw-border-solid tw-border-black'
-          aria-hidden='true'
-        >
-        </span>
+
+        <a href='{{ product.url }}?variant={{ active_variant.id }}'>
+          <span
+            style='background-color: {{ color }}; border-radius: {% if color != active_color %} 50px; {% else %} 0px; {% endif %}'
+            class='color-swatch-border tw-block tw-border-[0.5px] tw-h-14 tw-w-14 tw-border-solid tw-border-black'
+            aria-hidden='true'
+          >
+          </span>
+        </a>
       </label>
     {% endfor %}
   </div>

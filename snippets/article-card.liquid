@@ -9,8 +9,11 @@
         height='auto'
       >
     </div>
-    <h2 class='tw-text-center h2 tw-mb-sm'>{{ article.title }}</h2>
-    <p class='tw-text-center tw-text-sm tw-text-gray-500 p3'>{{ article.published_at | date: '%B %d, %Y' }}</p>
+
+    <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-flex-1 tw-items-center tw-border-t tw-border-black tw-w-[85%] tw-m-auto'>
+      <p class='p1 tw-text-black tw-uppercase tw-truncate'>{{ article.title }}</p>
+      <p class='p1 tw-text-black tw-uppercase '>{{ article.published_at | date: '%B %d, %Y' }}</p>
+    </div>
     <script>
       console.log('article', {{ article | json }})
     </script>

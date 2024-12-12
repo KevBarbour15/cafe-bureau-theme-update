@@ -19,7 +19,7 @@
           {% endif %}
         >
         <span
-          style='border-radius: {% if size != active_size %}50px;{% endif %}'
+          style='border-radius: {% if size != active_size %} 50px; {% else %} 0px; background-color: black; color: white; {% endif %}'
           aria-hidden='true'
           class='size-swatch-border tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-py-[10px] tw-px-[10px] tw-min-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black'
         >
