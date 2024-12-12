@@ -1,14 +1,17 @@
+{% assign product = product %}
+{% assign color_options = color_options %}
+{% assign size_options = size_options %}
 {% assign active_variant = active_variant %}
+{% assign active_color = active_color %}
+{% assign active_size = active_size %}
+
 <script src='{{ 'product-scroll.js' | asset_url }}' type='module' defer='defer'></script>
 
-<accordion-component>
-  <script>
-    console.log('{{ active_variant | json }}');
-  </script>
-  <product-page-scroll>
+<product-page-scroll>
+  <accordion-component>
     <div class='tw-w-full tw-block tw-h-full'>
-      <div class='tw-w-full tw-flex'>
-        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative'>
+      <div class='tw-w-full tw-flex tw-h-full'>
+        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative tw-h-full'>
           {% assign images = product.images | map: 'src' %}
 
           {% if product_video != blank or images != blank %}
@@ -29,27 +32,39 @@
 
         <div
           id='details-container'
-          class='md:tw-w-1/2 tw-h-fit tw-pt-[120px]'
+          class='md:tw-w-1/2 tw-h-full tw-pt-[120px] tw-z-[2] tw-bg-red-500'
         >
-          <div class='tw-h-fit tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
+          <div class='tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
             {% if product.title != blank or product.price != blank %}
               <div class='tw-mb-lg'>
-                <p class='h3 tw-mb-lg'>{{ product.title }}</p>
-                <p class='h3'>{{ product.price | money }}</p>
+                <p class='p3 tw-mb-lg'>{{ product.title }}</p>
+                <p class='p3'>{{ product.price | money }}</p>
               </div>
             {% endif %}
 
-            {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
-            {% if product_colors != blank %}
+            {% if color_options != blank %}
               <div class='tw-mb-lg'>
-                {% render 'color-swatches', color_options: product_colors %}
+                {% render 'color-swatches',
+                  product: product,
+                  active_variant: active_variant,
+                  color_options: color_options,
+                  size_options: size_options,
+                  active_color: active_color,
+                  active_size: active_size
+                %}
               </div>
             {% endif %}
 
-            {% assign product_sizes = product.options_with_values | where: 'name', 'Size' | first %}
-            {% if product_sizes != blank %}
+            {% if size_options != blank and color_options != blank %}
               <div class='tw-mb-lg'>
-                {% render 'size-swatches', size_options: product_sizes %}
+                {% render 'size-swatches',
+                  product: product,
+                  active_variant: active_variant,
+                  size_options: size_options,
+                  color_options: color_options,
+                  active_color: active_color,
+                  active_size: active_size
+                %}
               </div>
             {% endif %}
 
@@ -58,9 +73,9 @@
             {% if product.description != blank %}
               <div
                 id='accordion-header'
-                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black tw-pb-sm'
+                class='tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black'
               >
-                <p>Product Description</p>
+                <p class='p2 tw-pb-xs'>Product Description</p>
                 <div
                   id='down-icon'
                   class='tw-transform tw-rotate-180 tw-text-3xl'
@@ -70,9 +85,9 @@
               </div>
               <div
                 id='accordion-content'
-                class='tw-max-h-0 tw-overflow-hidden tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent'
+                class='tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
               >
-                <span id='accordion-text' class='tw-text-balance'>{{ product.description }}</span>
+                <span id='accordion-text' class='tw-text-balance p2'>{{ product.description | strip_html }}</span>
               </div>
             {% endif %}
           </div>
@@ -91,5 +106,5 @@
         </div>
       {% endif %}
     </div>
-  </product-page-scroll>
-</accordion-component>
+  </accordion-component>
+</product-page-scroll>

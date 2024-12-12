@@ -1,31 +1,52 @@
-{% assign variants = variants %}
+{% assign product = product %}
+{% assign active_variant = active_variant %}
 {% assign color_options = color_options %}
-{% assign active_color = active_color | default: color_options.values.first %}
+{% assign size_options = size_options %}
+{% assign active_color = active_color %}
 
-{% if color_options.values.size > 1 %}
-  <script src='{{ 'color-swatches.js' | asset_url }}' type='module' defer='defer'></script>
-{% endif %}
+<script src='{{ 'color-swatches.js' | asset_url }}' type='module' defer='defer'></script>
+
+{% assign active_size = '' %}
+
+{% for size in size_options.values %}
+  {% for variant in product.variants %}
+    {% if variant.option1 == size or variant.option2 == size %}
+      {% if variant == active_variant %}
+        {% assign active_size = size %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
 
 <color-swatches-component>
-  <div class='tw-flex tw-flex-wrap tw-gap-6' role='radiogroup'>
+  <div class='tw-flex tw-flex-wrap tw-gap-6 tw-items-center '>
     {% for color in color_options.values %}
-      <label class='color-swatch tw-cursor-pointer'>
-        <input
-          type='radio'
-          name='color-choice'
-          value='{{ color }}'
-          class='tw-sr-only'
-        >
-
-        <a href='{{ product.url }}?variant={{ active_variant.id }}'>
-          <span
-            style='background-color: {{ color }}; border-radius: {% if color != active_color %} 50px; {% else %} 0px; {% endif %}'
-            class='color-swatch-border tw-block tw-border-[0.5px] tw-h-14 tw-w-14 tw-border-solid tw-border-black'
-            aria-hidden='true'
-          >
-          </span>
-        </a>
-      </label>
+      {% for variant in product.variants %}
+        {% if variant.option1 == active_size or variant.option2 == active_size %}
+          {% if variant.option1 == color or variant.option2 == color %}
+            {% if variant == active_variant %}
+              <span
+                style='background-color: {{ color }}; border-radius:  0px;'
+                class='tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
+                aria-hidden='true'
+              >
+              </span>
+            {% else %}
+              <label class='color-swatch tw-cursor-pointer'>
+                <a href='{{ product.url }}?variant={{ variant.id }}'>
+                  <span
+                    style='background-color: {{ color }}; border-radius: 50px;'
+                    class='color-swatch-border tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
+                    aria-hidden='true'
+                  >
+                  </span>
+                </a>
+              </label>
+            {% endif %}
+            {% break %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
     {% endfor %}
   </div>
 </color-swatches-component>

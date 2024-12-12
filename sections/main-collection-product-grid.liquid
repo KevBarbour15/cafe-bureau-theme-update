@@ -1,7 +1,3 @@
-{%- unless section.settings.quick_add == 'none' -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-{%- endunless -%}
-
 {%- if section.settings.quick_add == 'standard' -%}
   <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
   <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
@@ -12,7 +8,9 @@
 <div class='tw-container tw-pb-md tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]'>
   <div>
     {%- if collection.products.size == 0 -%}
-      <h2>No products found</h2>
+      <div class='tw-w-full tw-flex tw-justify-center tw-items-center tw-h-full'>
+        <h2>No products found</h2>
+      </div>
     {%- else -%}
       <ul
         id='product-grid'

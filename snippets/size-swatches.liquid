@@ -1,31 +1,53 @@
+{% assign product = product %}
+{% assign active_variant = active_variant %}
+{% assign variants = variants %}
 {% assign size_options = size_options %}
-{% assign active_size = active_size | default: size_options.values.first %}
+{% assign color_options = color_options %}
+{% assign active_color = active_color %}
+{% assign active_size = active_size %}
 
-{% if size_options.values.size > 1 %}
-  <script src='{{ 'size-swatches.js' | asset_url }}' type='module' defer='defer'></script>
-{% endif %}
+<script src='{{ 'size-swatches.js' | asset_url }}' type='module' defer='defer'></script>
 
 <size-swatches-component>
-  <div class='tw-flex tw-flex-wrap tw-gap-6' role='radiogroup'>
+  <div class='tw-flex tw-flex-wrap tw-gap-6 tw-items-center'>
     {% for size in size_options.values %}
-      <label class='size-swatch tw-cursor-pointer'>
-        <input
-          type='radio'
-          name='size-choice'
-          value='{{ size }}'
-          class='tw-sr-only'
-          {% if size == active_size %}
-            checked
+      {% for variant in product.variants %}
+        {% if variant.option1 == active_color or variant.option2 == active_color %}
+          {% if variant.option1 == size or variant.option2 == size %}
+            {% if variant == active_variant %}
+              {% if variant.available %}
+                <span
+                  aria-hidden='true'
+                  class='tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-bg-black tw-text-white'
+                >
+                  {{- size -}}
+                </span>
+              {% else %}
+                <span
+                  aria-hidden='true'
+                  class='tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-text-gray-500'
+                >
+                  {{- size -}}
+                </span>
+              {% endif %}
+              {% break %}
+            {% else %}
+              <label class='size-swatch tw-cursor-pointer'>
+                <a href='{{ product.url }}?variant={{ variant.id }}'>
+                  <span
+                    style='border-radius: 50px; background-color: white; color: black;'
+                    aria-hidden='true'
+                    class='size-swatch-border tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black'
+                  >
+                    {{ size }}
+                  </span>
+                </a>
+              </label>
+            {% endif %}
+            {% break %}
           {% endif %}
-        >
-        <span
-          style='border-radius: {% if size != active_size %} 50px; {% else %} 0px; background-color: black; color: white; {% endif %}'
-          aria-hidden='true'
-          class='size-swatch-border tw-leading-[0.75] tw-inline-flex tw-items-center tw-justify-center tw-py-[10px] tw-px-[10px] tw-min-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black'
-        >
-          {{ size }}
-        </span>
-      </label>
+        {% endif %}
+      {% endfor %}
     {% endfor %}
   </div>
 </size-swatches-component>

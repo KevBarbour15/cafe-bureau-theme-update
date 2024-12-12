@@ -34,14 +34,14 @@
       {% for link in linklists[section.settings.menu].links %}
         <li class='menu-link'>
           <a
-            class='tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer'
+            class='tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer h3'
             href='{{ link.url }}'
-            aria-label='Navigate to {{ link.title }}'
+            aria-label='Navigate to {{ link.title | strip_html }}'
             {% if link.current %}
               aria-current='page'
             {% endif %}
           >
-            <span style='color: white;' class='menu-link-text h2'>{{ link.title }}</span>
+            <span style='color: white;' class='menu-link-text '>{{ link.title }}</span>
             <span class='menu-link-arrow tw-opacity-0' aria-hidden='true'>
               {%- render 'right-arrow', style: 'tw-fill-white', size: 28 -%}
             </span>

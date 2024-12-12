@@ -41,7 +41,7 @@ body {
 a,
 li,
 p {
-   font-family: var(--global-font);
+  font-family: var(--global-font);
   font-size: 1.6rem;
 }
 

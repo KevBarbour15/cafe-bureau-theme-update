@@ -13,7 +13,10 @@ class Accordion extends HTMLElement {
     this.splitText = new SplitText(this.text, { type: "chars,words,lines" });
 
     this.openAnimation = gsap.timeline({ paused: true })
-      .set(this.splitText.chars, {
+      .set(this.content, {
+        overflow: "hidden",
+      }, 0)
+      .set(this.splitText.words, {
         opacity: 0,
       }, 0)
       .to(this.content, {
@@ -22,12 +25,13 @@ class Accordion extends HTMLElement {
         borderColor: "black",
         opacity: 1,
         ease: "linear",
+        overflow: "visible",
       }, 0.05)
-      .to(this.splitText.chars, {
-        duration: 0.125,
+      .to(this.splitText.words, {
+        duration: 0.12,
         opacity: 1,
         ease: "linear",
-        stagger: 0.0003,
+        stagger: 0.0025,
         scrambleText: {
           text: true,
           chars: "lowerCase",

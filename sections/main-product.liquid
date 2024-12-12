@@ -10,9 +10,40 @@
   data-variants='{{ product.variants | json }}'
 >
   {% assign active_variant = product.selected_or_first_available_variant %}
+  {% assign color_options = product.options_with_values | where: 'name', 'Color' | first %}
+  {% assign size_options = product.options_with_values | where: 'name', 'Size' | first %}
+
+  {% assign active_color = '' %}
+  {% for color in color_options.values %}
+    {% for variant in product.variants %}
+      {% if variant.option1 == color or variant.option2 == color %}
+        {% if variant == active_variant %}
+          {% assign active_color = color %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {% assign active_size = '' %}
+  {% for size in size_options.values %}
+    {% for variant in product.variants %}
+      {% if variant.option1 == size or variant.option2 == size %}
+        {% if variant == active_variant %}
+          {% assign active_size = size %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
 
   <div class='tw-hidden md:tw-block tw-container tw-pb-sm tw-h-full'>
-    {% render 'main-product-desktop', active_variant: active_variant %}
+    {% render 'main-product-desktop',
+      product: product,
+      active_variant: active_variant,
+      color_options: color_options,
+      size_options: size_options,
+      active_color: active_color,
+      active_size: active_size
+    %}
   </div>
 
   {% comment %}
