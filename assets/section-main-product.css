@@ -148,6 +148,9 @@ product-info {
 
 .product-form {
   display: block;
+  button {
+    text-transform: uppercase;
+  }
 }
 
 .product-form__error-message-wrapper:not([hidden]) {

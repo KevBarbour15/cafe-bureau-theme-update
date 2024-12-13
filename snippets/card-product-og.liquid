@@ -9,7 +9,11 @@
   %}
     <product-card-hover-component>
       <div class='product-card '>
-        <a href='{{ product_url }}'>
+        <a 
+          href='{{ product_url }}'
+          aria-label='View {{ product.title }}'
+          class='tw-block'
+        >
           <div class='product-image tw-w-full tw-relative' style='aspect-ratio: 4/5;'>
             <img
               src='{{ variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
@@ -63,7 +67,15 @@
   {% endif %}
 
   <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-flex-1 tw-items-center tw-border-t tw-border-black tw-w-[85%] tw-m-auto'>
-    <p class='p1 tw-text-black tw-uppercase tw-truncate tw-text-center'>{{ product.title }}</p>
+    <a 
+      href='{{ product_url }}' 
+      class='tw-text-center'
+      aria-label='View {{ product.title }} - {{ product.price | money }}'
+    >
+      <p class='p1 tw-text-black tw-uppercase tw-truncate tw-text-center md:hover:tw-underline  tw-transition-all tw-duration-150 tw-ease-in-out'>
+        {{ product.title }}
+      </p>
+    </a>
     <p class='p1 tw-text-black tw-uppercase tw-text-center'>{{ product.price | money }}</p>
   </div>
 </div>

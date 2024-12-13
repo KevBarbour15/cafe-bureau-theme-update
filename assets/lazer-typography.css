@@ -36,6 +36,7 @@ h4 {
   height: 36px;
   letter-spacing: 0.1px;
   line-height: 1;
+  color: var(--color-primary-black);
 }
 
 .subheading {

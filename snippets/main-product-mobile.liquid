@@ -1,0 +1,162 @@
+{% assign product = product %}
+{% assign color_options = color_options %}
+{% assign size_options = size_options %}
+{% assign active_variant = active_variant %}
+{% assign active_color = active_color %}
+{% assign active_size = active_size %}
+
+<div class='tw-flex tw-flex-col tw-h-auto'>
+  <item-slider data-show-buttons>
+    <div class='embla'>
+      <div class='embla__container'>
+        {% if active_variant.metafields.custom.variant_product_video != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <video
+              src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-w-full tw-h-full tw-object-cover'
+            ></video>
+          </div>
+        {% endif %}
+
+        {% if active_variant.metafields.custom.variant_front_image != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <img
+              src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-object-cover'
+              width='100%'
+              height='auto'
+            >
+          </div>
+        {% endif %}
+
+        {% if active_variant.metafields.custom.variant_rear_image != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <img
+              src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-object-cover'
+              width='100%'
+              height='auto'
+            >
+          </div>
+        {% endif %}
+
+        {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-px-8 tw-pt-8'>
+            <video
+              src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
+            ></video>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class='embla__buttons tw-flex tw-justify-center tw-py-sm'>
+      {% render 'prev-button' %}
+      {% render 'next-button' %}
+    </div>
+  </item-slider>
+  <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-150 tw-ease-in-out tw-pb-md'>
+    {% if product.title != blank or product.price != blank %}
+      <div class='tw-flex tw-flex-col tw-gap-sm'>
+        <p class='p3 '>{{ product.title }}</p>
+        <p class='p3'>{{ product.price | money }}</p>
+      </div>
+    {% endif %}
+    <accordion-component>
+      {% if color_options != blank %}
+        <div
+          class=' accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black tw-py-xs'
+        >
+          <p class='p2'>Colors</p>
+          <div
+            class='down-icon tw-transition-all tw-duration-150'
+          >
+            {% render 'down-arrow', size: 20 %}
+          </div>
+        </div>
+        <div
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-py-sm tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+        >
+          {% render 'color-swatches',
+            product: product,
+            active_variant: active_variant,
+            color_options: color_options,
+            size_options: size_options,
+            active_color: active_color,
+            active_size: active_size
+          %}
+        </div>
+      {% endif %}
+
+      {% if size_options != blank %}
+        <div
+          class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
+        >
+          <p class='p2'>Sizes</p>
+          <div
+            class='down-icon tw-transition-all tw-duration-150'
+          >
+            {% render 'down-arrow', size: 20 %}
+          </div>
+        </div>
+        <div
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-py-sm tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+        >
+          {% render 'size-swatches',
+            product: product,
+            active_variant: active_variant,
+            color_options: color_options,
+            size_options: size_options,
+            active_color: active_color,
+            active_size: active_size
+          %}
+        </div>
+      {% endif %}
+
+      {% if product.description != blank %}
+        <div
+          class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
+        >
+          <p class='p2'>Description</p>
+          <div
+            class='down-icon tw-transition-all tw-duration-150'
+          >
+            {% render 'down-arrow', size: 20 %}
+          </div>
+        </div>
+        <div
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+        >
+          {{ product.description }}
+        </div>
+      {% endif %}
+      {% if product.metafields.custom.product_details != blank %}
+        <div
+          class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
+        >
+          <p class='p2'>Product Details</p>
+          <div
+            class='down-icon tw-transition-all tw-duration-150'
+          >
+            {% render 'down-arrow', size: 20 %}
+          </div>
+        </div>
+        <div
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+        >
+          {{ product.metafields.custom.product_details }}
+        </div>
+      {% endif %}
+    </accordion-component>
+  </div>
+</div>

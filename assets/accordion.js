@@ -1,68 +1,67 @@
 class Accordion extends HTMLElement {
   constructor() {
     super();
-    this.isOpen = false;
+    this.openIndex = null;
   }
 
   connectedCallback() {
-    this.header = document.getElementById('accordion-header');
-    this.content = document.getElementById('accordion-content');
-    this.text = document.getElementById('accordion-text');
-    this.downIcon = document.getElementById('down-icon');
+    this.header = this.querySelectorAll('.accordion-header');
+    this.content = this.querySelectorAll('.accordion-content');
+    this.downIcon = this.querySelectorAll('.down-icon');
 
-    this.splitText = new SplitText(this.text, { type: "chars,words,lines" });
+    // Add initial styles
+    this.content.forEach(content => {
+      content.style.maxHeight = '0';
+      content.style.opacity = '0';
+      content.style.overflow = 'hidden';
+    });
 
-    this.openAnimation = gsap.timeline({ paused: true })
-      .set(this.content, {
-        overflow: "hidden",
-      }, 0)
-      .set(this.splitText.words, {
-        opacity: 0,
-      }, 0)
-      .to(this.content, {
-        maxHeight: '100%',
-        duration: 0.3,
-        borderColor: "black",
-        opacity: 1,
-        ease: "linear",
-        overflow: "visible",
-      }, 0.05)
-      .to(this.splitText.words, {
-        duration: 0.12,
-        opacity: 1,
-        ease: "linear",
-        stagger: 0.0025,
-        scrambleText: {
-          text: true,
-          chars: "lowerCase",
-          revealDelay: 0.1,
-        }
-      }, 0.15)
-      .to(this.downIcon, {
-        ease: "linear",
-        duration: 0.15,
-        rotateX: 180,
-      }, "-=0.3");
-
-
-    this.header.addEventListener('click', () => this.toggleAccordion());
+    this.header.forEach((header, idx) => {
+      header.addEventListener('click', () => this.toggleAccordion(idx));
+    });
   }
 
-  toggleAccordion() {
-    if (this.isOpen) {
-      this.closeAccordion();
-    } else {
-      this.openAccordion();
+  toggleAccordion(idx) {
+    if (this.openIndex === idx) {
+      this.closeAccordion(idx);
+      this.openIndex = null;
+      return;
     }
-    this.isOpen = !this.isOpen;
+
+    if (this.openIndex !== null) {
+      this.closeAccordion(this.openIndex);
+    }
+
+    this.openAccordion(idx);
+    this.openIndex = idx;
   }
 
-  openAccordion() {
-    this.openAnimation.play();
+  closeAccordion(idx) {
+    const content = this.content[idx];
+    const icon = this.downIcon[idx];
+
+    content.style.maxHeight = '0';
+    content.style.opacity = '0';
+    content.style.overflow = 'hidden';
+    icon.style.transform = 'rotateX(0deg)';
+
+    setTimeout(() => {
+      content.classList.add('tw-hidden');
+    }, 50);
   }
 
-  closeAccordion() {
-    this.openAnimation.reverse();
+  openAccordion(idx) {
+    const content = this.content[idx];
+    const icon = this.downIcon[idx];
+
+    setTimeout(() => {
+      content.classList.remove('tw-hidden');
+    }, 50);
+    content.style.overflow = 'visible';
+    content.style.maxHeight = '100%';
+    content.style.opacity = '1';
+    content.style.borderColor = 'black';
+    icon.style.transform = 'rotateX(180deg)';
   }
 }
 

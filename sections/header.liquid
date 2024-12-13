@@ -16,7 +16,7 @@
   {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
 {% else %}
   {% assign header_style = header_style
-    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-50 tw-backdrop-blur-md'
+    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm'
   %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-black ' %}
@@ -51,7 +51,7 @@
       <div
         id='menu'
         style='clip-path: polygon(-100% 0%, 0% 0%, 0% 100%, -100% 100%)'
-        class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[100] tw-bg-black md:tw-w-[50vh] tw-p-lg'
+        class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[100] md:tw-w-[50vh] tw-p-lg tw-bg-black'
       >
         <ul
           class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-8 tw-h-full'

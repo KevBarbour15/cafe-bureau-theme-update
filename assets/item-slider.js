@@ -146,7 +146,6 @@ class ItemSlider extends HTMLElement {
   };
 
   addPrevNextBtnsClickHandlers = (emblaApi, prevBtn, nextBtn) => {
-    console.log('addPrevNextBtnsClickHandlers');
     const scrollPrev = () => {
       emblaApi.scrollPrev();
       if (this.showCount) {
@@ -155,7 +154,6 @@ class ItemSlider extends HTMLElement {
       }
     };
     const scrollNext = () => {
-      console.log('scrollNext');
       emblaApi.scrollNext();
       if (this.showCount) {
         let current = this.slideCount.querySelector('.embla__count-current');

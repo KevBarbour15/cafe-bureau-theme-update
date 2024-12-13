@@ -1,17 +1,9 @@
 {%- paginate blog.articles by 6 -%}
   <div class='tw-container tw-pt-[80px]'>
-    <div class='tw-grid tw-grid-cols-1 tw-gap-x-sm md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-pb-lg'>
+    <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6 tw-pb-lg'>
       {%- for article in blog.articles -%}
         <div class=''>
-          {%- render 'article-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true
-          -%}
+          {%- render 'article-card', article: article -%}
         </div>
       {%- endfor -%}
     </div>
