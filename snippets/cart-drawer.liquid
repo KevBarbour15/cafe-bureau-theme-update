@@ -549,6 +549,8 @@
             class='cart__checkout-button button'
             name='checkout'
             form='CartDrawer-Form'
+            formaction='{{ routes.cart_url }}/checkout'
+            formmethod='post'
             {% if cart == empty %}
               disabled
             {% endif %}

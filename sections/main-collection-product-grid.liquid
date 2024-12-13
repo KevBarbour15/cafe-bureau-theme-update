@@ -24,40 +24,32 @@
               {% for color in product_colors.values %}
                 {% for variant in product.variants %}
                   {% if variant.option1 == color or variant.option2 == color %}
-                    {% if variant.metafields.custom.variant_front_image != blank
-                      and variant.metafields.custom.variant_product_video != blank
-                    %}
-                      {% assign product_url = product.url | append: '?variant=' | append: variant.id %}
-                      <li class=''>
-                        {% render 'card-product-og',
-                          product: product,
-                          variant: variant,
-                          product_url: product_url,
-                          lazy_load: lazy_load
-                        %}
-                      </li>
-                    {% endif %}
+                    {% assign product_url = product.url | append: '?variant=' | append: variant.id %}
+                    <li class=''>
+                      {% render 'card-product-og',
+                        product: product,
+                        variant: variant,
+                        product_url: product_url,
+                        lazy_load: lazy_load
+                      %}
+                    </li>
                     {% break %}
                   {% endif %}
                 {% endfor %}
               {% endfor %}
             {% else %}
-              {% if product.selected_or_first_available_variant.metafields.custom.variant_front_image != blank
-                and product.selected_or_first_available_variant.metafields.custom.variant_product_video != blank
+              {% assign product_url = product.url
+                | append: '?variant='
+                | append: product.selected_or_first_available_variant.id
               %}
-                {% assign product_url = product.url
-                  | append: '?variant='
-                  | append: product.selected_or_first_available_variant.id
+              <li>
+                {% render 'card-product-og',
+                  product: product,
+                  variant: product.selected_or_first_available_variant,
+                  product_url: product_url,
+                  lazy_load: lazy_load
                 %}
-                <li>
-                  {% render 'card-product-og',
-                    product: product,
-                    variant: product.selected_or_first_available_variant,
-                    product_url: product_url,
-                    lazy_load: lazy_load
-                  %}
-                </li>
-              {% endif %}
+              </li>
             {% endif %}
           {% endif %}
         {%- endfor -%}

@@ -1,6 +1,6 @@
 <div class='tw-w-screen tw-h-dvh tw-bg-black'>
   {%- if section.settings.video != blank -%}
-    <div class='tw-w-full tw-h-full '>
+    <div class='tw-w-full tw-h-full'>
       {{
         section.settings.video
         | video_tag:
@@ -20,6 +20,8 @@
       height='100%'
     >
   {%- endif -%}
+
+  
 </div>
 
 {% schema %}
@@ -37,6 +39,16 @@
       "type": "video",
       "id": "video",
       "label": "Video"
+    },
+    {
+      "type": "video",
+      "id": "desktop_video",
+      "label": "Desktop Video"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile Video"
     }
   ],
   "presets": [

@@ -12,9 +12,7 @@
     <div class='tw-w-full tw-block tw-h-full'>
       <div class='tw-w-full tw-flex tw-h-full'>
         <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative tw-h-full'>
-          {% assign images = product.images | map: 'src' %}
-
-          {% if product_video != blank or images != blank %}
+          {% if active_variant.metafields.custom.variant_product_video != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
           <div id='scroll-arrow' class='tw-w-full tw-h-screen tw-absolute tw-top-0 tw-left-0 tw-z-[1]'>
@@ -84,7 +82,7 @@
               <div
                 class='accordion-content tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
               >
-                <span class='tw-text-balance p2'>{{ product.description | strip_html }}</span>
+                <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description }}</span>
               </div>
             {% endif %}
           </div>
