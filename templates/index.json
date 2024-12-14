@@ -1,10 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "media_banner": {
       "type": "media-banner",
-    },
+      "settings": {
+        "desktop_video": "shopify://files/videos/Bureau_Homepage_001.mp4",
+        "mobile_video": "shopify://files/videos/Homepage_Video_Mobile_compressed.mp4"
+      }
+    }
   },
   "order": [
-    "media_banner",
+    "media_banner"
   ]
 }
