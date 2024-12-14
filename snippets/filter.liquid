@@ -49,20 +49,20 @@
         {% endif %}
       >
         <span>{% render 'left-arrow' %}</span>
-        <span class='filter-link-text tw-text-black tw-uppercase tw-font-bold p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+        <span class='filter-link-text tw-text-black tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
           Shop
         </span>
       </a>
 
       <a
         class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0'
-        href='/collections/all'
-        aria-label='Navigate to {{ link.title }}'
+        href='/blogs/lookbooks'
+        aria-label='Navigate to lookbooks'
         {% if link.current %}
           aria-current='page'
         {% endif %}
       >
-        <span class='filter-link-text tw-text-black tw-uppercase tw-font-bold p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+        <span class='filter-link-text tw-text-black tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
           Lookbooks
         </span>
         <span>{% render 'right-arrow' %}</span>
