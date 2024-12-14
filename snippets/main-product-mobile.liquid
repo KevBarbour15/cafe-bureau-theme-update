@@ -47,15 +47,17 @@
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
-          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-p-8 tw-max-h-[calc(100dvh-100px)]'>
-            <video
-              src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
-              autoplay
-              muted
-              playsinline
-              loop
-              class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
-            ></video>
+          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%]'>
+            <div class='tw-w-[75vw] tw-h-auto'>
+              <video
+                src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
+                autoplay
+                muted
+                playsinline`
+                loop
+                class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
+              ></video>
+            </div>
           </div>
         {% endif %}
       </div>
