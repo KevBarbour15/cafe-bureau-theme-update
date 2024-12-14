@@ -7,59 +7,57 @@
 
 <div class='tw-flex tw-flex-col tw-h-auto'>
   <item-slider data-show-buttons>
-    <div class=''>
-      <div class='embla'>
-        <div class='embla__container'>
-          {% if active_variant.metafields.custom.variant_product_video != blank %}
-            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
-              <video
-                src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
-                autoplay
-                muted
-                playsinline
-                loop
-                class='tw-w-full tw-h-full tw-object-cover'
-              ></video>
-            </div>
-          {% endif %}
+    <div class='embla'>
+      <div class='embla__container'>
+        {% if active_variant.metafields.custom.variant_product_video != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <video
+              src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-w-full tw-h-full tw-object-cover'
+            ></video>
+          </div>
+        {% endif %}
 
-          {% if active_variant.metafields.custom.variant_front_image != blank %}
-            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
-              <img
-                src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
-                alt='{{ product.title }}'
-                class='tw-w-full tw-h-full tw-object-cover'
-                width='100%'
-                height='auto'
-              >
-            </div>
-          {% endif %}
+        {% if active_variant.metafields.custom.variant_front_image != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <img
+              src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-object-cover'
+              width='100%'
+              height='auto'
+            >
+          </div>
+        {% endif %}
 
-          {% if active_variant.metafields.custom.variant_rear_image != blank %}
-            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
-              <img
-                src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
-                alt='{{ product.title }}'
-                class='tw-w-full tw-h-full tw-object-cover'
-                width='100%'
-                height='auto'
-              >
-            </div>
-          {% endif %}
+        {% if active_variant.metafields.custom.variant_rear_image != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+            <img
+              src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-object-cover'
+              width='100%'
+              height='auto'
+            >
+          </div>
+        {% endif %}
 
-          {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
-            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-p-8 tw-max-h-[calc(100dvh-100px)]'>
-              <video
-                src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
-                autoplay
-                muted
-                playsinline
-                loop
-                class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
-              ></video>
-            </div>
-          {% endif %}
-        </div>
+        {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-p-8 tw-max-h-[calc(100dvh-100px)]'>
+            <video
+              src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black'
+            ></video>
+          </div>
+        {% endif %}
       </div>
     </div>
   </item-slider>
