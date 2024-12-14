@@ -15,7 +15,7 @@
         >
           {% for link in filter_links %}
             {% if collection.handle == link.object.handle -%}
-              <p class='tw-text-black tw-uppercase tw-font-bold tw-underline p2'>{{ link.title }}</p>
+              <p class='tw-text-black tw-uppercase  tw-underline p2'>{{ link.title }}</p>
             {% else %}
               <a
                 class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0'
@@ -25,7 +25,7 @@
                   aria-current='page'
                 {% endif %}
               >
-                <span class='filter-link-text tw-text-black tw-uppercase tw-font-bold p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+                <span class='filter-link-text tw-text-black tw-uppercase  p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
                   {{- link.title -}}
                 </span>
               </a>

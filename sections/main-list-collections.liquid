@@ -33,7 +33,7 @@
             style='--animation-order: {{ forloop.index }};'
           {% endif %}
         >
-          <h2 class='tw-text-2xl tw-font-bold tw-text-center tw-mb-4'>{{ collection.title }}</h2>
+          <h2 class='tw-text-2xl  tw-text-center tw-mb-4'>{{ collection.title }}</h2>
           {% render 'card-collection',
             card_collection: collection,
             media_aspect_ratio: section.settings.image_ratio,
