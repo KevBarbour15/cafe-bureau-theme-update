@@ -102,7 +102,7 @@
       {%- endif -%}
 
       <div class='tw-block tw-pt-sm md:tw-hidden'>
-        <p class=''>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</p>
+        <p class='p1'>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</p>
       </div>
       <div class='tw-flex-col tw-text-right tw-h-full tw-gap-3 tw-items-end tw-hidden md:tw-flex'>
         {% render 'social-icons', settings: section.settings %}
