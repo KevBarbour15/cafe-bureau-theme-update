@@ -1,27 +1,58 @@
 <div class='tw-w-screen tw-h-dvh tw-bg-black'>
-  {%- if section.settings.video != blank -%}
-    <div class='tw-w-full tw-h-full'>
-      {{
-        section.settings.video
-        | video_tag:
-          autoplay: true,
-          loop: true,
-          muted: true,
-          controls: false,
-          class: 'tw-w-full tw-h-full tw-object-cover tw-object-center'
-      }}
-    </div>
-  {% elsif section.settings.image != blank %}
-    <img
-      src='{{ section.settings.image | image_url: width: 1000 }}'
-      alt='{{ product.title }}'
-      class='tw-w-full tw-h-full tw-object-cover'
-      width='100%'
-      height='100%'
-    >
-  {%- endif -%}
+  {%- if section.settings.desktop_video != blank or section.settings.mobile_video != blank -%}
+    {%- if section.settings.desktop_video != blank -%}
+      <div class='tw-w-full tw-h-full tw-hidden md:tw-block'>
+        {{
+          section.settings.desktop_video
+          | video_tag:
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            playsinline: true,
+            class: 'tw-w-full tw-h-full tw-object-cover tw-object-center'
+        }}
+      </div>
+    {%- endif -%}
 
-  
+    {%- if section.settings.mobile_video != blank -%}
+      <div class='tw-w-full tw-h-full md:tw-hidden'>
+        {{
+          section.settings.mobile_video
+          | video_tag:
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            playsinline: true,
+            class: 'tw-w-full tw-h-full tw-object-cover tw-object-center'
+        }}
+      </div>
+    {%- endif -%}
+  {% elsif section.settings.image != blank %}
+    {%- # Desktop image -%}
+    <div class='tw-hidden md:tw-block tw-w-full tw-h-full'>
+      <img
+        src='{{ section.settings.image | image_url: width: 2000 }}'
+        alt='{{ section.settings.image.alt | escape }}'
+        class='tw-w-full tw-h-full tw-object-cover'
+        loading='lazy'
+        width='{{ section.settings.image.width }}'
+        height='{{ section.settings.image.height }}'
+      >
+    </div>
+    {%- # Mobile image -%}
+    <div class='md:tw-hidden tw-w-full tw-h-full'>
+      <img
+        src='{{ section.settings.image | image_url: width: 1000 }}'
+        alt='{{ section.settings.image.alt | escape }}'
+        class='tw-w-full tw-h-full tw-object-cover'
+        loading='lazy'
+        width='{{ section.settings.image.width }}'
+        height='{{ section.settings.image.height }}'
+      >
+    </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -31,16 +62,6 @@
   "class": "section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "video",
-      "id": "video",
-      "label": "Video"
-    },
-    {
       "type": "video",
       "id": "desktop_video",
       "label": "Desktop Video"
@@ -49,6 +70,11 @@
       "type": "video",
       "id": "mobile_video",
       "label": "Mobile Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (Both Desktop & Mobile)"
     }
   ],
   "presets": [
