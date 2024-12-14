@@ -14,8 +14,10 @@
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu",
-        "collection_menu": ""
+        "home_page_header_logo": "shopify://shop_images/CB-sitelogowhite_300x_7270b5d0-1437-4580-9bfc-c615cde53f6e.png",
+        "header_logo": "shopify://shop_images/cb1_300x_b27d5422-6556-4751-9949-4da7c6dba7cc.png",
+        "menu": "dropdown-menu",
+        "collection_menu": "collection-filter"
       }
     }
   },
