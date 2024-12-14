@@ -73,17 +73,17 @@
     {% endcomment %}
 
     <!-- Footer bottom with links,contact and copyright -->
-    <div class='tw-container tw-block md:tw-flex md:tw-items-end tw-py-lg tw-h-auto md:tw-justify-between'>
+    <div class='tw-container tw-block md:tw-flex md:tw-items-end tw-py-md md:tw-py-lg tw-h-auto md:tw-justify-between'>
       <div class='tw-block tw-pb-sm md:tw-hidden'>
         {% render 'social-icons', settings: section.settings %}
       </div>
       {%- if section.settings.footer_menu != blank -%}
         <ul class=''>
           {% if section.settings.contact_email != blank %}
-            <li class='tw-flex tw-items-center tw-gap-sm'>
-              <p class='tw-uppercase'>Contact:</p>
+            <li class='tw-flex tw-items-center tw-gap-sm '>
+              <p class='tw-uppercase p1'>Contact:</p>
               <a
-                class='md:hover:tw-underline md:tw-transition-all md:tw-duration-150'
+                class='md:hover:tw-underline md:tw-transition-all md:tw-duration-150 p1'
                 href='mailto:{{ section.settings.contact_email }}'
               >
                 {{- section.settings.contact_email -}}
@@ -94,7 +94,7 @@
           {%- for link in section.settings.footer_menu.links %}
             {%- if link != blank -%}
               <li>
-                {% render 'link-hover', link: link, text_style: 'tw-uppercase p3', arrow_style: 'tw-fill-black' %}
+                {% render 'link-hover', link: link, text_style: 'tw-uppercase p1', arrow_style: 'tw-fill-black' %}
               </li>
             {%- endif -%}
           {%- endfor -%}

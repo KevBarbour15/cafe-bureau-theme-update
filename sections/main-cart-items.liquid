@@ -25,10 +25,9 @@
 
 <script src='{{ 'quantity-popover.js' | asset_url }}' defer='defer'></script>
 
-<cart-items class='tw-container tw-pt-[100px] md:tw-pt-[120px] tw-min-h-[calc(100vh-100px)] md:tw-min-h-[calc(100vh-120px)] isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}'>
-  <div class='tw-pt-lg'>
-    <div class='title-wrapper-with-link'>
-      <h1 class='title title--primary'>{{ 'sections.cart.title' | t }}</h1>
+<cart-items class='tw-min-h-[calc(100vh-100px)] md:tw-min-h-[calc(100vh-120px)]'>
+  <div class='tw-container tw-pt-[100px]'>
+    <div class='title-wrapper-with-link tw-pt-lg'>
       <a href='{{ routes.all_products_collection_url }}' class='underlined-link'>
         {{- 'general.continue_shopping' | t -}}
       </a>
