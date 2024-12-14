@@ -1213,6 +1213,14 @@ video {
   padding-top: 48px;
 }
 
+.tw-pt-8 {
+  padding-top: 2rem;
+}
+
+.tw-pb-8 {
+  padding-bottom: 2rem;
+}
+
 .tw-text-center {
   text-align: center;
 }
