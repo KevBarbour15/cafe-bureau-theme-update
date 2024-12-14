@@ -52,14 +52,6 @@ class ProductCardHover extends HTMLElement {
 
     this.productCard.addEventListener('mouseover', () => this.onMouseOver());
     this.productCard.addEventListener('mouseout', () => this.onMouseOut());
-    this.productCard.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      this.onMouseOver();
-    });
-    this.productCard.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      this.onMouseOut();
-    });
   }
 
   disconnectedCallback() {
