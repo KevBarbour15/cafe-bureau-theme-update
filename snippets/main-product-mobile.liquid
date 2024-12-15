@@ -155,7 +155,9 @@
           {{ product.metafields.custom.product_details }}
         </div>
       {% endif %}
-      {% render 'buy-buttons', product: product, active_variant: active_variant, section: section %}
+      <div class='tw-mt-md'>
+        {% render 'buy-buttons', product: product, active_variant: active_variant, section: section %}
+      </div>
     </accordion-component>
   </div>
 </div>
