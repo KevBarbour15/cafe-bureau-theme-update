@@ -661,6 +661,11 @@ video {
   margin-bottom: 24px;
 }
 
+.tw-my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .tw-mb-4 {
   margin-bottom: 1rem;
 }
