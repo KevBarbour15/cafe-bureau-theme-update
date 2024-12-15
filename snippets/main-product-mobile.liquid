@@ -8,9 +8,9 @@
 <div class='tw-flex tw-flex-col tw-h-auto'>
   <item-slider data-show-buttons>
     <div class='embla'>
-      <div class='embla__container tw-h-[75dvh]'>
+      <div class='embla__container'>
         {% if active_variant.metafields.custom.variant_product_video != blank %}
-          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%]'>
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75dvh]'>
             <video
               src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
               autoplay
@@ -23,7 +23,7 @@
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_front_image != blank %}
-          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75dvh]'>
             <img
               src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
               alt='{{ product.title }}'
@@ -35,7 +35,7 @@
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_rear_image != blank %}
-          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75dvh]'>
             <img
               src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
               alt='{{ product.title }}'
@@ -47,7 +47,7 @@
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
-          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%]'>
+          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%] tw-h-[75dvh] tw-px-8 tw-pb-8'>
             <div class='tw-max-h-[calc(100dvh-100px)] tw-px-8 tw-pb-8'>
               <video
                 src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
