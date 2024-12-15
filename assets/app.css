@@ -858,6 +858,10 @@ video {
   height: 70dvh;
 }
 
+.tw-h-\[75dvh\] {
+  height: 75dvh;
+}
+
 .tw-max-h-0 {
   max-height: 0px;
 }
