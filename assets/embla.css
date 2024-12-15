@@ -20,7 +20,6 @@
   padding: 0;
   z-index: 1;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +28,6 @@
 .embla__dots {
   display: flex;
   flex-wrap: wrap;
-
   align-items: center;
   margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
   z-index: auto;

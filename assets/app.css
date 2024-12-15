@@ -566,6 +566,10 @@ video {
   position: relative;
 }
 
+.tw-sticky {
+  position: sticky;
+}
+
 .tw-inset-0 {
   inset: 0px;
 }
@@ -632,6 +636,10 @@ video {
 
 .tw-z-\[75\] {
   z-index: 75;
+}
+
+.tw-z-50 {
+  z-index: 50;
 }
 
 .tw-m-auto {
@@ -713,6 +721,34 @@ video {
   aspect-ratio: 1 / 1;
 }
 
+.tw-aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.tw-aspect-\[\] {
+  aspect-ratio: ;
+}
+
+.tw-aspect-\[4\] {
+  aspect-ratio: 4;
+}
+
+.tw-aspect-\[4\/3\] {
+  aspect-ratio: 4/3;
+}
+
+.tw-aspect-\[\/3\] {
+  aspect-ratio: /3;
+}
+
+.tw-aspect-\[3\/3\] {
+  aspect-ratio: 3/3;
+}
+
+.tw-aspect-\[2\/3\] {
+  aspect-ratio: 2/3;
+}
+
 .tw-h-14 {
   height: 3.5rem;
 }
@@ -760,6 +796,58 @@ video {
 
 .tw-h-screen {
   height: 100vh;
+}
+
+.tw-h-\[\] {
+  height: ;
+}
+
+.tw-h-\[7\] {
+  height: 7;
+}
+
+.tw-h-\[75\] {
+  height: 75;
+}
+
+.tw-h-\[75\%\] {
+  height: 75%;
+}
+
+.tw-h-\[\%\] {
+  height: %;
+}
+
+.tw-h-\[75v\] {
+  height: 75v;
+}
+
+.tw-h-\[75vh\] {
+  height: 75vh;
+}
+
+.tw-h-\[7vh\] {
+  height: 7vh;
+}
+
+.tw-h-\[vh\] {
+  height: vh;
+}
+
+.tw-h-\[5vh\] {
+  height: 5vh;
+}
+
+.tw-h-\[50vh\] {
+  height: 50vh;
+}
+
+.tw-h-\[6vh\] {
+  height: 6vh;
+}
+
+.tw-h-\[65vh\] {
+  height: 65vh;
 }
 
 .tw-max-h-0 {

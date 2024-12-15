@@ -8,9 +8,9 @@
 <div class='tw-flex tw-flex-col tw-h-auto'>
   <item-slider data-show-buttons>
     <div class='embla'>
-      <div class='embla__container'>
+      <div class='embla__container tw-h-[65vh]'>
         {% if active_variant.metafields.custom.variant_product_video != blank %}
-          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] '>
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%]'>
             <video
               src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
               autoplay

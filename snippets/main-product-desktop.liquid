@@ -35,7 +35,7 @@
           <div class='tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
             {% if product.title != blank or product.price != blank %}
               <div class='tw-mb-lg'>
-                <p class='p3 tw-mb-lg'>{{ product.title }}</p>
+                <p class='p3 tw-mb-lg tw-uppercase'>{{ product.title }}</p>
                 <p class='p3'>{{ product.price | money }}</p>
               </div>
             {% endif %}
