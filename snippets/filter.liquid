@@ -41,7 +41,7 @@
       class='tw-h-[40px] tw-fixed tw-top-[60px] md:tw-top-[80px] tw-w-full tw-bg-white tw-flex tw-items-center tw-px-8 tw-justify-between tw-mix-blend-difference tw-z-[75]'
     >
       <a
-        class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0'
+        class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0'
         href='/collections/all'
         aria-label='Navigate to {{ link.title }}'
         {% if link.current %}
@@ -49,20 +49,20 @@
         {% endif %}
       >
         <span>{% render 'left-arrow' %}</span>
-        <span class='filter-link-text tw-text-black tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+        <span class='filter-link-text tw-text-black tw-uppercase p1 md:hover:tw-underline md:tw-transition-all md:tw-duration-150 tw-ml-xs'>
           Shop
         </span>
       </a>
 
       <a
-        class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0'
+        class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0'
         href='/blogs/lookbooks'
         aria-label='Navigate to lookbooks'
         {% if link.current %}
           aria-current='page'
         {% endif %}
       >
-        <span class='filter-link-text tw-text-black tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+        <span class='filter-link-text tw-text-black tw-uppercase p1 md:hover:tw-underline md:tw-transition-all md:tw-duration-150 tw-mr-xs'>
           Lookbooks
         </span>
         <span>{% render 'right-arrow' %}</span>
