@@ -47,15 +47,15 @@
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
-          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%] tw-h-[75dvh] tw-px-8 tw-mt-8'>
-            <div class='tw-max-h-[calc(100dvh-100px)] tw-px-8 tw-pb-8 tw-mt-8'>
+          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%] tw-max-h-[75dvh] tw-p-8'>
+            <div class='tw-h-full tw-w-full'>
               <video
                 src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
                 autoplay
                 muted
                 playsinline
                 loop
-                class='tw-object-center tw-object-cover tw-w-full tw-border-8 tw-border-black '
+                class='tw-object-center tw-object-cover tw-w-full tw-h-full tw-border-8 tw-border-black'
               ></video>
             </div>
           </div>
