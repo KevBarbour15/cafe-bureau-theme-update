@@ -33,19 +33,25 @@ class ProductPageScroll extends HTMLElement {
         end: "65% top",
         onUpdate: (self) => {
           if (self.progress >= 1) {
-            this.scrollArrow.style.opacity = '0';
+            
             gsap.to(this.scrollArrow, {
               opacity: 0,
               duration: 0.25,
               ease: "power1.inOut"
-            });
+            })
+
+            this.scrollArrow.style.display = 'none';
+              
           } else {
-            this.scrollArrow.style.opacity = '1';
+            
             gsap.to(this.scrollArrow, {
               opacity: 1,
               duration: 0.25,
               ease: "power1.inOut"
-            });
+            })
+
+            this.scrollArrow.style.display = 'block';
+              
           }
         }
       }

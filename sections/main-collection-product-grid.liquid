@@ -1,62 +1,65 @@
 <script src='{{ 'product-card-hover.js' | asset_url }}' defer='defer'></script>
+<script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
-<div class='tw-container tw-pb-md tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]'>
-  <div>
-    {%- if collection.products.size == 0 -%}
-      <div class='tw-w-full tw-flex tw-justify-center tw-items-center tw-h-[calc(100vh-100px)] md:tw-h-[calc(100vh-120px)]'>
-        <h2 class='h2'>No products found</h2>
-      </div>
-    {%- else -%}
-      <ul
-        id='product-grid'
-        data-id='{{ section.id }}'
-        class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6'
-      >
-        {%- for product in collection.products -%}
-          {% if product.type == 'Clothing' or product.type == 'Accessories' %}
-            {% assign lazy_load = false %}
-            {%- if forloop.index > 3 -%}
-              {%- assign lazy_load = true -%}
-            {%- endif -%}
+<opacity-reveal>
+  <div class='page-container tw-container tw-pb-md tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]'>
+    <div>
+      {%- if collection.products.size == 0 -%}
+        <div class='tw-w-full tw-flex tw-justify-center tw-items-center tw-h-[calc(100vh-100px)] md:tw-h-[calc(100vh-120px)]'>
+          <h2 class='h2'>No products found</h2>
+        </div>
+      {%- else -%}
+        <ul
+          id='product-grid'
+          data-id='{{ section.id }}'
+          class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6'
+        >
+          {%- for product in collection.products -%}
+            {% if product.type == 'Clothing' or product.type == 'Accessories' %}
+              {% assign lazy_load = false %}
+              {%- if forloop.index > 3 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
 
-            {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
-            {% if product_colors and product_colors.values.size > 1 %}
-              {% for color in product_colors.values %}
-                {% for variant in product.variants %}
-                  {% if variant.option1 == color or variant.option2 == color %}
-                    {% assign product_url = product.url | append: '?variant=' | append: variant.id %}
-                    <li class=''>
-                      {% render 'card-product-og',
-                        product: product,
-                        variant: variant,
-                        product_url: product_url,
-                        lazy_load: lazy_load
-                      %}
-                    </li>
-                    {% break %}
-                  {% endif %}
+              {% assign product_colors = product.options_with_values | where: 'name', 'Color' | first %}
+              {% if product_colors and product_colors.values.size > 1 %}
+                {% for color in product_colors.values %}
+                  {% for variant in product.variants %}
+                    {% if variant.option1 == color or variant.option2 == color %}
+                      {% assign product_url = product.url | append: '?variant=' | append: variant.id %}
+                      <li class='card' style='opacity: 0;'>
+                        {% render 'card-product-og',
+                          product: product,
+                          variant: variant,
+                          product_url: product_url,
+                          lazy_load: lazy_load
+                        %}
+                      </li>
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            {% else %}
-              {% assign product_url = product.url
-                | append: '?variant='
-                | append: product.selected_or_first_available_variant.id
-              %}
-              <li>
-                {% render 'card-product-og',
-                  product: product,
-                  variant: product.selected_or_first_available_variant,
-                  product_url: product_url,
-                  lazy_load: lazy_load
+              {% else %}
+                {% assign product_url = product.url
+                  | append: '?variant='
+                  | append: product.selected_or_first_available_variant.id
                 %}
-              </li>
+                <li class='card' style='opacity: 0;'>
+                  {% render 'card-product-og',
+                    product: product,
+                    variant: product.selected_or_first_available_variant,
+                    product_url: product_url,
+                    lazy_load: lazy_load
+                  %}
+                </li>
+              {% endif %}
             {% endif %}
-          {% endif %}
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
-</div>
+</opacity-reveal>
 
 {% schema %}
 {

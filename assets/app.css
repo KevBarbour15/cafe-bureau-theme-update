@@ -875,6 +875,10 @@ video {
   width: 0.25rem;
 }
 
+.tw-w-12 {
+  width: 3rem;
+}
+
 .tw-min-w-14 {
   min-width: 3.5rem;
 }
