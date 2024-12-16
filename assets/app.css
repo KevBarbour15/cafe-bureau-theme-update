@@ -654,6 +654,10 @@ video {
   left: 25%;
 }
 
+.tw-bottom-lg {
+  bottom: 32px;
+}
+
 .tw-z-\[100\] {
   z-index: 100;
 }
