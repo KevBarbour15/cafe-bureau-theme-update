@@ -39,19 +39,17 @@ class ProductPageScroll extends HTMLElement {
               duration: 0.25,
               ease: "power1.inOut"
             })
-
-            this.scrollArrow.style.display = 'none';
-              
+            gsap.to(this.scrollArrow, {
+              display: 'none',
+              delay: 0.25,
+            })
           } else {
-            
+            this.scrollArrow.style.display = 'block';
             gsap.to(this.scrollArrow, {
               opacity: 1,
               duration: 0.25,
               ease: "power1.inOut"
-            })
-
-            this.scrollArrow.style.display = 'block';
-              
+            }) 
           }
         }
       }
