@@ -15,15 +15,13 @@
           {% if active_variant.metafields.custom.variant_product_video != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
-          <div id='scroll-arrow' class='tw-w-full tw-h-screen tw-absolute tw-top-0 tw-left-0 tw-z-[1]'>
-            <div
-              class='tw-w-14 tw-h-14 tw-bg-white tw-flex tw-justify-center tw-items-center tw-border tw-border-black tw-text-black tw-rounded-full tw-tracking-widest tw-absolute tw-bottom-md tw-left-1/2 tw-transform tw--translate-x-1/2 tw-shadow-md'
-            >
-              <span
-                class='tw-transform tw-rotate-180'
+          <div id='scroll-arrow' class='tw-w-screen tw-h-screen tw-fixed tw-top-0 tw-left-0 tw-z-[1]'>
+            <div class='tw-w-full tw-h-full tw-container '>
+              <div
+                class='tw-flex tw-justify-center tw-items-center tw-border tw-p-2 tw-rounded-full tw-absolute tw-bottom-md tw-left-1/4 tw-transform tw--translate-x-1/2 tw-shadow-md tw-border-black tw-bg-white'
               >
-                ↑
-              </span>
+                {% render 'down-arrow', size: 24, style: 'tw-fill-black' %}
+              </div>
             </div>
           </div>
         </div>
@@ -82,7 +80,7 @@
               <div
                 class='accordion-content tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
               >
-                <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description }}</span>
+                <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description | strip_html }}</span>
               </div>
             {% endif %}
           </div>

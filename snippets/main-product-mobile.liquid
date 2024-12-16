@@ -5,9 +5,9 @@
 {% assign active_color = active_color %}
 {% assign active_size = active_size %}
 
-<div class='tw-flex tw-flex-col tw-h-auto'>
+<div class='tw-flex tw-flex-col'>
   <item-slider data-show-buttons>
-    <div class='embla'>
+    <div class='embla tw-relative tw-h-auto'>
       <div class='embla__container'>
         {% if active_variant.metafields.custom.variant_product_video != blank %}
           <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
@@ -61,13 +61,19 @@
           </div>
         {% endif %}
       </div>
+      <div class='embla__button embla__button--prev tw-absolute tw-top-1/2 tw-left-12 tw-mix-blend-difference tw-invert'>
+        {% render 'left-arrow', size: 32, style: 'tw-fill-black' %}
+      </div>
+      <div class='embla__button embla__button--next tw-absolute tw-top-1/2 tw-right-12 tw-mix-blend-difference tw-invert'>
+        {% render 'right-arrow', size: 32, style: 'tw-fill-black' %}
+      </div>
     </div>
   </item-slider>
-  <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-150 tw-ease-in-out tw-pb-md'>
+  <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-150 tw-ease-in-out tw-py-sm'>
     {% if product.title != blank or product.price != blank %}
-      <div class='tw-flex tw-flex-col tw-gap-sm'>
-        <p class='p3 '>{{ product.title }}</p>
-        <p class='p3'>{{ product.price | money }}</p>
+      <div class='tw-flex tw-flex-col tw-gap-sm tw-uppercase'>
+        <p class='p2'>{{ product.title }}</p>
+        <p class='p2'>{{ product.price | money }}</p>
       </div>
     {% endif %}
     <accordion-component>
@@ -75,7 +81,7 @@
         <div
           class=' accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p2'>Colors</p>
+          <p class='p1'>Colors</p>
           <div
             class='down-icon tw-transition-all tw-duration-150'
           >
@@ -100,7 +106,7 @@
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p2'>Sizes</p>
+          <p class='p1'>Sizes</p>
           <div
             class='down-icon tw-transition-all tw-duration-150'
           >
@@ -125,7 +131,7 @@
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p2'>Description</p>
+          <p class='p1'>Description</p>
           <div
             class='down-icon tw-transition-all tw-duration-150'
           >
@@ -135,14 +141,14 @@
         <div
           class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
         >
-          {{ product.description }}
+          <p class='p1'>{{ product.description | strip_html }}</p>
         </div>
       {% endif %}
       {% if product.metafields.custom.product_details != blank %}
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p2'>Product Details</p>
+          <p class='p1'>Product Details</p>
           <div
             class='down-icon tw-transition-all tw-duration-150'
           >
@@ -150,7 +156,7 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out p1'
         >
           {{ product.metafields.custom.product_details }}
         </div>

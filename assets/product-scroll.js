@@ -27,16 +27,29 @@ class ProductPageScroll extends HTMLElement {
     });
 
     this.pinImageAnimation = gsap.to(this.scrollArrow, {
-      opacity: 0,
       scrollTrigger: {
         trigger: this.imageContainer,
         start: "top top",
-        end: "top+=1 top",
-        scrub: true
+        end: "65% top",
+        onUpdate: (self) => {
+          if (self.progress >= 1) {
+            this.scrollArrow.style.opacity = '0';
+            gsap.to(this.scrollArrow, {
+              opacity: 0,
+              duration: 0.25,
+              ease: "power1.inOut"
+            });
+          } else {
+            this.scrollArrow.style.opacity = '1';
+            gsap.to(this.scrollArrow, {
+              opacity: 1,
+              duration: 0.25,
+              ease: "power1.inOut"
+            });
+          }
+        }
       }
     });
-
-
   }
 }
 
