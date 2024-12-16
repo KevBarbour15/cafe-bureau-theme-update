@@ -83,7 +83,7 @@
                 </div>
               </div>
               <div
-                class='accordion-content tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
+                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
               >
                 <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description | strip_html }}</span>
               </div>
@@ -91,9 +91,9 @@
 
             {% if product.metafields.custom.product_details != blank %}
               <div
-                class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black'
+                class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black'
               >
-                <p class='p2 tw-pb-xs'>Product Details</p>
+                <p class='p2 tw-py-xs'>Product Details</p>
                 <div
                   class='down-icon tw-transition-all tw-duration-150'
                 >
@@ -101,9 +101,11 @@
                 </div>
               </div>
               <div
-                class='accordion-content tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
+                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
               >
-                <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description | strip_html }}</span>
+                <span class='tw-text-pretty p2 whitespace-pre-wrap'>
+                  {{- product.metafields.custom.product_details | strip_html -}}
+                </span>
               </div>
             {% endif %}
           </div>

@@ -47,7 +47,7 @@ class Accordion extends HTMLElement {
 
     setTimeout(() => {
       content.classList.add('tw-hidden');
-    }, 50);
+    }, 5);
   }
 
   openAccordion(idx) {
