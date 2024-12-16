@@ -12,6 +12,7 @@
     "media_banner": {
       "type": "media-banner",
       "settings": {
+        "home_link": "shopify://collections/all",
         "desktop_video": "shopify://files/videos/Bureau_Homepage_001.mp4",
         "mobile_video": "shopify://files/videos/Homepage_Video_Mobile_compressed.mp4"
       }
