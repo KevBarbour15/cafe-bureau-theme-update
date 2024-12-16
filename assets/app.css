@@ -891,6 +891,10 @@ video {
   max-height: 75dvh;
 }
 
+.tw-max-h-\[75vh\] {
+  max-height: 75vh;
+}
+
 .tw-min-h-\[calc\(100vh-100px\)\] {
   min-height: calc(100vh - 100px);
 }
