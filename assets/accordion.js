@@ -48,12 +48,19 @@ class Accordion extends HTMLElement {
     setTimeout(() => {
       content.classList.add('tw-hidden');
     }, 5);
+
+    setTimeout(() => {
+      content.style.padding = '0px 0px';
+    }, 100);
   }
 
   openAccordion(idx) {
     const content = this.content[idx];
     const icon = this.downIcon[idx];
 
+     setTimeout(() => {
+      content.style.padding = '8px 0px';
+    }, 5);
     setTimeout(() => {
       content.classList.remove('tw-hidden');
     }, 50);

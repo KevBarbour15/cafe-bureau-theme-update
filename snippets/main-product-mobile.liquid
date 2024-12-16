@@ -89,7 +89,7 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-py-sm tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
         >
           {% render 'color-swatches',
             product: product,
@@ -114,7 +114,7 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-py-sm tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
         >
           {% render 'size-swatches',
             product: product,
@@ -139,7 +139,7 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
         >
           <p class='p1'>{{ product.description | strip_html }}</p>
         </div>
@@ -156,9 +156,9 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-sm tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out p1'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out p1'
         >
-          {{ product.metafields.custom.product_details }}
+          {{ product.metafields.custom.product_details | newline_to_br }}
         </div>
       {% endif %}
       <div class='tw-mt-md'>

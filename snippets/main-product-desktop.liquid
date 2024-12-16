@@ -83,7 +83,7 @@
                 </div>
               </div>
               <div
-                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
+                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden'
               >
                 <span class='tw-text-pretty p2 whitespace-pre-wrap'>{{ product.description | strip_html }}</span>
               </div>
@@ -101,11 +101,11 @@
                 </div>
               </div>
               <div
-                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-py-xs tw-border-b tw-border-transparent tw-overflow-hidden'
+                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden'
               >
-                <span class='tw-text-pretty p2 whitespace-pre-wrap'>
-                  {{- product.metafields.custom.product_details | strip_html -}}
-                </span>
+                <p class='tw-text-pretty p2 whitespace-pre-wrap'>
+                  {{ product.metafields.custom.product_details | newline_to_br }}
+                </p>
               </div>
             {% endif %}
           </div>
