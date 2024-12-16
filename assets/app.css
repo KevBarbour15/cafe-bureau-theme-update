@@ -1460,6 +1460,10 @@ video {
     height: calc(100vh - 120px);
   }
 
+  .md\:tw-h-screen {
+    height: 100vh;
+  }
+
   .md\:tw-min-h-\[calc\(100vh-120px\)\] {
     min-height: calc(100vh - 120px);
   }

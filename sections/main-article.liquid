@@ -1,60 +1,82 @@
-<article
-  class='tw-container tw-pt-[60px] md:tw-pt-[80px] tw-min-h-dvh'
->
-  {% if article.title != blank %}
-    <div class='tw-border-b tw-border-black tw-py-md md:tw-py-lg'>
-      <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
-      <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+<script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
+
+<opacity-reveal>
+  <article
+    class='tw-container tw-pt-[60px] md:tw-pt-[80px] tw-min-h-dvh'
+  >
+    {% if article.title != blank %}
+      <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
+        <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
+        <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+      </div>
+    {% endif %}
+    <div class='tw-py-md md:tw-py-lg'>
+      {% if article.metafields.custom.image_1.value != blank %}
+        {{ article.metafields.custom.image_1.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
+      {% endif %}
+
+      {% if article.metafields.custom.image_list_1.value != blank %}
+        <div class='tw-grid tw-grid-cols-2 tw-gap-md tw-mb-md'>
+          {% for image in article.metafields.custom.image_list_1.value %}
+            <div class='card' style='opacity: 0;'>
+              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if article.metafields.custom.image_2.value != blank %}
+        <div class='card tw-mb-md lg:tw-w-1/2 tw-mx-auto' style='opacity: 0;'>
+          {{
+            article.metafields.custom.image_2.value
+            | image_url: width: 1000
+            | image_tag: class: 'tw-w-full tw-h-auto'
+          }}
+        </div>
+      {% endif %}
+
+      {% if article.metafields.custom.image_list_2.value != blank %}
+        <div class='tw-grid tw-grid-cols-2 tw-gap-md'>
+          {% for image in article.metafields.custom.image_list_2.value %}
+            <div class='card' style='opacity: 0;'>
+              {{ image | image_url: width: 1000 | image_tag: class: ' tw-w-full tw-h-auto' }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if article.metafields.custom.image_3.value != blank %}
+        <div class='card tw-mb-md tw-w-1/2 tw-mx-auto' style='opacity: 0;'>
+          {{
+            article.metafields.custom.image_3.value
+            | image_url: width: 1000
+            | image_tag: class: 'tw-w-full tw-h-auto'
+          }}
+        </div>
+      {% endif %}
+
+      {% if article.metafields.custom.image_list_3.value != blank %}
+        <div class='card tw-grid tw-grid-cols-2 tw-gap-md'>
+          {% for image in article.metafields.custom.image_list_3.value %}
+            <div class='card' style='opacity: 0;'>
+              {{ image | image_url: width: 1000 | image_tag: class: ' tw-w-full tw-h-auto' }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if article.metafields.custom.image_4.value != blank %}
+        <div class='tw-mb-md tw-w-1/2 tw-mx-auto'>
+          {{
+            article.metafields.custom.image_4.value
+            | image_url: width: 1000
+            | image_tag: class: 'tw-w-full tw-h-auto'
+          }}
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
-  <div class='tw-py-md md:tw-py-lg'>
-    {% if article.metafields.custom.image_1.value != blank %}
-      {{ article.metafields.custom.image_1.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-    {% endif %}
-
-    {% if article.metafields.custom.image_list_1.value != blank %}
-      <div class='tw-grid tw-grid-cols-2 tw-gap-md tw-mb-md'>
-        {% for image in article.metafields.custom.image_list_1.value %}
-          {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    {% if article.metafields.custom.image_2.value != blank %}
-      <div class='tw-mb-md lg:tw-w-1/2 tw-mx-auto'>
-        {{ article.metafields.custom.image_2.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-      </div>
-    {% endif %}
-
-    {% if article.metafields.custom.image_list_2.value != blank %}
-      <div class='tw-grid tw-grid-cols-2 tw-gap-md'>
-        {% for image in article.metafields.custom.image_list_2.value %}
-          {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    {% if article.metafields.custom.image_3.value != blank %}
-      <div class='tw-mb-md tw-w-1/2 tw-mx-auto'>
-        {{ article.metafields.custom.image_3.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-      </div>
-    {% endif %}
-
-    {% if article.metafields.custom.image_list_3.value != blank %}
-      <div class='tw-grid tw-grid-cols-2 tw-gap-md'>
-        {% for image in article.metafields.custom.image_list_3.value %}
-          {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    {% if article.metafields.custom.image_4.value != blank %}
-      <div class='tw-mb-md tw-w-1/2 tw-mx-auto'>
-        {{ article.metafields.custom.image_4.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
-      </div>
-    {% endif %}
-  </div>
-</article>
+  </article>
+</opacity-reveal>
 
 {% schema %}
 {

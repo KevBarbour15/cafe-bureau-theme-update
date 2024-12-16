@@ -4,7 +4,6 @@ class OpacityReveal extends HTMLElement {
   }
 
   connectedCallback() {
-    this.pageContainer = this.querySelector('.page-container');
     this.cards = this.querySelectorAll('.card');
 
     this.cards.forEach((card) => {
@@ -12,8 +11,8 @@ class OpacityReveal extends HTMLElement {
 
       gsap.to(card, {
         opacity: 1,
-        duration: 0.35,
-        ease: "power4.in",
+        duration: 0.3,
+        ease: "linear",
         delay: 0.25,
         scrollTrigger: {
           trigger: card,

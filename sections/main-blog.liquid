@@ -1,18 +1,22 @@
-{%- paginate blog.articles by 6 -%}
-  <div class='tw-container tw-pt-[80px]'>
-    <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6 tw-pb-lg'>
-      {%- for article in blog.articles -%}
-        <div class=''>
-          {%- render 'article-card', article: article -%}
-        </div>
-      {%- endfor -%}
-    </div>
+<script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
-    {%- if paginate.pages > 1 -%}
-      {%- render 'pagination', paginate: paginate -%}
-    {%- endif -%}
-  </div>
-{%- endpaginate -%}
+<opacity-reveal>
+  {%- paginate blog.articles by 6 -%}
+    <div class='tw-container tw-pt-[80px]'>
+      <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6 tw-pb-lg'>
+        {%- for article in blog.articles -%}
+          <div class='card' style='opacity: 0;'>
+            {%- render 'article-card', article: article -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endif -%}
+    </div>
+  {%- endpaginate -%}
+</opacity-reveal>
 
 {% schema %}
 {

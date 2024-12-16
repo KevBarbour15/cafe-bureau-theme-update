@@ -1,4 +1,13 @@
-<div class='tw-w-screen tw-h-dvh tw-bg-black tw-sticky tw-top-0 tw-left-0'>
+<div
+  class='tw-w-screen tw-h-dvh tw-bg-black tw-top-0 tw-left-0'
+>
+  {% if section.settings.home_link != blank %}
+    <a
+      href='{{ section.settings.home_link }}'
+      aria-label='{{ section.settings.home_link.title }}'
+      class='tw-w-full tw-h-full'
+    >
+  {% endif %}
   {%- if section.settings.desktop_video != blank or section.settings.mobile_video != blank -%}
     {%- if section.settings.desktop_video != blank -%}
       <div class='tw-w-full tw-h-full tw-hidden md:tw-block'>
@@ -53,6 +62,9 @@
       >
     </div>
   {%- endif -%}
+  {% if section.settings.home_link != blank %}
+    </a>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -61,6 +73,12 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "url",
+      "id": "home_link",
+      "label": "Home Link",
+      "info": "Where the page will link to when the media is clicked."
+    },
     {
       "type": "video",
       "id": "desktop_video",
