@@ -24,9 +24,15 @@
       {% for variant in product.variants %}
         {% if variant.option1 == active_size or variant.option2 == active_size %}
           {% if variant.option1 == color or variant.option2 == color %}
+            {% assign swatch_color = '' %}
+            {% if variant.metafields.custom.swatch_color_hex_code != blank %}
+              {% assign swatch_color = variant.metafields.custom.swatch_color_hex_code %}
+            {% else %}
+              {% assign swatch_color = color %}
+            {% endif %}
             {% if variant == active_variant %}
               <span
-                style='background-color: {{ color }}; border-radius:  0px;'
+                style='background-color: {{ swatch_color }}; border-radius:  0px;'
                 class='tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
                 aria-hidden='true'
               >
@@ -35,7 +41,7 @@
               <label class='color-swatch tw-cursor-pointer'>
                 <a href='{{ product.url }}?variant={{ variant.id }}'>
                   <span
-                    style='background-color: {{ color }}; border-radius: 50px;'
+                    style='background-color: {{ swatch_color }}; border-radius: 50px;'
                     class='color-swatch-border tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
                     aria-hidden='true'
                   >
