@@ -14,9 +14,7 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "newsletter_enable": false,
         "newsletter_heading": "FOR DEALS AND UPDATES:",
-        "show_policy": false,
         "footer_menu": "footer",
         "contact_email": "support@bureau.cafe",
         "social_facebook_link": "https://www.facebook.com/CafeBureau251/",
