@@ -2,20 +2,20 @@
 
 {% assign page_styling = '' %}
 {% if section.settings.subheader_enabled %}
-  {% assign page_styling = 'tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]' %}
+  {% assign page_styling = 'tw-pt-[100px] md:tw-pt-[120px]' %}
 {% else %}
-  {% assign page_styling = 'tw-pt-[60px] tw-min-h-[calc(100vh-60px)] md:tw-pb-lg md:tw-pt-[80px] md:tw-min-h-[calc(100vh-80px)]' %}
+  {% assign page_styling = 'tw-pt-[60px] md:tw-pt-[80px]' %}
 {% endif %}
 
 <opacity-reveal>
-  <article class='tw-container {{ page_styling }}'>
+  <article class='tw-container tw-min-h-dvh {{ page_styling }}'>
     {% if article.title != blank %}
       <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
         <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
         <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
       </div>
     {% endif %}
-    <div class='tw-py-md md:tw-py-lg'>
+    <div class='tw-py-md'>
       {% if article.metafields.custom.image_1.value != blank %}
         {{ article.metafields.custom.image_1.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
       {% endif %}

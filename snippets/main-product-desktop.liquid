@@ -13,11 +13,13 @@
   If the subheader is enabled, we add 40px to the padding top.
 {% endcomment %}
 
-{% assign padding_top = 'tw-pt-[120px]' %}
+{% assign padding_top = '' %}
+{% assign details_video_height = 'calc(100dvh-120px-64px)' %}
 {% if subheader_enabled %}
   {% assign padding_top = 'tw-pt-[120px]' %}
 {% else %}
   {% assign padding_top = 'tw-pt-[80px]' %}
+  {% assign details_video_height = 'calc(100dvh-80px-64px)' %}
 {% endif %}
 
 <product-page-scroll>
@@ -132,7 +134,7 @@
             muted
             playsinline
             loop
-            class='tw-object-center tw-object-cover tw-max-h-[calc(100dvh-120px-64px)] tw-w-auto tw-border-8 tw-border-black'
+            class='tw-object-center tw-object-cover {{ details_video_height }} tw-w-auto tw-border-8 tw-border-black'
           ></video>
         </div>
       {% endif %}
