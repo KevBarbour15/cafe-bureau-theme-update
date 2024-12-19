@@ -4,14 +4,27 @@
 {% assign active_variant = active_variant %}
 {% assign active_color = active_color %}
 {% assign active_size = active_size %}
+{% assign subheader_enabled = subheader_enabled %}
 
 <script src='{{ 'product-scroll.js' | asset_url }}' type='module' defer='defer'></script>
 
+{% comment %}
+  This is the padding top for the product page.
+  If the subheader is enabled, we add 40px to the padding top.
+{% endcomment %}
+
+{% assign padding_top = 'tw-pt-[120px]' %}
+{% if subheader_enabled %}
+  {% assign padding_top = 'tw-pt-[120px]' %}
+{% else %}
+  {% assign padding_top = 'tw-pt-[80px]' %}
+{% endif %}
+
 <product-page-scroll>
   <accordion-component>
-    <div class='tw-w-full tw-block tw-h-full'>
+    <div class='tw-w-full tw-block'>
       <div class='tw-w-full tw-flex tw-h-full'>
-        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative tw-h-full'>
+        <div id='image-container' class='tw-w-1/2  tw-relative tw-h-full {{ padding_top }}'>
           {% if active_variant.metafields.custom.variant_product_video != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
@@ -33,7 +46,7 @@
 
         <div
           id='details-container'
-          class='md:tw-w-1/2 tw-h-full tw-pt-[120px] tw-z-[2]'
+          class='md:tw-w-1/2 tw-h-full tw-z-[2] {{ padding_top }}'
         >
           <div class='tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
             {% if product.title != blank or product.price != blank %}

@@ -1,0 +1,131 @@
+{% if section.settings.display_subheader != false %}
+  <script src='{{ 'filter-link.js' | asset_url }}' defer></script>
+  <filter-link-hover>
+    <div
+      class='tw-h-[40px] tw-fixed tw-top-[60px] md:tw-top-[80px] tw-w-full tw-bg-white md:tw-px-0 tw-px-8 tw-mix-blend-difference tw-z-[75] tw-overflow-x-auto tw-pr-8'
+      style='scrollbar-width: none; -ms-overflow-style: none;'
+    >
+      {% if section.settings.left_link_title != blank and section.settings.left_link_url != blank %}
+        <div class='tw-absolute tw-left-8 tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
+          <a
+            class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0'
+            href='{{ section.settings.left_link_url }}'
+            aria-label='Navigate to {{ section.settings.left_link_title }}'
+            aria-current='page'
+          >
+            <span>{% render 'left-arrow' %}</span>
+            <span class='filter-link-text tw-text-black tw-uppercase p1 md:hover:tw-underline md:tw-transition-all md:tw-duration-150 tw-ml-xs p2'>
+              {{ section.settings.left_link_title }}
+            </span>
+          </a>
+        </div>
+      {% endif %}
+
+      {% comment %}
+        This is meant to be used instead of the links on either / both sides of the subheader
+      {% endcomment %}
+
+      {% if section.settings.link_list != blank
+        and section.settings.left_link_title == blank
+        and section.settings.right_link_title == blank
+        and section.settings.left_link_url == blank
+        and section.settings.right_link_url == blank
+      %}
+        <div
+          class='tw-flex tw-h-full tw-items-center tw-whitespace-nowrap md:tw-justify-center tw-gap-x-8 tw-pr-8 md:tw-pr-0'
+          style='-webkit-scrollbar { display: none; }'
+        >
+          {% if section.settings.link_list.links.size > 0 %}
+            {% for link in section.settings.link_list.links %}
+              {% if collection.handle == link.object.handle -%}
+                <p class='tw-text-black tw-uppercase tw-underline p2'>{{ link.title }}</p>
+              {% else %}
+                <a
+                  class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0'
+                  href='{{ link.url }}'
+                  aria-label='Navigate to {{ link.title }}'
+                  {% if link.current %}
+                    aria-current='page'
+                  {% endif %}
+                >
+                  <span class='filter-link-text tw-text-black tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+                    {{- link.title -}}
+                  </span>
+                </a>
+              {% endif %}
+            {% endfor %}
+            <!-- for mobile scroll purposes -->
+            <div class='md:tw-hidden'>&nbsp;</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.right_link_title != blank and section.settings.right_link_url != blank %}
+        <div class='tw-absolute tw-right-8 tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
+          <a
+            class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0 tw-absolute tw-right-0'
+            href='{{ section.settings.right_link_url }}'
+            aria-label='Navigate to {{ section.settings.right_link_title }}'
+            aria-current='page'
+          >
+            <span class='filter-link-text tw-text-black tw-uppercase p1 md:hover:tw-underline md:tw-transition-all md:tw-duration-150 tw-mr-xs p2'>
+              {{ section.settings.right_link_title }}
+            </span>
+            <span>{% render 'right-arrow' %}</span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </filter-link-hover>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Page Subheader",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_subheader",
+      "label": "Display Subheader",
+      "info": "Subheader will not display if this is unchecked",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "left_link_title",
+      "label": "Left Link Title",
+      "info": "This will be the title of the left link. Leave blank if you don't want to display a left link."
+    },
+    {
+      "type": "url",
+      "id": "left_link_url",
+      "label": "Left Link URL",
+      "info": "This will be the URL of the left link. Leave blank if you don't want to display a left link."
+    },
+    {
+      "type": "text",
+      "id": "right_link_title",
+      "label": "Right Link Title",
+      "info": "This will be the title of the right link. Leave blank if you don't want to display a right link."
+    },
+    {
+      "type": "url",
+      "id": "right_link_url",
+      "label": "Right Link URL",
+      "info": "This will be the URL of the right link. Leave blank if you don't want to display a right link."
+    },
+    {
+      "type": "link_list",
+      "id": "link_list",
+      "label": "Link List",
+      "info": "This will be if you choose to use a list of links, for example a collection menu to filter by. Leave blank if you don't want to display a link list."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Subheader"
+    }
+  ]
+}
+{% endschema %}

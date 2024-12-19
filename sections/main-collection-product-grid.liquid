@@ -1,8 +1,15 @@
 <script src='{{ 'product-card-hover.js' | asset_url }}' defer='defer'></script>
 <script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
+{% assign page_styling = '' %}
+{% if section.settings.subheader_enabled %}
+  {% assign page_styling = 'tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]' %}
+{% else %}
+  {% assign page_styling = 'tw-pt-[60px] tw-min-h-[calc(100vh-60px)] md:tw-pb-lg md:tw-pt-[80px] md:tw-min-h-[calc(100vh-80px)]' %}
+{% endif %}
+
 <opacity-reveal>
-  <div class='page-container tw-container tw-pb-md tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]'>
+  <div class='page-container tw-container tw-pb-md {{ page_styling }}'>
     <div>
       {%- if collection.products.size == 0 -%}
         <div class='tw-w-full tw-flex tw-justify-center tw-items-center tw-h-[calc(100vh-100px)] md:tw-h-[calc(100vh-120px)]'>
@@ -28,7 +35,7 @@
                     {% if variant.option1 == color or variant.option2 == color %}
                       {% assign product_url = product.url | append: '?variant=' | append: variant.id %}
                       <li class='card' style='opacity: 0;'>
-                        {% render 'card-product-og',
+                        {% render 'card-product',
                           product: product,
                           variant: variant,
                           product_url: product_url,
@@ -45,7 +52,7 @@
                   | append: product.selected_or_first_available_variant.id
                 %}
                 <li class='card' style='opacity: 0;'>
-                  {% render 'card-product-og',
+                  {% render 'card-product',
                     product: product,
                     variant: product.selected_or_first_available_variant,
                     product_url: product_url,
@@ -63,7 +70,17 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-collection-product-grid.name",
-  "class": "section"
+  "name": "Main Collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "subheader_enabled",
+      "label": "Enable Subheader",
+      "info": "If enabled, the collection page will have a adjusted padding top to account for the subheader.",
+      "default": true
+    }
+  ]
 }
 {% endschema %}
