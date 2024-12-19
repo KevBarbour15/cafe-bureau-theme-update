@@ -12,7 +12,7 @@
     "subheader_NKqDaJ": {
       "type": "subheader",
       "settings": {
-        "display_subheader": true,
+        "display_subheader": false,
         "left_link_title": "Lookbooks",
         "left_link_url": "shopify://blogs/lookbooks",
         "right_link_title": "Shop",
