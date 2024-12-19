@@ -7,27 +7,45 @@
 <script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[200] tw-px-8' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-8' %}
 {% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
-{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
+{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer' %}
 
 {% if request.page_type == 'index' %}
+  {% assign header_style = header_style | append: ' tw-h-[60px] md:tw-h-[80px]' %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
+  {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
+{% elsif request.path == '/pages/cafe' %}
+  {% assign header_style = header_style | append: ' tw-shadow-md tw-shadow-black tw-h-[90px] tw-bg-black' %}
+  {% assign hamburger_style = hamburger_style | append: ' tw-bg-white' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
 {% else %}
   {% assign header_style = header_style
-    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm'
+    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm tw-h-[60px] md:tw-h-[80px]'
   %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-black ' %}
 {% endif %}
 
 <menu-overlay>
-  <header class='{{ header_style }}'>
+  <header
+    class='{{ header_style }}'
+  >
     <div class='tw-flex tw-items-center tw-justify-between tw-h-full'>
+      {% if request.path == '/pages/cafe' %}
+        <div class='tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-[50]'>
+          <img
+            src='{{ section.settings.gate_awning | img_url: "master" }}'
+            alt='Gate Awning'
+            class='tw-w-full tw-h-full tw-object-center'
+            width='1000'
+            height='1000'
+          >
+        </div>
+      {% endif %}
       <div
         id='hamburger'
-        class='tw-relative tw-w-[24px] tw-h-[15px] tw-cursor-pointer tw-z-[101] tw-mix-blend-difference tw-invert'
+        class='tw-relative tw-w-[24px] tw-h-[15px] tw-cursor-pointer tw-z-[101] {% if request.path != '/pages/cafe' %} tw-mix-blend-difference tw-invert {% endif %}'
       >
         <div
           id='hamburger-bar-1'
@@ -80,14 +98,30 @@
         {% if section.settings.home_page_header_logo != blank %}
           <a
             href='/'
-            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[101]'
           >
             <img
               src='{{ section.settings.home_page_header_logo | img_url: "master" }}'
               alt='Home header logo'
               width='{{ section.settings.home_page_header_logo.width }}'
               height='{{ section.settings.home_page_header_logo.height }}'
-              class='tw-w-[125px] md:tw-w-[200px] tw-h-auto'
+              class='tw-w-[100px] md:tw-w-[150px]'
+            >
+          </a>
+        {% endif %}
+
+      {% elsif request.path == '/pages/cafe' %}
+        {% if section.settings.header_logo_cafe != blank %}
+          <a
+            href='/'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[99] '
+          >
+            <img
+              src='{{ section.settings.header_logo_cafe | img_url: "master" }}'
+              alt='Header logo'
+              width='{{ section.settings.header_logo_cafe.width }}'
+              height='{{ section.settings.header_logo_cafe.height }}'
+              class='tw-w-[100px] md:tw-w-[125px]'
             >
           </a>
         {% endif %}
@@ -95,14 +129,14 @@
         {% if section.settings.header_logo != blank %}
           <a
             href='/'
-            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[99]'
           >
             <img
               src='{{ section.settings.header_logo | img_url: "master" }}'
               alt='Header logo'
               width='{{ section.settings.home_page_header_logo.width }}'
               height='{{ section.settings.home_page_header_logo.height }}'
-              class='tw-w-[125px] md:tw-w-[200px] tw-h-auto'
+              class='tw-w-[100px] md:tw-w-[150px]'
             >
           </a>
         {% endif %}
@@ -110,7 +144,7 @@
 
       <a
         href='{{ routes.cart_url }}'
-        class='{{ cart_link_style }}'
+        class='{{ cart_link_style }} tw-z-[99]'
         id='cart-link'
         aria-label='View shopping cart{% if cart.item_count > 0 %} with {{ cart.item_count }} items{% endif %}'
       >
@@ -185,6 +219,18 @@
       "id": "header_logo",
       "label": "Header Logo",
       "info": "This logo will be used for the header on all pages except the home page. Ideally, this should be a transparent PNG with black text."
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo_cafe",
+      "label": "Header Logo (Cafe)",
+      "info": "This logo will be used for the header on the cafe page. Ideally, this should be a transparent PNG with white text."
+    },
+    {
+      "type": "image_picker",
+      "id": "gate_awning",
+      "label": "Gate Awning",
+      "info": "This image will be used as the gate awning for the home page."
     },
     {
       "type": "link_list",
