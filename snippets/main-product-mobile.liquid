@@ -5,7 +5,18 @@
 {% assign active_color = active_color %}
 {% assign active_size = active_size %}
 
-<div class='tw-flex tw-flex-col'>
+{% comment %}
+  This is the padding top for the product page.
+  If the subheader is enabled, we add 40px to the padding top.
+{% endcomment %}
+
+{% if subheader_enabled %}
+  {% assign padding_top = 'tw-pt-[100px]' %}
+{% else %}
+  {% assign padding_top = 'tw-pt-[80px]' %}
+{% endif %}
+
+<div class='tw-flex tw-flex-col {{ padding_top }}'>
   <item-slider data-show-buttons>
     <div class='embla tw-relative tw-h-auto'>
       <div class='embla__container'>

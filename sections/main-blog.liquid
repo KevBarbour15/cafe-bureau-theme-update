@@ -1,9 +1,16 @@
 <script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
+{% assign page_styling = '' %}
+{% if section.settings.subheader_enabled %}
+  {% assign page_styling = 'tw-pt-[100px] tw-min-h-[calc(100vh-100px)] md:tw-pb-lg md:tw-pt-[120px] md:tw-min-h-[calc(100vh-120px)]' %}
+{% else %}
+  {% assign page_styling = 'tw-pt-[60px] tw-min-h-[calc(100vh-60px)] md:tw-pb-lg md:tw-pt-[80px] md:tw-min-h-[calc(100vh-80px)]' %}
+{% endif %}
+
 <opacity-reveal>
   {%- paginate blog.articles by 6 -%}
-    <div class='tw-container tw-pt-[80px]'>
-      <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6 tw-pb-lg'>
+    <div class='tw-container {{ page_styling }}'>
+      <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6 tw-pb-lg tw-pt-md'>
         {%- for article in blog.articles -%}
           <div class='card' style='opacity: 0;'>
             {%- render 'article-card', article: article -%}
@@ -20,9 +27,17 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-blog.name",
+  "name": "Main Blog",
   "tag": "section",
   "class": "section",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "subheader_enabled",
+      "label": "Enable Subheader",
+      "default": false,
+      "info": "If enabled,the blog page will have a adjusted padding top to account for the subheader."
+    }
+  ]
 }
 {% endschema %}

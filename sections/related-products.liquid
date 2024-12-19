@@ -14,7 +14,7 @@
             <div class='embla__container'>
               {% for recommendation in recommendations.products %}
                 <div class='embla__slide tw-mx-xs tw-h-full tw-min-w-[215px] tw-max-w-[315px]  !tw-flex-[0_0_215px] lg:!tw-flex-[0_0_315px]'>
-                  {% render 'card-product-og',
+                  {% render 'card-product',
                     product: recommendation,
                     variant: recommendation.first_available_variant,
                     product_url: recommendation.first_available_variant.url,
@@ -28,7 +28,7 @@
       </div>
       <div class='tw-hidden md:tw-flex tw-container tw-gap-6'>
         {% for recommendation in recommendations.products %}
-          {% render 'card-product-og',
+          {% render 'card-product',
             product: recommendation,
             variant: recommendation.first_available_variant,
             product_url: recommendation.first_available_variant.url,
