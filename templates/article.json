@@ -23,7 +23,7 @@
     "main": {
       "type": "main-article",
       "settings": {
-        "subheader_enabled": true
+        "subheader_enabled": false
       }
     }
   },
