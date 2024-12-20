@@ -10,11 +10,21 @@
 {
   "sections": {
     "main": {
-      "type": "main-cafe",
+      "type": "main-cafe-media-banner",
+      "settings": {}
+    },
+    "main-cafe-section": {
+      "type": "main-cafe-section",
+      "settings": {}
+    },
+    "programming-slider": { 
+      "type": "programming-slider",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "main-cafe-section",
+    "programming-slider"
   ]
-}
+} 

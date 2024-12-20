@@ -1,0 +1,60 @@
+<script src='{{ 'gate-animation.js' | asset_url }}' defer></script>
+
+<gate-animation>
+  <div class='tw-min-h-dvh tw-relative tw-w-screen tw-h-full'>
+    {% if section.settings.gate_overlay_desktop != blank and section.settings.cafe_home_image_desktop != blank %}
+      <div class='tw-absolute tw-top-0 tw-left-0 tw-w-screen tw-h-full'>
+        <div
+          id='gate-overlay'
+          class='tw-absolute tw-top-0 tw-left-0 tw-w-auto tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+        >
+          <img
+            src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
+            alt='{{ section.settings.gate_overlay_desktop.alt }}'
+            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+            width='1000'
+            height='1000'
+          >
+        </div>
+        <div class='tw-h-dvh tw-w-full'>
+          <img
+            src='{{ section.settings.cafe_home_image_desktop | img_url: "master" }}'
+            alt='{{ section.settings.cafe_home_image_desktop.alt }}'
+            class='tw-w-screen tw-h-dvh tw-object-cover tw-object-center'
+            width='1000'
+            height='1000'
+          >
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</gate-animation>
+{% schema %}
+{
+  "name": "Main Cafe Media Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "gate_overlay_desktop",
+      "label": "Gate Overlay Image Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "gate_overlay_mobile",
+      "label": "Gate Overlay Image Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "cafe_home_image_desktop",
+      "label": "Cafe Home Image Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "cafe_home_image_mobile",
+      "label": "Cafe Home Image Mobile"
+    }
+  ]
+}
+{% endschema %}

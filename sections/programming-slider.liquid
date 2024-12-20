@@ -1,0 +1,40 @@
+<div class='tw-py-md tw-border-t tw-border-black tw-h-[calc(100vh-110px)] tw-flex tw-flex-col'>
+  <h2 class='tw-text-center heading tw-mb-md'>{{ section.settings.heading }}</h2>
+
+  <div class='tw-overflow-x-auto tw-flex tw-flex-row tw-gap-md tw-px-md'>
+    {% for article in section.settings.blog.articles %}
+      <div class='tw-w-1/4 tw-flex tw-flex-col tw-items-center tw-justify-center'>
+        <a href='{{ article.url }}' class='tw-h-full tw-w-auto tw-block tw-border tw-border-black'>
+          <div class='tw-h-full tw-w-full tw-flex tw-items-center tw-justify-center'>
+            <img
+              src='{{ article.image | img_url: 'master' }}'
+              alt='{{ article.image.alt }}'
+              class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
+              width='{{ article.height }}'
+              height='{{ article.width }}'
+            >
+          </div>
+          <span class='p1 tw-text-center tw-text-black tw-uppercase'>{{ article.title }}</span>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+.
+{% schema %}
+{
+  "name": "Programming Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Programming Blog"
+    }
+  ]
+}
+{% endschema %}

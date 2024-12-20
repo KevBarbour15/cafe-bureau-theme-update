@@ -1,11 +1,10 @@
-class AnimateCafeScroll extends HTMLElement {
+class GateAnimation  extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
     this.gateOverlay = this.querySelector('#gate-overlay');
-    this.pageContainer = this.querySelector('#page-container');
 
     this.gateAnimation = gsap.to(this.gateOverlay, {
       //paused: true,
@@ -21,4 +20,4 @@ class AnimateCafeScroll extends HTMLElement {
   }
 }
 
-customElements.define('animate-cafe-scroll', AnimateCafeScroll);
+customElements.define('gate-animation', GateAnimation);
