@@ -4,6 +4,7 @@ class LoadingAnimation extends HTMLElement {
   }
 
   connectedCallback() {
+    return;
     let loadingScreen = this.querySelector('#loading-screen');
     let path1 = this.querySelector('#path-1');
     let path2 = this.querySelector('#path-2');
