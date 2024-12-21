@@ -3,7 +3,7 @@
 <loading-animation>
   <div
     id='loading-screen'
-    class='tw-w-screen tw-h-dvh tw-bg-black tw-top-0 tw-left-0 tw-fixed tw-z-[500] tw-flex tw-items-center tw-justify-center'
+    class='tw-w-screen tw-h-dvh tw-bg-black tw-top-0 tw-left-0 tw-fixed tw-z-[500] tw-items-center tw-justify-center tw-hidden'
   >
     <svg viewBox='0 0 288 360' class='tw-h-3/4'>
        <g>
@@ -32,7 +32,7 @@
           {{
             section.settings.desktop_video
             | video_tag:
-          
+              autoplay: true,
               loop: true,
               muted: true,
               controls: false,
@@ -47,7 +47,7 @@
           {{
             section.settings.mobile_video
             | video_tag:
-              
+              autoplay: true,
               loop: true,
               muted: true,
               controls: false,
