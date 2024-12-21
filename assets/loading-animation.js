@@ -4,7 +4,6 @@ class LoadingAnimation extends HTMLElement {
   }
 
   connectedCallback() {
-    return;
 
     let loadingScreen = this.querySelector('#loading-screen');
     let path1 = this.querySelector('#path-1');
@@ -14,20 +13,17 @@ class LoadingAnimation extends HTMLElement {
     let video = window.innerWidth >= 768 ? desktopVideo : mobileVideo;
     let videoReady = false;
 
-    if (video && video.readyState >= 3) {
-      //console.log('video ready 1');
-      videoReady = true;
-    }
-
     [desktopVideo, mobileVideo].forEach(vid => {
       if (vid) {
-        //console.log('vid', vid);
         vid.muted = true;
+        vid.playsInline = true;
         vid.setAttribute('playsinline', '');
-        vid.addEventListener('canplay', () => {
+        vid.setAttribute('webkit-playsinline', '');
+        vid.load();
+        
+        vid.addEventListener('canplaythrough', () => {
           if (vid === video) videoReady = true;
-          //console.log('video ready 2');
-        });
+        }, { once: true });
       }
     });
 
@@ -84,14 +80,21 @@ class LoadingAnimation extends HTMLElement {
           if (video) {
             try {
               video.muted = true;
-              const playPromise = video.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                  //console.log("Video playback failed:", error);
-                });
-              }
+              video.playsInline = true;
+              
+              const attemptPlay = async () => {
+                try {
+                  await video.play();
+                } catch (error) {
+                  document.addEventListener('touchstart', () => {
+                    video.play().catch(e => console.warn('Video playback failed:', e));
+                  }, { once: true });
+                }
+              };
+              
+              attemptPlay();
             } catch (error) {
-              //console.log("Video playback error:", error);
+              console.warn("Video playback error:", error);
             }
           }
         }
