@@ -35,7 +35,7 @@ class LoadingAnimation extends HTMLElement {
       },
       {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 85%, 0% 85%)",
-        duration: 2.125,
+        duration: 1.7,
         ease: "linear"
       })
       .call(() => {
@@ -56,7 +56,7 @@ class LoadingAnimation extends HTMLElement {
       })
       .to(path1, {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        duration: 0.375,
+        duration: 0.3,
         ease: "linear"
       })
       .fromTo(path2, {
@@ -64,12 +64,13 @@ class LoadingAnimation extends HTMLElement {
       },
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          duration: 0.375,
+          duration: 0.3,
           ease: "power2.inOut"
         }, "<")
       .to(loadingScreen, {
+        delay: 0.2,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.3,
         ease: "power4.out",
         onStart: () => {
           if (video) {
