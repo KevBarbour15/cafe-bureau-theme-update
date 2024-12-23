@@ -1,10 +1,10 @@
 {%- if article and article != empty -%}
   <div>
-    <div class='tw-w-full tw-h-auto' style='aspect-ratio: 3.5/4.2;'>
+    <div class='tw-w-full tw-h-auto tw' style='aspect-ratio: 3.5/4.5;'>
       {% if article.image != blank %}
         <a class='tw-pointer' href='{{ article.url }}'>
           <img
-            src='{{ article.image | image_url: width: 1000 }}'
+            src='{{ article.image | img_url: 'master' }}'
             alt='{{ article.title }}'
             class='tw-w-full tw-h-full tw-object-cover tw-object-center'
             width='100%'
