@@ -14,12 +14,12 @@
 {% endcomment %}
 
 {% assign padding_top = '' %}
-{% assign details_video_height = 'calc(100dvh-120px-64px)' %}
+{% assign details_video_height = 'tw-h-[calc(100dvh-120px-64px)]' %}
 {% if subheader_enabled %}
   {% assign padding_top = 'tw-pt-[120px]' %}
 {% else %}
   {% assign padding_top = 'tw-pt-[80px]' %}
-  {% assign details_video_height = 'calc(100dvh-80px-64px)' %}
+  {% assign details_video_height = 'tw-h-[calc(100dvh-80px-64px)]' %}
 {% endif %}
 
 <product-page-scroll>
@@ -127,15 +127,17 @@
         </div>
       </div>
       {% if active_variant.metafields.custom.variant_details_video != blank %}
-        <div class='tw-p-8 tw-m-auto tw-w-fit tw-h-fit'>
-          <video
-            src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'
-            autoplay
-            muted
-            playsinline
-            loop
-            class='tw-object-center tw-object-cover {{ details_video_height }} tw-w-auto tw-border-8 tw-border-black'
-          ></video>
+        <div class='tw-w-full tw-py-8 tw-flex tw-justify-center tw-items-center'>
+          <div class='{{ details_video_height }}'>
+            <video
+              src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-object-center tw-object-cover tw-w-auto tw-border-8 tw-border-black {{ details_video_height }}'
+            ></video>
+          </div>
         </div>
       {% endif %}
     </div>
