@@ -2,9 +2,8 @@
 {% assign styles = 'tw-fill-black' %}
 {% assign size = '32px' %}
 <div class='tw-flex tw-gap-6'>
-  
   {%- if settings.social_facebook_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a
         href='{{ settings.social_facebook_link }}'
         target='_blank'
@@ -16,7 +15,7 @@
     </div>
   {%- endif -%}
   {%- if settings.social_meta_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a
         href='{{ settings.social_meta_link }}'
         target='_blank'
@@ -28,7 +27,7 @@
     </div>
   {%- endif -%}
   {%- if settings.social_instagram_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a
         href='{{ settings.social_instagram_link }}'
         target='_blank'
@@ -40,7 +39,7 @@
     </div>
   {%- endif -%}
   {%- if settings.social_youtube_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a
         href='{{ settings.social_youtube_link }}'
         target='_blank'
@@ -52,7 +51,7 @@
     </div>
   {%- endif -%}
   {%- if settings.social_x_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a
         href='{{ settings.social_x_link }}'
         target='_blank'
@@ -64,7 +63,7 @@
     </div>
   {%- endif -%}
   {%- if settings.social_spotify_link != blank -%}
-    <div>
+    <div class='md:hover:tw-scale-[1.15] tw-transition-all tw-duration-300'>
       <a href='{{ settings.social_spotify_link }}' target='_blank' rel='noopener noreferrer' aria-label=''>
         {% render 'icon-spotify', size: size %}
       </a>
