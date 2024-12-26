@@ -17,14 +17,14 @@
       "type": "main-cafe-section",
       "settings": {}
     },
-    "programming-slider": { 
-      "type": "programming-slider",
+    "main-cafe-programming-slider": { 
+      "type": "main-cafe-programming-slider",
       "settings": {}
     }
   },
   "order": [
     "main",
     "main-cafe-section",
-    "programming-slider"
+    "main-cafe-programming-slider"
   ]
 } 
