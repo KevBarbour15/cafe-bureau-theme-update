@@ -717,6 +717,10 @@ video {
   margin-top: 24px;
 }
 
+.tw-mt-3 {
+  margin-top: 0.75rem;
+}
+
 .tw-block {
   display: block;
 }
@@ -1091,6 +1095,14 @@ video {
 
 .tw-gap-5 {
   gap: 1.25rem;
+}
+
+.tw-gap-14 {
+  gap: 3.5rem;
+}
+
+.tw-gap-4 {
+  gap: 1rem;
 }
 
 .tw-gap-x-1 {
