@@ -25,10 +25,17 @@
       "settings": {
         "subheader_enabled": true
       }
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Recommended"
+      }
     }
   },
   "order": [
     "subheader_CNRVWg",
-    "main"
+    "main",
+    "related_products"
   ]
 }

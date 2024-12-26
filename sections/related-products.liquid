@@ -13,7 +13,7 @@
           <div class='embla !tw-overflow-visible xlg:tw-flex xlg:tw-justify-center'>
             <div class='embla__container'>
               {% for recommendation in recommendations.products %}
-                <div class='embla__slide tw-mx-xs tw-h-full tw-min-w-[215px] tw-max-w-[315px]  !tw-flex-[0_0_215px] lg:!tw-flex-[0_0_315px]'>
+                <div class='embla__slide tw-mx-xs tw-h-auto tw-min-w-[40%] tw-max-w-[315px] !tw-flex-[0_0_40%]'>
                   {% render 'card-product',
                     product: recommendation,
                     variant: recommendation.first_available_variant,
@@ -26,14 +26,16 @@
           </div>
         </item-slider>
       </div>
-      <div class='tw-hidden md:tw-flex tw-container tw-gap-6'>
+      <div class='tw-hidden md:tw-flex tw-container tw-gap-6 tw-justify-between'>
         {% for recommendation in recommendations.products %}
-          {% render 'card-product',
-            product: recommendation,
-            variant: recommendation.first_available_variant,
-            product_url: recommendation.first_available_variant.url,
-            lazy_load: true
-          %}
+          <div class='tw-basis-1/4'>
+            {% render 'card-product',
+              product: recommendation,
+              variant: recommendation.first_available_variant,
+              product_url: recommendation.first_available_variant.url,
+              lazy_load: true
+            %}
+          </div>
         {% endfor %}
       </div>
     </div>
