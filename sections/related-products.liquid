@@ -3,7 +3,7 @@
   data-section-id='{{ section.id }}'
   data-product-id='{{ product.id }}'
 >
-  {% if recommendations.performed and recommendations.products_count > 0 %}
+  {% if recommendations.performed and recommendations.products_count > 2 %}
     <div class='tw-py-lg tw-border-t tw-border-black'>
       <h2 class='tw-capitalize tw-mb-sm heading tw-text-center tw-text-black'>
         {{ section.settings.heading }}
@@ -26,7 +26,7 @@
           </div>
         </item-slider>
       </div>
-      <div class='tw-hidden md:tw-flex tw-container tw-gap-6 tw-justify-between'>
+      <div class='tw-hidden md:tw-flex tw-container tw-gap-6 tw-justify-between tw-items-center'>
         {% for recommendation in recommendations.products %}
           <div class='tw-basis-1/4'>
             {% render 'card-product',
