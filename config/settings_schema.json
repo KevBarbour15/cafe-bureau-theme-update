@@ -1465,5 +1465,16 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "SEO",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "default_social_image",
+        "label": "Default Social Sharing Image",
+        "info": "Used when sharing your home page and other pages that don't have a specific image"
+      }
+    ]
   }
 ]
