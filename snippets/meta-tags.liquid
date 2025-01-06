@@ -24,11 +24,17 @@
   <meta property='og:image:secure_url' content='https:{{ page_image | image_url }}'>
   <meta property='og:image:width' content='{{ page_image.width }}'>
   <meta property='og:image:height' content='{{ page_image.height }}'>
+  <meta property='og:image:alt' content='{{ page_image.alt | escape }}'>
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
   <meta property='og:price:amount' content='{{ product.price | money_without_currency | strip_html }}'>
   <meta property='og:price:currency' content='{{ cart.currency.iso_code }}'>
+  <meta property='product:price:amount' content='{{ product.price | money_without_currency | strip_html }}'>
+  <meta property='product:price:currency' content='{{ cart.currency.iso_code }}'>
+  {%- if product.available -%}
+    <meta property='product:availability' content='in stock'>
+  {%- endif -%}
 {%- endif -%}
 
 {%- if settings.social_x_link != blank -%}
@@ -37,3 +43,7 @@
 <meta name='twitter:card' content='summary_large_image'>
 <meta name='twitter:title' content='{{ og_title | escape }}'>
 <meta name='twitter:description' content='{{ og_description | escape }}'>
+<meta name='twitter:image' content='https:{{ page_image | image_url }}'>
+{%- if page_image.alt -%}
+  <meta name='twitter:image:alt' content='{{ page_image.alt | escape }}'>
+{%- endif -%}
