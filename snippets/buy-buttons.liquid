@@ -82,7 +82,7 @@
               disabled
             {% endif %}
           >
-            <span>
+            <span class='tw-uppercase'>
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -101,7 +101,7 @@
     </product-form>
   {%- else -%}
     <div class='product-form'>
-      <div class='product-form__buttons form'>
+      <div class='product-form__buttons form tw-uppercase'>
         <button
           type='submit'
           name='add'

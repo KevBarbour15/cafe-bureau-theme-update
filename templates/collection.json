@@ -1,8 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "product-grid": {
       "type": "main-collection-product-grid",
+      "settings": {
+        "subheader_enabled": true
+      }
     },
+    "subheader_k3zh9d": {
+      "type": "subheader",
+      "settings": {
+        "display_subheader": true,
+        "left_link_title": "",
+        "left_link_url": "",
+        "right_link_title": "",
+        "right_link_url": "",
+        "link_list": "collection-filter"
+      }
+    }
   },
-  "order": [ "product-grid"]
+  "order": [
+    "product-grid",
+    "subheader_k3zh9d"
+  ]
 }

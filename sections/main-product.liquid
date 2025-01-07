@@ -35,6 +35,8 @@
     {% endfor %}
   {% endfor %}
 
+  {% assign subheader_enabled = section.settings.subheader_enabled %}
+
   {% comment %}
     Desktop Product Slider
   {% endcomment %}
@@ -45,21 +47,23 @@
       color_options: color_options,
       size_options: size_options,
       active_color: active_color,
-      active_size: active_size
+      active_size: active_size,
+      subheader_enabled: subheader_enabled
     %}
   </div>
 
   {% comment %}
     Mobile Product Slider
   {% endcomment %}
-  <div class='md:tw-hidden tw-pt-[100px]'>
+  <div class='md:tw-hidden'>
     {% render 'main-product-mobile',
       product: product,
       active_variant: active_variant,
       color_options: color_options,
       size_options: size_options,
       active_color: active_color,
-      active_size: active_size
+      active_size: active_size,
+      subheader_enabled: subheader_enabled
     %}
   </div>
 </product-info>
@@ -68,6 +72,15 @@
 {
   "name": "Product",
   "tag": "section",
-  "class": "section"
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "subheader_enabled",
+      "label": "Enable Subheader",
+      "info": "If enabled, the product page will have a adjusted padding top to account for the subheader.",
+      "default": true
+    }
+  ]
 }
 {% endschema %}

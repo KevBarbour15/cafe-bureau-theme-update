@@ -1,16 +1,21 @@
 <script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
+{% assign page_styling = '' %}
+{% if section.settings.subheader_enabled %}
+  {% assign page_styling = 'tw-pt-[100px] md:tw-pt-[120px]' %}
+{% else %}
+  {% assign page_styling = 'tw-pt-[60px] md:tw-pt-[80px]' %}
+{% endif %}
+
 <opacity-reveal>
-  <article
-    class='tw-container tw-pt-[60px] md:tw-pt-[80px] tw-min-h-dvh'
-  >
+  <article class='tw-container tw-min-h-dvh {{ page_styling }}'>
     {% if article.title != blank %}
       <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
         <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
         <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
       </div>
     {% endif %}
-    <div class='tw-py-md md:tw-py-lg'>
+    <div class='tw-py-md'>
       {% if article.metafields.custom.image_1.value != blank %}
         {{ article.metafields.custom.image_1.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
       {% endif %}
@@ -80,8 +85,17 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-article.name",
+  "name": "Main Article",
   "tag": "section",
-  "class": "section"
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "subheader_enabled",
+      "label": "Enable Subheader",
+      "default": false,
+      "info": "If enabled,the article page will have a adjusted padding top to account for the subheader."
+    }
+  ]
 }
 {% endschema %}

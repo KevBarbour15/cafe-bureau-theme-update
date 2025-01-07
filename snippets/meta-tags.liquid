@@ -11,6 +11,12 @@
   elsif request.page_type == 'password'
     assign og_url = request.origin
   endif
+
+  if page_image
+    assign social_image = page_image
+  elsif settings.default_social_image
+    assign social_image = settings.default_social_image
+  endif
 %}
 
 <meta property='og:site_name' content='{{ shop.name }}'>
@@ -19,16 +25,22 @@
 <meta property='og:type' content='{{ og_type }}'>
 <meta property='og:description' content='{{ og_description | escape }}'>
 
-{%- if page_image -%}
-  <meta property='og:image' content='http:{{ page_image | image_url }}'>
-  <meta property='og:image:secure_url' content='https:{{ page_image | image_url }}'>
-  <meta property='og:image:width' content='{{ page_image.width }}'>
-  <meta property='og:image:height' content='{{ page_image.height }}'>
+{%- if social_image -%}
+  <meta property='og:image' content='http:{{ social_image | image_url }}'>
+  <meta property='og:image:secure_url' content='https:{{ social_image | image_url }}'>
+  <meta property='og:image:width' content='{{ social_image.width }}'>
+  <meta property='og:image:height' content='{{ social_image.height }}'>
+  <meta property='og:image:alt' content='{{ social_image.alt | escape }}'>
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
   <meta property='og:price:amount' content='{{ product.price | money_without_currency | strip_html }}'>
   <meta property='og:price:currency' content='{{ cart.currency.iso_code }}'>
+  <meta property='product:price:amount' content='{{ product.price | money_without_currency | strip_html }}'>
+  <meta property='product:price:currency' content='{{ cart.currency.iso_code }}'>
+  {%- if product.available -%}
+    <meta property='product:availability' content='in stock'>
+  {%- endif -%}
 {%- endif -%}
 
 {%- if settings.social_x_link != blank -%}
@@ -37,3 +49,7 @@
 <meta name='twitter:card' content='summary_large_image'>
 <meta name='twitter:title' content='{{ og_title | escape }}'>
 <meta name='twitter:description' content='{{ og_description | escape }}'>
+<meta name='twitter:image' content='https:{{ social_image | image_url }}'>
+{%- if social_image.alt -%}
+  <meta name='twitter:image:alt' content='{{ social_image.alt | escape }}'>
+{%- endif -%}

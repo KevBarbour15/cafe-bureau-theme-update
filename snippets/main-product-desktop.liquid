@@ -4,14 +4,29 @@
 {% assign active_variant = active_variant %}
 {% assign active_color = active_color %}
 {% assign active_size = active_size %}
+{% assign subheader_enabled = subheader_enabled %}
 
 <script src='{{ 'product-scroll.js' | asset_url }}' type='module' defer='defer'></script>
 
+{% comment %}
+  This is the padding top for the product page.
+  If the subheader is enabled, we add 40px to the padding top.
+{% endcomment %}
+
+{% assign padding_top = '' %}
+{% assign details_video_height = 'tw-h-[calc(100dvh-120px-64px)]' %}
+{% if subheader_enabled %}
+  {% assign padding_top = 'tw-pt-[120px]' %}
+{% else %}
+  {% assign padding_top = 'tw-pt-[80px]' %}
+  {% assign details_video_height = 'tw-h-[calc(100dvh-80px-64px)]' %}
+{% endif %}
+
 <product-page-scroll>
   <accordion-component>
-    <div class='tw-w-full tw-block tw-h-full'>
+    <div class='tw-w-full tw-block'>
       <div class='tw-w-full tw-flex tw-h-full'>
-        <div id='image-container' class='tw-w-1/2 tw-pt-[120px] tw-relative tw-h-full'>
+        <div id='image-container' class='tw-w-1/2 tw-pr-md tw-relative tw-h-full {{ padding_top }}'>
           {% if active_variant.metafields.custom.variant_product_video != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
@@ -33,7 +48,7 @@
 
         <div
           id='details-container'
-          class='md:tw-w-1/2 tw-h-full tw-pt-[120px] tw-z-[2]'
+          class='md:tw-w-1/2 tw-h-full tw-z-[2] {{ padding_top }}'
         >
           <div class='tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
             {% if product.title != blank or product.price != blank %}
@@ -112,15 +127,17 @@
         </div>
       </div>
       {% if active_variant.metafields.custom.variant_details_video != blank %}
-        <div class='tw-p-8 tw-m-auto tw-w-fit tw-h-fit'>
-          <video
-            src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'
-            autoplay
-            muted
-            playsinline
-            loop
-            class='tw-object-center tw-object-cover tw-max-h-[calc(100dvh-120px-64px)] tw-w-auto tw-border-8 tw-border-black'
-          ></video>
+        <div class='tw-w-full tw-py-8 tw-flex tw-justify-center tw-items-center'>
+          <div class='{{ details_video_height }}'>
+            <video
+              src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              class='tw-object-center tw-object-cover tw-w-auto tw-border-8 tw-border-black {{ details_video_height }}'
+            ></video>
+          </div>
         </div>
       {% endif %}
     </div>
