@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-cafe",
+      "type": "main-cafe-section",
       "settings": {}
     }
   },

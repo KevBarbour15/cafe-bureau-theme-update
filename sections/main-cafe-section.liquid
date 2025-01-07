@@ -1,0 +1,107 @@
+<div class=' tw-min-h-[calc(100vh-110px)] tw-container tw-h-full'>
+  <div class='tw-flex tw-flex-col md:tw-flex-row tw-h-full'>
+    <div class='tw-flex tw-flex-col tw-justify-center tw-items-center md:tw-w-1/2 tw-bg-red-500 tw-p-md tw-gap-md'>
+      {% if section.settings.cafe_image != blank %}
+        <img
+          src='{{ section.settings.cafe_image | img_url: 'master' }}'
+          alt='{{ section.settings.cafe_image.alt }}'
+          width='300px'
+          height='auto'
+          class=''
+        >
+      {% endif %}
+      {% if section.settings.sub_heading != blank %}
+        <p class='subheading tw-text-center'>{{ section.settings.sub_heading }}</p>
+      {% endif %}
+      {% if section.settings.overview != blank %}
+        <p class='overview tw-text-center'>{{ section.settings.overview }}</p>
+      {% endif %}
+    </div>
+    <div class='md:tw-w-1/2 tw-h-full tw-p-md'>
+      <div class='heading tw-mb-md tw-m-auto tw-text-center'>Upcoming Events</div>
+      <div class='tw-grid tw-grid-cols-2 tw-gap-8'>
+        {% for block in section.blocks %}
+          <div class=' tw-gap-4'>
+            <div class='tw-relative tw-pb-[100%]'>
+              <img
+                src='{{ block.settings.event_flyer | img_url: 'master' }}'
+                alt='{{ block.settings.event_flyer.alt }}'
+                class='tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center tw-border tw-border-black'
+                width='100%'
+                height='100%'
+              >
+            </div>
+            <div class='tw-flex tw-flex-col tw-gap-2 tw-uppercase'>
+              {% if block.settings.event_title != blank %}
+                <p class='p1 tw-text-center'>{{ block.settings.event_title }}</p>
+              {% endif %}
+              {% if block.settings.event_date != blank %}
+                <p class='p1 tw-text-center'>{{ block.settings.event_date }}</p>
+              {% endif %}
+              {% if block.settings.event_time != blank %}
+                <p class='p1 tw-text-center'>{{ block.settings.event_time }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Cafe Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading"
+    },
+    {
+      "type": "text",
+      "id": "overview",
+      "label": "Cafe Overview"
+    },
+    {
+      "type": "image_picker",
+      "id": "cafe_image",
+      "label": "Cafe Logo Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cafe_highlighted_image",
+      "label": "Cafe Highlighted Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "upcoming_events",
+      "name": "Cafe Section Block",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event Title"
+        },
+        {
+          "type": "text",
+          "id": "event_date",
+          "label": "Event Date"
+        },
+        {
+          "type": "text",
+          "id": "event_time",
+          "label": "Event Time"
+        },
+        {
+          "type": "image_picker",
+          "id": "event_flyer",
+          "label": "Event Flyer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

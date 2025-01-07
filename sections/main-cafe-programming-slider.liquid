@@ -1,0 +1,51 @@
+<div class='tw-py-md tw-border-t tw-border-black tw-flex tw-flex-col'>
+  <h2 class='tw-text-center heading tw-mb-md'>{{ section.settings.heading }}</h2>
+
+  <div class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-md' style='scrollbar-width: none; -ms-overflow-style: none;'>
+    {% for article in section.settings.blog.articles %}
+      <div
+        class=' tw-h-full tw-min-w-[215px] tw-max-w-[315px] tw-flex-[0_0_215px] lg:tw-flex-[0_0_315px]'
+      >
+        <a href='{{ article.url }}' class='tw-h-full tw-w-auto tw-block'>
+          <div class='tw-w-full tw-flex tw-items-center tw-justify-center tw-aspect-[4/5]'>
+            <img
+              src='{{ article.image | img_url: 'master' }}'
+              alt='{{ article.image.alt }}'
+              class='tw-w-full tw-h-full tw-object-cover tw-object-center'
+              width='{{ article.height }}'
+              height='{{ article.width }}'
+            >
+          </div>
+          <div class='tw-flex tw-flex-col tw-text-center tw-items-center tw-justify-center tw-pt-sm'>
+            <p class='tw-text-black tw-mx-auto tw-uppercase p1 md:hover:tw-underline md:tw-transition-all md:tw-duration-150'>
+              {{ article.title }}
+            </p>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cafe Programming Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Programming Blog"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cafe Programming Slider"
+    }
+  ]
+}
+{% endschema %}
