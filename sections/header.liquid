@@ -7,7 +7,7 @@
 <script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[200] tw-px-8' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[200] tw-px-8 ' %}
 {% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
 {% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
@@ -15,14 +15,22 @@
 {% if request.page_type == 'index' %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
+
+{% elsif request.path == 'pages/cafe' %}
+  {% assign header_style = header_style | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm' %}
+
 {% else %}
   {% assign header_style = header_style
-    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm'
+    | append: ' tw-bg-white tw-border-b tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm '
   %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-black ' %}
   {% assign cart_arrow_styles = 'tw-fill-black' %}
 {% endif %}
+
+<script>
+  console.log('{{ request.path }}');
+</script>
 
 <menu-overlay>
   <header class='{{ header_style }}'>
