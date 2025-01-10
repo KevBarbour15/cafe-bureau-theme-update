@@ -61,7 +61,7 @@
 
     {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
- 
+
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
@@ -250,6 +250,7 @@
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
+        color: black;
       }
       @media screen and (min-width: 750px) {
         body {
