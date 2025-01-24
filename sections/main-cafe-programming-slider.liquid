@@ -1,7 +1,10 @@
 <div class='tw-py-md tw-border-t tw-border-black tw-flex tw-flex-col'>
   <h2 class='tw-text-center heading tw-mb-md'>{{ section.settings.heading }}</h2>
 
-  <div class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-md' style='scrollbar-width: none; -ms-overflow-style: none;'>
+  <div
+    class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-md tw-w-full'
+    style='scrollbar-width: none; -ms-overflow-style: none;'
+  >
     {% for article in section.settings.blog.articles %}
       <div
         class=' tw-h-full tw-min-w-[215px] tw-max-w-[315px] tw-flex-[0_0_215px] lg:tw-flex-[0_0_315px]'
@@ -25,6 +28,19 @@
       </div>
     {% endfor %}
   </div>
+  {% if section.settings.blog_link != blank and section.settings.blog_link_cta != blank %}
+    <div class='tw-w-screen tw-py-md tw-relative'>
+      <div class='tw-absolute tw-top-md tw-left-1/2'>
+        {% render 'link-hover',
+          link: section.settings.blog_link,
+          link_cta: section.settings.blog_link_cta,
+          text_style: 'tw-uppercase p1 tw-mx-auto tw-text-black tw-underline',
+          arrow_style: 'tw-fill-black',
+          arrow_size: 16
+        %}
+      </div>
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -40,6 +56,16 @@
       "type": "blog",
       "id": "blog",
       "label": "Programming Blog"
+    },
+    {
+      "type": "url",
+      "id": "blog_link",
+      "label": "Blog Link"
+    },
+    {
+      "type": "text",
+      "id": "blog_link_cta",
+      "label": "Blog Link CTA"
     }
   ],
   "presets": [

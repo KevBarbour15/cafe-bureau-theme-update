@@ -110,7 +110,7 @@
               >
                 <p class='p2 tw-py-xs'>Product Details</p>
                 <div
-                  class='down-icon tw-transition-all tw-duration-150'
+                  class='card down-icon tw-transition-all tw-duration-150'
                 >
                   {% render 'down-arrow', size: 20 %}
                 </div>
@@ -127,7 +127,7 @@
         </div>
       </div>
       {% if active_variant.metafields.custom.variant_details_video != blank %}
-        <div class='tw-w-full tw-py-8 tw-flex tw-justify-center tw-items-center'>
+        <div class='card tw-w-full tw-py-8 tw-flex tw-justify-center tw-items-center'>
           <div class='{{ details_video_height }}'>
             <video
               src='{{ active_variant.metafields.custom.variant_details_video | file_url }}'

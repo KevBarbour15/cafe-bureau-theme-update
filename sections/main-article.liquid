@@ -12,26 +12,49 @@
     {% if article.title != blank %}
       <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
         <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
-        <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+        {% if article.metafields.custom.post_date != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.post_date }}</p>
+        {% elsif article.metafields.custom.event_date != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.event_date }}</p>
+        {% elsif article.published_at != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+        {% endif %}
       </div>
     {% endif %}
-    <div class='tw-py-md'>
+
+    {% if blog.title == 'Past Events' and article.content != blank %}
+      <div class='card tw-py-md p2' style='opacity: 0;'>
+        {{ article.content }}
+      </div>
+    {% endif %}
+
+    <div class='tw-pt-md'>
       {% if article.metafields.custom.image_1.value != blank %}
-        {{ article.metafields.custom.image_1.value | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
+        <div class='card tw-mb-md' style='opacity: 0;'>
+          {{
+            article.metafields.custom.image_1.value
+            | image_url: width: 1000
+            | image_tag: class: 'tw-w-full tw-h-auto'
+          }}
+        </div>
       {% endif %}
 
       {% if article.metafields.custom.image_list_1.value != blank %}
-        <div class='tw-grid tw-grid-cols-2 tw-gap-md tw-mb-md'>
+        <div class='md:tw-flex md:tw-gap-md'>
           {% for image in article.metafields.custom.image_list_1.value %}
-            <div class='card' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-full tw-h-auto' }}
+            <div class='card tw-mb-md' style='opacity: 0;'>
+              {{
+                image
+                | image_url: width: 1000
+                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
+              }}
             </div>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if article.metafields.custom.image_2.value != blank %}
-        <div class='card tw-mb-md lg:tw-w-1/2 tw-mx-auto' style='opacity: 0;'>
+        <div class='card tw-mb-md' style='opacity: 0;'>
           {{
             article.metafields.custom.image_2.value
             | image_url: width: 1000
@@ -41,17 +64,21 @@
       {% endif %}
 
       {% if article.metafields.custom.image_list_2.value != blank %}
-        <div class='tw-grid tw-grid-cols-2 tw-gap-md'>
+        <div class='md:tw-flex md:tw-gap-md'>
           {% for image in article.metafields.custom.image_list_2.value %}
-            <div class='card' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: ' tw-w-full tw-h-auto' }}
+            <div class='card tw-mb-md' style='opacity: 0;'>
+              {{
+                image
+                | image_url: width: 1000
+                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
+              }}
             </div>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if article.metafields.custom.image_3.value != blank %}
-        <div class='card tw-mb-md tw-w-1/2 tw-mx-auto' style='opacity: 0;'>
+        <div class='card tw-mb-md' style='opacity: 0;'>
           {{
             article.metafields.custom.image_3.value
             | image_url: width: 1000
@@ -61,17 +88,21 @@
       {% endif %}
 
       {% if article.metafields.custom.image_list_3.value != blank %}
-        <div class='card tw-grid tw-grid-cols-2 tw-gap-md'>
+        <div class='md:tw-flex md:tw-gap-md'>
           {% for image in article.metafields.custom.image_list_3.value %}
-            <div class='card' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: ' tw-w-full tw-h-auto' }}
+            <div class='card tw-mb-md' style='opacity: 0;'>
+              {{
+                image
+                | image_url: width: 1000
+                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
+              }}
             </div>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if article.metafields.custom.image_4.value != blank %}
-        <div class='tw-mb-md tw-w-1/2 tw-mx-auto'>
+        <div class='card tw-mb-md' style='opacity: 0;'>
           {{
             article.metafields.custom.image_4.value
             | image_url: width: 1000

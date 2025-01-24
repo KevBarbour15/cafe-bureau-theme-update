@@ -1,0 +1,33 @@
+## Overview
+
+This is a Shopify theme that uses Tailwind CSS for styling. The theme includes various sections and templates for product pages, blog posts, and static pages. All Tailwind classes are prefixed with `tw-` to avoid conflicts with Shopify's default styling.
+
+## Installation
+
+1. **Clone the repository**
+
+## Styling
+
+To run tailwindcss, use the following in a separate terminal:
+
+```npx tailwindcss -i ./assets/app-tailwind.css -o ./assets/app.css --watch```
+
+All tailwind classes should be used with the prefix "tw-".
+
+Note: the sections and snippets that are built with tailwind are the active sections and snippets.
+
+## Project Structure
+
+- `assets/` - Contains CSS, JavaScript, and other static files
+- `layout/` - Theme layout templates
+- `sections/` - Theme sections that can be customized in the theme editor
+- `templates/` - Theme templates for different page types
+- `locales/` - Translation files for multiple languages
+
+## Notes
+
+- The sections and snippets built with Tailwind are the active sections and snippet
+- The theme uses a responsive design approach with mobile-first styling
+
+
+

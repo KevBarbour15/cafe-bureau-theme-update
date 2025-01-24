@@ -6,6 +6,10 @@ class ProductCardHover extends HTMLElement {
 
   connectedCallback() {
 
+    if (document.documentElement.clientWidth < 768) {
+      return;
+    }
+
     this.productCard = this.querySelector('.product-card');
     this.productImage = this.querySelector('.product-image');
     this.productVideo = this.querySelector('.product-video');
@@ -37,11 +41,11 @@ class ProductCardHover extends HTMLElement {
       .set(this.productVideo, {
         play: true,
       }, 0)
-      .to(this.productVideoContainer, {
+      .set(this.productVideoContainer, {
         display: 'block',
         opacity: 1,
       }, 0)
-      .to(this.productImage, {
+      .set(this.productImage, {
         opacity: 0,
       }, 0)
       .set(this.productImage, {

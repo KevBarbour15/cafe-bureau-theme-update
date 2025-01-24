@@ -7,24 +7,25 @@
 <script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-h-[60px] md:tw-h-[80px] tw-z-[200] tw-px-8 ' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-8 ' %}
 {% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
-{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer ' %}
+{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer tw-z-[200]' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
 
 {% if request.page_type == 'index' %}
+  {% assign header_style = header_style | append: ' tw-h-[60px] md:tw-h-[80px] ' %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
 
 {% elsif request.path == '/pages/cafe' %}
   {% if section.settings.cafe_header != blank %}
-    {% assign header_style = header_style | append: ' tw-h-[100px] md:tw-h-[110px] tw-bg-black' %}
+    {% assign header_style = header_style | append: ' tw-h-[100px] ' %}
     {% assign hamburger_style = hamburger_style | append: ' tw-bg-white ' %}
     {% assign cart_link_style = cart_link_style | append: ' tw-text-white ' %}
   {% endif %}
 {% else %}
   {% assign header_style = header_style
-    | append: ' tw-bg-white tw-border-y tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm'
+    | append: ' tw-bg-white tw-border-y tw-border-black tw-bg-opacity-85 tw-backdrop-blur-sm tw-h-[60px] md:tw-h-[80px] '
   %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-black ' %}
@@ -150,20 +151,20 @@
         href='{{ routes.cart_url }}'
         class='{{ cart_link_style }}'
         id='cart-link'
-        aria-label='View shopping cart{% if cart.item_count > 0 %} with {{ cart.item_count }} items{% endif %}'
+        aria-label='View shopping cart'
       >
         <div
           id='cart-icon'
           class='tw-border tw-hidden tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[16px] tw-md:tw-h-[20px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px]'
         >
-          <p class='tw-text-lg tw-text-black tw-text-center tw-leading-none '>
+          <p class='tw-text-lg  tw-text-center tw-leading-none '>
             {{- cart.item_count -}}
           </p>
         </div>
         <span id='cart-arrow' class='tw-opacity-0'>
           {%- render 'right-arrow', style: cart_arrow_styles, size: 20 -%}
         </span>
-        <span class='tw-text-base tw-uppercase md:tw-text-2xl tw-leading-[0.5]'>Cart</span>
+        <span class='tw-text-lg tw-uppercase md:tw-text-2xl tw-leading-[0.5]'>Cart</span>
       </a>
     </div>
   </header>

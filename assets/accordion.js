@@ -9,7 +9,6 @@ class Accordion extends HTMLElement {
     this.content = this.querySelectorAll('.accordion-content');
     this.downIcon = this.querySelectorAll('.down-icon');
 
-    // Add initial styles
     this.content.forEach(content => {
       content.style.maxHeight = '0';
       content.style.opacity = '0';

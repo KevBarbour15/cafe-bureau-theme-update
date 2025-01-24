@@ -1,4 +1,8 @@
 {% if section.settings.display_subheader != false %}
+  {% comment %}
+    write in logic to check if the page is a collection, product, blog, or blog post and if the display_metadata is true
+    and then display the metadata choices correctly
+  {% endcomment %}
   <script src='{{ 'filter-link.js' | asset_url }}' defer></script>
   <filter-link-hover>
     <div
@@ -90,6 +94,13 @@
       "label": "Display Subheader",
       "info": "Subheader will not display if this is unchecked",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_metadata",
+      "label": "Display metadata choices",
+      "info": "Choose to display metadata for individual pages / products / blogs / blog posts",
+      "default": false
     },
     {
       "type": "text",

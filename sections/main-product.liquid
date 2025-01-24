@@ -1,74 +1,76 @@
 <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+<script src='{{ 'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
-<product-info
-  data-section='{{ section.id }}'
-  data-product-id='{{ product.id }}'
-  data-update-url='true'
-  data-url='{{ product.url }}'
-  data-variants='{{ product.variants | json }}'
->
-  {% assign active_variant = product.selected_or_first_available_variant %}
-  {% assign color_options = product.options_with_values | where: 'name', 'Color' | first %}
-  {% assign size_options = product.options_with_values | where: 'name', 'Size' | first %}
+<opacity-reveal>
+  <product-info
+    data-section='{{ section.id }}'
+    data-product-id='{{ product.id }}'
+    data-update-url='true'
+    data-url='{{ product.url }}'
+    data-variants='{{ product.variants | json }}'
+  >
+    {% assign active_variant = product.selected_or_first_available_variant %}
+    {% assign color_options = product.options_with_values | where: 'name', 'Color' | first %}
+    {% assign size_options = product.options_with_values | where: 'name', 'Size' | first %}
 
-  {% assign active_color = '' %}
-  {% for color in color_options.values %}
-    {% for variant in product.variants %}
-      {% if variant.option1 == color or variant.option2 == color %}
-        {% if variant == active_variant %}
-          {% assign active_color = color %}
+    {% assign active_color = '' %}
+    {% for color in color_options.values %}
+      {% for variant in product.variants %}
+        {% if variant.option1 == color or variant.option2 == color %}
+          {% if variant == active_variant %}
+            {% assign active_color = color %}
+          {% endif %}
         {% endif %}
-      {% endif %}
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
 
-  {% assign active_size = '' %}
-  {% for size in size_options.values %}
-    {% for variant in product.variants %}
-      {% if variant.option1 == size or variant.option2 == size %}
-        {% if variant == active_variant %}
-          {% assign active_size = size %}
+    {% assign active_size = '' %}
+    {% for size in size_options.values %}
+      {% for variant in product.variants %}
+        {% if variant.option1 == size or variant.option2 == size %}
+          {% if variant == active_variant %}
+            {% assign active_size = size %}
+          {% endif %}
         {% endif %}
-      {% endif %}
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
 
-  {% assign subheader_enabled = section.settings.subheader_enabled %}
+    {% assign subheader_enabled = section.settings.subheader_enabled %}
 
-  {% comment %}
-    Desktop Product Slider
-  {% endcomment %}
-  <div class='tw-hidden md:tw-block tw-container tw-pb-sm tw-h-full'>
-    {% render 'main-product-desktop',
-      product: product,
-      active_variant: active_variant,
-      color_options: color_options,
-      size_options: size_options,
-      active_color: active_color,
-      active_size: active_size,
-      subheader_enabled: subheader_enabled
-    %}
-  </div>
+    {% comment %}
+      Desktop Product Slider
+    {% endcomment %}
+    <div class='tw-hidden md:tw-block tw-container tw-pb-sm tw-h-full'>
+      {% render 'main-product-desktop',
+        product: product,
+        active_variant: active_variant,
+        color_options: color_options,
+        size_options: size_options,
+        active_color: active_color,
+        active_size: active_size,
+        subheader_enabled: subheader_enabled
+      %}
+    </div>
 
-  {% comment %}
-    Mobile Product Slider
-  {% endcomment %}
-  <div class='md:tw-hidden'>
-    {% render 'main-product-mobile',
-      product: product,
-      active_variant: active_variant,
-      color_options: color_options,
-      size_options: size_options,
-      active_color: active_color,
-      active_size: active_size,
-      subheader_enabled: subheader_enabled
-    %}
-  </div>
-</product-info>
+    {% comment %}
+      Mobile Product Slider
+    {% endcomment %}
+    <div class='md:tw-hidden'>
+      {% render 'main-product-mobile',
+        product: product,
+        active_variant: active_variant,
+        color_options: color_options,
+        size_options: size_options,
+        active_color: active_color,
+        active_size: active_size,
+        subheader_enabled: subheader_enabled
+      %}
+    </div>
+  </product-info>
 
-{% schema %}
+  {% schema %}
 {
   "name": "Product",
   "tag": "section",
@@ -83,4 +85,5 @@
     }
   ]
 }
-{% endschema %}
+  {% endschema %}
+</opacity-reveal>

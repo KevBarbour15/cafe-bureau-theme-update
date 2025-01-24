@@ -1,4 +1,4 @@
-<div class=' tw-min-h-[calc(100vh-110px)] tw-container tw-h-full'>
+<div class='tw-min-h-dvh tw-pt-[100px] tw-h-full'>
   <div class='tw-flex tw-flex-col md:tw-flex-row tw-h-full'>
     <div class='tw-flex tw-flex-col tw-justify-center tw-items-center md:tw-w-1/2 tw-bg-red-500 tw-p-md tw-gap-md'>
       {% if section.settings.cafe_image != blank %}
@@ -17,7 +17,7 @@
         <p class='overview tw-text-center'>{{ section.settings.overview }}</p>
       {% endif %}
     </div>
-    <div class='md:tw-w-1/2 tw-h-full tw-p-md'>
+    <div class='md:tw-w-1/2 tw-h-full'>
       <div class='heading tw-mb-md tw-m-auto tw-text-center'>Upcoming Events</div>
       <div class='tw-grid tw-grid-cols-2 tw-gap-8'>
         {% for block in section.blocks %}

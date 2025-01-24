@@ -78,9 +78,9 @@
         <ul class='tw-flex tw-flex-col tw-justify-between'>
           {% if section.settings.contact_email != blank %}
             <li class='tw-flex tw-items-center'>
-              <span class='tw-uppercase p2 tw-mr-sm'>Contact:</span>
+              <span class='tw-uppercase p1 tw-mr-sm'>Contact:</span>
               <a
-                class='md:hover:tw-underline md:tw-transition-all md:tw-duration-150 p2'
+                class='md:hover:tw-underline md:tw-transition-all md:tw-duration-150 p1'
                 href='mailto:{{ section.settings.contact_email }}'
               >
                 {{- section.settings.contact_email -}}
@@ -91,7 +91,7 @@
           {%- for link in section.settings.footer_menu.links %}
             {%- if link != blank -%}
               <li>
-                {% render 'link-hover', link: link, text_style: 'tw-uppercase p2', arrow_style: 'tw-fill-black' %}
+                {% render 'link-hover', link: link, text_style: 'tw-uppercase p1', arrow_style: 'tw-fill-black' %}
               </li>
             {%- endif -%}
           {%- endfor -%}

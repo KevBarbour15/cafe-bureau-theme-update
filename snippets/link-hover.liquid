@@ -1,6 +1,8 @@
 {% assign link = link %}
+{% assign link_cta = link_cta %}
 {% assign text_style = text_style %}
 {% assign arrow_style = arrow_style %}
+{% assign arrow_size = arrow_size | default: 20 %}
 
 <script src='{{ 'link-hover.js' | asset_url }}' defer='defer' type='module'></script>
 
@@ -8,14 +10,14 @@
   <a
     class='hover-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer'
     href='{{ link.url }}'
-    aria-label='Navigate to {{ link.title }}'
+    aria-label='Navigate to {{ link_cta | default: link.title }}'
     {% if link.current %}
       aria-current='page'
     {% endif %}
   >
-    <span class='hover-link-text {{ text_style }}'>{{ link.title }}</span>
+    <span class='hover-link-text {{ text_style }}'>{{ link_cta | default: link.title }}</span>
     <span class='hover-link-arrow' style='display: none;' aria-hidden='true'>
-      {% render 'right-arrow', style: '{{ arrow_style }}', size: 20 %}
+      {% render 'right-arrow', style: '{{ arrow_style }}', size: arrow_size %}
     </span>
   </a>
 </link-hover-effect>

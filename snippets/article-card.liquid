@@ -23,8 +23,12 @@
             <span class='tw-block'>{{- article.title -}}</span>
           </a>
         {% endif %}
-        {% if article.published_at != blank %}
-          <p class='p1 tw-text-black tw-uppercase tw-text-center'>{{ article.published_at | date: '%B %d, %Y' }}</p>
+        {% if article.metafields.custom.post_date != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.post_date }}</p>
+        {% elsif article.metafields.custom.event_date != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.event_date }}</p>
+        {% elsif article.published_at != blank %}
+          <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
         {% endif %}
       </div>
     {% endif %}
