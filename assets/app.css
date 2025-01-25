@@ -1315,6 +1315,10 @@ video {
   line-height: 1.25rem;
 }
 
+.tw-font-bold {
+  font-weight: 700;
+}
+
 .tw-uppercase {
   text-transform: uppercase;
 }
@@ -1561,6 +1565,16 @@ video {
     --tw-scale-x: 1.15;
     --tw-scale-y: 1.15;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .md\:hover\:tw-bg-white:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  }
+
+  .md\:hover\:tw-text-black:hover {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity, 1));
   }
 
   .md\:hover\:tw-underline:hover {
