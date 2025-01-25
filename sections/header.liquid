@@ -154,7 +154,7 @@
       >
         <div
           id='cart-icon'
-          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden'
+          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden {% if request.page_type == 'index' %} tw-bg-white tw-text-black {% else %} tw-bg-[#5ffcf9] {% endif %} '
         >
           <update-cart-count>
             <span
