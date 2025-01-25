@@ -733,6 +733,10 @@ video {
   margin-top: 24px;
 }
 
+.tw-mt-sm {
+  margin-top: 16px;
+}
+
 .tw-block {
   display: block;
 }
@@ -819,6 +823,22 @@ video {
 
 .tw-h-full {
   height: 100%;
+}
+
+.tw-h-\[px\] {
+  height: px;
+}
+
+.tw-h-\[2px\] {
+  height: 2px;
+}
+
+.tw-h-\[20px\] {
+  height: 20px;
+}
+
+.tw-h-\[24px\] {
+  height: 24px;
 }
 
 .tw-max-h-0 {
@@ -1009,6 +1029,10 @@ video {
   gap: 16px;
 }
 
+.tw-gap-xs {
+  gap: 8px;
+}
+
 .tw-gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -1049,6 +1073,10 @@ video {
 
 .tw-whitespace-nowrap {
   white-space: nowrap;
+}
+
+.tw-text-wrap {
+  text-wrap: wrap;
 }
 
 .tw-text-nowrap {
@@ -1122,6 +1150,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
+.tw-bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
+}
+
 .tw-bg-opacity-85 {
   --tw-bg-opacity: 0.85;
 }
@@ -1158,6 +1191,10 @@ video {
 
 .tw-p-md {
   padding: 24px;
+}
+
+.tw-p-0 {
+  padding: 0px;
 }
 
 .tw-px-8 {
@@ -1280,6 +1317,10 @@ video {
 
 .tw-pt-xl {
   padding-top: 48px;
+}
+
+.tw-pl-md {
+  padding-left: 24px;
 }
 
 .tw-text-center {
@@ -1506,6 +1547,10 @@ video {
     gap: 24px;
   }
 
+  .md\:tw-gap-lg {
+    gap: 32px;
+  }
+
   .md\:tw-px-0 {
     padding-left: 0px;
     padding-right: 0px;
@@ -1536,6 +1581,14 @@ video {
     padding-top: 80px;
   }
 
+  .md\:tw-pl-md {
+    padding-left: 24px;
+  }
+
+  .md\:tw-pl-lg {
+    padding-left: 32px;
+  }
+
   .md\:tw-text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -1559,6 +1612,10 @@ video {
 
   .md\:tw-duration-150 {
     transition-duration: 150ms;
+  }
+
+  .md\:tw-duration-300 {
+    transition-duration: 300ms;
   }
 
   .md\:hover\:tw-scale-\[1\.15\]:hover {
@@ -1589,6 +1646,44 @@ video {
 
   .lg\:tw-grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:tw-gap-lg {
+    gap: 32px;
+  }
+
+  .lg\:tw-pl-md {
+    padding-left: 24px;
+  }
+
+  .lg\:tw-pr-md {
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .xl\:tw-p-lg {
+    padding: 32px;
+  }
+
+  .xl\:tw-pr-md {
+    padding-right: 24px;
+  }
+
+  .xl\:tw-pr-lg {
+    padding-right: 32px;
+  }
+
+  .xl\:tw-pl-lg {
+    padding-left: 32px;
+  }
+
+  .xl\:tw-pl-xl {
+    padding-left: 48px;
+  }
+
+  .xl\:tw-pl-xxl {
+    padding-left: 64px;
   }
 }
 

@@ -66,16 +66,16 @@
     >
   {% endif %}
 
-  <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-flex-1 tw-items-center tw-border-t tw-border-black tw-w-[85%] tw-m-auto'>
+  <div class='tw-flex tw-flex-col tw-gap-xs tw-pt-sm tw-mt-sm tw-flex-1 tw-items-center tw-justify-center tw-w-full tw-border-t tw-border-black'>
     <a
       href='{{ product_url }}'
       class='tw-text-center'
       aria-label='View {{ product.title }} - {{ product.price | money }}'
     >
-      <p class='p1  tw-text-black tw-uppercase tw-truncate tw-text-center tw-text-nowrap md:hover:tw-underline tw-transition-all tw-duration-150 tw-ease-in-out'>
+      <p class='p2 tw-text-black tw-uppercase tw-truncate md:hover:tw-underline tw-transition-all tw-duration-300 tw-ease-in-out tw-text-center'>
         {{ product.title }}
       </p>
     </a>
-    <p class='p1  tw-text-black tw-uppercase tw-text-center'>{{ product.price | money }}</p>
+    <p class='p1 tw-uppercase tw-text-center tw-leading-none'>{{ product.price | money }}</p>
   </div>
 </div>

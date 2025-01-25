@@ -26,7 +26,7 @@
   <accordion-component>
     <div class='tw-w-full tw-block'>
       <div class='tw-w-full tw-flex tw-h-full'>
-        <div id='image-container' class='tw-w-1/2 tw-pr-md tw-relative tw-h-full {{ padding_top }}'>
+        <div id='image-container' class='tw-w-1/2 md:tw-pr-md xl:tw-pr-lg tw-relative tw-h-full {{ padding_top }}'>
           {% if active_variant.metafields.custom.variant_product_video != blank %}
             {% render 'product-media-gallery', active_variant: active_variant %}
           {% endif %}
@@ -34,7 +34,7 @@
             id='scroll-arrow'
             class='tw-w-screen tw-h-dvh tw-fixed tw-top-0 tw-left-0 tw-z-[1]'
           >
-            <div class='tw-w-full tw-h-full tw-container'>
+            <div class='tw-w-full tw-h-full'>
               <div class='tw-w-1/2 tw-h-full tw-relative'>
                 <div
                   class='tw-flex tw-justify-center tw-items-center tw-border tw-p-2 tw-rounded-full tw-absolute tw-bottom-8 tw-left-1/2 tw-transform tw--translate-x-1/2 tw-shadow-md tw-border-black tw-bg-white'
@@ -50,7 +50,7 @@
           id='details-container'
           class='md:tw-w-1/2 tw-h-full tw-z-[2] {{ padding_top }}'
         >
-          <div class='tw-w-full tw-pl-xxl tw-pr-md tw-block tw-pt-xl'>
+          <div class='tw-w-full tw-block tw-pt-xl md:tw-pl-lg xl:tw-pl-xxl'>
             {% if product.title != blank or product.price != blank %}
               <div class='tw-mb-lg'>
                 <p class='tw-mb-lg tw-uppercase tw-leading-none'>{{ product.title }}</p>
@@ -92,7 +92,7 @@
               >
                 <p class=' tw-leading-none'>Product Description</p>
                 <div
-                  class='down-icon tw-transition-all tw-duration-150'
+                  class='down-icon tw-transition-all tw-duration-300'
                 >
                   {% render 'down-arrow', size: 20 %}
                 </div>
@@ -110,7 +110,7 @@
               >
                 <p class=' tw-leading-none'>Product Details</p>
                 <div
-                  class='card down-icon tw-transition-all tw-duration-150'
+                  class='down-icon tw-transition-all tw-duration-300'
                 >
                   {% render 'down-arrow', size: 20 %}
                 </div>

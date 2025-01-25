@@ -19,7 +19,7 @@
         <ul
           id='product-grid'
           data-id='{{ section.id }}'
-          class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-1 md:tw-gap-6'
+          class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md lg:tw-gap-lg'
         >
           {%- for product in collection.products -%}
             {% if product.type == 'Clothing' or product.type == 'Accessories' %}

@@ -9,7 +9,7 @@
 <script src='{{ 'size-swatches.js' | asset_url }}' type='module' defer='defer'></script>
 
 <size-swatches-component>
-  <div class='tw-flex tw-flex-wrap tw-gap-6 tw-items-center'>
+  <div class='tw-flex tw-flex-wrap tw-gap-sm tw-items-center'>
     {% for size in size_options.values %}
       {% for variant in product.variants %}
         {% if variant.option1 == active_color or variant.option2 == active_color %}
@@ -18,14 +18,14 @@
               {% if variant.available %}
                 <span
                   aria-hidden='true'
-                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-bg-black tw-text-white tw-text-xl'
+                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-bg-black tw-text-white p2'
                 >
                   {{- size -}}
                 </span>
               {% else %}
                 <span
                   aria-hidden='true'
-                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-text-gray-500 tw-text-xl'
+                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-text-gray-500 p2'
                 >
                   {{- size -}}
                 </span>
@@ -37,7 +37,7 @@
                   <span
                     style='border-radius: 50px; background-color: white; color: black;'
                     aria-hidden='true'
-                    class='size-swatch-border tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-text-xl tw-leading-[1.5]'
+                    class='size-swatch-border tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-leading-none p2'
                   >
                     {{ size }}
                   </span>

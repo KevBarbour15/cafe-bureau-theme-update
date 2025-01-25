@@ -12,18 +12,6 @@
 {% endcomment %}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
-    {%- liquid
-      assign gift_card_recipient_feature_active = false
-      if block.settings.show_gift_card_recipient and product.gift_card?
-        assign gift_card_recipient_feature_active = true
-      endif
-
-      assign show_dynamic_checkout = false
-      if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
-        assign show_dynamic_checkout = true
-      endif
-    -%}
-
     <product-form
       class='product-form'
       data-hide-errors='{{ gift_card_recipient_feature_active }}'
@@ -53,14 +41,9 @@
           %}
             disabled
           {% endif %}
-          class='product-variant-id'
         >
 
-        {%- if gift_card_recipient_feature_active -%}
-          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
-        {%- endif -%}
-
-        <div class='product-form__buttons'>
+        <div class=''>
           {%- liquid
             assign check_against_inventory = true
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
@@ -74,7 +57,7 @@
             id='ProductSubmitButton-{{ section_id }}'
             type='submit'
             name='add'
-            class='product-form__submit tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-text-2xl tw-py-sm tw-px-md md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
+            class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm  md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -82,7 +65,7 @@
               disabled
             {% endif %}
           >
-            <span class='tw-uppercase tw-text-2xl '>
+            <span class='tw-uppercase tw-leading-none p3'>
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -91,11 +74,7 @@
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
-            {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
-          {%- endif -%}
         </div>
       {%- endform -%}
     </product-form>

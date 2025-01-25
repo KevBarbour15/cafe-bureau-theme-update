@@ -14,21 +14,21 @@
       {% endif %}
     </div>
     {% if article.title != blank or article.published_at != blank %}
-      <div class='md:tw-flex tw-flex-col tw-gap-3 tw-pt-3 tw-mt-3 tw-flex-1 tw-items-center tw-justify-center tw-border-t tw-border-black tw-w-[85%] tw-m-auto'>
+      <div class='tw-flex tw-flex-col tw-gap-xs tw-pt-sm tw-mt-sm tw-flex-1 tw-items-center tw-justify-center tw-w-full tw-border-t tw-border-black'>
         {% if article.title != blank %}
           <a
-            class='p1 tw-text-black tw-uppercase tw-truncate md:hover:tw-underline tw-transition-all tw-duration-150 tw-ease-in-out tw-text-center'
+            class='p2 tw-text-black tw-uppercase tw-truncate md:hover:tw-underline tw-transition-all tw-duration-300 tw-ease-in-out tw-text-center'
             href='{{ article.url }}'
           >
-            <span class='tw-block'>{{- article.title -}}</span>
+            <span class='tw-leading-none'>{{- article.title -}}</span>
           </a>
         {% endif %}
         {% if article.metafields.custom.post_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.post_date }}</p>
+          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{ article.metafields.custom.post_date }}</p>
         {% elsif article.metafields.custom.event_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.event_date }}</p>
+          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{ article.metafields.custom.event_date }}</p>
         {% elsif article.published_at != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
         {% endif %}
       </div>
     {% endif %}

@@ -1,3 +1,8 @@
+// Add this at the top of the file to verify the event system
+console.log('PUB_SUB_EVENTS available:', PUB_SUB_EVENTS);
+console.log('publish function available:', typeof publish);
+console.log('subscribe function available:', typeof subscribe);
+
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
@@ -15,6 +20,7 @@ customElements.define('cart-remove-button', CartRemoveButton);
 class CartItems extends HTMLElement {
   constructor() {
     super();
+    console.log('CartItems constructor called');
     this.lineItemStatusElement =
       document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
 
@@ -23,17 +29,104 @@ class CartItems extends HTMLElement {
     }, ON_CHANGE_DEBOUNCE_TIMER);
 
     this.addEventListener('change', debouncedOnChange.bind(this));
+
+    // Listen for form submissions that might add items to cart
+    document.addEventListener('submit', (event) => {
+      if (event.target.matches('form[action*="/cart/add"]')) {
+        console.log('Form submission intercepted');
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          console.log('Add to cart response received');
+          return response.json();
+        })
+        .then(data => {
+          console.log('Item added to cart:', data);
+          try {
+            // Try both direct DOM update and event publishing
+            const cartCountElements = document.querySelectorAll('#cart-count');
+            cartCountElements.forEach(element => {
+              element.textContent = data.items ? data.items.length : '0';
+            });
+            
+            // Manually trigger cart update
+            console.log('Publishing cart update event');
+            publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: data });
+            
+            // Also try fetching current cart state
+            return fetch(`${routes.cart_url}.js`);
+          } catch (error) {
+            console.error('Error in cart update handling:', error);
+          }
+        })
+        .then(response => response.json())
+        .then(cartData => {
+          console.log('Current cart state:', cartData);
+          const cartCountElements = document.querySelectorAll('#cart-count');
+          cartCountElements.forEach(element => {
+            element.textContent = cartData.item_count;
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    });
+
+    // Add additional listener for AJAX add to cart if present
+    document.addEventListener('click', (event) => {
+      const addToCartButton = event.target.closest('[data-add-to-cart]');
+      if (addToCartButton) {
+        console.log('Add to cart button clicked');
+        event.preventDefault();
+        const form = addToCartButton.closest('form');
+        if (form) {
+          const formData = new FormData(form);
+          fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Item added to cart via AJAX:', data);
+            publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: data });
+          })
+          .catch(error => console.error('Error:', error));
+        }
+      }
+    });
+
+    this.updateCartCount = (count) => {
+      const cartCountElements = document.querySelectorAll('#cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+      
+      const cartIcon = document.getElementById('cart-icon');
+      if (cartIcon) {
+        cartIcon.style.display = count > 0 ? 'flex' : 'none';
+      }
+    };
   }
 
   cartUpdateUnsubscriber = undefined;
 
   connectedCallback() {
-    this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
-      if (event.source === 'cart-items') {
-        return;
-      }
-      this.onCartUpdate();
-    });
+    console.log('CartItems connected');
+    try {
+      this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+        console.log('Cart update event received:', event);
+        this.onCartUpdate();
+      });
+      console.log('Successfully subscribed to cart updates');
+    } catch (error) {
+      console.error('Error subscribing to cart updates:', error);
+    }
   }
 
   disconnectedCallback() {
@@ -87,6 +180,25 @@ class CartItems extends HTMLElement {
   }
 
   onCartUpdate() {
+    console.log('onCartUpdate called');
+    
+    fetch(`${routes.cart_url}.js`)
+      .then(response => response.json())
+      .then(cart => {
+        console.log('Cart data received:', cart);
+        const cartCountElements = document.querySelectorAll('#cart-count');
+        console.log('Found cart count elements:', cartCountElements.length);
+        cartCountElements.forEach(element => {
+          element.textContent = cart.item_count;
+        });
+
+        const cartIcon = document.getElementById('cart-icon');
+        if (cartIcon) {
+          cartIcon.style.display = cart.item_count > 0 ? 'flex' : 'none';
+        }
+      })
+      .catch(error => console.error('Error fetching cart:', error));
+
     if (this.tagName === 'CART-DRAWER-ITEMS') {
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
         .then((response) => response.text())
@@ -159,6 +271,9 @@ class CartItems extends HTMLElement {
       })
       .then((state) => {
         const parsedState = JSON.parse(state);
+        
+        this.updateCartCount(parsedState.item_count);
+
         const quantityElement =
           document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
         const items = document.querySelectorAll('.cart-item');

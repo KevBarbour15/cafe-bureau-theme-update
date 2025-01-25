@@ -80,7 +80,7 @@
       </div>
     </div>
   </item-slider>
-  <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-150 tw-ease-in-out tw-py-sm'>
+  <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-300 tw-ease-in-out tw-py-sm'>
     {% if product.title != blank or product.price != blank %}
       <div class='tw-flex tw-flex-col tw-gap-sm tw-uppercase'>
         <p class='p2'>{{ product.title }}</p>
@@ -94,13 +94,13 @@
         >
           <p class='p1'>Colors</p>
           <div
-            class='down-icon tw-transition-all tw-duration-150'
+            class='down-icon tw-transition-all tw-duration-300'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
         >
           {% render 'color-swatches',
             product: product,
@@ -119,13 +119,13 @@
         >
           <p class='p1'>Sizes</p>
           <div
-            class='down-icon tw-transition-all tw-duration-150'
+            class='down-icon tw-transition-all tw-duration-300'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
         >
           {% render 'size-swatches',
             product: product,
@@ -144,13 +144,13 @@
         >
           <p class='p1'>Description</p>
           <div
-            class='down-icon tw-transition-all tw-duration-150'
+            class='down-icon tw-transition-all tw-duration-300'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
         >
           <p class='p1'>{{ product.description | strip_html }}</p>
         </div>
@@ -161,13 +161,13 @@
         >
           <p class='p1'>Product Details</p>
           <div
-            class='down-icon tw-transition-all tw-duration-150'
+            class='down-icon tw-transition-all tw-duration-300'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-150 tw-ease-in-out p1'
+          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out p1'
         >
           {{ product.metafields.custom.product_details | newline_to_br }}
         </div>

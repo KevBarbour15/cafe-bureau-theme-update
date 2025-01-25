@@ -4,7 +4,7 @@
   media='print'
   onload="this.media='all'"
 >
-<script src='{{ 'cart-notification.js' | asset_url }}' defer='defer'></script>
+<script src='{{ 'cart.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
 {% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-8 ' %}
@@ -155,27 +155,22 @@
       >
         <div
           id='cart-icon'
-          class='tw-border tw-hidden tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[16px] tw-md:tw-h-[20px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px]'
+          class='tw-hidden tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden'
         >
-          <p class='tw-text-lg  tw-text-center tw-leading-none '>
-            {{- cart.item_count -}}
-          </p>
+       
+            <p class='tw-text-lg tw-text-center '>
+              <span id='cart-count'>{{- cart.item_count -}}</span>
+            </p>
+      
         </div>
         <span id='cart-arrow' class='tw-opacity-0'>
-          {%- render 'right-arrow', style: cart_arrow_styles, size: 20 -%}
+          {%- render 'right-arrow', style: cart_arrow_styles, size: 24 -%}
         </span>
-        <span class='tw-text-lg tw-uppercase md:tw-text-2xl tw-leading-[0.5]'>Cart</span>
+        <span class='p2 tw-uppercase'>Cart</span>
       </a>
     </div>
   </header>
 </menu-overlay>
-
-{%- if settings.cart_type == 'notification' -%}
-  {%- render 'cart-notification',
-    color_scheme: section.settings.color_scheme,
-    desktop_menu_type: section.settings.menu_type_desktop
-  -%}
-{%- endif -%}
 
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
