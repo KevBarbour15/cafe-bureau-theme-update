@@ -42,12 +42,8 @@
       {% if article.metafields.custom.image_list_1.value != blank %}
         <div class='md:tw-flex md:tw-gap-md'>
           {% for image in article.metafields.custom.image_list_1.value %}
-            <div class='card tw-mb-md' style='opacity: 0;'>
-              {{
-                image
-                | image_url: width: 1000
-                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
-              }}
+            <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
+              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
             </div>
           {% endfor %}
         </div>
@@ -66,12 +62,8 @@
       {% if article.metafields.custom.image_list_2.value != blank %}
         <div class='md:tw-flex md:tw-gap-md'>
           {% for image in article.metafields.custom.image_list_2.value %}
-            <div class='card tw-mb-md' style='opacity: 0;'>
-              {{
-                image
-                | image_url: width: 1000
-                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
-              }}
+            <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
+              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
             </div>
           {% endfor %}
         </div>
@@ -88,14 +80,10 @@
       {% endif %}
 
       {% if article.metafields.custom.image_list_3.value != blank %}
-        <div class='md:tw-flex md:tw-gap-md'>
+        <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
           {% for image in article.metafields.custom.image_list_3.value %}
             <div class='card tw-mb-md' style='opacity: 0;'>
-              {{
-                image
-                | image_url: width: 1000
-                | image_tag: class: 'tw-w-auto tw-h-full tw-object-cover tw-object-center'
-              }}
+              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
             </div>
           {% endfor %}
         </div>

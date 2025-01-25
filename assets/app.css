@@ -1474,6 +1474,10 @@ video {
     width: 50vh;
   }
 
+  .md\:tw-flex-1 {
+    flex: 1 1 0%;
+  }
+
   .md\:tw-flex-row {
     flex-direction: row;
   }
