@@ -27,15 +27,14 @@
     <script defer src='https://unpkg.com/embla-carousel/embla-carousel.umd.js'></script>
     <script defer src='https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js'></script>
     <script defer src='https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js'></script>
-
+    <script src='{{ 'update-cart-count.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'constants.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'pubsub.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'details-disclosure.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'details-modal.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'search-form.js' | asset_url }}' defer='defer'></script>
-    <script defer src='{{ 'item-slider.js' | asset_url }}'></script>
-
+    <script src='{{ 'item-slider.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'gsap.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'DrawSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'MorphSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
@@ -372,5 +371,7 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src='{{ 'cart-drawer.js' | asset_url }}' defer='defer'></script>
     {%- endif -%}
+
+    
   </body>
 </html>

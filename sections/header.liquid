@@ -4,12 +4,11 @@
   media='print'
   onload="this.media='all'"
 >
-<script src='{{ 'cart.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-8 ' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm md:tw-px-md ' %}
 {% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
-{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer tw-z-[200]' %}
+{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
 
 {% if request.page_type == 'index' %}
@@ -74,22 +73,22 @@
       <div
         id='menu'
         style='clip-path: polygon(-100% 0%, 0% 0%, 0% 100%, -100% 100%)'
-        class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[100] md:tw-w-[50vh] tw-p-lg tw-bg-black'
+        class='tw-h-dvh tw-top-0 tw-fixed tw-w-screen tw-left-0 tw-z-[100] md:tw-w-[50vh] tw-bg-black'
       >
         <ul
-          class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-8 tw-h-full'
+          class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-sm md:tw-left-md tw-h-full'
         >
           {% for link in linklists[section.settings.menu].links %}
             <li class='menu-link'>
               <a
-                class='tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer h3'
+                class='tw-inline-flex tw-items-center tw-justify-center tw-gap-x-sm tw-cursor-pointer'
                 href='{{ link.url }}'
                 aria-label='Navigate to {{ link.title | strip_html }}'
                 {% if link.current %}
                   aria-current='page'
                 {% endif %}
               >
-                <span style='color: white;' class='menu-link-text '>{{ link.title }}</span>
+                <span style='color: white;' class='menu-link-text h2'>{{ link.title }}</span>
                 <span class='menu-link-arrow tw-opacity-0' aria-hidden='true'>
                   {%- render 'right-arrow', style: 'tw-fill-white', size: 28 -%}
                 </span>
@@ -155,13 +154,16 @@
       >
         <div
           id='cart-icon'
-          class='tw-hidden tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden'
+          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden'
         >
-       
-            <p class='tw-text-lg tw-text-center '>
-              <span id='cart-count'>{{- cart.item_count -}}</span>
-            </p>
-      
+          <update-cart-count>
+            <span
+              id='cart-count'
+              class='tw-text-lg tw-text-center tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2'
+            >
+              {{- cart.item_count -}}
+            </span>
+          </update-cart-count>
         </div>
         <span id='cart-arrow' class='tw-opacity-0'>
           {%- render 'right-arrow', style: cart_arrow_styles, size: 24 -%}
