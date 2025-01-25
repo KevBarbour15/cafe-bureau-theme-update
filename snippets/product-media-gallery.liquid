@@ -3,7 +3,7 @@
 <div class='tw-h-full tw-z-[1] tw-pt-sm'>
   {{ here }}
   {% if active_variant.metafields.custom.variant_product_video != blank %}
-    <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
+    <div class='tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
       <video
         src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
         autoplay
@@ -16,7 +16,7 @@
   {% endif %}
 
   {% if active_variant.metafields.custom.variant_front_image != blank %}
-    <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
+    <div class='tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
       <img
         src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
         alt='{{ product.title }}'
@@ -28,7 +28,7 @@
   {% endif %}
 
   {% if active_variant.metafields.custom.variant_rear_image != blank %}
-    <div class='card tw-w-full tw-h-auto tw-relative ' style='aspect-ratio: 4/5;'>
+    <div class='tw-w-full tw-h-auto tw-relative ' style='aspect-ratio: 4/5;'>
       <img
         src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
         alt='{{ product.title }}'
