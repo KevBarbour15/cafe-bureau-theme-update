@@ -16,6 +16,8 @@
       "settings": {
         "home_page_header_logo": "shopify://shop_images/cafe-bureau-white.png",
         "header_logo": "shopify://shop_images/cafe-bureau-black.png",
+        "cafe_header_logo": "shopify://shop_images/cafe-bureau-white.png",
+        "cafe_header": "shopify://shop_images/Top_of_gate.png",
         "menu": "dropdown-menu",
         "collection_menu": "collection-filter"
       }
