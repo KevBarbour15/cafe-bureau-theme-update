@@ -1476,5 +1476,16 @@
         "info": "Used when sharing your home page and other pages that don't have a specific image"
       }
     ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default share image",
+        "info": "Shown when sharing a link if no other image is available. Should be at least 1200 x 630px."
+      }
+    ]
   }
 ]

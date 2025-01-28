@@ -1,84 +1,88 @@
 <script src='{{ 'gate-animation.js' | asset_url }}' defer></script>
 
-<div class='tw-relative tw-text-black'>
-  {% if section.settings.gate_overlay_desktop != blank %}
-    <gate-animation>
-      <div
-        id='gate-overlay'
-        class='tw-fixed tw-top-0 tw-left-0 tw-w-auto tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
-      >
-        <img
-          src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
-          alt='{{ section.settings.gate_overlay_desktop.alt }}'
-          class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
-          width=''
-          height=''
+<opacity-reveal>
+  <div class='tw-relative tw-text-black'>
+    {% if section.settings.gate_overlay_desktop != blank %}
+      <gate-animation>
+        <div
+          id='gate-overlay'
+          class='tw-fixed tw-top-0 tw-left-0 tw-w-auto tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
         >
-      </div>
-    </gate-animation>
-  {% endif %}
-  <div class='tw-border-t tw-border-black tw-mt-[100px]'>
-    {% if section.settings.splash_image != blank
-      or section.settings.cafe_home_heading != blank
-      or section.settings.cafe_home_text != blank
-    %}
-      {% if section.settings.splash_image != blank %}
-        <div class='tw-w-screen md:tw-mt-0 md:tw-absolute md:tw-left-0 md:tw-w-1/2 md:tw-h-[calc(100vh-100px)]'>
           <img
-            src='{{ section.settings.splash_image | img_url: "master" }}'
-            alt='{{ section.settings.splash_image.alt }}'
-            class='tw-h-auto tw-w-full md:tw-h-full tw-object-cover tw-object-center'
+            src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
+            alt='{{ section.settings.gate_overlay_desktop.alt }}'
+            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
             width=''
             height=''
           >
         </div>
-      {% endif %}
-      <div class='tw-block md:tw-flex md:tw-min-h-[calc(100vh-100px)] tw-container'>
-        <div class='tw-hidden md:tw-block md:tw-basis-1/2'></div>
-        <div class='tw-flex tw-flex-col md:tw-basis-1/2 tw-items-center tw-justify-between tw-py-md md:tw-pl-md'>
-          <div >
-            {% if section.settings.cafe_home_heading != blank %}
-              <p class='tw-text-center tw-font-tangerineBold tw-mb-md tw-text-[32px] tw-leading-none md:tw-text-[64px]'>
-                {{ section.settings.cafe_home_heading | newline_to_br }}
-              </p>
-            {% endif %}
-            {% if section.settings.cafe_home_text != blank %}
-              <p class='tw-text-left tw-mb-md tw-text-pretty p3'>
-                {{ section.settings.cafe_home_text | newline_to_br }}
-              </p>
+      </gate-animation>
+    {% endif %}
+    <div class='tw-border-t tw-border-black tw-mt-[100px]'>
+      {% if section.settings.splash_image != blank
+        or section.settings.cafe_home_heading != blank
+        or section.settings.cafe_home_text != blank
+      %}
+        {% if section.settings.splash_image != blank %}
+          <div
+            class='card tw-w-screen md:tw-mt-0 md:tw-absolute md:tw-left-0 md:tw-w-1/2 md:tw-h-[calc(100vh-100px)]'
+            style='opacity: 0;'
+          >
+            <img
+              src='{{ section.settings.splash_image | img_url: "master" }}'
+              alt='{{ section.settings.splash_image.alt }}'
+              class='tw-h-auto tw-w-full md:tw-h-full tw-object-cover tw-object-center'
+              width=''
+              height=''
+            >
+          </div>
+        {% endif %}
+        <div class='card tw-block md:tw-flex md:tw-min-h-[calc(100vh-100px)] tw-container' style='opacity: 0;'>
+          <div class='tw-hidden md:tw-block md:tw-basis-1/2'></div>
+          <div class='tw-flex tw-flex-col md:tw-basis-1/2 tw-items-center tw-justify-between tw-py-md md:tw-pl-md'>
+            <div>
+              {% if section.settings.cafe_home_heading != blank %}
+                <p class='tw-text-center tw-font-tangerineBold tw-mb-md tw-text-[32px] tw-leading-none md:tw-text-[64px]'>
+                  {{ section.settings.cafe_home_heading | newline_to_br }}
+                </p>
+              {% endif %}
+              {% if section.settings.cafe_home_text != blank %}
+                <p class='tw-text-left tw-mb-md tw-text-pretty p3'>
+                  {{ section.settings.cafe_home_text | newline_to_br }}
+                </p>
+              {% endif %}
+            </div>
+            {% if section.settings.cafe_hours != blank
+              or section.settings.cafe_location != blank
+              or section.settings.cafe_location_url != blank
+            %}
+              <div class='tw-flex tw-justify-between tw-w-full'>
+                {% if section.settings.cafe_hours != blank %}
+                  <div class='tw-flex tw-flex-col tw-gap-2 tw-text-left'>
+                    <p class='p2 tw-uppercase'>Hours:</p>
+                    <p class='p2'>{{ section.settings.cafe_hours | newline_to_br }}</p>
+                  </div>
+                {% endif %}
+                <div class='tw-flex tw-flex-col tw-justify-end'>
+                  {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
+                    {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
+                      <a
+                        href='{{ section.settings.cafe_location_url }}'
+                        class='tw-text-right tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
+                      >
+                        {{- section.settings.cafe_location | newline_to_br -}}
+                      </a>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
             {% endif %}
           </div>
-          {% if section.settings.cafe_hours != blank
-            or section.settings.cafe_location != blank
-            or section.settings.cafe_location_url != blank
-          %}
-            <div class='tw-flex tw-justify-between tw-w-full'>
-              {% if section.settings.cafe_hours != blank %}
-                <div class='tw-flex tw-flex-col tw-gap-2 tw-text-left'>
-                  <p class='p2 tw-uppercase'>Hours:</p>
-                  <p class='p2'>{{ section.settings.cafe_hours | newline_to_br }}</p>
-                </div>
-              {% endif %}
-              <div class='tw-flex tw-flex-col tw-justify-end'>
-                {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
-                  {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
-                    <a
-                      href='{{ section.settings.cafe_location_url }}'
-                      class='tw-text-right tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
-                    >
-                      {{- section.settings.cafe_location | newline_to_br -}}
-                    </a>
-                  {% endif %}
-                {% endif %}
-              </div>
-            </div>
-          {% endif %}
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
-</div>
-
+</opacity-reveal>
 {% schema %}
 {
   "name": "Main Cafe Media Banner",
