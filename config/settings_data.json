@@ -123,6 +123,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "default_social_image": "shopify://shop_images/082022_CafeBureau_Grandpa_464.jpg",
+    "share_image": "shopify://shop_images/082022_CafeBureau_Grandpa_464.jpg",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
