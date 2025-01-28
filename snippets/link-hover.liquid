@@ -3,13 +3,14 @@
 {% assign text_style = text_style %}
 {% assign arrow_style = arrow_style %}
 {% assign arrow_size = arrow_size | default: 20 %}
+{% assign is_url = is_url | default: false %}
 
 <script src='{{ 'link-hover.js' | asset_url }}' defer='defer' type='module'></script>
 
 <link-hover-effect>
   <a
     class='hover-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-relative'
-    href='{{ link.url }}'
+    href='{% if is_url %}{{ link }}{% else %}{{ link.url }}{% endif %}'
     aria-label='Navigate to {{ link_cta | default: link.title }}'
     {% if link.current %}
       aria-current='page'

@@ -399,3 +399,62 @@ if (!customElements.get('cart-note')) {
     }
   );
 }
+
+// Add this to your cart update handling code
+async function updateQuantity(event) {
+  const quantity = event.target.value;
+  const id = event.target.dataset.quantityVariantId;
+  
+  try {
+    const response = await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: id,
+        quantity: quantity
+      })
+    });
+
+    const cart = await response.json();
+    
+    // Update cart total
+    const cartTable = document.querySelector('.cart-items');
+    if (cartTable) {
+      cartTable.dataset.cartTotal = cart.total_price;
+    }
+    
+    // Update line item price
+    const linePrice = cart.items.find(item => item.variant_id === parseInt(id))?.final_line_price;
+    if (linePrice) {
+      const linePriceElement = event.target.closest('tr').querySelector('.cart-item__price-wrapper .price--end');
+      if (linePriceElement) {
+        linePriceElement.innerHTML = formatMoney(linePrice);
+      }
+    }
+    
+    // Clear any error messages
+    const errorElement = document.querySelector(`#Line-item-error-${event.target.dataset.index}`);
+    if (errorElement) {
+      errorElement.querySelector('.cart-item__error-text').textContent = '';
+      errorElement.classList.remove('active');
+    }
+
+  } catch (error) {
+    console.error('Error updating cart:', error);
+    const errorElement = document.querySelector(`#Line-item-error-${event.target.dataset.index}`);
+    if (errorElement) {
+      errorElement.querySelector('.cart-item__error-text').textContent = 'Error updating cart';
+      errorElement.classList.add('active');
+    }
+  }
+}
+
+// Helper function to format money (adjust according to your shop's currency format)
+function formatMoney(cents) {
+  return (cents/100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD' // Change this to your shop's currency
+  });
+}
