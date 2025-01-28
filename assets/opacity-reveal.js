@@ -16,7 +16,7 @@ class OpacityReveal extends HTMLElement {
         delay: 0.15,
         scrollTrigger: {
           trigger: card,
-          start: "top 85%",
+          start: "top 90%",
           toggleActions: "play none none none",
         }
       });

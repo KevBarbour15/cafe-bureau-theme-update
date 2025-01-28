@@ -8,7 +8,7 @@
 
 {% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm md:tw-px-md tw-box-border' %}
 {% assign hamburger_style = 'tw-w-[22px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
-{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer' %}
+{% assign cart_link_style = 'tw-inline-flex tw-items-center tw-gap-x-1 tw-cursor-pointer' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
 
 {% if request.page_type == 'index' %}
@@ -154,7 +154,7 @@
       >
         <div
           id='cart-icon'
-          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-translate-x-[20px] tw-overflow-hidden tw-text-black {% if request.page_type == 'index' or request.path == '/pages/cafe' %} tw-bg-white {% else %} tw-bg-[#5ffcf9] {% endif %} '
+          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] tw-aspect-square tw-w-full tw-relative tw-translate-x-[20px] tw-overflow-hidden tw-text-black {% if request.page_type == 'index' or request.path == '/pages/cafe' %} tw-bg-white {% else %} tw-bg-[#5ffcf9] {% endif %} '
         >
           <update-cart-count>
             <span
@@ -168,7 +168,7 @@
         <span id='cart-arrow' class='tw-opacity-0'>
           {%- render 'right-arrow', style: cart_arrow_styles, size: 20 -%}
         </span>
-        <span class='p1 tw-uppercase'>Cart</span>
+        <span class='p2 tw-uppercase'>Cart</span>
       </a>
     </div>
   </header>
