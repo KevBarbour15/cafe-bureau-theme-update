@@ -1,13 +1,12 @@
-<script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
 <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
 <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+<script src='{{ 'product-variant-selector.js' | asset_url }}' type='module' defer='defer'></script>
 
-
-
+<opacity-reveal>
   <product-info
     data-section='{{ section.id }}'
     data-product-id='{{ product.id }}'
-    data-update-url='true'
+    data-update-url='false'
     data-url='{{ product.url }}'
     data-variants='{{ product.variants | json }}'
   >
@@ -69,8 +68,9 @@
       %}
     </div>
   </product-info>
+</opacity-reveal>
 
-  {% schema %}
+{% schema %}
 {
   "name": "Product",
   "tag": "section",
@@ -85,5 +85,4 @@
     }
   ]
 }
-  {% endschema %}
-
+{% endschema %}

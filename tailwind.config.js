@@ -22,7 +22,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        heading: 'var(--font-heading-family)',
+        tangerine: ['Tangerine', 'serif'],
+        tangerineBold: ['Tangerine-Bold', 'serif']
       },
 
       colors: {

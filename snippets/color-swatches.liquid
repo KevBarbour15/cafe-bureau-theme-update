@@ -18,41 +18,46 @@
   {% endfor %}
 {% endfor %}
 
-<color-swatches-component>
-  <div class='tw-flex tw-flex-wrap tw-gap-6 tw-items-center '>
-    {% for color in color_options.values %}
-      {% for variant in product.variants %}
-        {% if variant.option1 == active_size or variant.option2 == active_size %}
-          {% if variant.option1 == color or variant.option2 == color %}
-            {% assign swatch_color = '' %}
-            {% if variant.metafields.custom.swatch_color_hex_code != blank %}
-              {% assign swatch_color = variant.metafields.custom.swatch_color_hex_code %}
-            {% else %}
-              {% assign swatch_color = color %}
-            {% endif %}
-            {% if variant == active_variant %}
-              <span
-                style='background-color: {{ swatch_color }}; border-radius:  0px;'
-                class='tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
-                aria-hidden='true'
-              >
-              </span>
-            {% else %}
-              <label class='color-swatch tw-cursor-pointer'>
-                <a href='{{ product.url }}?variant={{ variant.id }}'>
-                  <span
-                    style='background-color: {{ swatch_color }}; border-radius: 50px;'
-                    class='color-swatch-border tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
-                    aria-hidden='true'
-                  >
-                  </span>
-                </a>
-              </label>
-            {% endif %}
+<product-variant-selector>
+  <color-swatches>
+    <div class='tw-flex tw-flex-wrap tw-gap-6 tw-items-center'>
+      {% for color in color_options.values %}
+        {% assign variant_for_color = null %}
+        {% for variant in product.variants %}
+          {% if variant.option1 == color and variant.option2 == active_size %}
+            {% assign variant_for_color = variant %}
             {% break %}
+          {% elsif variant.option2 == color and variant.option1 == active_size %}
+            {% assign variant_for_color = variant %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+
+        {% if variant_for_color %}
+          {% assign swatch_color = variant_for_color.metafields.custom.swatch_color_hex_code | default: color %}
+
+          {% if variant_for_color.id == active_variant.id %}
+            <span
+              style='background-color: {{ swatch_color }}; border-radius: 0px;'
+              class='tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
+              aria-hidden='true'
+            ></span>
+          {% else %}
+            <a
+              href='{{ product.url }}?variant={{ variant_for_color.id }}'
+              class='color-swatch tw-cursor-pointer'
+              data-variant-id='{{ variant_for_color.id }}'
+              data-available='{{ variant_for_color.available }}'
+            >
+              <span
+                style='background-color: {{ swatch_color }}; border-radius: 50px;'
+                class='color-swatch-border tw-block tw-border tw-h-14 tw-w-14 tw-border-solid tw-border-black'
+                aria-hidden='true'
+              ></span>
+            </a>
           {% endif %}
         {% endif %}
       {% endfor %}
-    {% endfor %}
-  </div>
-</color-swatches-component>
+    </div>
+  </color-swatches>
+</product-variant-selector>

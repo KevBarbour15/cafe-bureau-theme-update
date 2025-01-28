@@ -10,8 +10,20 @@
 {
   "sections": {
     "main": {
-      "type": "main-cafe-section",
-      "settings": {}
+      "type": "main-cafe-media-banner",
+      "presets": [
+        {
+          "name": "Main Cafe Media Banner",
+          "category": "Custom",
+          "settings": {
+            "cafe_home_heading": "Owner Operated.\n~ By Creatives, For Creatives~",
+            "cafe_home_text": "Inspired by the arts, music, and, culture we design clothes for the everyday people that keep every city creative, inspired, and on the move.\n\nOur flagship in the heart of Williamsburg is the manifestation of building community one relationship at a time with the goal to be a conduit for creativity for all the amazing people in our community. Stop by during regular store hours of during one of our many events.",
+            "cafe_hours": "Monday: 7:30-5\nFriday: 7:30-5\nSaturday: 9-6\nSunday: 9-6",
+            "cafe_location": "251 Grand St.\nBrooklyn, NY 11211",
+            "cafe_location_url": "https://www.google.com/maps/dir//251+Grand+St,+Brooklyn,+NY+11211/@40.7135518,-74.0410098,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x89c2594c4968555d:0xf161f5f306d16029!2m2!1d-73.9586226!2d40.7135423?entry=ttu&g_ep=EgoyMDI1MDEyMi4wIKXMDSoASAFQAw%3D%3D"
+          }
+        }
+      ]
     }
   },
   "order": [

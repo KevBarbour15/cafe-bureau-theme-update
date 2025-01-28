@@ -8,46 +8,39 @@
 
 <script src='{{ 'size-swatches.js' | asset_url }}' type='module' defer='defer'></script>
 
-<size-swatches-component>
-  <div class='tw-flex tw-flex-wrap tw-gap-sm tw-items-center'>
-    {% for size in size_options.values %}
-      {% for variant in product.variants %}
-        {% if variant.option1 == active_color or variant.option2 == active_color %}
-          {% if variant.option1 == size or variant.option2 == size %}
-            {% if variant == active_variant %}
-              {% if variant.available %}
-                <span
-                  aria-hidden='true'
-                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-bg-black tw-text-white p2'
-                >
-                  {{- size -}}
-                </span>
-              {% else %}
-                <span
-                  aria-hidden='true'
-                  class='tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-text-gray-500 p2'
-                >
-                  {{- size -}}
-                </span>
-              {% endif %}
-              {% break %}
-            {% else %}
-              <label class='size-swatch tw-cursor-pointer'>
-                <a href='{{ product.url }}?variant={{ variant.id }}'>
-                  <span
-                    style='border-radius: 50px; background-color: white; color: black;'
-                    aria-hidden='true'
-                    class='size-swatch-border tw-inline-flex tw-items-center tw-justify-center tw-px-[10px] tw-h-14 tw-min-w-14 tw-border tw-border-solid tw-border-black tw-leading-none p2'
-                  >
-                    {{ size }}
-                  </span>
-                </a>
-              </label>
-            {% endif %}
+<product-variant-selector data-current-variant='{{ active_variant.id }}'>
+  <script>
+    console.log("active_variant", {{ active_variant.id }})
+  </script>
+  <size-swatches-component>
+    <div class='tw-flex tw-flex-wrap tw-gap-sm tw-items-center'>
+      {% for size in size_options.values %}
+        {% assign variant_for_size = null %}
+        {% for variant in product.variants %}
+          {% if variant.option1 == active_color and variant.option2 == size %}
+            {% assign variant_for_size = variant %}
+            {% break %}
+          {% elsif variant.option2 == active_color and variant.option1 == size %}
+            {% assign variant_for_size = variant %}
             {% break %}
           {% endif %}
+        {% endfor %}
+
+        {% if variant_for_size %}
+          <button
+            type='button'
+            class='size-swatch p2 tw-border tw-border-black tw-min-w-14 tw-h-14 tw-flex tw-items-center tw-justify-center tw-px-2 tw-py-1 tw-cursor-pointer'
+            data-variant-id='{{ variant_for_size.id }}'
+            data-available='{{ variant_for_size.available }}'
+            style='border-radius: 50px;'
+            {% unless variant_for_size.available %}
+              disabled
+            {% endunless %}
+          >
+            {{ size }}
+          </button>
         {% endif %}
       {% endfor %}
-    {% endfor %}
-  </div>
-</size-swatches-component>
+    </div>
+  </size-swatches-component>
+</product-variant-selector>

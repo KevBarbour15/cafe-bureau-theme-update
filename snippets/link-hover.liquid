@@ -8,7 +8,7 @@
 
 <link-hover-effect>
   <a
-    class='hover-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer'
+    class='hover-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-relative'
     href='{{ link.url }}'
     aria-label='Navigate to {{ link_cta | default: link.title }}'
     {% if link.current %}
@@ -16,7 +16,7 @@
     {% endif %}
   >
     <span class='hover-link-text {{ text_style }}'>{{ link_cta | default: link.title }}</span>
-    <span class='hover-link-arrow' style='display: none;' aria-hidden='true'>
+    <span class='hover-link-arrow tw-absolute tw-left-full tw-ml-0' style='display: none;' aria-hidden='true'>
       {% render 'right-arrow', style: '{{ arrow_style }}', size: arrow_size %}
     </span>
   </a>

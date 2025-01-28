@@ -1,37 +1,40 @@
 {%- if article and article != empty -%}
-  <div>
-    <div class='tw-w-full tw-h-auto tw' style='aspect-ratio: 5/6;'>
-      {% if article.image != blank %}
-        <a class='tw-pointer' href='{{ article.url }}'>
-          <img
-            src='{{ article.image | img_url: 'master' }}'
-            alt='{{ article.title }}'
-            class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-            width='100%'
-            height='auto'
-          >
+  <div class='tw-w-full tw-h-auto ' style='aspect-ratio: 5/6;'>
+    {% if article.image != blank %}
+      <a class='tw-pointer' href='{{ article.url }}'>
+        <img
+          src='{{ article.image | img_url: 'master' }}'
+          alt='{{ article.title }}'
+          class='tw-w-full tw-h-full tw-object-cover tw-object-center'
+          width='100%'
+          height='auto'
+        >
+      </a>
+    {% endif %}
+  </div>
+  {% if article.title != blank or article.published_at != blank %}
+    <div class='tw-flex tw-flex-col tw-gap-xs tw-pt-xs tw-mt-xs md:tw-pt-sm md:tw-mt-sm tw-flex-1 tw-items-center tw-justify-center tw-w-full tw-border-t tw-border-black tw-text-black'>
+      {% if article.title != blank %}
+        <a
+          class='p2 tw-uppercase tw-text-wrap md:hover:tw-underline tw-transition-all tw-underline-offset-4 tw-duration-300 tw-ease-in-out tw-text-center'
+          href='{{ article.url }}'
+        >
+          <span class='tw-leading-none'>{{- article.title -}}</span>
         </a>
       {% endif %}
+      {% if article.metafields.custom.post_date != blank %}
+        <p class='tw-text-center caption tw-uppercase tw-leading-none'>
+          {{ article.metafields.custom.post_date }}
+        </p>
+      {% elsif article.metafields.custom.event_date != blank %}
+        <p class='tw-text-center caption tw-uppercase tw-leading-none'>
+          {{ article.metafields.custom.event_date }}
+        </p>
+      {% elsif article.published_at != blank %}
+        <p class='tw-text-center caption tw-uppercase tw-leading-none'>
+          {{- article.published_at | date: '%B %d, %Y' -}}
+        </p>
+      {% endif %}
     </div>
-    {% if article.title != blank or article.published_at != blank %}
-      <div class='tw-flex tw-flex-col tw-gap-xs tw-pt-sm tw-mt-sm tw-flex-1 tw-items-center tw-justify-center tw-w-full tw-border-t tw-border-black'>
-        {% if article.title != blank %}
-          <a
-            class='p2 tw-text-black tw-uppercase tw-truncate md:hover:tw-underline tw-transition-all tw-duration-300 tw-ease-in-out tw-text-center'
-            href='{{ article.url }}'
-          >
-            <span class='tw-leading-none'>{{- article.title -}}</span>
-          </a>
-        {% endif %}
-        {% if article.metafields.custom.post_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{ article.metafields.custom.post_date }}</p>
-        {% elsif article.metafields.custom.event_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{ article.metafields.custom.event_date }}</p>
-        {% elsif article.published_at != blank %}
-          <p class='tw-text-center p1 tw-uppercase tw-leading-none'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-    <div></div>
-  </div>
+  {% endif %}
 {%- endif -%}

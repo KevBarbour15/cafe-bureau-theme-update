@@ -1,0 +1,140 @@
+<accordion-component>
+  <div class='tw-w-screen tw-border-t tw-border-black tw-text-black'>
+    <div class='tw-container tw-py-md tw-flex tw-flex-col-reverse md:tw-flex-row '>
+      <div class='tw-w-full'>
+        {% if section.settings.heading != blank %}
+          <h2 class='tw-text-center tw-mb-sm md:tw-mb-md tw-leading-none tw-font-tangerineBold tw-text-[32px] md:tw-text-[48px]'>
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class='tw-text-center  p3 tw-mb-md tw-text-pretty'>
+            {{ section.settings.subheading }}
+          </p>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class='tw-flex tw-flex-col'>
+            {% for block in section.blocks %}
+              {% if block.settings.event_title != blank or block.settings.event_date != blank %}
+                <div class='accordion-header tw-cursor-pointer tw-flex tw-flex-row tw-pb-sm tw-justify-between tw-border-b tw-mt-sm tw-border-black tw-uppercase tw-items-end'>
+                  <div class='tw-flex tw-flex-col'>
+                    <p class='p3 tw-text-balance'>
+                      {{ block.settings.event_title }}
+                    </p>
+                    <p class='p2'>{{ block.settings.event_date }}</p>
+                    <p class='p2'>{{ block.settings.event_time }}</p>
+                  </div>
+                  <div
+                    class='down-icon tw-justify-self-end'
+                  >
+                    {% render 'down-arrow', size: 24 %}
+                  </div>
+                </div>
+                <div
+                  class='accordion-content tw-pr-sm md:tw-pr-md'
+                >
+                  <div class='tw-flex tw-flex-col md:tw-flex-row'>
+                    {% if block.settings.event_image != blank %}
+                      <img
+                        src='{{ block.settings.event_image | img_url: "master" }}'
+                        alt='{{ block.settings.event_image.alt }}'
+                        class='tw-w-auto tw-object-cover tw-object-center tw-max-h-[500px]'
+                        width=''
+                        height=''
+                      >
+                    {% endif %}
+                    {% if block.settings.event_description != blank %}
+                      <p class='tw-text-pretty p2'>{{ block.settings.event_description }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      {% if section.settings.hero_image != blank %}
+        <div class='tw-basis-1/2 tw-m-auto md:tw-px-md '>
+          <img
+            src='{{ section.settings.hero_image | img_url: "master" }}'
+            alt='{{ section.settings.hero_image.alt }}'
+            class='tw-w-full tw-h-full tw-object-cover tw-object-center tw-max-h-[80dvh]'
+            width=''
+            height=''
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</accordion-component>
+
+{% schema %}
+{
+  "name": "Main Cafe Upcoming Events",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Upcoming Events"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event Block",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event Title",
+          "default": "Event Title"
+        },
+        {
+          "type": "text",
+          "id": "event_time",
+          "label": "Event Time"
+        },
+        {
+          "type": "text",
+          "id": "event_date",
+          "label": "Event Date"
+        },
+        {
+          "type": "richtext",
+          "id": "event_description",
+          "label": "Event Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "event_image",
+          "label": "Event Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Main Cafe Upcoming Events",
+      "blocks": [
+        {
+          "type": "event"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -6,19 +6,19 @@
 >
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm md:tw-px-md ' %}
-{% assign hamburger_style = 'tw-w-[24px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm md:tw-px-md tw-box-border' %}
+{% assign hamburger_style = 'tw-w-[22px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
 {% assign cart_link_style = 'tw-inline-flex tw-items-center tw-justify-center tw-gap-x-1 tw-cursor-pointer' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
 
 {% if request.page_type == 'index' %}
-  {% assign header_style = header_style | append: ' tw-h-[60px] md:tw-h-[80px] ' %}
+  {% assign header_style = header_style | append: ' tw-h-[60px] md:tw-h-[80px]' %}
   {% assign hamburger_style = hamburger_style | append: ' tw-bg-black' %}
   {% assign cart_link_style = cart_link_style | append: ' tw-text-white' %}
 
 {% elsif request.path == '/pages/cafe' %}
   {% if section.settings.cafe_header != blank %}
-    {% assign header_style = header_style | append: ' tw-h-[100px] ' %}
+    {% assign header_style = header_style | append: ' tw-h-[100px] tw-bg-black' %}
     {% assign hamburger_style = hamburger_style | append: ' tw-bg-white ' %}
     {% assign cart_link_style = cart_link_style | append: ' tw-text-white ' %}
   {% endif %}
@@ -42,14 +42,14 @@
             src='{{ section.settings.cafe_header | img_url: "master" }}'
             alt='Cafe header'
             class='tw-w-full tw-h-full tw-object-center'
-            width='1000'
-            height='1000'
+            width=''
+            height=''
           >
         </div>
       {% endif %}
       <div
         id='hamburger'
-        class='tw-relative tw-w-[24px] tw-h-[15px] tw-cursor-pointer tw-z-[101] {% if request.path != '/pages/cafe' %} tw-mix-blend-exclusion tw-invert {% endif %}'
+        class='tw-relative tw-w-[22px] tw-h-[15px] tw-cursor-pointer tw-z-[101] {% if request.path != '/pages/cafe' %} tw-mix-blend-exclusion tw-invert {% endif %}'
       >
         <div
           id='hamburger-bar-1'
@@ -90,7 +90,7 @@
               >
                 <span style='color: white;' class='menu-link-text h2'>{{ link.title }}</span>
                 <span class='menu-link-arrow tw-opacity-0' aria-hidden='true'>
-                  {%- render 'right-arrow', style: 'tw-fill-white', size: 28 -%}
+                  {%- render 'right-arrow', style: 'tw-fill-white', size: 32 -%}
                 </span>
               </a>
             </li>
@@ -102,7 +102,7 @@
         {% if section.settings.home_page_header_logo != blank %}
           <a
             href='/'
-            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[51]'
           >
             <img
               src='{{ section.settings.home_page_header_logo | img_url: "master" }}'
@@ -118,7 +118,7 @@
         {% if section.settings.cafe_header_logo != blank %}
           <a
             href='/'
-            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[101]'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[51]'
           >
             <img
               src='{{ section.settings.cafe_header_logo | img_url: "master" }}'
@@ -133,7 +133,7 @@
         {% if section.settings.header_logo != blank %}
           <a
             href='/'
-            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer'
+            class='tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-cursor-pointer tw-z-[51]'
           >
             <img
               src='{{ section.settings.header_logo | img_url: "master" }}'
@@ -148,13 +148,13 @@
 
       <a
         href='{{ routes.cart_url }}'
-        class='{{ cart_link_style }}'
+        class='{{ cart_link_style }} tw-z-[51]'
         id='cart-link'
         aria-label='View shopping cart'
       >
         <div
           id='cart-icon'
-          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-bg-[#5ffcf9] tw-translate-x-[20px] tw-overflow-hidden {% if request.page_type == 'index' %} tw-bg-white tw-text-black {% else %} tw-bg-[#5ffcf9] {% endif %} '
+          class='tw-flew tw-border tw-border-transparent tw-items-center tw-justify-center tw-rounded-full tw-h-[20px] md:tw-h-[24px] tw-aspect-square tw-w-full tw-relative tw-translate-x-[20px] tw-overflow-hidden tw-text-black {% if request.page_type == 'index' or request.path == '/pages/cafe' %} tw-bg-white {% else %} tw-bg-[#5ffcf9] {% endif %} '
         >
           <update-cart-count>
             <span
@@ -166,9 +166,9 @@
           </update-cart-count>
         </div>
         <span id='cart-arrow' class='tw-opacity-0'>
-          {%- render 'right-arrow', style: cart_arrow_styles, size: 24 -%}
+          {%- render 'right-arrow', style: cart_arrow_styles, size: 20 -%}
         </span>
-        <span class='p2 tw-uppercase'>Cart</span>
+        <span class='p1 tw-uppercase'>Cart</span>
       </a>
     </div>
   </header>

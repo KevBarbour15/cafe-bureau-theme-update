@@ -83,8 +83,8 @@
   <div class='tw-container tw-flex tw-flex-col tw-h-auto tw-transition-all tw-duration-300 tw-ease-in-out tw-py-sm'>
     {% if product.title != blank or product.price != blank %}
       <div class='tw-flex tw-flex-col tw-gap-sm tw-uppercase'>
-        <p class='p2'>{{ product.title }}</p>
-        <p class='p2'>{{ product.price | money }}</p>
+        <p class=''>{{ product.title }}</p>
+        <p class=''>{{ product.price | money }}</p>
       </div>
     {% endif %}
     <accordion-component>
@@ -92,15 +92,15 @@
         <div
           class=' accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-mt-md tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p1 tw-uppercase'>Colors</p>
+          <p class='p2 tw-uppercase'>Color</p>
           <div
-            class='down-icon tw-transition-all tw-duration-300'
+            class='down-icon'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
+          class='accordion-content tw-pr-sm md:tw-pr-md'
         >
           {% render 'color-swatches',
             product: product,
@@ -117,15 +117,15 @@
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p1 tw-uppercase'>Sizes</p>
+          <p class='p2 tw-uppercase'>Size</p>
           <div
-            class='down-icon tw-transition-all tw-duration-300'
+            class='down-icon'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
+          class='accordion-content tw-pr-sm md:tw-pr-md'
         >
           {% render 'size-swatches',
             product: product,
@@ -142,7 +142,7 @@
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p1 tw-uppercase'>Description</p>
+          <p class='p2 tw-uppercase'>Description</p>
           <div
             class='down-icon tw-transition-all tw-duration-300'
           >
@@ -150,24 +150,24 @@
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out'
+          class='accordion-content tw-pr-sm md:tw-pr-md'
         >
-          <p class='p1'>{{ product.description | strip_html }}</p>
+          <p class='p2'>{{ product.description | strip_html }}</p>
         </div>
       {% endif %}
       {% if product.metafields.custom.product_details != blank %}
         <div
           class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
         >
-          <p class='p1 tw-uppercase'>Product Details</p>
+          <p class='tw-uppercase p2'>Details</p>
           <div
-            class='down-icon tw-transition-all tw-duration-300'
+            class='down-icon'
           >
             {% render 'down-arrow', size: 20 %}
           </div>
         </div>
         <div
-          class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out p1'
+          class='accordion-content tw-pr-sm md:tw-pr-md p2'
         >
           {{ product.metafields.custom.product_details | newline_to_br }}
         </div>

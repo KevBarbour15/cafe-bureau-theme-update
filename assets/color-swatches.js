@@ -31,4 +31,4 @@ class ColorSwatches extends HTMLElement {
   }
 }
 
-customElements.define('color-swatches-component', ColorSwatches);
+customElements.define('color-swatches', ColorSwatches);

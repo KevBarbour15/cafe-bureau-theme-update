@@ -9,6 +9,8 @@
 
     {%- if settings.favicon != blank -%}
       <link rel='icon' type='image/png' href='{{ settings.favicon | image_url: width: 32, height: 32 }}'>
+      <link rel='apple-touch-icon' href='{{ settings.favicon | image_url: width: 180, height: 180 }}'>
+      <link rel='mask-icon' href='{{ settings.favicon | image_url }}' color='{{ settings.color_accent }}'>
     {%- endif -%}
 
     <title>
@@ -22,8 +24,40 @@
       <meta name='description' content='{{ page_description | escape }}'>
     {% endif %}
 
-    {% render 'meta-tags' %}
+    <!-- Open Graph / Facebook -->
+    <meta property='og:type' content='{% if template contains 'product' %}product{% else %}website{% endif %}'>
+    <meta property='og:title' content='{{ page_title | escape }}'>
+    {% if page_description %}
+      <meta property='og:description' content='{{ page_description | escape }}'>
+    {% endif %}
+    <meta property='og:url' content='{{ canonical_url }}'>
+    <meta property='og:site_name' content='{{ shop.name }}'>
+    {% if template contains 'product' and product.featured_media %}
+      <meta property='og:image' content='{{ product.featured_media | img_url: 'large' }}'>
+    {% elsif settings.share_image %}
+      <meta property='og:image' content='{{ settings.share_image | img_url: 'large' }}'>
+    {% endif %}
 
+    <!-- Twitter -->
+    <meta name='twitter:card' content='summary_large_image'>
+    <meta name='twitter:title' content='{{ page_title | escape }}'>
+    {% if page_description %}
+      <meta name='twitter:description' content='{{ page_description | escape }}'>
+    {% endif %}
+    {% if template contains 'product' and product.featured_media %}
+      <meta name='twitter:image' content='{{ product.featured_media | img_url: 'large' }}'>
+    {% elsif settings.share_image %}
+      <meta name='twitter:image' content='{{ settings.share_image | img_url: 'large' }}'>
+    {% endif %}
+
+    <!-- Additional SEO -->
+    {% if template == 'index' %}
+      <meta name='robots' content='index, follow'>
+    {% endif %}
+
+    {% render 'meta-tags' %}
+    
+    <script src='{{ 'gsap.min.js' | asset_url }}' defer='defer'></script>
     <script defer src='https://unpkg.com/embla-carousel/embla-carousel.umd.js'></script>
     <script defer src='https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js'></script>
     <script defer src='https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js'></script>
@@ -35,12 +69,13 @@
     <script src='{{ 'details-modal.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'search-form.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'item-slider.js' | asset_url }}' defer='defer'></script>
-    <script src='{{ 'gsap.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'DrawSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'MorphSVGPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'ScrambleTextPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'SplitText.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'ScrollTrigger.min.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
+    <script src='{{ 'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
         gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, ScrambleTextPlugin, SplitText, ScrollTrigger);
@@ -371,7 +406,5 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src='{{ 'cart-drawer.js' | asset_url }}' defer='defer'></script>
     {%- endif -%}
-
-    
   </body>
 </html>

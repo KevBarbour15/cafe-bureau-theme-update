@@ -2,15 +2,15 @@
 
 {% assign page_styling = '' %}
 {% if section.settings.subheader_enabled %}
-  {% assign page_styling = 'tw-pt-[100px] md:tw-pb-lg md:tw-pt-[120px]' %}
+  {% assign page_styling = 'tw-pt-[100px] tw-pb-md md:tw-pt-[120px]' %}
 {% else %}
-  {% assign page_styling = 'tw-pt-[60px] md:tw-pb-lg md:tw-pt-[80px]' %}
+  {% assign page_styling = 'tw-pt-[60px] tw-pb-md md:tw-pt-[80px]' %}
 {% endif %}
 
 <opacity-reveal>
   {%- paginate blog.articles by 6 -%}
     <div class=' tw-min-h-dvh tw-container {{ page_styling }}'>
-      <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md lg:tw-gap-lg tw-pt-lg'>
+      <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md tw-pt-md'>
         {%- for article in blog.articles -%}
           <div class='card' style='opacity: 0;'>
             {%- render 'article-card', article: article -%}

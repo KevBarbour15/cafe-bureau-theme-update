@@ -1,34 +1,80 @@
 <script src='{{ 'gate-animation.js' | asset_url }}' defer></script>
 
-<gate-animation>
-  <div class='tw-min-h-dvh tw-relative tw-w-screen tw-h-full'>
-    {% if section.settings.gate_overlay_desktop != blank and section.settings.cafe_home_image_desktop != blank %}
-      <div class='tw-absolute tw-top-0 tw-left-0 tw-w-screen tw-h-full'>
-        <div
-          id='gate-overlay'
-          class='tw-absolute tw-top-0 tw-left-0 tw-w-auto tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+<div class='tw-relative md:tw-min-h-dvh'>
+  {% if section.settings.gate_overlay_desktop != blank %}
+    <gate-animation>
+      <div
+        id='gate-overlay'
+        class='tw-fixed tw-top-0 tw-left-0 tw-w-auto tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+      >
+        <img
+          src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
+          alt='{{ section.settings.gate_overlay_desktop.alt }}'
+          class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+          width=''
+          height=''
         >
-          <img
-            src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
-            alt='{{ section.settings.gate_overlay_desktop.alt }}'
-            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
-            width='1000'
-            height='1000'
-          >
-        </div>
-        <div class='tw-h-dvh tw-w-full'>
-          <img
-            src='{{ section.settings.cafe_home_image_desktop | img_url: "master" }}'
-            alt='{{ section.settings.cafe_home_image_desktop.alt }}'
-            class='tw-w-screen tw-h-dvh tw-object-cover tw-object-center'
-            width='1000'
-            height='1000'
-          >
-        </div>
+      </div>
+    </gate-animation>
+  {% endif %}
+  {% if section.settings.splash_image != blank
+    or section.settings.cafe_home_heading != blank
+    or section.settings.cafe_home_text != blank
+  %}
+    {% if section.settings.splash_image != blank %}
+      <div class='tw-mt-[100px] tw-w-screen md:tw-mt-0 md:tw-absolute md:tw-top-[100px] md:tw-left-0 md:tw-w-1/2 md:tw-h-[calc(100vh-100px)] tw-bg-black'>
+        <img
+          src='{{ section.settings.splash_image | img_url: "master" }}'
+          alt='{{ section.settings.splash_image.alt }}'
+          class='tw-h-auto tw-w-full md:tw-h-full tw-object-cover tw-object-center'
+          width=''
+          height=''
+        >
       </div>
     {% endif %}
-  </div>
-</gate-animation>
+    <div class='md:tw-pt-[100px] tw-block md:tw-flex md:tw-min-h-dvh tw-container'>
+      <div class='tw-hidden md:tw-block md:tw-basis-1/2'></div>
+      <div class='tw-flex tw-flex-col md:tw-basis-1/2 tw-items-center tw-py-md md:tw-pl-md'>
+        {% if section.settings.cafe_home_heading != blank %}
+          <p class='tw-text-center tw-font-tangerineBold tw-mb-sm tw-text-[32px] tw-leading-none md:tw-text-[48px]'>
+            {{ section.settings.cafe_home_heading | newline_to_br }}
+          </p>
+        {% endif %}
+        {% if section.settings.cafe_home_text != blank %}
+          <p class='tw-text-left tw-mb-md tw-text-pretty'>
+            {{ section.settings.cafe_home_text | newline_to_br }}
+          </p>
+        {% endif %}
+        {% if section.settings.cafe_hours != blank
+          or section.settings.cafe_location != blank
+          or section.settings.cafe_location_url != blank
+        %}
+          <div class='tw-flex tw-justify-between tw-w-full'>
+            {% if section.settings.cafe_hours != blank %}
+              <div class='tw-flex tw-flex-col tw-gap-2  tw-text-left'>
+                <p class='caption'>Hours:</p>
+                <p class='p1'>{{ section.settings.cafe_hours | newline_to_br }}</p>
+              </div>
+            {% endif %}
+            <div class='tw-flex tw-flex-col tw-justify-end'>
+              {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
+                {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
+                  <a
+                    href='{{ section.settings.cafe_location_url }}'
+                    class='tw-text-right caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300'
+                  >
+                    {{- section.settings.cafe_location | newline_to_br -}}
+                  </a>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
 {% schema %}
 {
   "name": "Main Cafe Media Banner",
@@ -47,13 +93,37 @@
     },
     {
       "type": "image_picker",
-      "id": "cafe_home_image_desktop",
-      "label": "Cafe Home Image Desktop"
+      "id": "splash_image",
+      "label": "Cafe Splash Image"
     },
     {
-      "type": "image_picker",
-      "id": "cafe_home_image_mobile",
-      "label": "Cafe Home Image Mobile"
+      "type": "textarea",
+      "id": "cafe_home_heading",
+      "label": "Cafe Home Heading",
+      "default": "Owner Operated.\n~ By Creatives, For Creatives~"
+    },
+    {
+      "type": "textarea",
+      "id": "cafe_home_text",
+      "label": "Cafe Home Text",
+      "default": "Inspired by the arts, music, and, culture we design clothes for the everyday people that keep every city creative, inspired, and on the move.\n\nOur flagship in the heart of Williamsburg is the manifestation of building community one relationship at a time with the goal to be a conduit for creativity for all the amazing people in our community. Stop by during regular store hours of during one of our many events."
+    },
+    {
+      "type": "textarea",
+      "id": "cafe_hours",
+      "label": "Cafe Hours",
+      "default": "Monday: 7:30-5\nFriday: 7:30-5\nSaturday: 9-6\nSunday: 9-6"
+    },
+    {
+      "type": "textarea",
+      "id": "cafe_location",
+      "label": "Cafe Location",
+      "default": "251 Grand St.\nBrooklyn, NY 11211"
+    },
+    {
+      "type": "url",
+      "id": "cafe_location_url",
+      "label": "Cafe Location URL"
     }
   ],
   "presets": [

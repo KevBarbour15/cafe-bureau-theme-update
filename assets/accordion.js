@@ -10,9 +10,13 @@ class Accordion extends HTMLElement {
     this.downIcon = this.querySelectorAll('.down-icon');
 
     this.content.forEach(content => {
-      content.style.maxHeight = '0';
-      content.style.opacity = '0';
-      content.style.overflow = 'hidden';
+      content.classList.add('tw-hidden');
+      gsap.set(content, {
+        maxHeight: 0,
+        opacity: 0,
+        overflow: 'hidden',
+        padding: '0px 0px'
+      });
     });
 
     this.header.forEach((header, idx) => {
@@ -39,35 +43,66 @@ class Accordion extends HTMLElement {
     const content = this.content[idx];
     const icon = this.downIcon[idx];
 
-    content.style.maxHeight = '0';
-    content.style.opacity = '0';
-    content.style.overflow = 'hidden';
-    icon.style.transform = 'rotateX(0deg)';
+    const timeline = gsap.timeline()
+      .to(content, {
+        maxHeight: 0,
+        opacity: 0,
+        padding: '0px 0px',
+        overflow: 'hidden',
+        duration: 0.3,
+        ease: 'sine.inOut'
+      })
+      .to(icon, {
+        rotation: 0,
+        duration: 0.3,
+        ease: 'sine.inOut'
+      }, '<');
 
     setTimeout(() => {
       content.classList.add('tw-hidden');
-    }, 5);
-
-    setTimeout(() => {
-      content.style.padding = '0px 0px';
-    }, 100);
+    }, 300);
   }
 
   openAccordion(idx) {
     const content = this.content[idx];
     const icon = this.downIcon[idx];
-
-     setTimeout(() => {
-      content.style.padding = '8px 0px';
-    }, 5);
-    setTimeout(() => {
-      content.classList.remove('tw-hidden');
-    }, 50);
-    content.style.overflow = 'visible';
-    content.style.maxHeight = '100%';
-    content.style.opacity = '1';
-    content.style.borderColor = 'black';
-    icon.style.transform = 'rotateX(180deg)';
+    
+    content.classList.remove('tw-hidden');
+    
+    // Temporarily remove restrictions to measure full height
+    gsap.set(content, {
+      opacity: 0,
+      maxHeight: 'none',
+      overflow: 'visible',
+      padding: '8px 0px'
+    });
+    
+    // Measure the natural height
+    const height = content.offsetHeight;
+    
+    // Reset and animate to measured height
+    gsap.set(content, {
+      maxHeight: 0,
+      opacity: 0,
+      overflow: 'hidden',
+      padding: '0px 0px'
+    });
+    
+    const timeline = gsap.timeline()
+      .to(content, {
+        maxHeight: height,
+        opacity: 1,
+        padding: '8px 0px',
+        overflow: 'visible',
+        duration: 0.3,
+        ease: 'sine.inOut',
+        borderBottom: '1px solid black'
+      }, 0)
+      .to(icon, {
+        rotation: 180,
+        duration: 0.3,
+        ease: 'sine.inOut'
+      }, '<');
   }
 }
 
