@@ -14,7 +14,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "home_page_header_logo": "shopify://shop_images/CB-sitelogowhite_300x_7270b5d0-1437-4580-9bfc-c615cde53f6e.png",
+        "home_page_header_logo": "shopify://shop_images/cafe-bureau-white.png",
         "header_logo": "shopify://shop_images/cafe-bureau-black.png",
         "menu": "dropdown-menu",
         "collection_menu": "collection-filter"
