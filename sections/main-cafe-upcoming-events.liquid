@@ -37,7 +37,7 @@
                   <div
                     class='accordion-content tw-pr-sm md:tw-pr-md'
                   >
-                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-gap-md'>
+                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-py-sm md:tw-gap-lg'>
                       {% if block.settings.event_image != blank %}
                         <img
                           src='{{ block.settings.event_image | img_url: "master" }}'
@@ -48,9 +48,14 @@
                         >
                       {% endif %}
                       {% if block.settings.event_description != blank %}
-                        <p class='tw-text-pretty p2 {% if block.settings.event_image != blank %} tw-mt-md md:tw-mt-0{% endif %}'>
-                          {{ block.settings.event_description }}
-                        </p>
+                        <div class='tw-flex tw-flex-col'>
+                          <h2 class='tw-font-snell tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-my-md tw-ml-xs'>
+                            {{ block.settings.event_title }}
+                          </h2>
+                          <p class='tw-text-pretty p2'>
+                            {{ block.settings.event_description }}
+                          </p>
+                        </div>
                       {% endif %}
                     </div>
                   </div>

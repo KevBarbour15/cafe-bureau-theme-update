@@ -62,7 +62,7 @@
               {% if section.settings.cafe_hours != blank %}
                 <div class='tw-flex tw-flex-col tw-gap-2 tw-text-left'>
                   <p class='p2 tw-uppercase'>Hours:</p>
-                  <p class='p2'>{{ section.settings.cafe_hours | newline_to_br }}</p>
+                  <p class='caption'>{{ section.settings.cafe_hours | newline_to_br }}</p>
                 </div>
               {% endif %}
               <div class='tw-flex tw-flex-col tw-justify-end'>
@@ -70,7 +70,7 @@
                   {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
                     <a
                       href='{{ section.settings.cafe_location_url }}'
-                      class='tw-text-right tw-uppercase p2 md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
+                      class='tw-text-right tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
                     >
                       {{- section.settings.cafe_location | newline_to_br -}}
                     </a>
@@ -79,7 +79,6 @@
               </div>
             </div>
           {% endif %}
-        </div>
         </div>
       {% endif %}
     </div>

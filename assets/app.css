@@ -689,6 +689,11 @@ video {
   margin-bottom: 24px;
 }
 
+.tw-my-sm {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
 .tw-mb-4 {
   margin-bottom: 1rem;
 }
@@ -747,6 +752,10 @@ video {
 
 .tw-mt-xs {
   margin-top: 8px;
+}
+
+.tw-ml-xxs {
+  margin-left: 4px;
 }
 
 .tw-box-border {
@@ -1065,6 +1074,10 @@ video {
   gap: 8px;
 }
 
+.tw-gap-lg {
+  gap: 32px;
+}
+
 .tw-gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -1238,6 +1251,10 @@ video {
   padding: 24px;
 }
 
+.tw-p-sm {
+  padding: 16px;
+}
+
 .tw-px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1350,6 +1367,10 @@ video {
   padding-top: 8px;
 }
 
+.tw-pl-xxs {
+  padding-left: 4px;
+}
+
 .tw-text-left {
   text-align: left;
 }
@@ -1384,6 +1405,14 @@ video {
   line-height: 1.75rem;
 }
 
+.tw-text-\[24px\] {
+  font-size: 24px;
+}
+
+.tw-text-\[2px\] {
+  font-size: 2px;
+}
+
 .tw-uppercase {
   text-transform: uppercase;
 }
@@ -1404,6 +1433,10 @@ video {
 .tw-text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.tw-text-\[px\] {
+  color: px;
 }
 
 .tw-underline {
@@ -1502,6 +1535,11 @@ video {
     margin-bottom: 32px;
   }
 
+  .md\:tw-my-md {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
   .md\:tw-mb-lg {
     margin-bottom: 32px;
   }
@@ -1520,6 +1558,10 @@ video {
 
   .md\:tw-mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:tw-mt-md {
+    margin-top: 24px;
   }
 
   .md\:tw-block {
@@ -1594,6 +1636,10 @@ video {
     gap: 24px;
   }
 
+  .md\:tw-gap-lg {
+    gap: 32px;
+  }
+
   .md\:tw-px-0 {
     padding-left: 0px;
     padding-right: 0px;
@@ -1612,6 +1658,11 @@ video {
   .md\:tw-py-md {
     padding-top: 24px;
     padding-bottom: 24px;
+  }
+
+  .md\:tw-py-sm {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
   .md\:tw-pb-lg {
@@ -1642,6 +1693,10 @@ video {
     padding-top: 16px;
   }
 
+  .md\:tw-font-snell {
+    font-family: Snell Roundhand, serif;
+  }
+
   .md\:tw-text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -1666,6 +1721,10 @@ video {
 
   .md\:tw-text-\[28px\] {
     font-size: 28px;
+  }
+
+  .md\:tw-text-\[32px\] {
+    font-size: 32px;
   }
 
   .md\:tw-transition-all {
