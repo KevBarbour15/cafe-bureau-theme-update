@@ -53,7 +53,7 @@
                             {{ block.settings.event_title }}
                           </h2>
                           <p class='p2'>
-                            {{ block.settings.event_description | strip_html }}
+                            {{ block.settings.event_description | newline_to_br }}
                           </p>
                         </div>
                       {% endif %}
