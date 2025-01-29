@@ -19,9 +19,32 @@
         "cafe_location": "251 Grand St.\nBrooklyn, NY 11211",
         "cafe_location_url": "https://www.google.com/maps?rlz=1C5CHFA_enUS791US791&gs_lcrp=EgZjaHJvbWUqFQgBEC4YJxivARjHARiABBiKBRiOBTIGCAAQRRg7MhUIARAuGCcYrwEYxwEYgAQYigUYjgUyEwgCEC4YgwEYxwEYsQMY0QMYgAQyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRg80gEIMzI0MGowajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KV1VaElMWcKJMSlg0Qbz9WHx&daddr=251+Grand+St,+Brooklyn,+NY+11211"
       }
+    },
+    "main_cafe_upcoming_events_JrXjPY": {
+      "type": "main-cafe-upcoming-events",
+      "blocks": {
+        "event_kEbYjy": {
+          "type": "event",
+          "settings": {
+            "event_title": "Mary Chun: “Achilles” Ceramic Art Show",
+            "event_time": "7pm - 11pm",
+            "event_date": "February 8, 2025",
+            "event_description": "",
+            "event_image": "shopify://shop_images/image0.png"
+          }
+        }
+      },
+      "block_order": [
+        "event_kEbYjy"
+      ],
+      "settings": {
+        "heading": "Upcoming Events",
+        "subheading": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "main_cafe_upcoming_events_JrXjPY"
   ]
 }
