@@ -14,6 +14,7 @@
       "settings": {
         "splash_image": "shopify://shop_images/082022_CafeBureau_Grandpa_464.jpg",
         "cafe_home_heading": "Owner Operated.\n~ By Creatives, For Creatives~",
+        "cafe_home_subheading": "Owner Operated: By Creatives, For Creatives",
         "cafe_home_text": "Inspired by the arts, music, and, culture we design clothes for the everyday people that keep every city creative, inspired, and on the move.\n\n\n\nOur flagship in the heart of Williamsburg is the manifestation of building community one relationship at a time with the goal to be a conduit for creativity for all the amazing people in our community. Stop by during regular store hours of during one of our many events.",
         "cafe_hours": "Monday: 7:30-5\nFriday: 7:30-5\nSaturday: 9-6\nSunday: 9-6",
         "cafe_location": "251 Grand St.\nBrooklyn, NY 11211",
@@ -29,7 +30,7 @@
             "event_title": "Mary Chun: “Achilles” Ceramic Art Show",
             "event_time": "7pm - 11pm",
             "event_date": "February 8, 2025",
-            "event_description": "",
+            "event_description": "<p>Creating this series started as a way to cope while recovering from a ruptured Achilles injury. 'Achilles' is a collection of ceramic pieces inspired by my Korean heritage and familiar skate obstacles and objects found around the city I places where l've made the best memories both eating shit and celebrating new makes.</p>",
             "event_image": "shopify://shop_images/image0.png"
           }
         },
