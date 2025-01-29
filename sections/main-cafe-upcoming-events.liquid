@@ -17,7 +17,7 @@
           <div class='tw-flex tw-flex-col'>
             {% for block in section.blocks %}
               {% if block.settings.event_title != blank or block.settings.event_date != blank %}
-                <div class='accordion-header tw-cursor-pointer tw-flex tw-flex-row tw-pb-sm tw-justify-between tw-border-b tw-mt-sm tw-border-black tw-uppercase tw-items-end'>
+                <div class='{% if block.settings.event_description != blank or block.settings.event_image != blank %} accordion-header tw-cursor-pointer{% endif %} tw-flex tw-flex-row tw-pb-sm tw-justify-between tw-border-b tw-mt-sm tw-border-black tw-uppercase tw-items-end'>
                   <div class='tw-flex tw-flex-col'>
                     <p class='p3 tw-text-balance'>
                       {{ block.settings.event_title }}
@@ -25,30 +25,36 @@
                     <p class='p2'>{{ block.settings.event_date }}</p>
                     <p class='p2'>{{ block.settings.event_time }}</p>
                   </div>
+                  {% if block.settings.event_description != blank or block.settings.event_image != blank %}
+                    <div
+                      class='down-icon tw-justify-self-end'
+                    >
+                      {% render 'down-arrow', size: 24 %}
+                    </div>
+                  {% endif %}
+                </div>
+                {% if block.settings.event_description != blank or block.settings.event_image != blank %}
                   <div
-                    class='down-icon tw-justify-self-end'
+                    class='accordion-content tw-pr-sm md:tw-pr-md'
                   >
-                    {% render 'down-arrow', size: 24 %}
+                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-gap-md'>
+                      {% if block.settings.event_image != blank %}
+                        <img
+                          src='{{ block.settings.event_image | img_url: "master" }}'
+                          alt='{{ block.settings.event_image.alt }}'
+                          class='tw-w-auto tw-object-cover tw-object-center tw-max-h-[400px]'
+                          width=''
+                          height=''
+                        >
+                      {% endif %}
+                      {% if block.settings.event_description != blank %}
+                        <p class='tw-text-pretty p2 {% if block.settings.event_image != blank %} tw-mt-md md:tw-mt-0{% endif %}'>
+                          {{ block.settings.event_description }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </div>
-                </div>
-                <div
-                  class='accordion-content tw-pr-sm md:tw-pr-md'
-                >
-                  <div class='tw-flex tw-flex-col md:tw-flex-row'>
-                    {% if block.settings.event_image != blank %}
-                      <img
-                        src='{{ block.settings.event_image | img_url: "master" }}'
-                        alt='{{ block.settings.event_image.alt }}'
-                        class='tw-w-auto tw-object-cover tw-object-center tw-max-h-[500px]'
-                        width=''
-                        height=''
-                      >
-                    {% endif %}
-                    {% if block.settings.event_description != blank %}
-                      <p class='tw-text-pretty p2'>{{ block.settings.event_description }}</p>
-                    {% endif %}
-                  </div>
-                </div>
+                {% endif %}
               {% endif %}
             {% endfor %}
           </div>

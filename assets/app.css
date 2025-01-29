@@ -857,6 +857,30 @@ video {
   max-height: 80dvh;
 }
 
+.tw-max-h-\[50px\] {
+  max-height: 50px;
+}
+
+.tw-max-h-\[5px\] {
+  max-height: 5px;
+}
+
+.tw-max-h-\[px\] {
+  max-height: px;
+}
+
+.tw-max-h-\[4px\] {
+  max-height: 4px;
+}
+
+.tw-max-h-\[40px\] {
+  max-height: 40px;
+}
+
+.tw-max-h-\[400px\] {
+  max-height: 400px;
+}
+
 .tw-min-h-dvh {
   min-height: 100dvh;
 }
@@ -1269,6 +1293,11 @@ video {
   padding-bottom: 8px;
 }
 
+.tw-py-xxs {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 .tw-pb-\[100\%\] {
   padding-bottom: 100%;
 }
@@ -1443,6 +1472,18 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (min-width: 420px) {
+  .sm\:tw-text-\[20px\] {
+    font-size: 20px;
+  }
+
+  @media (min-width: 767px) {
+    .sm\:md\:tw-text-\[24px\] {
+      font-size: 24px;
+    }
+  }
+}
+
 @media (min-width: 767px) {
   .md\:tw-left-md {
     left: 24px;
@@ -1475,6 +1516,10 @@ video {
 
   .md\:tw-mt-sm {
     margin-top: 16px;
+  }
+
+  .md\:tw-mt-0 {
+    margin-top: 0px;
   }
 
   .md\:tw-block {
@@ -1613,6 +1658,14 @@ video {
 
   .md\:tw-text-\[48px\] {
     font-size: 48px;
+  }
+
+  .md\:tw-text-\[2px\] {
+    font-size: 2px;
+  }
+
+  .md\:tw-text-\[28px\] {
+    font-size: 28px;
   }
 
   .md\:tw-transition-all {
