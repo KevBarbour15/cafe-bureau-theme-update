@@ -11,7 +11,7 @@ class GateAnimation  extends HTMLElement {
       y: '-100vh',
      ease: "sine.inOut",
       delay: 1.25, 
-      duration: 1.75,
+      duration: 1.25,
 
       onComplete: () => {
         this.gateOverlay.style.display = 'none';

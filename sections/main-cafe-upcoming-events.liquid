@@ -42,18 +42,18 @@
                         <img
                           src='{{ block.settings.event_image | img_url: "master" }}'
                           alt='{{ block.settings.event_image.alt }}'
-                          class='tw-w-auto tw-object-cover tw-object-center tw-max-h-[400px]'
+                          class='tw-object-cover tw-object-center tw-max-h-[400px] tw-m-auto'
                           width=''
                           height=''
                         >
                       {% endif %}
                       {% if block.settings.event_description != blank %}
                         <div class='tw-flex tw-flex-col'>
-                          <h2 class='tw-font-snell tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-my-md tw-ml-xs'>
+                          <h2 class='tw-font-snell tw-text-balance tw-capitalize tw-text-center tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-mt-0 md:tw-mb-md'>
                             {{ block.settings.event_title }}
                           </h2>
-                          <p class='tw-text-pretty p2'>
-                            {{ block.settings.event_description }}
+                          <p class='p2'>
+                            {{ block.settings.event_description | strip_html }}
                           </p>
                         </div>
                       {% endif %}
@@ -65,17 +65,6 @@
           </div>
         {% endif %}
       </div>
-      {% if section.settings.hero_image != blank %}
-        <div class='tw-basis-1/2 tw-m-auto md:tw-px-md '>
-          <img
-            src='{{ section.settings.hero_image | img_url: "master" }}'
-            alt='{{ section.settings.hero_image.alt }}'
-            class='tw-w-full tw-h-full tw-object-cover tw-object-center tw-max-h-[80dvh]'
-            width=''
-            height=''
-          >
-        </div>
-      {% endif %}
     </div>
   </div>
 </accordion-component>
