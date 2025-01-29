@@ -46,17 +46,19 @@ class Accordion extends HTMLElement {
     const timeline = gsap.timeline()
       .to(content, {
         maxHeight: 0,
-        opacity: 0,
         padding: '0px 0px',
         overflow: 'hidden',
         duration: 0.3,
-        ease: 'sine.inOut'
+        ease: 'sine.inOut',
       })
       .to(icon, {
         rotation: 0,
         duration: 0.3,
         ease: 'sine.inOut'
-      }, '<');
+      }, '<')
+      .set(content, {
+        opacity: 0
+      });
 
     setTimeout(() => {
       content.classList.add('tw-hidden');
@@ -66,9 +68,9 @@ class Accordion extends HTMLElement {
   openAccordion(idx) {
     const content = this.content[idx];
     const icon = this.downIcon[idx];
-    
+
     content.classList.remove('tw-hidden');
-    
+
     // Temporarily remove restrictions to measure full height
     gsap.set(content, {
       opacity: 0,
@@ -76,10 +78,10 @@ class Accordion extends HTMLElement {
       overflow: 'visible',
       padding: '8px 0px'
     });
-    
+
     // Measure the natural height
     const height = content.offsetHeight;
-    
+
     // Reset and animate to measured height
     gsap.set(content, {
       maxHeight: 0,
@@ -87,17 +89,21 @@ class Accordion extends HTMLElement {
       overflow: 'hidden',
       padding: '0px 0px'
     });
-    
+
     const timeline = gsap.timeline()
       .to(content, {
         maxHeight: height,
-        opacity: 1,
         padding: '8px 0px',
         overflow: 'visible',
         duration: 0.3,
         ease: 'sine.inOut',
         borderBottom: '1px solid black'
       }, 0)
+      .to(content, {
+        opacity: 1,
+        duration: 0.15,
+        ease: 'sine.out'
+      }, 0.2)
       .to(icon, {
         rotation: 180,
         duration: 0.3,

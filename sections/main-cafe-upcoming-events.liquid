@@ -42,7 +42,7 @@
                         <img
                           src='{{ block.settings.event_image | img_url: "master" }}'
                           alt='{{ block.settings.event_image.alt }}'
-                          class='tw-object-cover tw-object-center tw-max-h-[400px] tw-m-auto'
+                          class='tw-w-full md:tw-w-auto tw-object-cover tw-object-center md:tw-max-h-[400px] tw-m-auto'
                           width=''
                           height=''
                         >
@@ -53,7 +53,7 @@
                             {{ block.settings.event_title }}
                           </h2>
                           <p class='p2'>
-                            {{ block.settings.event_description | newline_to_br }}
+                            {{ block.settings.event_description | strip_html }}
                           </p>
                         </div>
                       {% endif %}
