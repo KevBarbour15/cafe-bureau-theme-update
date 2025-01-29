@@ -32,10 +32,50 @@
             "event_description": "",
             "event_image": "shopify://shop_images/image0.png"
           }
+        },
+        "event_eJUKp8": {
+          "type": "event",
+          "settings": {
+            "event_title": "Killer Pool Event",
+            "event_time": "7pm - 11pm",
+            "event_date": "February 19, 2025",
+            "event_description": ""
+          }
+        },
+        "event_MAHRxy": {
+          "type": "event",
+          "settings": {
+            "event_title": "Event Title",
+            "event_time": "",
+            "event_date": "",
+            "event_description": ""
+          }
+        },
+        "event_QPPHzB": {
+          "type": "event",
+          "settings": {
+            "event_title": "Event Title",
+            "event_time": "",
+            "event_date": "",
+            "event_description": ""
+          }
+        },
+        "event_9ja7xy": {
+          "type": "event",
+          "settings": {
+            "event_title": "Event Title",
+            "event_time": "",
+            "event_date": "",
+            "event_description": ""
+          }
         }
       },
       "block_order": [
-        "event_kEbYjy"
+        "event_kEbYjy",
+        "event_eJUKp8",
+        "event_MAHRxy",
+        "event_QPPHzB",
+        "event_9ja7xy"
       ],
       "settings": {
         "heading": "Upcoming Events",
