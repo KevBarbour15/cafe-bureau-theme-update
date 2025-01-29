@@ -74,10 +74,20 @@
         "heading": "Upcoming Events",
         "subheading": ""
       }
+    },
+    "main_cafe_programming_slider_xxPr7D": {
+      "type": "main-cafe-programming-slider",
+      "settings": {
+        "heading": "Past Events",
+        "blog": "past-events",
+        "blog_link": "shopify://blogs/past-events",
+        "blog_link_cta": "view all events"
+      }
     }
   },
   "order": [
     "main",
-    "main_cafe_upcoming_events_JrXjPY"
+    "main_cafe_upcoming_events_JrXjPY",
+    "main_cafe_programming_slider_xxPr7D"
   ]
 }
