@@ -23,7 +23,8 @@ module.exports = {
     extend: {
       fontFamily: {
         tangerine: ['Tangerine', 'serif'],
-        tangerineBold: ['Tangerine-Bold', 'serif']
+        tangerineBold: ['Tangerine-Bold', 'serif'],
+        snell: ['Snell Roundhand', 'serif'],
       },
 
       colors: {
