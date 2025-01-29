@@ -12,6 +12,27 @@
     "main": {
       "type": "main-cafe-media-banner",
       "blocks": {
+        "cafe_hours_EK3bcp": {
+          "type": "cafe_hours",
+          "settings": {
+            "day": "Monday",
+            "hours": "9:00 AM - 5:00 PM"
+          }
+        },
+        "cafe_hours_UakGaG": {
+          "type": "cafe_hours",
+          "settings": {
+            "day": "Monday",
+            "hours": "9:00 AM - 5:00 PM"
+          }
+        },
+        "cafe_hours_mF8aWD": {
+          "type": "cafe_hours",
+          "settings": {
+            "day": "Friday",
+            "hours": "7:30AM - 5:00PM"
+          }
+        },
         "cafe_hours_Mgkbzp": {
           "type": "cafe_hours",
           "settings": {
@@ -21,6 +42,9 @@
         }
       },
       "block_order": [
+        "cafe_hours_EK3bcp",
+        "cafe_hours_UakGaG",
+        "cafe_hours_mF8aWD",
         "cafe_hours_Mgkbzp"
       ],
       "settings": {
