@@ -60,16 +60,16 @@
           %}
             <div class='tw-flex tw-justify-between tw-w-full'>
               {% if section.blocks.size > 0 %}
-                <div class='tw-flex tw-flex-col'>
+                <dl class='tw-flex tw-flex-col'>
                   {% for block in section.blocks %}
                     {% if block.type == 'cafe_hours' %}
                       <div class='tw-flex tw-gap-xs tw-justify-between tw-w-full'>
-                        <p class='caption'>{{ block.settings.day }}:</p>
-                        <p class='caption'>{{ block.settings.hours }}</p>
+                        <dt class='caption'>{{ block.settings.day }}:</dt>
+                        <dd class='caption'>{{ block.settings.hours }}</dd>
                       </div>
                     {% endif %}
                   {% endfor %}
-                </div>
+                </dl>
               {% endif %}
               <div class='tw-flex tw-flex-col tw-justify-end'>
                 {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
