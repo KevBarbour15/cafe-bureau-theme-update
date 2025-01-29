@@ -59,10 +59,16 @@
             or section.settings.cafe_location_url != blank
           %}
             <div class='tw-flex tw-justify-between tw-w-full'>
-              {% if section.settings.cafe_hours != blank %}
-                <div class='tw-flex tw-flex-col tw-gap-2 tw-text-left'>
-                  <p class='p2 tw-uppercase'>Hours:</p>
-                  <p class='caption'>{{ section.settings.cafe_hours | newline_to_br }}</p>
+              {% if section.blocks.size > 0 %}
+                <div class='tw-flex tw-flex-col'>
+                  {% for block in section.blocks %}
+                    {% if block.type == 'cafe_hours' %}
+                      <div class='tw-flex tw-gap-xs tw-justify-between tw-w-full'>
+                        <p class='caption'>{{ block.settings.day }}:</p>
+                        <p class='caption'>{{ block.settings.hours }}</p>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
                 </div>
               {% endif %}
               <div class='tw-flex tw-flex-col tw-justify-end'>
@@ -70,7 +76,7 @@
                   {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
                     <a
                       href='{{ section.settings.cafe_location_url }}'
-                      class='tw-text-right tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
+                      class='{% if section.blocks.size > 0 %}tw-text-right{% endif %} tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
                     >
                       {{- section.settings.cafe_location | newline_to_br -}}
                     </a>
@@ -125,12 +131,6 @@
     },
     {
       "type": "textarea",
-      "id": "cafe_hours",
-      "label": "Cafe Hours",
-      "default": "Monday: 7:30-5\nFriday: 7:30-5\nSaturday: 9-6\nSunday: 9-6"
-    },
-    {
-      "type": "textarea",
       "id": "cafe_location",
       "label": "Cafe Location",
       "default": "251 Grand St.\nBrooklyn, NY 11211"
@@ -139,6 +139,26 @@
       "type": "url",
       "id": "cafe_location_url",
       "label": "Cafe Location URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cafe_hours",
+      "name": "Cafe Hours",
+      "settings": [
+        {
+          "type": "text",
+          "id": "day",
+          "label": "Day",
+          "default": "Monday"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "label": "Hours",
+          "default": "9:00 AM - 5:00 PM"
+        }
+      ]
     }
   ],
   "presets": [
