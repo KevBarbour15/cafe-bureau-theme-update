@@ -854,10 +854,6 @@ video {
   max-height: 0px;
 }
 
-.tw-max-h-\[400px\] {
-  max-height: 400px;
-}
-
 .tw-min-h-dvh {
   min-height: 100dvh;
 }
@@ -1529,11 +1525,6 @@ video {
     width: auto;
   }
 
-  .md\:tw-w-fit {
-    width: -moz-fit-content;
-    width: fit-content;
-  }
-
   .md\:tw-flex-1 {
     flex: 1 1 0%;
   }
@@ -1621,6 +1612,10 @@ video {
 
   .md\:tw-pt-sm {
     padding-top: 16px;
+  }
+
+  .md\:tw-text-right {
+    text-align: right;
   }
 
   .md\:tw-text-2xl {

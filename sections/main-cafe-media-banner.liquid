@@ -58,7 +58,7 @@
             or section.settings.cafe_location != blank
             or section.settings.cafe_location_url != blank
           %}
-            <div class='tw-flex tw-justify-between tw-w-full'>
+            <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between tw-w-full'>
               {% if section.blocks.size > 0 %}
                 <dl class='tw-flex tw-flex-col'>
                   {% for block in section.blocks %}
@@ -71,12 +71,12 @@
                   {% endfor %}
                 </dl>
               {% endif %}
-              <div class='tw-flex tw-flex-col tw-justify-end'>
+              <div class='tw-flex tw-flex-col tw-justify-end tw-mt-md md:tw-mt-0'>
                 {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
                   {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
                     <a
                       href='{{ section.settings.cafe_location_url }}'
-                      class='{% if section.blocks.size > 0 %}tw-text-right{% endif %} tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
+                      class='{% if section.blocks.size > 0 %} tw-text-left md:tw-text-right {% endif %} tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
                     >
                       {{- section.settings.cafe_location | newline_to_br -}}
                     </a>
