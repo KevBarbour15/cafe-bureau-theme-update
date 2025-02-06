@@ -24,6 +24,14 @@
                     </p>
                     <p class='p2'>{{ block.settings.event_date }}</p>
                     <p class='p2'>{{ block.settings.event_time }}</p>
+                    {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
+                      <a
+                        href='{{ block.settings.event_link }}'
+                        class='tw-uppercase tw-underline tw-underline-offset-4 tw-cursor-pointer p2 tw-w-fit'
+                      >
+                        {{ block.settings.event_link_text }}
+                      </a>
+                    {% endif %}
                   </div>
                   {% if block.settings.event_description != blank or block.settings.event_image != blank %}
                     <div
@@ -55,6 +63,14 @@
                           <p class='p2'>
                             {{ block.settings.event_description | strip_html }}
                           </p>
+                          {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
+                            <a
+                              href='{{ block.settings.event_link }}'
+                              class='tw-uppercase caption tw-mt-sm tw-underline tw-underline-offset-4 tw-cursor-pointer'
+                            >
+                              {{ block.settings.event_link_text }}
+                            </a>
+                          {% endif %}
                         </div>
                       {% endif %}
                     </div>
@@ -121,6 +137,16 @@
           "type": "image_picker",
           "id": "event_image",
           "label": "Event Image"
+        },
+        {
+          "type": "text",
+          "id": "event_link_text",
+          "label": "Event Link Text"
+        },
+        {
+          "type": "url",
+          "id": "event_link",
+          "label": "Event Link"
         }
       ]
     }

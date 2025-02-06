@@ -890,6 +890,11 @@ video {
   width: 100vw;
 }
 
+.tw-w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .tw-min-w-14 {
   min-width: 3.5rem;
 }
