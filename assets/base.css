@@ -52,6 +52,23 @@
 
 html {
   overflow-x: hidden;
+  overflow-y: auto;
+  width: calc(100vw + var(--scrollbar-width, 0px));
+}
+
+html::-webkit-scrollbar {
+  width: auto;
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
 body {
@@ -59,6 +76,7 @@ body {
   overflow-x: hidden;
   font-family: var(--global-font);
   font-size: 62.5%;
+  scrollbar-gutter: stable both-edges;
 }
 
 .visually-hidden,
