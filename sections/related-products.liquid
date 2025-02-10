@@ -4,17 +4,19 @@
   data-product-id='{{ product.id }}'
 >
   {% if recommendations.performed and recommendations.products_count > 2 %}
-    <div class='tw-py-lg tw-border-t tw-border-black tw-text-black'>
-      <h2 class='tw-capitalize tw-mb-sm heading tw-text-center '>
-        {{ section.settings.heading }}
-      </h2>
+    <div class='tw-py-md tw-border-t tw-border-black tw-text-black'>
+      {% if section.settings.heading != blank %}
+        <h2 class='tw-capitalize tw-mb-sm heading tw-text-center '>
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
       <div class='md:tw-hidden'>
         <item-slider>
-          <div class='embla !tw-overflow-visible xlg:tw-flex xlg:tw-justify-center'>
+          <div class='embla !tw-overflow-visible xlg:tw-flex xlg:tw-justify-center tw-pl-sm md:tw-pl-0'>
             <div class='embla__container'>
               {% for recommendation in recommendations.products %}
                 <div
-                  class='embla__slide  tw-mx-xs tw-h-auto tw-min-w-[40%] tw-max-w-[315px] !tw-flex-[0_0_40%]'
+                  class='embla__slide tw-mx-xs tw-h-auto tw-min-w-[40%] tw-max-w-[315px] !tw-flex-[0_0_40%]'
                 >
                   {% render 'product-card',
                     product: recommendation,
