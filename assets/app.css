@@ -1431,6 +1431,10 @@ video {
   text-underline-offset: 4px;
 }
 
+.tw-underline-offset-2 {
+  text-underline-offset: 2px;
+}
+
 .tw-opacity-0 {
   opacity: 0;
 }
@@ -1698,6 +1702,10 @@ video {
     font-size: 48px;
   }
 
+  .md\:tw-underline-offset-8 {
+    text-underline-offset: 8px;
+  }
+
   .md\:tw-transition-all {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1726,6 +1734,14 @@ video {
 
   .md\:hover\:tw-underline:hover {
     text-decoration-line: underline;
+  }
+
+  .md\:hover\:tw-underline-offset-4:hover {
+    text-underline-offset: 4px;
+  }
+
+  .md\:hover\:tw-underline-offset-2:hover {
+    text-underline-offset: 2px;
   }
 }
 
