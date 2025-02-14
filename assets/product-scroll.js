@@ -31,6 +31,7 @@ class ProductPageScroll extends HTMLElement {
         trigger: this.imageContainer,
         start: "top top",
         end: "65% top",
+        scrub: 2,
         onUpdate: (self) => {
           if (self.progress >= 1) {
             
