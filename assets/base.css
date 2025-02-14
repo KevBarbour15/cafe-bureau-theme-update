@@ -49,6 +49,10 @@
   --color-secondary-plum: #6e2b62;
 }
 
+* {
+  cursor: none;
+}
+
 
 html {
   overflow-x: hidden;
@@ -71,6 +75,7 @@ html {
   scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -78,6 +83,24 @@ body {
   font-size: 62.5%;
   scrollbar-gutter: stable both-edges;
 }
+
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  width: 40px;
+  height: 40px;
+  transition: transform 350ms ease;
+  transform: translate(-50%, -50%);
+  background-image: url("Water-Drop-Logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  z-index: 1000;
+  mix-blend-mode: difference;
+  filter: invert(1);
+}
+
 
 .visually-hidden,
 .hidden {
