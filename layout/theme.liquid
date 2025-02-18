@@ -303,18 +303,68 @@
     </script>
   </head>
 
-  <body class=''>
+  <body class='cursor-rules'>
     <div class='custom-cursor'></div>
     <script>
       const cursor = document.querySelector('.custom-cursor');
+      const cursorRules = document.querySelector('.cursor-rules');
 
+      // Update cursor position
       document.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
           cursor.style.left = e.clientX + 'px';
           cursor.style.top = e.clientY + 'px';
         });
       });
+
+      // Handle cursor visibility for the entire document
+      document.addEventListener(
+        'mouseenter',
+        () => {
+          cursor.style.opacity = 1;
+        },
+        true
+      );
+
+      document.addEventListener(
+        'mouseleave',
+        () => {
+          cursor.style.opacity = 0;
+        },
+        true
+      );
+
+      // Handle slide cart with a MutationObserver to detect when it's added to DOM
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.addedNodes.length) {
+            const cartDrawer = document.querySelector('#slidecarthq');
+            console.log(cartDrawer);
+            if (cartDrawer) {
+              cartDrawer.addEventListener('mouseenter', () => {
+                cursorRules.classList.remove('cursor-rules');
+                cursor.style.opacity = 0;
+              });
+
+              cartDrawer.addEventListener('mouseleave', () => {
+                cursorRules.classList.add('cursor-rules');
+                cursor.style.opacity = 1;
+              });
+
+              // Once we've found and set up the cart drawer, we can disconnect the observer
+              observer.disconnect();
+            }
+          }
+        });
+      });
+
+      // Start observing the document body for changes
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
     </script>
+
     <a class='skip-to-content-link button visually-hidden' href='#MainContent'>
       {{ 'accessibility.skip_to_text' | t }}
     </a>

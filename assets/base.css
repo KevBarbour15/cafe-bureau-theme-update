@@ -49,9 +49,6 @@
   --color-secondary-plum: #6e2b62;
 }
 
-* {
-  cursor: none;
-}
 
 
 html {
@@ -84,23 +81,27 @@ body {
   scrollbar-gutter: stable both-edges;
 }
 
+.cursor-rules {
+  cursor: none;
+}
+
 .custom-cursor {
   position: fixed;
   pointer-events: none;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   transition: transform 350ms ease;
   transform: translate(-50%, -50%);
-  background-image: url("Water-Drop-Logo.svg");
+  background-image: url("drop.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
-  z-index: 1000;
+  z-index: 1000000;
   mix-blend-mode: difference;
   filter: invert(1);
+  transition: transform 300ms ease-in-out;
 }
-
 
 .visually-hidden,
 .hidden {
