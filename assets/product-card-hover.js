@@ -2,15 +2,21 @@ class ProductCardHover extends HTMLElement {
   constructor() {
     super();
     this.observerCallback = this.observerCallback.bind(this);
+    this.isTouchDevice = false;
   }
 
   connectedCallback() {
-
-    if (document.documentElement.clientWidth < 768) {
+    if (window.innerWidth < 768) {
       return;
     }
 
+    // Prevent touch events on product card
     this.productCard = this.querySelector('.product-card');
+
+    this.productCard.addEventListener('touchstart', () => {
+      this.isTouchDevice = true;
+    }, { passive: true });
+
     this.productImage = this.querySelector('.product-image');
     this.productVideo = this.querySelector('.product-video');
     this.productVideoContainer = this.querySelector('.product-video-container');
@@ -73,10 +79,8 @@ class ProductCardHover extends HTMLElement {
   }
 
   onMouseOver() {
-    if (this.videoReady) {
+    if (!this.isTouchDevice && this.videoReady) {
       this.hoverAnimation.play();
-    } else {
-      console.log('Video is not ready');
     }
   }
 

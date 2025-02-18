@@ -6,7 +6,7 @@
 >
 <script src='{{ 'menu.js' | asset_url }}' defer='defer'></script>
 
-{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm md:tw-px-md tw-box-border' %}
+{% assign header_style = 'tw-fixed tw-top-0 tw-w-full tw-z-[200] tw-px-sm' %}
 {% assign hamburger_style = 'tw-w-[22px] tw-h-[1px] tw-rounded-full tw-absolute tw-z-[200]' %}
 {% assign cart_link_style = 'tw-inline-flex tw-items-center tw-gap-x-1 tw-cursor-pointer' %}
 {% assign cart_arrow_styles = 'tw-fill-white' %}
@@ -76,7 +76,7 @@
         class='tw-h-dvh tw-top-0 tw-fixed tw-w-full tw-left-0 tw-z-[100] md:tw-w-[50vh] tw-bg-black'
       >
         <ul
-          class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-sm md:tw-left-md tw-h-full'
+          class='tw-flex tw-flex-col tw-uppercase tw-gap-2 tw-absolute tw-top-[100px] tw-left-sm  tw-h-full'
         >
           {% for link in linklists[section.settings.menu].links %}
             <li class='menu-link'>

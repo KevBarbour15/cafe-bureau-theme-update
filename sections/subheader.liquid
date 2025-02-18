@@ -10,7 +10,7 @@
       style='scrollbar-width: none; -ms-overflow-style: none;'
     >
       {% if section.settings.left_link_title != blank and section.settings.left_link_url != blank %}
-        <div class='tw-absolute tw-left-sm md:tw-left-md tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
+        <div class='tw-absolute tw-left-sm  tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
           <a
             class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0 tw-text-black'
             href='{{ section.settings.left_link_url }}'
@@ -65,7 +65,7 @@
       {% endif %}
 
       {% if section.settings.right_link_title != blank and section.settings.right_link_url != blank %}
-        <div class='tw-absolute tw-right-sm md:tw-right-md tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
+        <div class='tw-absolute tw-right-sm  tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
           <a
             class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0 tw-absolute tw-right-0'
             href='{{ section.settings.right_link_url }}'

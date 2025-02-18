@@ -1,12 +1,18 @@
 class FilterLinkHover extends HTMLElement {
   constructor() {
     super();
+    this.isTouchDevice = false;
   }
 
   connectedCallback() {
     this.filterLinks = this.querySelectorAll('.filter-link');
     this.filterLinkTexts = this.querySelectorAll('.filter-link-text');
 
+    this.filterLinks.forEach((link) => {
+      link.addEventListener('touchstart', () => {
+        this.isTouchDevice = true;
+      }, { passive: true });
+    });
 
     this.filterLinks.forEach((link, idx) => {
       const hoverAnimation = new gsap.timeline({ paused: true })
@@ -18,14 +24,19 @@ class FilterLinkHover extends HTMLElement {
       link.addEventListener('mouseover', () => this.onMouseOver(hoverAnimation));
       link.addEventListener('mouseout', () => this.onMouseOut(hoverAnimation));
     });
+
   }
 
   onMouseOver(hoverAnimation) {
-    hoverAnimation.play();
+    if (!this.isTouchDevice) {
+      hoverAnimation.play();
+    }
   }
 
   onMouseOut(hoverAnimation) {
-    hoverAnimation.reverse();
+    if (!this.isTouchDevice) {
+      hoverAnimation.reverse();
+    }
   }
 }
 

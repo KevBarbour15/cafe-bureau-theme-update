@@ -2,6 +2,7 @@ class Menu extends HTMLElement {
   constructor() {
     super();
     this.isOpen = false;
+    this.isTouchDevice = false;
   }
 
   connectedCallback() {
@@ -10,7 +11,9 @@ class Menu extends HTMLElement {
 
     // Animation setup
     this.initializeMenuAnimation();
+
     this.initializeCartAnimation();
+
 
     // Event listeners
     this.setupEventListeners();
@@ -63,6 +66,7 @@ class Menu extends HTMLElement {
         }, 0.2);
 
 
+
     this.hoverLinks = [];
     this.links.forEach((_, index) => {
       this.hoverLinks[index] = new gsap.timeline({ paused: true })
@@ -88,6 +92,16 @@ class Menu extends HTMLElement {
 
   // Event listener setup
   setupEventListeners() {
+    this.cartLink.addEventListener('touchstart', () => {
+      this.isTouchDevice = true;
+    }, { passive: true });
+
+    this.links.forEach((link) => {
+      link.addEventListener('touchstart', () => {
+        this.isTouchDevice = true;
+      }, { passive: true });
+    });
+
     this.hamburger.addEventListener('click', () => this.onToggleMenu());
     this.cartLink.addEventListener('mouseover', () => this.onMouseOverCart());
     this.cartLink.addEventListener('mouseout', () => this.onMouseOutCart());
@@ -110,19 +124,27 @@ class Menu extends HTMLElement {
   }
 
   onMouseOver(index) {
-    this.hoverLinks[index].play();
+    if (!this.isTouchDevice) {
+      this.hoverLinks[index].play();
+    }
   }
 
   onMouseOut(index) {
-    this.hoverLinks[index].reverse();
+    if (!this.isTouchDevice) {
+      this.hoverLinks[index].reverse();
+    }
   }
 
   onMouseOverCart() {
-    this.hoverCart.play();
+    if (!this.isTouchDevice) {
+      this.hoverCart.play();
+    }
   }
 
   onMouseOutCart() {
-    this.hoverCart.reverse();
+    if (!this.isTouchDevice) {
+      this.hoverCart.reverse();
+    }
   }
 
 }

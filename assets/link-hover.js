@@ -1,10 +1,19 @@
 class LinkHover extends HTMLElement {
   constructor() {
     super();
+    this.isTouchDevice = false;
   }
 
   connectedCallback() {
+    if (window.innerWidth < 768) {
+      return;
+    }
+
     this.link = this.querySelector('.hover-link');
+    this.link.addEventListener('touchstart', () => {
+      this.isTouchDevice = true;
+    }, { passive: true });
+
     this.linkTexts = this.querySelector('.hover-link-text');
     this.linkArrow = this.querySelector('.hover-link-arrow');
 
@@ -29,11 +38,15 @@ class LinkHover extends HTMLElement {
   }
 
   onMouseOver() {
-    this.animate.play();
+    if (!this.isTouchDevice) {
+      this.animate.play();
+    }
   }
 
   onMouseOut() {
-    this.animate.reverse();
+    if (!this.isTouchDevice) {
+      this.animate.reverse();
+    }
   }
 }
 
