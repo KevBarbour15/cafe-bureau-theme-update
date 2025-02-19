@@ -73,6 +73,7 @@
         },
         "event_MAHRxy": {
           "type": "event",
+          "disabled": true,
           "settings": {
             "event_title": "Jeremy Murray video premiere",
             "event_time": "7pm - 11pm",
