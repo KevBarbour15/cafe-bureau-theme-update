@@ -24,7 +24,7 @@
         or section.settings.cafe_home_heading != blank
         or section.settings.cafe_home_text != blank
       %}
-        <div class='tw-py-sm md:tw-basis-1/2 tw-min-h-full tw-w-full tw-overflow-hidden tw-relative md:tw-py-md tw-flex'>
+        <div class='tw-py-sm md:tw-basis-1/2 tw-min-h-full tw-w-full tw-overflow-hidden tw-relative md:tw-py-md tw-flex tw-items-center tw-justify-center'>
           {% if section.blocks.size > 0 %}
             {% assign desktop_images = '' %}
             {% assign mobile_images = '' %}
@@ -51,15 +51,15 @@
                 {% render 'image-carousel', images: mobile_images %}
               </div>
             {% else %}
-              <p>No images found</p>
+              <p class='lg:tw-hidden'>No images found</p>
             {% endif %}
 
             {% if desktop_images.size > 0 %}
-              <div class='tw-hidden tw-min-h-full lg:tw-block tw-flex tw-w-full'>
+              <div class='tw-hidden tw-min-h-full lg:tw-block tw-w-full'>
                 {% render 'image-carousel', images: desktop_images %}
               </div>
             {% else %}
-              <p>No images found</p>
+              <p class='tw-hidden lg:tw-block'>No images found</p>
             {% endif %}
           {% endif %}
         </div>
