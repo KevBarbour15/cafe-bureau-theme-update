@@ -11,12 +11,12 @@
             class='tw-w-full tw-h-full tw-object-cover tw-object-center'
             width='100%'
             height='100%'
-            loading='lazy'
+            loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
           >
         </div>
       {% endfor %}
     </div>
-    
+
     {% if carousel_images.size > 1 %}
       <div class='embla__button embla__button--prev tw-absolute tw-top-1/2 tw-left-xs tw-mix-blend-difference tw-invert'>
         {% render 'left-arrow', size: 32, style: 'tw-fill-black' %}
