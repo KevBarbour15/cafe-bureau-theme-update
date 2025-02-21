@@ -12,6 +12,18 @@
     "main": {
       "type": "main-cafe-media-banner",
       "blocks": {
+        "images_mobile_aXC9Ph": {
+          "type": "images_mobile",
+          "settings": {
+            "image": "shopify://shop_images/082022_CafeBureau_Grandpa_433.jpg"
+          }
+        },
+        "images_desktop_GWPzDK": {
+          "type": "images_desktop",
+          "settings": {
+            "image": "shopify://shop_images/082022_CafeBureau_Grandpa_464.jpg"
+          }
+        },
         "cafe_hours_Mgkbzp": {
           "type": "cafe_hours",
           "settings": {
@@ -42,6 +54,8 @@
         }
       },
       "block_order": [
+        "images_mobile_aXC9Ph",
+        "images_desktop_GWPzDK",
         "cafe_hours_Mgkbzp",
         "cafe_hours_mF8aWD",
         "cafe_hours_UakGaG",
