@@ -1,7 +1,8 @@
 <script src='{{ 'gate-animation.js' | asset_url }}' defer></script>
+<script src='{{ 'item-slider.js' | asset_url }}' type='module' defer='defer'></script>
 
 <opacity-reveal>
-  <div class='tw-relative tw-text-black'>
+  <div class='tw-relative tw-text-black tw-h-full'>
     {% if section.settings.gate_overlay_desktop != blank %}
       <gate-animation>
         <div
@@ -18,23 +19,51 @@
         </div>
       </gate-animation>
     {% endif %}
-    <div class='tw-mt-[100px] tw-container md:tw-flex tw-gap-md'>
+    <div class='tw-mt-[100px] tw-container md:tw-flex tw-h-full md:tw-gap-md'>
       {% if section.settings.splash_image != blank
         or section.settings.cafe_home_heading != blank
         or section.settings.cafe_home_text != blank
       %}
-        <div class='tw-py-md md:tw-basis-1/2'>
-          {% if section.settings.splash_image != blank %}
-            <img
-              src='{{ section.settings.splash_image | img_url: "master" }}'
-              alt='{{ section.settings.splash_image.alt }}'
-              class='tw-h-auto tw-w-full md:tw-h-full tw-object-cover tw-object-center'
-              width=''
-              height=''
-            >
+        <div class='tw-py-sm md:tw-basis-1/2 tw-min-h-full tw-w-full tw-overflow-hidden tw-relative md:tw-py-md tw-flex'>
+          {% if section.blocks.size > 0 %}
+            {% assign desktop_images = '' %}
+            {% assign mobile_images = '' %}
+            {% for block in section.blocks %}
+              {% if block.type == 'images_desktop' %}
+                {% assign image = block.settings.image | sort %}
+                {% assign desktop_images = desktop_images | concat: image %}
+              {% endif %}
+              {% if block.type == 'images_mobile' %}
+                {% assign image = block.settings.image | sort %}
+                {% assign mobile_images = mobile_images | concat: image %}
+              {% endif %}
+            {% endfor %}
+
+            {% if desktop_images.size > 1 %}
+              {% assign desktop_images = desktop_images | slice: 1, desktop_images.size %}
+            {% endif %}
+            {% if mobile_images.size > 1 %}
+              {% assign mobile_images = mobile_images | slice: 1, mobile_images.size %}
+            {% endif %}
+
+            {% if mobile_images.size > 0 %}
+              <div class='tw-w-full tw-min-h-full lg:tw-hidden tw-flex'>
+                {% render 'image-carousel', images: mobile_images %}
+              </div>
+            {% else %}
+              <p>No images found</p>
+            {% endif %}
+
+            {% if desktop_images.size > 0 %}
+              <div class='tw-hidden tw-min-h-full lg:tw-block tw-flex tw-w-full'>
+                {% render 'image-carousel', images: desktop_images %}
+              </div>
+            {% else %}
+              <p>No images found</p>
+            {% endif %}
           {% endif %}
         </div>
-        <div class='tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-items-center tw-justify-between md:tw-py-md tw-h-full'>
+        <div class='tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md tw-h-full'>
           <div class='tw-w-full'>
             <div class=''>
               {% if section.settings.cafe_home_heading != blank %}
@@ -157,6 +186,28 @@
           "id": "hours",
           "label": "Hours",
           "default": "9:00 AM - 5:00 PM"
+        }
+      ]
+    },
+    {
+      "type": "images_desktop",
+      "name": "Images (Landscape)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "images_mobile",
+      "name": "Images (Portrait)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         }
       ]
     }
