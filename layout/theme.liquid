@@ -56,7 +56,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-    
+
     <script src='{{ 'gsap.min.js' | asset_url }}' defer='defer'></script>
     <script defer src='https://unpkg.com/embla-carousel/embla-carousel.umd.js'></script>
     <script defer src='https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js'></script>
@@ -347,7 +347,7 @@
 
     {% sections 'header-group' %}
 
-    <main role='main' tabindex='-1'>
+    <main class='tw-min-h-svh' role='main' tabindex='-1'>
       {{ content_for_layout }}
     </main>
 

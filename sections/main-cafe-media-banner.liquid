@@ -7,12 +7,12 @@
       <gate-animation>
         <div
           id='gate-overlay'
-          class='tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+          class='tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
         >
           <img
             src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
             alt='{{ section.settings.gate_overlay_desktop.alt }}'
-            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]'
+            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
             width=''
             height=''
           >
@@ -24,7 +24,7 @@
         or section.settings.cafe_home_heading != blank
         or section.settings.cafe_home_text != blank
       %}
-        <div class='tw-py-sm md:tw-basis-1/2 tw-min-h-full tw-w-full tw-overflow-hidden tw-relative md:tw-py-md tw-flex tw-items-center tw-justify-center'>
+        <div class='md:tw-basis-1/2 tw-min-h-[600px] tw-w-full tw-overflow-hidden tw-relative'>
           {% if section.blocks.size > 0 %}
             {% assign desktop_images = '' %}
             {% assign mobile_images = '' %}
@@ -47,23 +47,19 @@
             {% endif %}
 
             {% if mobile_images.size > 0 %}
-              <div class='tw-w-full tw-min-h-full lg:tw-hidden tw-flex'>
+              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm'>
                 {% render 'image-carousel', images: mobile_images %}
               </div>
-            {% else %}
-              <p class='lg:tw-hidden'>No images found</p>
             {% endif %}
 
             {% if desktop_images.size > 0 %}
-              <div class='tw-hidden tw-min-h-full lg:tw-block tw-w-full'>
+              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md'>
                 {% render 'image-carousel', images: desktop_images %}
               </div>
-            {% else %}
-              <p class='tw-hidden lg:tw-block'>No images found</p>
             {% endif %}
           {% endif %}
         </div>
-        <div class='tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md tw-h-full'>
+        <div class='tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md tw-min-h-[600px]'>
           <div class='tw-w-full'>
             <div class=''>
               {% if section.settings.cafe_home_heading != blank %}
