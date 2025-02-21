@@ -914,6 +914,14 @@ video {
   min-height: 100svh;
 }
 
+.tw-min-h-\[\] {
+  min-height: ;
+}
+
+.tw-min-h-\[calc\(100svh-100px\)\] {
+  min-height: calc(100svh - 100px);
+}
+
 .tw-w-1\/2 {
   width: 50%;
 }

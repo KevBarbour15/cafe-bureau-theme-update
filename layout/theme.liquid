@@ -347,8 +347,10 @@
 
     {% sections 'header-group' %}
 
-    <main class='tw-min-h-svh' role='main' tabindex='-1'>
-      {{ content_for_layout }}
+    <main class='' role='main' tabindex='-1'>
+      <div class='tw-min-h-[calc(100svh-100px)]'>
+        {{ content_for_layout }}
+      </div>
     </main>
 
     {% sections 'footer-group' %}
