@@ -1,7 +1,7 @@
 <script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
 
 {% assign page_styling = '' %}
-{% if section.settings.subheader_enabled %}
+{% if blog.metafields.custom.subheader_enabled == true %}
   {% assign page_styling = 'tw-pt-[100px] tw-pb-md md:tw-pt-[120px]' %}
 {% else %}
   {% assign page_styling = 'tw-pt-[60px] tw-pb-md md:tw-pt-[80px]' %}

@@ -1,25 +1,48 @@
-{% if section.settings.display_subheader != false %}
-  {% comment %}
-    write in logic to check if the page is a collection, product, blog, or blog post and if the display_metadata is true
-    and then display the metadata choices correctly
-  {% endcomment %}
+{% comment %}
+  Set the subheader data based on the page type to ensure the subheader is displayed correctly with the correct data.
+{% endcomment %}
+
+{% if request.page_type != 'article' and request.page_type != 'blog' %}
+  {% assign display_subheader = section.settings.display_subheader %}
+  {% assign left_link_title = section.settings.left_link_title %}
+  {% assign left_link_url = section.settings.left_link_url %}
+  {% assign right_link_title = section.settings.right_link_title %}
+  {% assign right_link_url = section.settings.right_link_url %}
+  {% assign link_list = section.settings.link_list %}
+{% elsif request.page_type == 'article' and article.metafields.custom.display_subheader != blank %}
+  {% assign display_subheader = article.metafields.custom.display_subheader %}
+  {% assign left_link_title = article.metafields.custom.left_link.value.text %}
+  {% assign left_link_url = article.metafields.custom.left_link.value.url %}
+  {% assign right_link_title = article.metafields.custom.right_link.value.text %}
+  {% assign right_link_url = article.metafields.custom.right_link.value.url %}
+  {% assign link_list = blank %}
+{% elsif request.page_type == 'blog' and blog.metafields.custom.display_subheader != blank %}
+  {% assign display_subheader = blog.metafields.custom.display_subheader %}
+  {% assign left_link_title = blog.metafields.custom.left_link.value.text %}
+  {% assign left_link_url = blog.metafields.custom.left_link.value.url %}
+  {% assign right_link_title = blog.metafields.custom.right_link.value.text %}
+  {% assign right_link_url = blog.metafields.custom.right_link.value.url %}
+  {% assign link_list = blank %}
+{% endif %}
+
+{% if display_subheader != false %}
   <script src='{{ 'filter-link.js' | asset_url }}' defer></script>
   <filter-link-hover>
     <div
       class='tw-h-[40px] tw-fixed tw-top-[60px] md:tw-top-[80px] tw-w-full tw-bg-white md:tw-px-0 tw-px-sm tw-mix-blend-exclusion tw-z-[75] tw-overflow-x-auto tw-pr-md'
       style='scrollbar-width: none; -ms-overflow-style: none;'
     >
-      {% if section.settings.left_link_title != blank and section.settings.left_link_url != blank %}
+      {% if left_link_title != blank and left_link_url != blank %}
         <div class='tw-absolute tw-left-sm  tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
           <a
             class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0 tw-text-black'
-            href='{{ section.settings.left_link_url }}'
-            aria-label='Navigate to {{ section.settings.left_link_title }}'
+            href='{{ left_link_url }}'
+            aria-label='Navigate to {{ left_link_title }}'
             aria-current='page'
           >
             <span>{% render 'left-arrow' %}</span>
             <span class='filter-link-text tw-text-black tw-uppercase md:hover:tw-underline md:hover:tw-underline-offset-4 md:tw-transition-all md:tw-duration-300 tw-ml-xs p1'>
-              {{ section.settings.left_link_title }}
+              {{ left_link_title }}
             </span>
           </a>
         </div>
@@ -29,18 +52,18 @@
         This is meant to be used instead of the links on either / both sides of the subheader
       {% endcomment %}
 
-      {% if section.settings.link_list != blank
-        and section.settings.left_link_title == blank
-        and section.settings.right_link_title == blank
-        and section.settings.left_link_url == blank
-        and section.settings.right_link_url == blank
+      {% if link_list != blank
+        and left_link_title == blank
+        and right_link_title == blank
+        and left_link_url == blank
+        and right_link_url == blank
       %}
         <div
           class='tw-flex tw-h-full tw-items-center tw-whitespace-nowrap md:tw-justify-center tw-gap-x-8 tw-pr-sm md:tw-pr-0'
           style='-webkit-scrollbar { display: none; }'
         >
-          {% if section.settings.link_list.links.size > 0 %}
-            {% for link in section.settings.link_list.links %}
+          {% if link_list.links.size > 0 %}
+            {% for link in link_list.links %}
               {% if collection.handle == link.object.handle -%}
                 <p class='tw-uppercase tw-underline tw-underline-offset-4 tw-text-black p1'>{{ link.title }}</p>
               {% else %}
@@ -64,16 +87,16 @@
         </div>
       {% endif %}
 
-      {% if section.settings.right_link_title != blank and section.settings.right_link_url != blank %}
+      {% if right_link_title != blank and right_link_url != blank %}
         <div class='tw-absolute tw-right-sm  tw-w-auto tw-h-full tw-flex tw-items-center tw-justify-center'>
           <a
             class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-cursor-pointer tw-shrink-0 tw-absolute tw-right-0'
-            href='{{ section.settings.right_link_url }}'
-            aria-label='Navigate to {{ section.settings.right_link_title }}'
+            href='{{ right_link_url }}'
+            aria-label='Navigate to {{ right_link_title }}'
             aria-current='page'
           >
             <span class='filter-link-text tw-text-black tw-uppercase md:hover:tw-underline md:hover:tw-underline-offset-4 md:tw-transition-all md:tw-duration-300 tw-mr-xs p1'>
-              {{ section.settings.right_link_title }}
+              {{ right_link_title }}
             </span>
             <span>{% render 'right-arrow' %}</span>
           </a>
@@ -86,7 +109,6 @@
 {% schema %}
 {
   "name": "Page Subheader",
-  "class": "section",
   "settings": [
     {
       "type": "checkbox",
