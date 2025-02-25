@@ -1,59 +1,36 @@
 <div class='tw-py-md tw-border-t tw-border-black tw-flex tw-flex-col'>
-  {% if section.settings.heading != blank %}
+  {% if section.settings.blog != blank %}
     <h2 class='tw-text-center tw-mb-md tw-font-snell tw-text-[32px] md:tw-text-[48px] tw-text-black'>
-      {{ section.settings.heading }}
+      {{ section.settings.blog.title }}
     </h2>
   {% endif %}
 
-  {% if section.blocks.size > 0 %}
+  {% if section.settings.blog != blank and section.settings.blog.metafields.custom.video_blog == true %}
     <div
-      class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-md tw-w-full'
+      class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-sm tw-w-full'
       style='scrollbar-width: none; -ms-overflow-style: none;'
     >
-      {% for video in section.blocks %}
+      {% for article in section.settings.blog.articles %}
         <div
-          class=' tw-h-full tw-min-w-[215px] tw-max-w-[375px] tw-flex-[0_0_215px] lg:tw-flex-[0_0_375px]'
+          class='tw-h-full tw-min-w-[215px] tw-max-w-[375px] tw-flex-[0_0_215px] lg:tw-flex-[0_0_375px]'
         >
-          <div class='tw-h-full tw-w-auto tw-block'>
-            {% if video.settings.video_url != blank %}
-              {% if video.settings.video_url.type == 'youtube' %}
-                <iframe
-                  src='https://www.youtube.com/embed/{{ video.settings.video_url.id }}?rel=0'
-                  class='tw-w-full tw-aspect-video'
-                  frameborder='0'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  allowfullscreen
-                  loading='lazy'
-                  title='YouTube video player'
-                ></iframe>
-              {% elsif video.settings.video_url.type == 'vimeo' %}
-                <iframe
-                  src='https://player.vimeo.com/video/{{ video.settings.video_url.id }}'
-                  class='tw-w-full tw-aspect-video'
-                  frameborder='0'
-                  allow='autoplay; fullscreen; picture-in-picture'
-                  allowfullscreen
-                  loading='lazy'
-                ></iframe>
-              {% else %}
-                <div class='tw-w-full tw-aspect-video tw-bg-gray-100 tw-flex tw-items-center tw-justify-center'>
-                  <p>Invalid video URL format</p>
-                </div>
-              {% endif %}
-            {% else %}
-              <div class='tw-w-full tw-aspect-video tw-bg-gray-100 tw-flex tw-items-center tw-justify-center'>
-                <p>Please add a video URL</p>
-              </div>
-            {% endif %}
+          {% if article.metafields.custom.youtube_video_url != blank %}
+            <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
+              {{
+                article.metafields.custom.youtube_video_url
+                | replace: 'width="560"', 'width="100%"'
+                | replace: 'height="315"', 'height="100%"'
 
-            <div class='tw-flex tw-flex-col tw-text-center tw-items-center tw-justify-center tw-pt-sm'>
-              <p
-                class='tw-uppercase p2 tw-text-black'
-              >
-                {{- video.settings.title -}}
-              </p>
+              }}
             </div>
-          </div>
+            {% if article.title != blank %}
+              <h2
+                class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+              >
+                {{- article.title -}}
+              </h2>
+            {% endif %}
+          {% endif %}
         </div>
       {% endfor %}
     </div>
@@ -79,9 +56,9 @@
   "name": "Cafe Video Slider",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading"
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
     },
     {
       "type": "url",
@@ -94,25 +71,7 @@
       "label": "Page Link CTA"
     }
   ],
-  "blocks": [
-    {
-      "type": "video",
-      "name": "Video",
-      "settings": [
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Video URL",
-          "accept": ["youtube", "vimeo"]
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Video Title"
-        }
-      ]
-    }
-  ],
+
   "presets": [
     {
       "name": "Cafe Video Slider"

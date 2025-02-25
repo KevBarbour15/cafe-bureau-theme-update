@@ -10,11 +10,49 @@
 <opacity-reveal>
   {%- paginate blog.articles by 6 -%}
     <div class=' tw-min-h-dvh tw-container {{ page_styling }}'>
+      {% if blog.metafields.custom.show_title == true %}
+        <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
+          <h2 class='tw-text-center heading'>
+            {{- blog.title -}}
+          </h2>
+
+          {% if blog.metafields.custom.blog_description != blank %}
+            <p class='tw-text-center p1 tw-mt-xs md:tw-mt-sm'>
+              {{- blog.metafields.custom.blog_description -}}
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
       <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md tw-pt-md'>
         {%- for article in blog.articles -%}
-          <div class='card' style='opacity: 0;'>
-            {%- render 'article-card', article: article -%}
-          </div>
+          {% if blog.metafields.custom.video_blog == true %}
+            <div class='card' style='opacity: 0;'>
+              {% if article.metafields.custom.youtube_video_url != blank %}
+                <div class='tw-aspect-video tw-border tw-border-black tw-overflow-hidden tw-w-full'>
+                  {{
+                    article.metafields.custom.youtube_video_url
+                    | replace: 'width="560"', 'width="100%"'
+                    | replace: 'height="315"', 'height="100%"'
+                  }}
+                </div>
+                {% if article.title != blank %}
+                  <h2
+                    class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+                  >
+                    {{- article.title -}}
+                  </h2>
+                {% endif %}
+              {% else %}
+                <div class='tw-w-full tw-aspect-video tw-bg-gray-100 tw-flex tw-items-center tw-justify-center'>
+                  <p>Please add a Youtube Embed Code</p>
+                </div>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class='card' style='opacity: 0;'>
+              {%- render 'article-card', article: article -%}
+            </div>
+          {% endif %}
         {%- endfor -%}
       </div>
 
