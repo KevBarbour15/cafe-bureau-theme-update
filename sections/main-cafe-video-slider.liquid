@@ -14,14 +14,24 @@
         <div
           class='tw-h-full tw-min-w-[215px] tw-max-w-[375px] tw-flex-[0_0_215px] lg:tw-flex-[0_0_375px]'
         >
-          {% if article.metafields.custom.youtube_video_url != blank %}
+          {% if article.metafields.custom.youtube_embed != blank %}
             <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
               {{
-                article.metafields.custom.youtube_video_url
+                article.metafields.custom.youtube_embed
                 | replace: 'width="560"', 'width="100%"'
                 | replace: 'height="315"', 'height="100%"'
-
               }}
+            </div>
+            {% if article.title != blank %}
+              <h2
+                class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+              >
+                {{- article.title -}}
+              </h2>
+            {% endif %}
+          {% elsif article.metafields.custom.vimeo_embed != blank %}
+            <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
+              {{ article.metafields.custom.vimeo_embed }}
             </div>
             {% if article.title != blank %}
               <h2

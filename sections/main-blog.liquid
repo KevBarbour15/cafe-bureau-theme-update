@@ -27,10 +27,10 @@
         {%- for article in blog.articles -%}
           {% if blog.metafields.custom.video_blog == true %}
             <div class='card' style='opacity: 0;'>
-              {% if article.metafields.custom.youtube_video_url != blank %}
+              {% if article.metafields.custom.youtube_embed != blank %}
                 <div class='tw-aspect-video tw-border tw-border-black tw-overflow-hidden tw-w-full'>
                   {{
-                    article.metafields.custom.youtube_video_url
+                    article.metafields.custom.youtube_embed
                     | replace: 'width="560"', 'width="100%"'
                     | replace: 'height="315"', 'height="100%"'
                   }}
@@ -42,9 +42,20 @@
                     {{- article.title -}}
                   </h2>
                 {% endif %}
+              {% elsif article.metafields.custom.vimeo_embed != blank %}
+                <div class='tw-aspect-video tw-border tw-border-black tw-overflow-hidden tw-w-full'>
+                  {{ article.metafields.custom.vimeo_embed }}
+                </div>
+                {% if article.title != blank %}
+                  <h2
+                    class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+                  >
+                    {{- article.title -}}
+                  </h2>
+                {% endif %}
               {% else %}
                 <div class='tw-w-full tw-aspect-video tw-bg-gray-100 tw-flex tw-items-center tw-justify-center'>
-                  <p>Please add a Youtube Embed Code</p>
+                  <p>Please add an embed code.</p>
                 </div>
               {% endif %}
             </div>
