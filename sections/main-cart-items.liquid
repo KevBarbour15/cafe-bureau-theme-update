@@ -1,53 +1,106 @@
+<script src='{{ "adjust-cart-quantity.js" | asset_url }}' defer></script>
+
 <cart-items
   class='tw-container tw-pt-[60px] md:tw-pt-[80px] tw-text-black tw-border-b tw-border-black {% if cart.items.size == 0 %} tw-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center{% endif %}'
 >
+  <style>
+    .no-spinner::-webkit-inner-spin-button,
+    .no-spinner::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .no-spinner {
+      -moz-appearance: textfield;
+    }
+  </style>
   {% if cart.items.size > 0 %}
     <div class='tw-flex tw-flex-col tw-pt-md'>
       {% render 'link-hover',
         link: routes.all_products_collection_url,
-        text_style: 'caption tw-text-black',
+        text_style: 'caption tw-text-black tw-underline tw-underline-offset-4',
         arrow_style: 'tw-fill-black',
         link_cta: 'Continue Shopping',
         is_url: true
       %}
       <div class='tw-mt-md'>
         {% for item in cart.items %}
-          <div class='tw-flex tw-w-full tw-border-t tw-border-black md:tw-justify-between'>
-            <div class='tw-flex tw-flex-col tw-gap-xs tw-py-sm tw-uppercase tw-basis-1/2'>
-              <span class='p2 tw-text-nowrap tw-truncate'>{{ item.product.title }}</span>
-              <span class='p2'>{{ item.product.price | money }}</span>
-              <span class='p2'>Quantity: {{ item.quantity }}</span>
+          <adjust-cart-quantity data-product-inventory='{{ item.product.selected_or_first_available_variant.inventory_quantity }}'>
+            <input type='hidden' name='id' value='{{ item.variant_id }}'>
+            <div class='tw-flex tw-w-full tw-border-t tw-border-black md:tw-justify-between'>
+              <div class='tw-flex tw-flex-col tw-gap-xs tw-py-sm tw-uppercase tw-basis-1/2 tw-pr-xs tw-overflow-hidden'>
+                <span class='p2 tw-text-nowrap tw-truncate'>{{ item.product.title }}</span>
+                <span class='p2 tw-mb-xs'>{{ item.product.price | money }}</span>
 
-              {% for option in item.options_with_values %}
-                {% if option.name == 'Color' %}
-                  <span class='p2'>Color: {{ option.value }}</span>
-                {% endif %}
-                {% if option.name == 'Size' %}
-                  <span class='p2'>Size: {{ option.value }}</span>
-                {% endif %}
-              {% endfor %}
-            </div>
-            {% if item.product.images.size > 0 %}
-              <div class='tw-flex tw-basis-1/2 tw-justify-center tw-items-center md:tw-justify-end'>
-                <img
-                  src='{{ item.product.images[0] | img_url: "master" }}'
-                  alt='{{ item.product.title }}'
-                  height='100'
-                  width='100'
-                  class='tw-object-contain tw-object-center'
+                {% assign color = '' %}
+                {% assign size = '' %}
+                {% for option in item.options_with_values %}
+                  {% if option.name == 'Color' %}
+                    {% assign color = option.value %}
+                  {% endif %}
+                  {% if option.name == 'Size' %}
+                    {% assign size = option.value %}
+                  {% endif %}
+                {% endfor %}
+                <span class='p1'>Size: {{ size }}</span>
+                <span class='p1'>Color: {{ color }}</span>
+                <span class='p1'>Total: {{ item.final_line_price | money }}</span>
+
+                <div class='tw-flex tw-items-center tw-gap-xs'>
+                  <button
+                    class='p3 tw-aspect-square tw-h-12 tw-w-12 tw-border tw-border-black tw-flex tw-items-center tw-justify-center tw-bg-black tw-text-white hover:tw-bg-white hover:tw-text-black tw-transition-all tw-duration-300'
+                    aria-label='Decrease quantity'
+                    id='decrease-quantity'
+                  >
+                    -
+                  </button>
+                  <input
+                    id='quantity-input'
+                    type='number'
+                    value='{{ item.quantity }}'
+                    min='0'
+                    class='p3 tw-border tw-border-black tw-text-center tw-h-12 tw-w-32 no-spinner focus:tw-outline-none tw-cursor-default'
+                    aria-label='Item quantity'
+                    readonly
+                  >
+                  <button
+                    class='p2 tw-h-12 tw-w-12 tw-aspect-square tw-border tw-border-black tw-flex tw-items-center tw-justify-center tw-bg-black tw-text-white hover:tw-bg-white hover:tw-text-black tw-transition-all tw-duration-300'
+                    aria-label='Increase quantity'
+                    id='increase-quantity'
+                  >
+                    +
+                  </button>
+                </div>
+
+                <button
+                  id='update-cart'
+                  aria-label='Update Cart'
+                  class='p2 tw-mt-xs tw-px-md md:tw-px-lg tw-py-xs tw-border tw-border-black tw-uppercase tw-w-fit tw-bg-black tw-text-white hover:tw-bg-white hover:tw-text-black tw-transition-all tw-duration-300'
                 >
+                  Update Cart
+                </button>
               </div>
-            {% endif %}
-          </div>
+              {% if item.product.images.size > 0 %}
+                <div class='tw-flex tw-basis-1/2 tw-justify-center tw-items-center md:tw-justify-end'>
+                  <img
+                    src='{{ item.product.images[0] | img_url: "master" }}'
+                    alt='{{ item.product.title }}'
+                    height='100'
+                    width='100'
+                    class='tw-object-cover tw-object-center'
+                  >
+                </div>
+              {% endif %}
+            </div>
+          </adjust-cart-quantity>
         {% endfor %}
       </div>
     </div>
   {% else %}
     <div class='tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-gap-y-md'>
-      <h2 class='tw-uppercase h2 tw-text-center'>Your cart is empty</h2>
+      <h2 class='tw-text-center heading'>Your cart is empty.</h2>
       {% render 'link-hover',
         link: routes.all_products_collection_url,
-        text_style: 'caption tw-text-black',
+        text_style: 'caption tw-text-black tw-underline tw-underline-offset-4',
         arrow_style: 'tw-fill-black',
         link_cta: 'Continue Shopping',
         is_url: true
