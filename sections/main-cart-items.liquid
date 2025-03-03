@@ -97,10 +97,10 @@
     </div>
   {% else %}
     <div class='tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-gap-y-md'>
-      <h2 class='tw-uppercase h2 tw-text-center'>Your cart is empty</h2>
+      <h2 class='tw-text-center heading'>Your cart is empty.</h2>
       {% render 'link-hover',
         link: routes.all_products_collection_url,
-        text_style: 'caption tw-text-black',
+        text_style: 'caption tw-text-black tw-underline tw-underline-offset-4',
         arrow_style: 'tw-fill-black',
         link_cta: 'Continue Shopping',
         is_url: true
