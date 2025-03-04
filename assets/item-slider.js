@@ -5,8 +5,9 @@ class ItemSlider extends HTMLElement {
 
   connectedCallback() {
     this.imageCount = this.getAttribute('data-image-count');
-    if (this.imageCount <= 1) return;
+    
 
+    
     this.emblaNode = this.querySelector('.embla');
     this.prevBtnNode = this.querySelector('.embla__button--prev');
     this.nextBtnNode = this.querySelector('.embla__button--next');
