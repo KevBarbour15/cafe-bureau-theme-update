@@ -42,15 +42,30 @@
               {% assign mobile_images = mobile_images | slice: 1, mobile_images.size %}
             {% endif %}
 
-            {% if mobile_images.size > 0 %}
+            {% if mobile_images.size == 1 %}
+              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm'>
+                <img
+                  src='{{ desktop_images.first | img_url: "master" }}'
+                  alt='{{ desktop_images.first.alt }}'
+                  class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
+                  width=''
+                  height=''
+                >
+              </div>
+            {% elsif mobile_images.size > 1 %}
               <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm'>
                 {% render 'image-carousel', images: mobile_images %}
               </div>
             {% endif %}
-
-            {% if desktop_images.size > 0 %}
+            {% if desktop_images.size == 1 %}
               <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md'>
-                {% render 'image-carousel', images: desktop_images %}
+                <img
+                  src='{{ desktop_images.first | img_url: "master" }}'
+                  alt='{{ desktop_images.first.alt }}'
+                  class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
+                  width=''
+                  height=''
+                >
               </div>
             {% endif %}
           {% endif %}
