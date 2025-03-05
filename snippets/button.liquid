@@ -1,29 +1,71 @@
-<script src='{{ 'button.js' | asset_url }}' type='module' defer='defer'></script>
-
 {% assign button_type = button_type | default: 'button' %}
-{% assign button_cta = button_cta | default: 'Button' %}
+{% assign button_text = button_text | default: 'Button' %}
 {% assign button_url = button_url | default: '#' %}
+{% assign button_variant = button_variant | default: 'primary' %}
+{% assign button_size = button_size | default: 'md' %}
+{% assign button_icon = button_icon | default: 'none' %}
+{% assign button_icon_position = button_icon_position | default: 'left' %}
+{% assign icon_styling = icon_styling | default: 'tw-h-[20px] tw-mr-xs' %}
+{% assign button_width = button_width | default: 'fluid' %}
+{% assign button_onclick = button_onclick | default: null %}
+{% assign custom_class = custom_class | default: '' %}
 
-{% assign styles = 'tw-border tw-border-black tw-flex tw-text-black tw-items-center tw-justify-center tw-uppercase tw-py-[10px] tw-px-[20px] tw-cursor-pointer tw-bg-white' %}
+{% assign primary_styles = 'tw-text-white tw-bg-primary-black tw-border tw-border-primary-black hover:tw-text-primary-black hover:tw-bg-primary-white tw-transition tw-py-sm  tw-px-sm tw-uppercase tw-items-center tw-justify-center tw-min-w-fit ' %}
+{% assign secondary_styles = 'secondary-button tw-primary-black tw-bg-white tw-py-sm hover:tw-border-black tw-border tw-border-black hover:tw-text-primary-white hover:tw-bg-primary-black tw-transition tw-px-sm tw-uppercase tw-items-center tw-justify-center' %}
 
-<button-component>
-  {%- if button_type == 'link' %}
-    <a
-      id='button'
-      class='{{ styles }}'
-      href='{{ button_url }}'
-    >
-      <span class=''>{{ button_cta }}</span>
-    </a>
-  {% else %}
-    <button
-      style='border-radius: 50px;'
-      id='button'
-      class='{{ styles }}'
-      onclick='{%if button_onclick != null%}{{button_onclick}}{%endif %}'
-      type='{% if button_action_type != null %}{{button_action_type}}{% endif %}'
-    >
-      <span class='tw-leading-none'>{{ button_cta }}</span>
-    </button>
-  {% endif %}
-</button-component>
+{% assign assigned_styles = init_classes | default: blank %}
+{% assign assigned_styles = init_classes | append: ' ' %}
+
+{%- liquid
+  if button_variant == 'secondary'
+    assign assigned_styles = assigned_styles | append: secondary_styles
+  else
+    assign assigned_styles = assigned_styles | append: primary_styles
+  endif
+
+  if button_size == 'sm'
+    assign assigned_styles = assigned_styles | append: 'tw-text-[1.4rem] tw-min-h-[4.8rem] '
+  else
+    assign assigned_styles = assigned_styles | append: 'tw-text-[1.6rem] tw-min-h-[5.6rem] '
+  endif
+
+  if button_width == 'inline'
+    assign assigned_styles = assigned_styles | append: 'tw-inline-flex '
+  else
+    assign assigned_styles = assigned_styles | append: 'tw-flex '
+  endif
+
+  assign assigned_styles = assigned_styles | append: custom_class
+-%}
+
+{% if button_type == 'link' %}
+  <a
+    class='{{ assigned_styles }}'
+    href='{{ button_url }}'
+  >
+    {% if button_icon_position == 'left' and button_icon != 'none' %}
+      {% render 'icon', icon_type: button_icon, icon_styling: icon_styling %}
+    {% endif %}
+    {{- button_text -}}
+    {% if button_icon_position == 'right' and button_icon != 'none' %}
+      {% render 'icon', icon_type: button_icon, icon_styling: icon_styling %}
+    {% endif %}
+  </a>
+{% else %}
+  <button
+    class='{{ assigned_styles }}'
+    onclick='{%if button_onclick != null%}{{button_onclick}}{%endif %}'
+    type='{% if button_action_type != null %}{{button_action_type}}{% endif %}'
+  >
+    <span class='text tw-flex'>
+      {% if button_icon_position == 'left' and button_icon != 'none' %}
+        {% render 'icon', icon_type: button_icon, icon_styling: icon_styling %}
+      {% endif %}
+      {{ button_text }}
+      {% if button_icon_position == 'right' and button_icon != 'none' %}
+        {% render 'icon', icon_type: button_icon, icon_styling: icon_styling %}
+      {% endif -%}
+    </span>
+    <div class='loader tw-transition tw-opacity-0 tw-hidden'></div>
+  </button>
+{% endif %}

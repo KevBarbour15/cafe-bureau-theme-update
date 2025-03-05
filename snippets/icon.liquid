@@ -1,0 +1,56 @@
+{% assign icon_type = icon_type %}
+{% assign icon_styling = icon_styling | default: '' %}
+
+{% case icon_type %}
+  {% when 'plus' %}
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      class='tw-w-6 tw-h-6 tw-fill-current'
+    >
+      <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.404.597 24 1.325 24h11.495V14.706h-3.13v-3.63h3.13V8.41c0-3.1 1.892-4.788 4.656-4.788 1.324 0 2.463.099 2.795.143v3.24l-1.918.001c-1.503 0-1.794.715-1.794 1.763v2.31h3.587l-.468 3.63h-3.119V24h6.116C23.403 24 24 23.404 24 22.676V1.325C24 .597 23.403 0 22.675 0z" />
+    </svg>
+
+  {% when 'instagram' %}
+    {% render 'icon-instagram', class: icon_styling %}
+  {% when 'facebook' %}
+    {% render 'icon-facebook', class: icon_styling %}
+  {% when 'x' %}
+    {% render 'icon-x', class: icon_styling %}
+  {% when 'youtube' %}
+    {% render 'icon-youtube', class: icon_styling %}
+  {% when 'pinterest' %}
+    {% render 'icon-pinterest', class: icon_styling %}
+  {% when 'tiktok' %}
+    {% render 'icon-tiktok', class: icon_styling %}
+  {% when 'tumblr' %}
+    {% render 'icon-tumblr', class: icon_styling %}
+  {% when 'snapchat' %}
+    {% render 'icon-snapchat', class: icon_styling %}
+  {% when 'vimeo' %}
+    {% render 'icon-vimeo', class: icon_styling %}
+  {% when 'logo-white' %}
+    {% render 'icon-logo-white', class: icon_styling %}
+  {% when 'logo-black' %}
+    {% render 'icon-logo-black', class: icon_styling %}
+  {% when 'hamburger-menu' %}
+    {% render 'icon-hamburger-menu', class: icon_styling %}
+  {% when 'close-menu' %}
+    {% render 'icon-close-menu', class: icon_styling %}
+  {% when 'search' %}
+    {% render 'icon-search', class: icon_styling %}
+  {% when 'user' %}
+    {% render 'icon-user', class: icon_styling %}
+  {% when 'cart' %}
+    {% render 'icon-cart', class: icon_styling %}
+  {% when 'chevron-right' %}
+    {% render 'icon-chevron-right', class: icon_sizing %}
+  {% when 'chevron-left' %}
+    {% render 'icon-chevron-left', class: icon_sizing %}
+  {% when 'chevron-down' %}
+    {% render 'icon-chevron-down', class: icon_sizing %}
+  {% when 'moon' %}
+    {% render 'icon-moon', class: icon_sizing %}
+  {% when 'sun' %}
+    {% render 'icon-sun', class: icon_sizing %}
+{% endcase %}

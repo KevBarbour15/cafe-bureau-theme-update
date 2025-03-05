@@ -1,0 +1,101 @@
+{%- liquid
+  assign terms = search.terms | escape
+  assign search_url = '?q=' | append: terms
+-%}
+
+<div class='tw-container tw-block tw-pt-[80px] tw-min-h-svh tw-text-primary-black'>
+  <div class='tw-flex tw-py-md tw-w-full'>
+    <form action='{{ search_url }}' class='tw-flex tw-flex-col tw-w-full tw-m-auto md:tw-flex-row md:tw-w-auto'>
+      <input
+        type='text'
+        placeholder='Search'
+        required
+        name='q'
+        value='{{ search.terms | escape }}'
+        class='tw-flex-auto tw-min-h-[5.6rem] tw-px-sm tw-uppercase p2 tw-text-primary-black tw-mb-md tw-bg-transparent tw-border tw-rounded-sm tw-border-primary-black md:tw-mb-0 md:tw-mr-sm md:tw-w-[300px]'
+      >
+      {% render 'button',
+        button_text: 'Search',
+        button_variant: 'primary',
+        button_size: 'md',
+        button_icon: 'search',
+        button_icon_position: 'left'
+      %}
+    </form>
+  </div>
+
+  {% unless search.terms == blank %}
+    {% assign pages_in_results = search.results | where: 'object_type', 'page' %}
+    {% assign products_in_results = search.results | where: 'object_type', 'product' %}
+    <div class='tw-block'>
+      {% if pages_in_results == 0 and products_in_results == 0 %}
+        <p class='tw-text-center p2 tw-uppercase'>
+          0 results found for "<span>{{ search.terms }}</span>"
+        </p>
+      {% else %}
+        <p class='tw-text-center p2 tw-uppercase tw-mb-md'>
+          {{ search.results_count }}
+          {{ search.results_count | pluralize: 'result', 'results' }} found for "<span>{{ search.terms }}</span>"
+        </p>
+        {% if pages_in_results.size > 0 %}
+          <h2 class='h2 tw-mb-xs tw-uppercase'>Pages:</h2>
+          <ul class='tw-flex tw-flex-col tw-gap-sm tw-mb-md tw-border-t tw-border-primary-black tw-pt-md'>
+            {% for result in search.results %}
+              {% if result.object_type == 'page' %}
+                <li class='p2 tw-uppercase tw-flex tw-items-center'>
+                  <span class='tw-w-[6px] tw-h-[6px] tw-bg-primary-black tw-rounded-full tw-mr-sm'></span>
+                  {% render 'link-hover',
+                    link_cta: result.title,
+                    link: result,
+                    text_style: 'tw-uppercase h3',
+                    arrow_style: 'tw-fill-black',
+                    arrow_size: 28
+                  %}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% paginate search.results by 24 %}
+          {% if products_in_results.size > 0 %}
+            <h2 class='h2 tw-mb-xs tw-uppercase'>Products:</h2>
+            <div class='tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-md tw-border-t tw-border-primary-black'>
+              {% for result in search.results %}
+                {% if result.object_type == 'product' and result.url != blank %}
+                  {% render 'product-card',
+                    product: result,
+                    variant: result.selected_or_first_available_variant,
+                    product_url: result.selected_or_first_available_variant.url,
+                    lazy_load: false
+                  %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class='tw-flex tw-justify-center tw-items-center tw-my-md p3'>
+            {% if paginate.previous %}
+              <a href='{{ paginate.previous.url }}' class='tw-mr-md'>{% render 'prev-button' %}</a>
+            {% endif %}
+
+            <p class=''>{{ paginate.current_page }} of {{ paginate.pages }}</p>
+
+            {% if paginate.next %}
+              <a href='{{ paginate.next.url }}' class='tw-ml-md'>{% render 'next-button' %}</a>
+            {% endif %}
+          </div>
+        {% endpaginate %}
+      {% endif %}
+    </div>
+  {% endunless %}
+</div>
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+<div class='tw-py-md'>
+  <form action='{{ routes.search_url }}' class='tw-flex tw-w-full tw-m-auto md:tw-w-auto'>
+    <input
+      type='text'
+      placeholder='Search'
+      required
+      name='q'
+      value='{{ search.terms | escape }}'
+      class='tw-leading-[1px] tw-flex-1 md:tw-flex-[0_0_90%] tw-px-sm tw-text-[16px] tw-min-h-[5.6rem] tw-w-full tw-bg-transparent border tw-border-[1px] tw-rounded-[4px] tw-border-primary-grey-mid md:tw-mb-[unset] md:tw-mr-md md:tw-w-[300px]'
+    >
+    {% render 'button',
+      button_text: 'Search',
+      button_variant: 'primary',
+      button_size: 'sm',
+      button_icon: 'search',
+      button_icon_position: 'left',
+      custom_class: 'search-button tw-pr-md tw-ml-xs'
+    %}
+  </form>
+</div>
