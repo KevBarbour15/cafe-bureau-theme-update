@@ -96,6 +96,14 @@
             </li>
           {% endfor %}
         </ul>
+
+        <a
+          href='{{ routes.search_url }}'
+          aria-label='Search'
+          class='tw-absolute tw-bottom-sm tw-left-sm tw-flex tw-items-center tw-justify-center'
+        >
+          {% render 'icon-search', class: 'tw-w-12 tw-h-12 tw-text-primary-white md:tw-cursor-pointer' %}
+        </a>
       </div>
 
       {% if request.page_type == 'index' %}
