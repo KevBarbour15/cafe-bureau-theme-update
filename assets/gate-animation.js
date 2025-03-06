@@ -16,6 +16,8 @@ class GateAnimation extends HTMLElement {
         behavior: 'smooth'
       });
     }
+
+    // Prevent scroll until animation is complete
     this.html.style.overflowY = 'hidden';
 
     this.gateAnimation = gsap.to(this.gateOverlay, {

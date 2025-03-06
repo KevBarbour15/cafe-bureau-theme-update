@@ -5,14 +5,19 @@ class LoadingAnimation extends HTMLElement {
 
   connectedCallback() {
     // Force scroll to top when component connects
+this.html = document.querySelector('html');
     this.window = window;
+    
     if (this.window.scrollY !== 0) {
       this.window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'smooth'
+        behavior: 'instant'
       });
     }
+
+     // Prevent scroll until animation is complete
+    this.html.style.overflowY = 'hidden';
 
     let loadingScreen = this.querySelector('#loading-screen');
     let path1 = this.querySelector('#path-1');
@@ -105,7 +110,10 @@ class LoadingAnimation extends HTMLElement {
         }
       })
       .set(loadingScreen, {
-        display: 'none'
+        display: 'none',
+        onComplete: () => {
+          this.html.style.overflowY = 'auto';
+        }
       }
       );
 
