@@ -1,0 +1,36 @@
+{% if request.path != '/' %}
+  <cookie-consent>
+    <div
+      id='cookie-consent-container'
+      class='tw-fixed tw-hidden tw-flex-col sm:tw-flex-row tw-items-center sm:tw-justify-between tw-bottom-0 tw-left-0 tw-right-0 tw-z-50 tw-bg-primary-black tw-p-sm tw-bg-opacity-65 tw-backdrop-blur-sm tw-gap-xs sm:tw-gap-lg'
+    >
+      <p class='tw-text-balance tw-text-primary-white tw-uppercase p2'>
+        We use cookies to ensure you get the best experience on our website.
+        <span>
+          {%- render 'link-hover',
+            link: '/pages/privacy-policy',
+            link_cta: 'Learn more',
+            text_style: 'tw-uppercase p2 tw-underline-offset-4 tw-underline tw-cursor-pointer',
+            arrow_style: '#fff',
+            arrow_size: 22,
+            is_url: true
+          -%}
+        </span>
+      </p>
+      <div class='tw-flex tw-flex-col sm:tw-flex-row tw-gap-xs tw-w-full sm:tw-w-auto'>
+        <button
+          id='decline-button'
+          class='p2 tw-w-full sm:tw-w-auto tw-cursor-pointer tw-border tw-border-black tw-bg-white tw-text-black tw-uppercase tw-px-sm tw-py-xs sm:hover:tw-bg-black sm:hover:tw-text-white tw-transition-all tw-duration-300'
+        >
+          Decline
+        </button>
+        <button
+          id='accept-button'
+          class='p2 tw-w-full sm:tw-w-auto tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-px-sm tw-py-xs sm:hover:tw-bg-white sm:hover:tw-text-black tw-transition-all tw-duration-300'
+        >
+          Accept
+        </button>
+      </div>
+    </div>
+  </cookie-consent>
+{% endif %}

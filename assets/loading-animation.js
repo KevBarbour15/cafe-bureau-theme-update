@@ -4,6 +4,15 @@ class LoadingAnimation extends HTMLElement {
   }
 
   connectedCallback() {
+    // Force scroll to top when component connects
+    this.window = window;
+    if (this.window.scrollY !== 0) {
+      this.window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
 
     let loadingScreen = this.querySelector('#loading-screen');
     let path1 = this.querySelector('#path-1');
@@ -20,7 +29,7 @@ class LoadingAnimation extends HTMLElement {
         vid.setAttribute('playsinline', '');
         vid.setAttribute('webkit-playsinline', '');
         vid.load();
-        
+
         vid.addEventListener('canplaythrough', () => {
           if (vid === video) videoReady = true;
         }, { once: true });
@@ -77,7 +86,7 @@ class LoadingAnimation extends HTMLElement {
             try {
               video.muted = true;
               video.playsInline = true;
-              
+
               const attemptPlay = async () => {
                 try {
                   await video.play();
@@ -87,7 +96,7 @@ class LoadingAnimation extends HTMLElement {
                   }, { once: true });
                 }
               };
-              
+
               attemptPlay();
             } catch (error) {
               console.warn("Video playback error:", error);

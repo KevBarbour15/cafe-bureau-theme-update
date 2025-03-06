@@ -57,7 +57,7 @@
             id='ProductSubmitButton-{{ section_id }}'
             type='submit'
             name='add'
-            class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm  md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
+            class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
