@@ -77,6 +77,7 @@
     <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'cookie-consent.js' | asset_url }}' type='module' defer='defer'></script>
+    <script src='{{ 'loading.js' | asset_url }}' type='module' defer='defer'></script>
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
         gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, ScrambleTextPlugin, SplitText, ScrollTrigger);
@@ -337,9 +338,9 @@
     </script>
   </head>
 
-  <body class=''>
+  <body class='tw-bg-primary-black'>
     {% render 'cookie-consent' %}
-    
+
     <a class='skip-to-content-link button visually-hidden' href='#MainContent'>
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -350,14 +351,14 @@
 
     {% sections 'header-group' %}
 
-    <main class='' role='main' tabindex='-1'>
+    <main class='tw-bg-primary-white' role='main' tabindex='-1'>
       <div class='tw-min-h-[calc(100svh-100px)]'>
         {{ content_for_layout }}
       </div>
     </main>
-
-    {% sections 'footer-group' %}
-
+    <div class='tw-bg-primary-white'>
+      {% sections 'footer-group' %}
+    </div>
     <ul hidden>
       <li id='a11y-refresh-page-message'>{{ 'accessibility.refresh_page' | t }}</li>
       <li id='a11y-new-window-message'>{{ 'accessibility.link_messages.new_window' | t }}</li>

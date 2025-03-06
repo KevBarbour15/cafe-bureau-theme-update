@@ -3,8 +3,9 @@
   assign search_url = '?q=' | append: terms
 -%}
 
-<div class='tw-container tw-block tw-pt-[80px] tw-min-h-svh tw-text-primary-black'>
-  <div class='tw-flex tw-py-md tw-w-full'>
+<div class='tw-container tw-block tw-pt-[60px] md:tw-pt-[80px] tw-min-h-svh tw-text-primary-black'>
+  <div class='tw-flex tw-flex-col tw-items-center tw-py-md tw-w-full'>
+    <h2 class='heading tw-mb-md'>Search</h2>
     <form action='{{ search_url }}' class='tw-flex tw-flex-col tw-w-full tw-m-auto md:tw-flex-row md:tw-w-auto'>
       <input
         type='text'
@@ -12,7 +13,7 @@
         required
         name='q'
         value='{{ search.terms | escape }}'
-        class='tw-flex-auto tw-min-h-[5.6rem] tw-px-sm tw-uppercase p2 tw-text-primary-black tw-mb-md tw-bg-transparent tw-border tw-rounded-sm tw-border-primary-black md:tw-mb-0 md:tw-mr-sm md:tw-w-[300px]'
+        class='tw-flex-auto tw-min-h-[5.6rem] tw-px-sm tw-uppercase p3 tw-text-primary-black tw-mb-md tw-bg-transparent tw-border tw-rounded-sm tw-border-primary-black md:tw-mb-0 md:tw-mr-sm md:tw-w-[350px] focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-primary-black'
       >
       {% render 'button',
         button_text: 'Search',
