@@ -76,10 +76,11 @@
         "event_eJUKp8": {
           "type": "event",
           "settings": {
-            "event_title": "Killer Pool Event",
+            "event_title": "Pool CLub",
             "event_time": "7pm - 11pm",
-            "event_date": "February 19, 2025",
+            "event_date": "March 26, 2025",
             "event_description": "",
+            "event_image": "shopify://shop_images/cb-poolnight.jpg",
             "event_link_text": "",
             "event_link": ""
           }
