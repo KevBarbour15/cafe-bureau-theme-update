@@ -293,7 +293,7 @@
          font-style: var(--font-body-style);
          font-weight: var(--font-body-weight);
          font-color: black;
-         width: 100%;
+         width: 100vw;
        }
 
 
@@ -342,8 +342,6 @@
   </head>
 
   <body class='tw-bg-black'>
-    {% render 'cookie-consent' %}
-
     <a class='skip-to-content-link button visually-hidden' href='#MainContent'>
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -355,6 +353,7 @@
     {% sections 'header-group' %}
 
     <main class='tw-bg-primary-white' role='main' tabindex='-1'>
+      {% render 'cookie-consent' %}
       <div class='tw-min-h-[calc(100svh-100px)]'>
         {{ content_for_layout }}
       </div>
