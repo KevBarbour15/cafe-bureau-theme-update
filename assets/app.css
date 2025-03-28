@@ -962,6 +962,10 @@ video {
   width: 100%;
 }
 
+.tw-w-screen {
+  width: 100vw;
+}
+
 .tw-min-w-14 {
   min-width: 3.5rem;
 }
