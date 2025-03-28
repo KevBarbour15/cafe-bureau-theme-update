@@ -6,9 +6,9 @@ class ProductCardHover extends HTMLElement {
   }
 
   connectedCallback() {
-    if (window.innerWidth < 768) {
-      return;
-    }
+    this.doneLoading = this.getAttribute('data-done-loading');
+
+    console.log('doneLoading', this.doneLoading);
 
     // Prevent touch events on product card
     this.productCard = this.querySelector('.product-card');

@@ -1,6 +1,7 @@
-<loading-component>
-  <div id='loading-container' class='tw-w-full tw-mt-md tw-text-center'>
+{% assign done_loading = done_loading %}
+
+<loading-component data-done-loading='{{ done_loading }}'>
+  <div id='loading-container' class='tw-w-full tw-mt-lg tw-text-center'>
     <h2 id='loading-text' class='h3 tw-uppercase'>Loading...</h2>
   </div>
 </loading-component>
-  
