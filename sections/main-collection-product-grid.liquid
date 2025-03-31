@@ -15,12 +15,10 @@
         <h2>No products found.</h2>
       </div>
     {%- else -%}
-      {% assign done_loading = false %}
-      {% render 'loading-animation', done_loading: done_loading %}
       <ul
         id='product-grid'
         data-id='{{ section.id }}'
-        class='tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md tw-pt-md tw-hidden'
+        class='tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md tw-pt-md tw-grid'
       >
         {%- for product in collection.products -%}
           {% if product.type == 'Clothing' or product.type == 'Accessories' %}
