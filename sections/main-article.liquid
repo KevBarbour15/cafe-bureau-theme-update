@@ -19,12 +19,11 @@
         {% elsif article.published_at != blank %}
           <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
         {% endif %}
-      </div>
-    {% endif %}
-
-    {% if blog.title == 'Past Events' and article.content != blank %}
-      <div class='card tw-py-md p2' style='opacity: 0;'>
-        {{ article.content }}
+        {% if article.content != blank %}
+          <div class='card p2 tw-mt-sm md:tw-mt-md' style='opacity: 0;'>
+            {{ article.content }}
+          </div>
+        {% endif %}
       </div>
     {% endif %}
 
