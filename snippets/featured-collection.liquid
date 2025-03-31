@@ -1,0 +1,34 @@
+{% assign collection = collection %}
+
+<div class='md:tw-hidden'>
+  <item-slider>
+    <div class='embla !tw-overflow-visible xlg:tw-flex xlg:tw-justify-center tw-pl-sm md:tw-pl-0'>
+      <div class='embla__container'>
+        {% for product in collection.products %}
+          <div
+            class='embla__slide tw-mx-xs tw-min-w-[40%] tw-max-w-[315px] !tw-flex-[0_0_40%]'
+          >
+            {% render 'product-card',
+              product: product,
+              variant: product.first_available_variant,
+              product_url: product.first_available_variant.url,
+              lazy_load: true
+            %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </item-slider>
+</div>
+<div class='tw-hidden md:tw-grid tw-container tw-gap-sm md:tw-gap-md tw-grid-cols-4'>
+  {% for product in collection.products %}
+    <div>
+      {% render 'product-card',
+        product: product,
+        variant: product.first_available_variant,
+        product_url: product.first_available_variant.url,
+        lazy_load: true
+      %}
+    </div>
+  {% endfor %}
+</div>

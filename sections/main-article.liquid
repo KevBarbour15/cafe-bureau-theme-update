@@ -116,6 +116,18 @@
       {% endif %}
     </div>
   </article>
+  {% if article.metafields.custom.featured_collection.value != blank
+    and article.metafields.custom.featured_collection.value.products_count > 0
+  %}
+    <div class='tw-py-md tw-border-t tw-border-black'>
+      <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>Featured Collection</h2>
+      {% render 'featured-collection', collection: article.metafields.custom.featured_collection.value %}
+    </div>
+  {% endif %}
+
+  <script>
+    console.log('{{ article.metafields.custom.featured_collection.value.products_count }}');
+  </script>
 </opacity-reveal>
 
 {% schema %}
