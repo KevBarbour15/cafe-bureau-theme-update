@@ -21,9 +21,22 @@
         "menu": "dropdown-menu",
         "collection_menu": "collection-filter"
       }
+    },
+    "subheader_BnCgPz": {
+      "type": "subheader",
+      "settings": {
+        "display_subheader": true,
+        "display_metadata": false,
+        "left_link_title": "",
+        "left_link_url": "",
+        "right_link_title": "",
+        "right_link_url": "",
+        "link_list": ""
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "subheader_BnCgPz"
   ]
 }

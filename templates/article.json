@@ -9,17 +9,6 @@
  */
 {
   "sections": {
-    "subheader_NKqDaJ": {
-      "type": "subheader",
-      "settings": {
-        "display_subheader": true,
-        "left_link_title": "Lookbooks",
-        "left_link_url": "shopify://blogs/lookbooks",
-        "right_link_title": "Shop",
-        "right_link_url": "shopify://collections/all",
-        "link_list": ""
-      }
-    },
     "main": {
       "type": "main-article",
       "settings": {
@@ -28,7 +17,6 @@
     }
   },
   "order": [
-    "subheader_NKqDaJ",
     "main"
   ]
 }
