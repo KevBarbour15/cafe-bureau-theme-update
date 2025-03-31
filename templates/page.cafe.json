@@ -103,9 +103,22 @@
         "blog_link": "shopify://blogs/past-events",
         "blog_link_cta": "view all events"
       }
+    },
+    "subheader_nXiEi9": {
+      "type": "subheader",
+      "settings": {
+        "display_subheader": true,
+        "display_metadata": false,
+        "left_link_title": "",
+        "left_link_url": "",
+        "right_link_title": "",
+        "right_link_url": "",
+        "link_list": ""
+      }
     }
   },
   "order": [
+    "subheader_nXiEi9",
     "main",
     "main_cafe_upcoming_events_JrXjPY",
     "main_cafe_programming_slider_xxPr7D"
