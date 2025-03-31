@@ -20,9 +20,9 @@
     </div>
   </item-slider>
 </div>
-<div class='tw-hidden md:tw-grid tw-container tw-gap-sm md:tw-gap-md tw-grid-cols-4'>
+<div class='tw-hidden md:tw-flex tw-justify-center tw-container tw-gap-sm md:tw-gap-md'>
   {% for product in collection.products %}
-    <div>
+    <div class='tw-w-1/4 tw-h-full'>
       {% render 'product-card',
         product: product,
         variant: product.first_available_variant,
