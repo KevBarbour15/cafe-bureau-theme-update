@@ -28,6 +28,22 @@
       </div>
     {% endif %}
 
+    {% if article.metafields.custom.youtube_embed != blank %}
+      <div class='card tw-py-md p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
+        {{
+          article.metafields.custom.youtube_embed
+          | replace: 'width="560"', 'width="100%"'
+          | replace: 'height="315"', 'height="100%"'
+        }}
+      </div>
+    {% endif %}
+
+    {% if article.metafields.custom.vimeo_embed != blank %}
+      <div class='card tw-py-md p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
+        {{ article.metafields.custom.youtube_embed }}
+      </div>
+    {% endif %}
+
     <div class='tw-pt-md'>
       {% if article.metafields.custom.image_1.value != blank %}
         <div class='card tw-mb-md' style='opacity: 0;'>

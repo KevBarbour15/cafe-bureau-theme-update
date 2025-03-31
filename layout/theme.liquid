@@ -273,9 +273,11 @@
 
 
       html {
+
          box-sizing: border-box;
          font-size: calc(var(--font-body-scale) * 62.5%);
          height: 100%;
+         width: 100%;
        }
 
        body {
@@ -291,6 +293,7 @@
          font-style: var(--font-body-style);
          font-weight: var(--font-body-weight);
          font-color: black;
+         width: 100vw;
        }
 
 
@@ -338,9 +341,7 @@
     </script>
   </head>
 
-  <body class='tw-bg-primary-black'>
-    {% render 'cookie-consent' %}
-
+  <body class='tw-bg-primary-white'>
     <a class='skip-to-content-link button visually-hidden' href='#MainContent'>
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -351,14 +352,15 @@
 
     {% sections 'header-group' %}
 
-    <main class='tw-bg-primary-white' role='main' tabindex='-1'>
+    <main role='main' tabindex='-1'>
+      {% render 'cookie-consent' %}
       <div class='tw-min-h-[calc(100svh-100px)]'>
         {{ content_for_layout }}
       </div>
     </main>
-    <div class='tw-bg-primary-white'>
-      {% sections 'footer-group' %}
-    </div>
+
+    {% sections 'footer-group' %}
+
     <ul hidden>
       <li id='a11y-refresh-page-message'>{{ 'accessibility.refresh_page' | t }}</li>
       <li id='a11y-new-window-message'>{{ 'accessibility.link_messages.new_window' | t }}</li>

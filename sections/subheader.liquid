@@ -1,7 +1,12 @@
 {% comment %}
   Set the subheader data based on the page type to ensure the subheader is displayed correctly with the correct data.
 {% endcomment %}
-
+{% assign display_subheader = false %}
+{% assign left_link_title = blank %}
+{% assign left_link_url = blank %}
+{% assign right_link_title = blank %}
+{% assign right_link_url = blank %}
+{% assign link_list = blank %}
 {% if request.page_type != 'article' and request.page_type != 'blog' %}
   {% assign display_subheader = section.settings.display_subheader %}
   {% assign left_link_title = section.settings.left_link_title %}
