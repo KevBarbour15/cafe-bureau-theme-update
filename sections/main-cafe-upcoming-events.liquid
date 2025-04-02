@@ -46,7 +46,7 @@
                   <div
                     class='accordion-content tw-pr-sm md:tw-pr-md'
                   >
-                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-py-sm md:tw-gap-lg'>
+                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-py-sm md:tw-gap-lg tw-w-full'>
                       {% if block.settings.event_image != blank %}
                         <img
                           src='{{ block.settings.event_image | img_url: "master" }}'
@@ -57,7 +57,7 @@
                         >
                       {% endif %}
                       {% if block.settings.event_description != blank %}
-                        <div class='tw-flex tw-flex-col'>
+                        <div class='tw-flex tw-flex-col tw-flex-auto'>
                           <h2 class='tw-font-snell tw-text-balance tw-capitalize tw-text-center tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-mt-0 md:tw-mb-md'>
                             {{ block.settings.event_title }}
                           </h2>
