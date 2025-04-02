@@ -61,9 +61,16 @@
                           <h2 class='tw-font-snell tw-text-balance tw-capitalize tw-text-center tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-mt-0 md:tw-mb-md'>
                             {{ block.settings.event_title }}
                           </h2>
-                          <p class='p2'>
-                            {{ block.settings.event_description | strip_html }}
-                          </p>
+
+                          <div class='p2'>
+                            {% assign paragraphs = block.settings.event_description | split: '<p>' %}
+                            {% for paragraph in paragraphs %}
+                              {% if paragraph != '' %}
+                                <p class='tw-mb-4'>{{ paragraph | remove: '</p>' }}</p>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+
                           {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
                             <a
                               href='{{ block.settings.event_link }}'
