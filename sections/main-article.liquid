@@ -36,7 +36,7 @@
         {% endif %}
         {% if article.content != blank %}
           <div class='card p2 tw-mt-sm' style='opacity: 0;'>
-            {{ article.content }}
+            {{ article.content | newline_to_br }}
           </div>
         {% endif %}
       </div>
