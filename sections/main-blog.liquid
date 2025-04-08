@@ -11,13 +11,13 @@
   {%- paginate blog.articles by 6 -%}
     <div class=' tw-min-h-dvh tw-container {{ page_styling }}'>
       {% if blog.metafields.custom.show_title == true %}
-        <div class='card tw-border-b tw-border-black tw-py-md md:tw-py-lg' style='opacity: 0;'>
+        <div class='card tw-pt-md md:tw-pt-lg' style='opacity: 0;'>
           <h2 class='tw-text-center heading'>
             {{- blog.title -}}
           </h2>
 
           {% if blog.metafields.custom.blog_description != blank %}
-            <p class='tw-text-center p1 tw-mt-xs md:tw-mt-sm'>
+            <p class='tw-text-center p1 tw-mt-xs md:tw-mt-sm tw-text-balance'>
               {{- blog.metafields.custom.blog_description -}}
             </p>
           {% endif %}
