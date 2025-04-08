@@ -109,17 +109,27 @@
     },
     "main_cafe_programming_slider_xxPr7D": {
       "type": "main-cafe-programming-slider",
+      "disabled": true,
       "settings": {
         "heading": "NBD Radio",
         "blog": "no-bad-days-radio",
         "blog_link": "shopify://blogs/no-bad-days-radio",
         "blog_link_cta": "View ALL Sets"
       }
+    },
+    "main_cafe_video_slider_rKWfEP": {
+      "type": "main-cafe-video-slider",
+      "settings": {
+        "blog": "",
+        "page_link": "shopify://blogs/no-bad-days-radio",
+        "page_link_cta": "View All Sets"
+      }
     }
   },
   "order": [
     "main",
     "main_cafe_upcoming_events_JrXjPY",
-    "main_cafe_programming_slider_xxPr7D"
+    "main_cafe_programming_slider_xxPr7D",
+    "main_cafe_video_slider_rKWfEP"
   ]
 }
