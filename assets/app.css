@@ -1023,6 +1023,14 @@ video {
   min-width: 325px;
 }
 
+.tw-min-w-\[30px\] {
+  min-width: 30px;
+}
+
+.tw-min-w-\[300px\] {
+  min-width: 300px;
+}
+
 .tw-max-w-\[315px\] {
   max-width: 315px;
 }
@@ -1101,6 +1109,14 @@ video {
 
 .tw-flex-\[0_0_325px\] {
   flex: 0 0 325px;
+}
+
+.tw-flex-\[0_0_30px\] {
+  flex: 0 0 30px;
+}
+
+.tw-flex-\[0_0_300px\] {
+  flex: 0 0 300px;
 }
 
 .tw-shrink-0 {
