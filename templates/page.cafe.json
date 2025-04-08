@@ -109,12 +109,11 @@
     },
     "main_cafe_programming_slider_xxPr7D": {
       "type": "main-cafe-programming-slider",
-      "disabled": true,
       "settings": {
         "heading": "NBD RADIO",
         "blog": "no-bad-days-radio",
-        "blog_link": "shopify://blogs/past-events",
-        "blog_link_cta": "view all events"
+        "blog_link": "shopify://blogs/no-bad-days-radio",
+        "blog_link_cta": "View ALL Sets"
       }
     }
   },
