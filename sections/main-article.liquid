@@ -20,7 +20,7 @@
           <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
         {% endif %}
         {% if article.metafields.custom.youtube_embed != blank %}
-          <div class='card tw-py-sm p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
+          <div class='card tw-pt-md p2 tw-w-full tw-aspect-video tw-border-black tw-border' style='opacity: 0;'>
             {{
               article.metafields.custom.youtube_embed
               | replace: 'width="560"', 'width="100%"'
@@ -30,7 +30,7 @@
         {% endif %}
 
         {% if article.metafields.custom.vimeo_embed != blank %}
-          <div class='card tw-py-sm p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
+          <div class='card tw-pt-md p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
             {{ article.metafields.custom.youtube_embed }}
           </div>
         {% endif %}
