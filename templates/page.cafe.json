@@ -78,29 +78,16 @@
           "settings": {
             "event_title": "Pool Club",
             "event_time": "7pm - 11pm",
-            "event_date": "April 9th, 2025",
+            "event_date": "April 23th, 2025",
             "event_description": "<p>Whether you're a shark or a minnow there's plenty of room in the Café Bureau pool. </p>",
             "event_image": "shopify://shop_images/cb-poolnight.jpg",
-            "event_link_text": "RSVP",
+            "event_link_text": "",
             "event_link": "https://lu.ma/dduvl7z4"
-          }
-        },
-        "event_nEFA7p": {
-          "type": "event",
-          "settings": {
-            "event_title": "The Worlds Smartest Genius Is",
-            "event_time": "6pm-10pm",
-            "event_date": "April 17th, 2025",
-            "event_description": "<p>Travis is a painter based in Brooklyn, New York. He received his Bachelor of Arts in Studio Art from The University of Texas at Austin in 2011. He works mainly in acrylics, with a practice spanning across fine art and reimagined clothing. Travis was heavily influenced by the skateboarding and graffiti culture of the Bay area, where he spent much of his time after college.<br/><br/>Gregory Simmons (American, b. Los Angeles 1984) is a Brooklyn based artist renowned for his oil, pastel, and gouache paintings. Inspired by modern culture and social media, Simmons captures fleeting moments with humor and nostalgia, often incorporating social commentary. Self-taught, he draws from his love of skateboarding and 90s television imagery. Through his work, Simmons explores contemporary identity within the context of media and pop culture, inviting viewers to ponder the nuances of modern existence.</p>",
-            "event_image": "shopify://shop_images/B9E9BBCC-2871-4BF4-86D2-C58BCDEC463D.jpg",
-            "event_link_text": "RSVP",
-            "event_link": "https://lu.ma/qx5isxwm"
           }
         }
       },
       "block_order": [
-        "event_eJUKp8",
-        "event_nEFA7p"
+        "event_eJUKp8"
       ],
       "settings": {
         "heading": "Upcoming Events",
