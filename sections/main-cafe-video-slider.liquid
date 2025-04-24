@@ -1,65 +1,67 @@
-<div class='tw-py-md tw-border-t tw-border-black tw-flex tw-flex-col'>
-  {% if section.settings.blog != blank %}
-    <h2 class='tw-text-center tw-mb-md tw-font-snell tw-text-[32px] md:tw-text-[48px] tw-text-black'>
-      {{ section.settings.blog.title }}
-    </h2>
-  {% endif %}
+<opacity-reveal>
+  <div class='card tw-py-md tw-border-t tw-border-black tw-flex tw-flex-col tw-opacity-0'>
+    {% if section.settings.blog != blank %}
+      <h2 class='tw-text-center tw-mb-md tw-font-snell tw-text-[32px] md:tw-text-[48px] tw-text-black'>
+        {{ section.settings.blog.title }}
+      </h2>
+    {% endif %}
 
-  {% if section.settings.blog != blank and section.settings.blog.metafields.custom.video_blog == true %}
-    <div
-      class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-sm tw-w-full'
-      style='scrollbar-width: none; -ms-overflow-style: none;'
-    >
-      {% for article in section.settings.blog.articles %}
-        <div
-          class='tw-h-full tw-min-w-[300px] tw-max-w-[500px] tw-flex-[0_0_300px] lg:tw-flex-[0_0_500px]'
-        >
-          {% if article.metafields.custom.youtube_embed != blank %}
-            <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
-              {{
-                article.metafields.custom.youtube_embed
-                | replace: 'width="560"', 'width="100%"'
-                | replace: 'height="315"', 'height="100%"'
-              }}
-            </div>
-            {% if article.title != blank %}
-              <h2
-                class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
-              >
-                {{- article.title -}}
-              </h2>
+    {% if section.settings.blog != blank and section.settings.blog.metafields.custom.video_blog == true %}
+      <div
+        class='tw-flex tw-overflow-x-auto tw-gap-x-md tw-px-sm tw-w-full'
+        style='scrollbar-width: none; -ms-overflow-style: none;'
+      >
+        {% for article in section.settings.blog.articles %}
+          <div
+            class='tw-h-full tw-min-w-[300px] tw-max-w-[500px] tw-flex-[0_0_300px] lg:tw-flex-[0_0_500px]'
+          >
+            {% if article.metafields.custom.youtube_embed != blank %}
+              <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
+                {{
+                  article.metafields.custom.youtube_embed
+                  | replace: 'width="560"', 'width="100%"'
+                  | replace: 'height="315"', 'height="100%"'
+                }}
+              </div>
+              {% if article.title != blank %}
+                <h2
+                  class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+                >
+                  {{- article.title -}}
+                </h2>
+              {% endif %}
+            {% elsif article.metafields.custom.vimeo_embed != blank %}
+              <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
+                {{ article.metafields.custom.vimeo_embed }}
+              </div>
+              {% if article.title != blank %}
+                <h2
+                  class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
+                >
+                  {{- article.title -}}
+                </h2>
+              {% endif %}
             {% endif %}
-          {% elsif article.metafields.custom.vimeo_embed != blank %}
-            <div class='video-container tw-w-full tw-aspect-video tw-border tw-border-black'>
-              {{ article.metafields.custom.vimeo_embed }}
-            </div>
-            {% if article.title != blank %}
-              <h2
-                class='p2 tw-uppercase tw-text-wrap tw-transition-all tw-underline-offset-4 tw-text-center tw-pt-sm'
-              >
-                {{- article.title -}}
-              </h2>
-            {% endif %}
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if section.settings.page_link != blank and section.settings.page_link_cta != blank %}
-    <div class='tw-w-full tw-py-md tw-relative'>
-      <div class='tw-absolute tw-left-1/2 tw--translate-x-1/2'>
-        {% render 'link-hover',
-          link: section.settings.page_link,
-          link_cta: section.settings.page_link_cta,
-          text_style: 'tw-uppercase caption tw-text-black tw-underline tw-underline-offset-4',
-          arrow_style: 'tw-fill-black',
-          arrow_size: 20
-        %}
+          </div>
+        {% endfor %}
       </div>
-    </div>
-  {% endif %}
-</div>
+    {% endif %}
+
+    {% if section.settings.page_link != blank and section.settings.page_link_cta != blank %}
+      <div class='tw-w-full tw-py-md tw-relative'>
+        <div class='tw-absolute tw-left-1/2 tw--translate-x-1/2'>
+          {% render 'link-hover',
+            link: section.settings.page_link,
+            link_cta: section.settings.page_link_cta,
+            text_style: 'tw-uppercase caption tw-text-black tw-underline tw-underline-offset-4',
+            arrow_style: 'tw-fill-black',
+            arrow_size: 20
+          %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</opacity-reveal>
 
 {% schema %}
 {

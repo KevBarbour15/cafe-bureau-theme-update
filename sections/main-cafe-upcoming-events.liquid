@@ -1,98 +1,100 @@
-<accordion-component>
-  <div class='tw-w-v tw-border-t tw-border-black tw-text-black'>
-    <div class='tw-container tw-py-md tw-flex tw-flex-col-reverse md:tw-flex-row '>
-      <div class='tw-w-full'>
-        {% if section.settings.heading != blank %}
-          <h2 class='tw-text-center tw-mb-sm md:tw-mb-md tw-leading-none tw-font-snell tw-text-[32px] md:tw-text-[48px]'>
-            {{ section.settings.heading }}
-          </h2>
-        {% endif %}
-        {% if section.settings.subheading != blank %}
-          <p class='tw-text-center p3 tw-mb-md tw-text-pretty'>
-            {{ section.settings.subheading }}
-          </p>
-        {% endif %}
+<opacity-reveal>
+  <accordion-component>
+    <div class='card tw-w-vw tw-border-t tw-border-black tw-text-black tw-opacity-0'>
+      <div class='tw-container tw-py-md tw-flex tw-flex-col-reverse md:tw-flex-row '>
+        <div class='tw-w-full'>
+          {% if section.settings.heading != blank %}
+            <h2 class='tw-text-center tw-mb-sm md:tw-mb-md tw-leading-none tw-font-snell tw-text-[32px] md:tw-text-[48px]'>
+              {{ section.settings.heading }}
+            </h2>
+          {% endif %}
+          {% if section.settings.subheading != blank %}
+            <p class='tw-text-center p3 tw-mb-md tw-text-pretty'>
+              {{ section.settings.subheading }}
+            </p>
+          {% endif %}
 
-        {% if section.blocks.size > 0 %}
-          <div class='tw-flex tw-flex-col'>
-            {% for block in section.blocks %}
-              {% if block.settings.event_title != blank or block.settings.event_date != blank %}
-                <div class='{% if block.settings.event_description != blank or block.settings.event_image != blank %} accordion-header tw-cursor-pointer{% endif %} tw-flex tw-flex-row tw-pb-sm tw-justify-between tw-border-b tw-mt-sm tw-border-black tw-uppercase tw-items-end'>
-                  <div class='tw-flex tw-flex-col'>
-                    <p class='p3 tw-text-balance'>
-                      {{ block.settings.event_title }}
-                    </p>
-                    <p class='p2'>{{ block.settings.event_date }}</p>
-                    <p class='p2'>{{ block.settings.event_time }}</p>
-                    {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
-                      <a
-                        href='{{ block.settings.event_link }}'
-                        class='tw-uppercase tw-underline tw-underline-offset-4 tw-cursor-pointer p2 tw-w-fit'
-                        target='_blank'
+          {% if section.blocks.size > 0 %}
+            <div class='tw-flex tw-flex-col'>
+              {% for block in section.blocks %}
+                {% if block.settings.event_title != blank or block.settings.event_date != blank %}
+                  <div class='{% if block.settings.event_description != blank or block.settings.event_image != blank %} accordion-header tw-cursor-pointer{% endif %} tw-flex tw-flex-row tw-pb-sm tw-justify-between tw-border-b tw-mt-sm tw-border-black tw-uppercase tw-items-end'>
+                    <div class='tw-flex tw-flex-col'>
+                      <p class='p3 tw-text-balance'>
+                        {{ block.settings.event_title }}
+                      </p>
+                      <p class='p2'>{{ block.settings.event_date }}</p>
+                      <p class='p2'>{{ block.settings.event_time }}</p>
+                      {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
+                        <a
+                          href='{{ block.settings.event_link }}'
+                          class='tw-uppercase tw-underline tw-underline-offset-4 tw-cursor-pointer p2 tw-w-fit'
+                          target='_blank'
+                        >
+                          {{ block.settings.event_link_text }}
+                        </a>
+                      {% endif %}
+                    </div>
+                    {% if block.settings.event_description != blank or block.settings.event_image != blank %}
+                      <div
+                        class='down-icon tw-justify-self-end'
                       >
-                        {{ block.settings.event_link_text }}
-                      </a>
+                        {% render 'down-arrow', size: 24 %}
+                      </div>
                     {% endif %}
                   </div>
                   {% if block.settings.event_description != blank or block.settings.event_image != blank %}
                     <div
-                      class='down-icon tw-justify-self-end'
+                      class='accordion-content tw-pr-sm md:tw-pr-md'
                     >
-                      {% render 'down-arrow', size: 24 %}
+                      <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-py-sm md:tw-gap-lg tw-w-full'>
+                        {% if block.settings.event_image != blank %}
+                          <img
+                            src='{{ block.settings.event_image | img_url: "master" }}'
+                            alt='{{ block.settings.event_image.alt }}'
+                            class='tw-w-full md:tw-w-auto tw-object-cover tw-object-center md:tw-max-h-[400px] tw-m-auto'
+                            width=''
+                            height=''
+                          >
+                        {% endif %}
+                        {% if block.settings.event_description != blank %}
+                          <div class='tw-flex tw-flex-col tw-flex-auto'>
+                            <h2 class='tw-font-snell tw-text-balance tw-capitalize tw-text-center tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-mt-0 md:tw-mb-md'>
+                              {{ block.settings.event_title }}
+                            </h2>
+
+                            <div class='p2'>
+                              {% assign paragraphs = block.settings.event_description | split: '<p>' %}
+                              {% for paragraph in paragraphs %}
+                                {% if paragraph != '' %}
+                                  <p class='tw-mb-4'>{{ paragraph | remove: '</p>' }}</p>
+                                {% endif %}
+                              {% endfor %}
+                            </div>
+
+                            {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
+                              <a
+                                href='{{ block.settings.event_link }}'
+                                class='tw-uppercase caption tw-mt-sm tw-underline tw-underline-offset-4 tw-cursor-pointer'
+                                target='_blank'
+                              >
+                                {{ block.settings.event_link_text }}
+                              </a>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </div>
                     </div>
                   {% endif %}
-                </div>
-                {% if block.settings.event_description != blank or block.settings.event_image != blank %}
-                  <div
-                    class='accordion-content tw-pr-sm md:tw-pr-md'
-                  >
-                    <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-py-sm md:tw-gap-lg tw-w-full'>
-                      {% if block.settings.event_image != blank %}
-                        <img
-                          src='{{ block.settings.event_image | img_url: "master" }}'
-                          alt='{{ block.settings.event_image.alt }}'
-                          class='tw-w-full md:tw-w-auto tw-object-cover tw-object-center md:tw-max-h-[400px] tw-m-auto'
-                          width=''
-                          height=''
-                        >
-                      {% endif %}
-                      {% if block.settings.event_description != blank %}
-                        <div class='tw-flex tw-flex-col tw-flex-auto'>
-                          <h2 class='tw-font-snell tw-text-balance tw-capitalize tw-text-center tw-text-[24px] md:tw-text-[32px] tw-my-sm md:tw-mt-0 md:tw-mb-md'>
-                            {{ block.settings.event_title }}
-                          </h2>
-
-                          <div class='p2'>
-                            {% assign paragraphs = block.settings.event_description | split: '<p>' %}
-                            {% for paragraph in paragraphs %}
-                              {% if paragraph != '' %}
-                                <p class='tw-mb-4'>{{ paragraph | remove: '</p>' }}</p>
-                              {% endif %}
-                            {% endfor %}
-                          </div>
-
-                          {% if block.settings.event_link_text != blank and block.settings.event_link != blank %}
-                            <a
-                              href='{{ block.settings.event_link }}'
-                              class='tw-uppercase caption tw-mt-sm tw-underline tw-underline-offset-4 tw-cursor-pointer'
-                              target='_blank'
-                            >
-                              {{ block.settings.event_link_text }}
-                            </a>
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
                 {% endif %}
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-</accordion-component>
+  </accordion-component>
+</opacity-reveal>
 
 {% schema %}
 {

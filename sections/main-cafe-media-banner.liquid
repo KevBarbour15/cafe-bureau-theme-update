@@ -1,23 +1,21 @@
-<script src='{{ 'gate-animation.js' | asset_url }}' defer></script>
-
-<opacity-reveal>
-  <div class='tw-relative tw-text-black tw-h-full'>
-    {% if section.settings.gate_overlay_desktop != blank %}
-      <gate-animation>
-        <div
-          id='gate-overlay'
-          class='tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
+<div class='tw-relative tw-text-black tw-h-full'>
+  {% if section.settings.gate_overlay_desktop != blank %}
+    <gate-animation>
+      <div
+        id='gate-overlay'
+        class='tw-fixed tw-top-0 tw-left-0 tw-opacity-0 tw-w-full tw-h-full tw-z-[10] tw-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
+      >
+        <img
+          src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
+          alt='{{ section.settings.gate_overlay_desktop.alt }}'
+          class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
+          width=''
+          height=''
         >
-          <img
-            src='{{ section.settings.gate_overlay_desktop | img_url: "master" }}'
-            alt='{{ section.settings.gate_overlay_desktop.alt }}'
-            class='tw-w-full tw-h-dvh tw-object-center tw-z-[10] tw-filter tw-drop-shadow-[0_0_8px_rgba(0,0,0,0.75)]'
-            width=''
-            height=''
-          >
-        </div>
-      </gate-animation>
-    {% endif %}
+      </div>
+    </gate-animation>
+  {% endif %}
+  <opacity-reveal>
     <div class='tw-mt-[100px] tw-container md:tw-flex tw-h-full md:tw-gap-md'>
       {% if section.settings.cafe_home_heading != blank or section.settings.cafe_home_text != blank %}
         <div class='md:tw-basis-1/2 tw-min-h-[600px] tw-w-full tw-overflow-hidden tw-relative'>
@@ -43,7 +41,7 @@
             {% endif %}
 
             {% if mobile_images.size == 1 %}
-              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm'>
+              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
                 <img
                   src='{{ desktop_images.first | img_url: "master" }}'
                   alt='{{ desktop_images.first.alt }}'
@@ -53,12 +51,12 @@
                 >
               </div>
             {% elsif mobile_images.size > 1 %}
-              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm'>
+              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
                 {% render 'image-carousel', images: mobile_images %}
               </div>
             {% endif %}
             {% if desktop_images.size == 1 %}
-              <div class='tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md'>
+              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md tw-opacity-0'>
                 <img
                   src='{{ desktop_images.first | img_url: "master" }}'
                   alt='{{ desktop_images.first.alt }}'
@@ -70,7 +68,7 @@
             {% endif %}
           {% endif %}
         </div>
-        <div class='tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md'>
+        <div class='card tw-opacity-0 tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md'>
           <div class='tw-w-full'>
             <div class=''>
               {% if section.settings.cafe_home_heading != blank %}
@@ -124,8 +122,9 @@
         </div>
       {% endif %}
     </div>
-  </div>
-</opacity-reveal>
+  </opacity-reveal>
+</div>
+
 {% schema %}
 {
   "name": "Main Cafe Media Banner",

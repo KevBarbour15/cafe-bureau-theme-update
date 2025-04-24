@@ -4,6 +4,11 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <script>
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+      }
+    </script>
     <meta name='theme-color' content=''>
     <link rel='canonical' href='{{ canonical_url }}'>
 
@@ -74,6 +79,7 @@
     <script src='{{ 'ScrambleTextPlugin.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'SplitText.min.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'ScrollTrigger.min.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'gate-animation.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'cookie-consent.js' | asset_url }}' type='module' defer='defer'></script>
