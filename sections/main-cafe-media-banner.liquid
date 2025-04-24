@@ -15,115 +15,172 @@
       </div>
     </gate-animation>
   {% endif %}
-  <opacity-reveal>
-    <div class='tw-mt-[100px] tw-container md:tw-flex tw-h-full md:tw-gap-md'>
-      {% if section.settings.cafe_home_heading != blank or section.settings.cafe_home_text != blank %}
-        <div class='md:tw-basis-1/2 tw-min-h-[600px] tw-w-full tw-overflow-hidden tw-relative'>
-          {% if section.blocks.size > 0 %}
-            {% assign desktop_images = '' %}
-            {% assign mobile_images = '' %}
-            {% for block in section.blocks %}
-              {% if block.type == 'images_desktop' %}
-                {% assign image = block.settings.image | sort %}
-                {% assign desktop_images = desktop_images | concat: image %}
-              {% endif %}
-              {% if block.type == 'images_mobile' %}
-                {% assign image = block.settings.image | sort %}
-                {% assign mobile_images = mobile_images | concat: image %}
-              {% endif %}
-            {% endfor %}
 
-            {% if desktop_images.size > 1 %}
-              {% assign desktop_images = desktop_images | slice: 1, desktop_images.size %}
-            {% endif %}
-            {% if mobile_images.size > 1 %}
-              {% assign mobile_images = mobile_images | slice: 1, mobile_images.size %}
-            {% endif %}
+  <loading-component data-done-loading='false' data-images-loaded='false'>
+    <div
+      id='loading-container'
+      class='tw-w-full tw-text-center tw-h-dvh tw-flex tw-flex-col tw-justify-center tw-items-center'
+    >
+      <h2 id='loading-text' class='tw-text-[32px] md:tw-text-[48px] tw-text-black tw-uppercase'>Loading...</h2>
+    </div>
 
-            {% if mobile_images.size == 1 %}
-              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
-                <img
-                  src='{{ desktop_images.first | img_url: "master" }}'
-                  alt='{{ desktop_images.first.alt }}'
-                  class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
-                  width=''
-                  height=''
-                >
-              </div>
-            {% elsif mobile_images.size > 1 %}
-              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
-                {% render 'image-carousel', images: mobile_images %}
-              </div>
-            {% endif %}
-            {% if desktop_images.size == 1 %}
-              <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md tw-opacity-0'>
-                <img
-                  src='{{ desktop_images.first | img_url: "master" }}'
-                  alt='{{ desktop_images.first.alt }}'
-                  class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
-                  width=''
-                  height=''
-                >
-              </div>
-            {% endif %}
-          {% endif %}
-        </div>
-        <div class='card tw-opacity-0 tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md'>
-          <div class='tw-w-full'>
-            <div class=''>
-              {% if section.settings.cafe_home_heading != blank %}
-                <p class='tw-text-center tw-font-snell tw-mb-sm tw-text-[32px] tw-leading-none md:tw-text-[48px]'>
-                  {{ section.settings.cafe_home_heading | newline_to_br }}
-                </p>
-              {% endif %}
-              {% if section.settings.cafe_home_subheading != blank %}
-                <p class='tw-text-center tw-font-snell tw-mb-lg tw-leading-none tw-text-[18px] md:tw-text-[24px]'>
-                  {{ section.settings.cafe_home_subheading | newline_to_br }}
-                </p>
+    <div class='tw-hidden' data-banner-content>
+      <opacity-reveal>
+        <div class='tw-mt-[100px] tw-container md:tw-flex tw-h-full md:tw-gap-md'>
+          {% if section.settings.cafe_home_heading != blank or section.settings.cafe_home_text != blank %}
+            <div class='md:tw-basis-1/2 tw-min-h-[600px] tw-w-full tw-overflow-hidden tw-relative'>
+              {% if section.blocks.size > 0 %}
+                {% assign desktop_images = '' %}
+                {% assign mobile_images = '' %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'images_desktop' %}
+                    {% assign image = block.settings.image | sort %}
+                    {% assign desktop_images = desktop_images | concat: image %}
+                  {% endif %}
+                  {% if block.type == 'images_mobile' %}
+                    {% assign image = block.settings.image | sort %}
+                    {% assign mobile_images = mobile_images | concat: image %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if desktop_images.size > 1 %}
+                  {% assign desktop_images = desktop_images | slice: 1, desktop_images.size %}
+                {% endif %}
+                {% if mobile_images.size > 1 %}
+                  {% assign mobile_images = mobile_images | slice: 1, mobile_images.size %}
+                {% endif %}
+
+                {% if mobile_images.size == 1 %}
+                  <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
+                    <img
+                      src='{{ desktop_images.first | img_url: "master" }}'
+                      alt='{{ desktop_images.first.alt }}'
+                      class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
+                      width=''
+                      height=''
+                    >
+                  </div>
+                {% elsif mobile_images.size > 1 %}
+                  <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-hidden tw-py-sm tw-opacity-0'>
+                    {% render 'image-carousel', images: mobile_images %}
+                  </div>
+                {% endif %}
+                {% if desktop_images.size == 1 %}
+                  <div class='card tw-w-full tw-h-full tw-absolute tw-inset-0 lg:tw-block tw-hidden tw-py-md tw-opacity-0'>
+                    <img
+                      src='{{ desktop_images.first | img_url: "master" }}'
+                      alt='{{ desktop_images.first.alt }}'
+                      class='tw-w-full tw-h-full tw-object-cover tw-border tw-border-black'
+                      width=''
+                      height=''
+                    >
+                  </div>
+                {% endif %}
               {% endif %}
             </div>
-            {% if section.settings.cafe_home_text != blank %}
-              <p class='tw-text-left tw-mb-lg tw-text-pretty p2'>
-                {{ section.settings.cafe_home_text | newline_to_br }}
-              </p>
-            {% endif %}
-          </div>
-          {% if section.settings.cafe_hours != blank
-            or section.settings.cafe_location != blank
-            or section.settings.cafe_location_url != blank
-          %}
-            <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between tw-w-full'>
-              {% if section.blocks.size > 0 %}
-                <dl class='tw-flex tw-flex-col'>
-                  {% for block in section.blocks %}
-                    {% if block.type == 'cafe_hours' %}
-                      <div class='tw-flex tw-gap-xs tw-justify-between tw-w-full'>
-                        <dt class='caption'>{{ block.settings.day }}:</dt>
-                        <dd class='caption'>{{ block.settings.hours }}</dd>
-                      </div>
-                    {% endif %}
-                  {% endfor %}
-                </dl>
-              {% endif %}
-              <div class='tw-flex tw-flex-col tw-justify-end tw-mt-md md:tw-mt-0'>
-                {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
-                  {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
-                    <a
-                      href='{{ section.settings.cafe_location_url }}'
-                      class='{% if section.blocks.size > 0 %} tw-text-left md:tw-text-right {% endif %} tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
-                    >
-                      {{- section.settings.cafe_location | newline_to_br -}}
-                    </a>
+            <div class='card tw-opacity-0 tw-flex tw-flex-col tw-pb-md md:tw-basis-1/2 tw-justify-between md:tw-py-md'>
+              <div class='tw-w-full'>
+                <div class=''>
+                  {% if section.settings.cafe_home_heading != blank %}
+                    <p class='tw-text-center tw-font-snell tw-mb-sm tw-text-[32px] tw-leading-none md:tw-text-[48px]'>
+                      {{ section.settings.cafe_home_heading | newline_to_br }}
+                    </p>
                   {% endif %}
+                  {% if section.settings.cafe_home_subheading != blank %}
+                    <p class='tw-text-center tw-font-snell tw-mb-lg tw-leading-none tw-text-[18px] md:tw-text-[24px]'>
+                      {{ section.settings.cafe_home_subheading | newline_to_br }}
+                    </p>
+                  {% endif %}
+                </div>
+                {% if section.settings.cafe_home_text != blank %}
+                  <p class='tw-text-left tw-mb-lg tw-text-pretty p2'>
+                    {{ section.settings.cafe_home_text | newline_to_br }}
+                  </p>
                 {% endif %}
               </div>
+              {% if section.settings.cafe_hours != blank
+                or section.settings.cafe_location != blank
+                or section.settings.cafe_location_url != blank
+              %}
+                <div class='tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between tw-w-full'>
+                  {% if section.blocks.size > 0 %}
+                    <dl class='tw-flex tw-flex-col'>
+                      {% for block in section.blocks %}
+                        {% if block.type == 'cafe_hours' %}
+                          <div class='tw-flex tw-gap-xs tw-justify-between tw-w-full'>
+                            <dt class='caption'>{{ block.settings.day }}:</dt>
+                            <dd class='caption'>{{ block.settings.hours }}</dd>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </dl>
+                  {% endif %}
+                  <div class='tw-flex tw-flex-col tw-justify-end tw-mt-md md:tw-mt-0'>
+                    {% if section.settings.cafe_location != blank or section.settings.cafe_location_url != blank %}
+                      {% if section.settings.cafe_location != blank and section.settings.cafe_location_url != blank %}
+                        <a
+                          href='{{ section.settings.cafe_location_url }}'
+                          class='{% if section.blocks.size > 0 %} tw-text-left md:tw-text-right {% endif %} tw-uppercase caption md:hover:tw-underline md:tw-transition-all md:tw-duration-300 tw-underline-offset-4'
+                        >
+                          {{- section.settings.cafe_location | newline_to_br -}}
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
             </div>
           {% endif %}
         </div>
-      {% endif %}
+      </opacity-reveal>
     </div>
-  </opacity-reveal>
+  </loading-component>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadingComponent = document.querySelector('loading-component');
+    const bannerContent = document.querySelector('[data-banner-content]');
+
+    const handleLoadingComplete = () => {
+      if (loadingComponent) {
+        const loadingContainer = loadingComponent.querySelector('#loading-container');
+        if (loadingContainer) {
+          loadingContainer.style.display = 'none';
+        }
+      }
+      if (bannerContent) {
+        bannerContent.classList.remove('tw-hidden');
+      }
+    };
+
+    // Check if images are already loaded
+    if (loadingComponent && loadingComponent.getAttribute('data-images-loaded') === 'true') {
+      handleLoadingComplete();
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-images-loaded') {
+          if (loadingComponent.getAttribute('data-images-loaded') === 'true') {
+            handleLoadingComplete();
+          }
+        }
+      });
+    });
+
+    if (loadingComponent) {
+      observer.observe(loadingComponent, { attributes: true });
+    }
+
+    // Fallback in case the observer doesn't trigger
+    setTimeout(() => {
+      if (loadingComponent && loadingComponent.getAttribute('data-images-loaded') !== 'true') {
+        loadingComponent.setAttribute('data-images-loaded', 'true');
+      }
+    }, 6000); // 6 second timeout
+  });
+</script>
 
 {% schema %}
 {

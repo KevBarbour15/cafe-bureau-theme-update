@@ -21,7 +21,7 @@ class GateAnimation extends HTMLElement {
     // Start gate animation after a short delay to allow scroll to begin
     setTimeout(() => {
       this.startGateAnimation();
-    }, 100);
+    }, 50);
   }
 
   startGateAnimation() {
@@ -29,9 +29,8 @@ class GateAnimation extends HTMLElement {
       opacity: 0,
     })
       .to(this.gateOverlay, {
-        delay: 0.35,
         opacity: 1,
-        duration: 0.1,
+        duration: 0.35,
       }).to(this.gateOverlay, {
         y: '-100vh',
         ease: "linear",
