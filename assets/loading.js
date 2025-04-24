@@ -46,7 +46,9 @@ class Loading extends HTMLElement {
     const checkComplete = () => {
       loadedImages++;
       if (loadedImages === totalImages) {
+        setTimeout(() => {
           this.setAttribute('data-images-loaded', 'true');
+        }, 1000);
       }
     };
 

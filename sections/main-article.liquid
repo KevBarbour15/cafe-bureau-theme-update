@@ -7,8 +7,10 @@
   {% assign page_styling = 'tw-pt-[60px] md:tw-pt-[80px]' %}
 {% endif %}
 
+{% render 'loading-animation', done_loading: false %}
+
 <opacity-reveal>
-  <article class='tw-container tw-text-black tw-min-h-dvh {{ page_styling }}'>
+  <article data-article-content class='tw-container tw-hidden tw-text-black tw-min-h-dvh {{ page_styling }}'>
     {% if article.title != blank %}
       <div class='card tw-py-md md:tw-py-lg' style='opacity: 0;'>
         <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
@@ -117,16 +119,55 @@
   {% if article.metafields.custom.featured_collection.value != blank
     and article.metafields.custom.featured_collection.value.products_count > 0
   %}
-    <div class='tw-py-md tw-border-t tw-border-black'>
+    <div class='card tw-py-md tw-border-t tw-border-black tw-opacity-0'>
       <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>Featured Collection</h2>
       {% render 'featured-collection', collection: article.metafields.custom.featured_collection.value %}
     </div>
   {% endif %}
-
-  <script>
-    console.log('{{ article.metafields.custom.featured_collection.value.products_count }}');
-  </script>
 </opacity-reveal>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadingComponent = document.querySelector('loading-component');
+    const articleContent = document.querySelector('[data-article-content]');
+
+    const handleLoadingComplete = () => {
+      if (loadingComponent) {
+        loadingComponent.style.display = 'none';
+      }
+      if (articleContent) {
+        articleContent.classList.remove('tw-hidden');
+        articleContent.style.opacity = '1';
+      }
+    };
+
+    // Check if images are already loaded
+    if (loadingComponent && loadingComponent.getAttribute('data-images-loaded') === 'true') {
+      handleLoadingComplete();
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-images-loaded') {
+          if (loadingComponent.getAttribute('data-images-loaded') === 'true') {
+            handleLoadingComplete();
+          }
+        }
+      });
+    });
+
+    if (loadingComponent) {
+      observer.observe(loadingComponent, { attributes: true });
+    }
+
+    // Fallback in case the observer doesn't trigger
+    setTimeout(() => {
+      if (loadingComponent && loadingComponent.getAttribute('data-images-loaded') !== 'true') {
+        loadingComponent.setAttribute('data-images-loaded', 'true');
+      }
+    }, 6000); // 6 second timeout
+  });
+</script>
 
 {% schema %}
 {
