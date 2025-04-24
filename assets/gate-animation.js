@@ -46,5 +46,3 @@ class GateAnimation extends HTMLElement {
 }
 
 customElements.define('gate-animation', GateAnimation);
-
-customElements.define('gate-animation', GateAnimation);

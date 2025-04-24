@@ -1,5 +1,3 @@
-<script src='{{'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
-
 {% assign page_styling = '' %}
 {% if article.metafields.custom.display_subheader == true %}
   {% assign page_styling = 'tw-pt-[100px] md:tw-pt-[120px]' %}
@@ -7,124 +5,134 @@
   {% assign page_styling = 'tw-pt-[60px] md:tw-pt-[80px]' %}
 {% endif %}
 
-{% render 'loading-animation', done_loading: false %}
+<loading-component data-done-loading='false' data-images-loaded='false'>
+  <div
+    id='loading-container'
+    class='tw-w-full tw-mt-lg tw-text-center tw-h-dvh tw-flex tw-flex-col tw-justify-center tw-items-center'
+  >
+    <h2 id='loading-text' class='h3 tw-uppercase'>Loading...</h2>
+  </div>
 
-<opacity-reveal>
-  <article data-article-content class='tw-container tw-hidden tw-text-black tw-min-h-dvh {{ page_styling }}'>
-    {% if article.title != blank %}
-      <div class='card tw-py-md md:tw-py-lg' style='opacity: 0;'>
-        <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
-        {% if article.metafields.custom.post_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.post_date }}</p>
-        {% elsif article.metafields.custom.event_date != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.event_date }}</p>
-        {% elsif article.published_at != blank %}
-          <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
-        {% endif %}
-        {% if article.metafields.custom.youtube_embed != blank %}
-          <div class='card tw-mt-md p2 tw-w-full tw-aspect-video tw-border tw-border-black' style='opacity: 0;'>
+  <article class='tw-container tw-hidden tw-text-black tw-min-h-dvh {{ page_styling }}' data-article-content>
+    <opacity-reveal>
+      {% if article.title != blank %}
+        <div class='card tw-py-md md:tw-py-lg' style='opacity: 0;'>
+          <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>{{- article.title -}}</h2>
+          {% if article.metafields.custom.post_date != blank %}
+            <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.post_date }}</p>
+          {% elsif article.metafields.custom.event_date != blank %}
+            <p class='tw-text-center p1 tw-uppercase'>{{ article.metafields.custom.event_date }}</p>
+          {% elsif article.published_at != blank %}
+            <p class='tw-text-center p1 tw-uppercase'>{{- article.published_at | date: '%B %d, %Y' -}}</p>
+          {% endif %}
+          {% if article.metafields.custom.youtube_embed != blank %}
+            <div class='card tw-mt-md p2 tw-w-full tw-aspect-video tw-border tw-border-black' style='opacity: 0;'>
+              {{
+                article.metafields.custom.youtube_embed
+                | replace: 'width="560"', 'width="100%"'
+                | replace: 'height="315"', 'height="100%"'
+              }}
+            </div>
+          {% endif %}
+
+          {% if article.metafields.custom.vimeo_embed != blank %}
+            <div class='card tw-pt-md p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
+              {{ article.metafields.custom.youtube_embed }}
+            </div>
+          {% endif %}
+          {% if article.content != blank %}
+            <div class='card p2 tw-mt-sm' style='opacity: 0;'>
+              {{ article.content | newline_to_br }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div>
+        {% if article.metafields.custom.image_1.value != blank %}
+          <div class='card tw-mb-md' style='opacity: 0;'>
             {{
-              article.metafields.custom.youtube_embed
-              | replace: 'width="560"', 'width="100%"'
-              | replace: 'height="315"', 'height="100%"'
+              article.metafields.custom.image_1.value
+              | image_url: width: 1000
+              | image_tag: class: 'tw-w-full tw-h-auto'
             }}
           </div>
         {% endif %}
 
-        {% if article.metafields.custom.vimeo_embed != blank %}
-          <div class='card tw-pt-md p2 tw-w-full tw-aspect-video' style='opacity: 0;'>
-            {{ article.metafields.custom.youtube_embed }}
+        {% if article.metafields.custom.image_list_1.value != blank %}
+          <div class='md:tw-flex md:tw-gap-md'>
+            {% for image in article.metafields.custom.image_list_1.value %}
+              <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
+                {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
+              </div>
+            {% endfor %}
           </div>
         {% endif %}
-        {% if article.content != blank %}
-          <div class='card p2 tw-mt-sm' style='opacity: 0;'>
-            {{ article.content | newline_to_br }}
+
+        {% if article.metafields.custom.image_2.value != blank %}
+          <div class='card tw-mb-md' style='opacity: 0;'>
+            {{
+              article.metafields.custom.image_2.value
+              | image_url: width: 1000
+              | image_tag: class: 'tw-w-full tw-h-auto'
+            }}
+          </div>
+        {% endif %}
+
+        {% if article.metafields.custom.image_list_2.value != blank %}
+          <div class='md:tw-flex md:tw-gap-md'>
+            {% for image in article.metafields.custom.image_list_2.value %}
+              <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
+                {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if article.metafields.custom.image_3.value != blank %}
+          <div class='card tw-mb-md' style='opacity: 0;'>
+            {{
+              article.metafields.custom.image_3.value
+              | image_url: width: 1000
+              | image_tag: class: 'tw-w-full tw-h-auto'
+            }}
+          </div>
+        {% endif %}
+
+        {% if article.metafields.custom.image_list_3.value != blank %}
+          <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
+            {% for image in article.metafields.custom.image_list_3.value %}
+              <div class='card tw-mb-md' style='opacity: 0;'>
+                {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if article.metafields.custom.image_4.value != blank %}
+          <div class='card tw-mb-md' style='opacity: 0;'>
+            {{
+              article.metafields.custom.image_4.value
+              | image_url: width: 1000
+              | image_tag: class: 'tw-w-full tw-h-auto'
+            }}
           </div>
         {% endif %}
       </div>
-    {% endif %}
-
-    <div>
-      {% if article.metafields.custom.image_1.value != blank %}
-        <div class='card tw-mb-md' style='opacity: 0;'>
-          {{
-            article.metafields.custom.image_1.value
-            | image_url: width: 1000
-            | image_tag: class: 'tw-w-full tw-h-auto'
-          }}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_list_1.value != blank %}
-        <div class='md:tw-flex md:tw-gap-md'>
-          {% for image in article.metafields.custom.image_list_1.value %}
-            <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_2.value != blank %}
-        <div class='card tw-mb-md' style='opacity: 0;'>
-          {{
-            article.metafields.custom.image_2.value
-            | image_url: width: 1000
-            | image_tag: class: 'tw-w-full tw-h-auto'
-          }}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_list_2.value != blank %}
-        <div class='md:tw-flex md:tw-gap-md'>
-          {% for image in article.metafields.custom.image_list_2.value %}
-            <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_3.value != blank %}
-        <div class='card tw-mb-md' style='opacity: 0;'>
-          {{
-            article.metafields.custom.image_3.value
-            | image_url: width: 1000
-            | image_tag: class: 'tw-w-full tw-h-auto'
-          }}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_list_3.value != blank %}
-        <div class='card tw-mb-md md:tw-flex-1' style='opacity: 0;'>
-          {% for image in article.metafields.custom.image_list_3.value %}
-            <div class='card tw-mb-md' style='opacity: 0;'>
-              {{ image | image_url: width: 1000 | image_tag: class: 'tw-w-auto tw-object-cover tw-object-center' }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if article.metafields.custom.image_4.value != blank %}
-        <div class='card tw-mb-md' style='opacity: 0;'>
-          {{
-            article.metafields.custom.image_4.value
-            | image_url: width: 1000
-            | image_tag: class: 'tw-w-full tw-h-auto'
-          }}
-        </div>
-      {% endif %}
-    </div>
+    </opacity-reveal>
   </article>
+
   {% if article.metafields.custom.featured_collection.value != blank
     and article.metafields.custom.featured_collection.value.products_count > 0
   %}
-    <div class='card tw-py-md tw-border-t tw-border-black tw-opacity-0'>
-      <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>Featured Collection</h2>
-      {% render 'featured-collection', collection: article.metafields.custom.featured_collection.value %}
-    </div>
+    <opacity-reveal>
+      <div class='card tw-py-md tw-border-t tw-border-black tw-opacity-0'>
+        <h2 class='tw-text-center heading md:tw-mb-sm tw-mb-xs'>Featured Collection</h2>
+        {% render 'featured-collection', collection: article.metafields.custom.featured_collection.value %}
+      </div>
+    </opacity-reveal>
   {% endif %}
-</opacity-reveal>
+</loading-component>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -133,11 +141,13 @@
 
     const handleLoadingComplete = () => {
       if (loadingComponent) {
-        loadingComponent.style.display = 'none';
+        const loadingContainer = loadingComponent.querySelector('#loading-container');
+        if (loadingContainer) {
+          loadingContainer.style.display = 'none';
+        }
       }
       if (articleContent) {
         articleContent.classList.remove('tw-hidden');
-        articleContent.style.opacity = '1';
       }
     };
 
