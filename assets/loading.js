@@ -7,9 +7,10 @@ class Loading extends HTMLElement {
     this.loadingText = this.querySelector('#loading-text');
     this.loadingContainer = this.querySelector('#loading-container');
     this.splitText = new SplitText(this.loadingText, { type: ' chars' });
-
+    this.imagesLoaded = false;
    
     this.loadingAnimation();
+    this.checkImagesLoaded();
   }
 
   disconnectedCallback() {
@@ -30,6 +31,40 @@ class Loading extends HTMLElement {
         yoyo: true
       }
     });
+  }
+
+  checkImagesLoaded() {
+    const images = document.querySelectorAll('img');
+    let loadedImages = 0;
+    const totalImages = images.length;
+
+    if (totalImages === 0) {
+      this.setAttribute('data-images-loaded', 'true');
+      return;
+    }
+
+    const checkComplete = () => {
+      loadedImages++;
+      if (loadedImages === totalImages) {
+          this.setAttribute('data-images-loaded', 'true');
+      }
+    };
+
+    images.forEach(img => {
+      if (img.complete) {
+        checkComplete();
+      } else {
+        img.addEventListener('load', checkComplete);
+        img.addEventListener('error', checkComplete); // Handle broken images
+      }
+    });
+
+    // Fallback timeout in case some images never load
+    setTimeout(() => {
+      if (this.getAttribute('data-images-loaded') !== 'true') {
+        this.setAttribute('data-images-loaded', 'true');
+      }
+    }, 5000); // 5 second timeout
   }
 }
 
