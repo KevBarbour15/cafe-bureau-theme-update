@@ -12,7 +12,7 @@ class OpacityReveal extends HTMLElement {
         opacity: 1,
         duration: 0.35,
         ease: "linear",
-        delay: 0.5,
+        delay: 0.35,
  
         scrollTrigger: {
           trigger: card,
