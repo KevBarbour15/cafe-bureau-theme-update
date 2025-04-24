@@ -26,7 +26,7 @@ class Loading extends HTMLElement {
       duration: 0.75,
       scrambleText: true,
       stagger: {
-        each: 0.05,
+        each: 0.035,
         repeat: 0,
         yoyo: true
       }
