@@ -54,23 +54,23 @@
           }}
         </div>
       {%- endif -%}
-    {% elsif section.settings.image != blank %}
+    {% elsif section.settings.desktop_image != blank or section.settings.mobile_image != blank %}
       {%- # Desktop image -%}
       <div class='tw-hidden md:tw-block tw-w-full tw-h-full'>
         <img
-          src='{{ section.settings.image | image_url: width: 2000 }}'
-          alt='{{ section.settings.image.alt | escape }}'
+          src='{{ section.settings.desktop_image | image_url: width: 2000 }}'
+          alt='{{ section.settings.desktop_image.alt | escape }}'
           class='tw-w-full tw-h-full tw-object-cover'
           loading='lazy'
-          width='{{ section.settings.image.width }}'
-          height='{{ section.settings.image.height }}'
+          width='{{ section.settings.desktop_image.width }}'
+          height='{{ section.settings.desktop_image.height }}'
         >
       </div>
       {%- # Mobile image -%}
       <div class='md:tw-hidden tw-w-full tw-h-full'>
         <img
-          src='{{ section.settings.image | image_url: width: 1000 }}'
-          alt='{{ section.settings.image.alt | escape }}'
+          src='{{ section.settings.mobile_image | image_url: width: 1000 }}'
+          alt='{{ section.settings.mobile_image.alt | escape }}'
           class='tw-w-full tw-h-full tw-object-cover'
           loading='lazy'
           width='{{ section.settings.image.width }}'
@@ -118,8 +118,15 @@
     },
     {
       "type": "image_picker",
-      "id": "image",
-      "label": "Image (Both Desktop & Mobile)"
+      "id": "desktop_image",
+      "label": "Desktop Image",
+      "info": "This image will be displayed on desktop devices."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image",
+      "info": "This image will be displayed on mobile devices. If there is not a mobile image, add the same desktop image here."
     }
   ],
   "presets": [
