@@ -4,10 +4,21 @@ class LoadingAnimation extends HTMLElement {
   }
 
   connectedCallback() {
+    // Check play-animation attribute
+    const playAnimationAttr = this.getAttribute('play-animation');
+    const shouldPlayAnimation = playAnimationAttr === null || playAnimationAttr === 'true';
+    if (!shouldPlayAnimation) {
+      // Instantly hide loading screen and allow scroll if animation is disabled
+      const loadingScreen = this.querySelector('#loading-screen');
+      if (loadingScreen) loadingScreen.style.display = 'none';
+      document.documentElement.style.overflowY = 'auto';
+      return;
+    }
+
     // Force scroll to top when component connects
-this.html = document.querySelector('html');
+    this.html = document.querySelector('html');
     this.window = window;
-    
+
     if (this.window.scrollY !== 0) {
       this.window.scrollTo({
         top: 0,
@@ -16,7 +27,7 @@ this.html = document.querySelector('html');
       });
     }
 
-     // Prevent scroll until animation is complete
+    // Prevent scroll until animation is complete
     this.html.style.overflowY = 'hidden';
 
     let loadingScreen = this.querySelector('#loading-screen');
@@ -24,9 +35,14 @@ this.html = document.querySelector('html');
     let path2 = this.querySelector('#path-2');
     let desktopVideo = this.querySelector('.desktop-video video');
     let mobileVideo = this.querySelector('.mobile-video video');
+    let desktopImg = this.querySelector('.tw-hidden.md\\:tw-block img');
+    let mobileImg = this.querySelector('.md\\:tw-hidden img');
     let video = window.innerWidth >= 768 ? desktopVideo : mobileVideo;
+    let image = window.innerWidth >= 768 ? desktopImg : mobileImg;
     let videoReady = false;
+    let imageReady = false;
 
+    // Video readiness
     [desktopVideo, mobileVideo].forEach(vid => {
       if (vid) {
         vid.muted = true;
@@ -38,6 +54,19 @@ this.html = document.querySelector('html');
         vid.addEventListener('canplaythrough', () => {
           if (vid === video) videoReady = true;
         }, { once: true });
+      }
+    });
+
+    // Image readiness
+    [desktopImg, mobileImg].forEach(img => {
+      if (img) {
+        if (img.complete && img.naturalWidth !== 0) {
+          if (img === image) imageReady = true;
+        } else {
+          img.addEventListener('load', () => {
+            if (img === image) imageReady = true;
+          }, { once: true });
+        }
       }
     });
 
@@ -53,18 +82,28 @@ this.html = document.querySelector('html');
         ease: "linear"
       })
       .call(() => {
-        if (!videoReady) {
+        // Wait for video or image to be ready
+        if ((video && !videoReady) || (image && !imageReady)) {
           tl.pause();
-          [desktopVideo, mobileVideo].forEach(vid => {
-            if (vid) {
-              vid.addEventListener('canplay', () => {
-                //console.log('canplay');
-                tl.resume();
-              }, { once: true });
-            }
-          });
+          if (video && !videoReady) {
+            [desktopVideo, mobileVideo].forEach(vid => {
+              if (vid) {
+                vid.addEventListener('canplay', () => {
+                  tl.resume();
+                }, { once: true });
+              }
+            });
+          }
+          if (image && !imageReady) {
+            [desktopImg, mobileImg].forEach(img => {
+              if (img) {
+                img.addEventListener('load', () => {
+                  tl.resume();
+                }, { once: true });
+              }
+            });
+          }
         } else {
-          //console.log('video ready');
           tl.resume();
         }
       })
