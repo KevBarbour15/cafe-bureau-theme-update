@@ -14,7 +14,8 @@
       "settings": {
         "home_link": "shopify://collections/all",
         "play_animation": "false",
-        "image": "shopify://shop_images/A7402331_1.jpg"
+        "desktop_image": "shopify://shop_images/A7402331_1.jpg",
+        "mobile_image": "shopify://shop_images/A7402331_1.jpg"
       }
     }
   },
