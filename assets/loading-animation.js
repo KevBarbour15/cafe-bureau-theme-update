@@ -10,9 +10,11 @@ class LoadingAnimation extends HTMLElement {
     if (!shouldPlayAnimation) {
       // Instantly hide loading screen and allow scroll if animation is disabled
       const loadingScreen = this.querySelector('#loading-screen');
-      if (loadingScreen) loadingScreen.style.display = 'none';
-      document.documentElement.style.overflowY = 'auto';
+      if (loadingScreen) document.documentElement.style.overflowY = 'auto';
       return;
+    } else {
+      const loadingScreen = this.querySelector('#loading-screen');
+      if (loadingScreen) loadingScreen.style.display = 'flex';
     }
 
     // Force scroll to top when component connects
