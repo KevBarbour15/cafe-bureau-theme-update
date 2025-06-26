@@ -1,9 +1,9 @@
 <script src='{{ 'loading-animation.js' | asset_url }}' type='module' defer='defer'></script>
 
-{% assign play_animation = section.settings.play_animation | default: false %}
+{% assign play_animation = section.settings.play_animation | default: 'false' %}
 
 <loading-animation play-animation='{{ play_animation }}'>
-  {% if play_animation %}
+  {% if play_animation == 'true' %}
     <div
       style='display: none;'
       id='loading-screen'
