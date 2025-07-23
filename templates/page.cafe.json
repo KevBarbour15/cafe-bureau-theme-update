@@ -76,11 +76,10 @@
         "event_eJUKp8": {
           "type": "event",
           "settings": {
-            "event_title": "NBD RADIO",
-            "event_time": "7pm - 11pm",
-            "event_date": "July 10th , 2025",
-            "event_description": "<p>NBD LIVE - Featuring LEB, TONY STARR, & GEEKYMINAJJ</p>",
-            "event_image": "shopify://shop_images/IMG_0957.jpg",
+            "event_title": "NBD RADIO LIVE",
+            "event_time": "5pm - 10pm",
+            "event_date": "August 2nd , 2025",
+            "event_description": "<p>NBD LIVE - Featuring ALESKA, MISHA SAVAGE, CHELSEA, VV$, KWEKU, KC</p>",
             "event_link_text": "",
             "event_link": ""
           }
