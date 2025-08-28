@@ -68,34 +68,6 @@
               >
             </div>
           {% endif %}
-
-          {% if product.media.size > 0 %}
-            {% for media in product.media %}
-              {% if media.media_type == 'image' %}
-                <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
-                  <img
-                    src='{{ media.preview_image | image_url: width: 1000 }}'
-                    alt='{{ product.title }}'
-                    class='tw-w-full tw-h-full tw-object-cover'
-                    width='100%'
-                    height='auto'
-                  >
-                </div>
-              {% elsif media.media_type == 'video' %}
-                <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
-                  <video
-                    src='{{ media.sources[0].url }}'
-                    autoplay
-                    muted
-                    playsinline
-                    loop
-                    disableRemotePlayback
-                    class='tw-object-center tw-object-cover tw-w-full tw-h-full tw-border-8 tw-border-black'
-                  ></video>
-                </div>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
