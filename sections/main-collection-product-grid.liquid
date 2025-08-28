@@ -21,7 +21,7 @@
         class='tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-sm md:tw-gap-md tw-pt-md tw-grid'
       >
         {%- for product in collection.products -%}
-          {% if product.type == 'Clothing' or product.type == 'Accessories' %}
+          {% if product.type == 'Clothing' or product.type == 'Accessories' or product.type == 'Sale' %}
             {% assign lazy_load = false %}
             {%- if forloop.index > 3 -%}
               {%- assign lazy_load = true -%}
