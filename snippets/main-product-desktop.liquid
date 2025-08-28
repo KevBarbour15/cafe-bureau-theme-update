@@ -26,10 +26,12 @@
   <accordion-component>
     <div class='tw-w-full tw-block tw-text-black'>
       <div class='tw-w-full tw-flex tw-h-full'>
-        <div id='image-container' class='tw-w-1/2 md:tw-pr-md xl:tw-pr-lg tw-relative tw-h-full {{ padding_top }}'>
-          {% if active_variant.metafields.custom.variant_product_video != blank %}
-            {% render 'product-media-gallery', active_variant: active_variant %}
-          {% endif %}
+        <div
+          id='image-container'
+          class='tw-w-1/2 md:tw-pr-md xl:tw-pr-lg tw-pb-10 tw-relative tw-h-full {{ padding_top }}'
+        >
+          {% render 'product-media-gallery', active_variant: active_variant %}
+
           <div
             id='scroll-arrow'
             class='tw-w- tw-h-svh tw-w-1/2 tw-fixed tw-top-0 tw-left-0 tw-z-[1]'
@@ -45,7 +47,7 @@
         <div
           id='details-container'
           style='opacity: 0;'
-          class='card md:tw-w-1/2 tw-h-full tw-z-[2] {{ padding_top }}'
+          class='card md:tw-w-1/2 tw-h-full tw-z-[2] tw-overflow-y-auto  {{ padding_top }}'
         >
           <div class='tw-w-full tw-block tw-pt-xl md:tw-pl-lg xl:tw-pl-xxl'>
             {% if product.title != blank or product.price != blank %}

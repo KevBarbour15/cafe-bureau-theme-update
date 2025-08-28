@@ -43,27 +43,18 @@
       </div>
     </product-card-hover-component>
   {% elsif variant.featured_media.preview_image != blank %}
-    <img
-      src='{{ product.featured_image | img_url: 'master' }}'
-      alt='{{ product.title }}'
-      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
-      width='100%'
-      height='auto'
-      {% if lazy_load %}
-        loading='lazy'
-      {% endif %}
-    >
-  {% elsif variant.featured_media.preview_image != blank %}
-    <img
-      src='{{ variant.featured_media.preview_image | img_url: 'master' }}'
-      alt='{{ product.title }}'
-      class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
-      width='100%'
-      height='auto'
-      {% if lazy_load %}
-        loading='lazy'
-      {% endif %}
-    >
+    <a href='{{ product_url }}' aria-label='View {{ product.title }}'>
+      <img
+        src='{{ variant.featured_media.preview_image | img_url: 'master' }}'
+        alt='{{ product.title }}'
+        class='tw-w-full tw-h-auto tw-object-cover tw-object-center'
+        width='100%'
+        height='auto'
+        {% if lazy_load %}
+          loading='lazy'
+        {% endif %}
+      >
+    </a>
   {% endif %}
 
   <div class='tw-flex tw-flex-col tw-gap-xs tw-pt-xs tw-mt-xs md:tw-pt-sm md:tw-mt-sm tw-flex-1 tw-items-center tw-justify-center tw-w-full tw-border-t tw-border-black tw-text-black'>
