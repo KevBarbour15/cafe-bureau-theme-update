@@ -111,7 +111,14 @@
     {% if product.title != blank or product.price != blank %}
       <div class='card tw-flex tw-flex-col tw-gap-sm tw-uppercase' style='opacity: 0;'>
         <p class=''>{{ product.title }}</p>
-        <p class=''>{{ product.price | money }}</p>
+        <p class=''>
+          {% if product.compare_at_price > product.price %}
+            <span class='tw-line-through'>{{ product.compare_at_price | money }}</span>
+            <span class='tw-text-red-500'>{{ product.price | money }}</span>
+          {% else %}
+            {{ product.price | money }}
+          {% endif %}
+        </p>
       </div>
     {% endif %}
     <accordion-component>
