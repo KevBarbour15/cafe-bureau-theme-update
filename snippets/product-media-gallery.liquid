@@ -48,37 +48,6 @@
         >
       </div>
     {% endif %}
-
-    {% if product.media.size > 0 %}
-      <div class='tw-flex tw-flex-col tw-gap-sm'>
-        {% for media in product.media %}
-          {% if media.media_type == 'image' %}
-            <div
-              class='card tw-w-full tw-h-auto tw-relative'
-              style='aspect-ratio: 4/5; opacity: 0;'
-            >
-              <img
-                src='{{ media.preview_image | image_url: width: 1000 }}'
-                alt='{{ product.title }}'
-                class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-                width='100%'
-                height='auto'
-              >
-            </div>
-          {% elsif media.media_type == 'video' %}
-            <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5; opacity: 0;'>
-              <video
-                src='{{ media.sources[0].url }}'
-                autoplay
-                muted
-                playsinline
-                loop
-                class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-              ></video>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
+    
   {% endif %}
 </div>
