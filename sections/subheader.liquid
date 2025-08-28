@@ -34,7 +34,7 @@
   <script src='{{ 'filter-link.js' | asset_url }}' defer></script>
   <filter-link-hover>
     <div
-      class='tw-h-[40px] tw-fixed tw-top-[60px] md:tw-top-[80px] tw-w-full tw-bg-white md:tw-px-0 tw-px-sm tw-mix-blend-exclusion tw-z-[75] tw-overflow-x-auto tw-pr-md'
+      class='tw-h-[40px] tw-fixed tw-top-[60px] md:tw-top-[80px] tw-w-full tw-bg-white md:tw-px-0 tw-px-sm tw-mix-blend-difference tw-z-[75] tw-overflow-x-auto tw-pr-md'
       style='scrollbar-width: none; -ms-overflow-style: none;'
     >
       {% if left_link_title != blank and left_link_url != blank %}
@@ -70,7 +70,12 @@
           {% if link_list.links.size > 0 %}
             {% for link in link_list.links %}
               {% if collection.handle == link.object.handle -%}
-                <p class='tw-uppercase tw-underline tw-underline-offset-4 tw-text-black p1'>{{ link.title }}</p>
+                <p
+                  class='tw-uppercase tw-underline tw-underline-offset-4 p1'
+                  style='color: {% if link.title == "Sale" %}#ff0000{% else %}black{% endif %};'
+                >
+                  {{ link.title }}
+                </p>
               {% else %}
                 <a
                   class='filter-link tw-inline-flex tw-items-center tw-justify-center tw-gap-x-6 tw-cursor-pointer tw-shrink-0 p1'
@@ -80,7 +85,10 @@
                     aria-current='page'
                   {% endif %}
                 >
-                  <span class='filter-link-text tw-uppercase md:hover:tw-underline md:hover:tw-underline-offset-4 md:tw-transition-all md:tw-duration-300 tw-text-black'>
+                  <span
+                    class='filter-link-text tw-uppercase md:hover:tw-underline md:hover:tw-underline-offset-4 md:tw-transition-all md:tw-duration-300'
+                    style='color: {% if link.title == "Sale" %}#ff0000{% else %}black{% endif %};'
+                  >
                     {{- link.title -}}
                   </span>
                 </a>

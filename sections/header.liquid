@@ -88,9 +88,18 @@
                   aria-current='page'
                 {% endif %}
               >
-                <span style='color: white;' class='menu-link-text h2'>{{ link.title }}</span>
+                <span
+                  style='color: {% if link.title == "Sale" %}#00ffff{% else %}white{% endif %};'
+                  class='menu-link-text h2'
+                >
+                  {{- link.title -}}
+                </span>
                 <span class='menu-link-arrow tw-opacity-0' aria-hidden='true'>
-                  {%- render 'right-arrow', style: '#fff', size: 32 -%}
+                  {%- if link.title == 'Sale' -%}
+                    {%- render 'right-arrow', style: '#00ffff', size: 32 -%}
+                  {%- else -%}
+                    {%- render 'right-arrow', style: '#fff', size: 32 -%}
+                  {%- endif -%}
                 </span>
               </a>
             </li>
