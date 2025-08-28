@@ -48,6 +48,21 @@
         >
       </div>
     {% endif %}
-    
+
+    {% if active_variant.metafields.custom.variant_images != blank %}
+      <div class='tw-flex tw-flex-col tw-gap-sm'>
+        {% for media in active_variant.metafields.custom.variant_images.value %}
+          <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
+            <img
+              src='{{ media | image_url: width: 1000 }}'
+              alt='{{ product.title }}'
+              class='tw-w-full tw-h-full tw-object-cover tw-object-center'
+              width='100%'
+              height='auto'
+            >
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   {% endif %}
 </div>

@@ -68,6 +68,19 @@
               >
             </div>
           {% endif %}
+          {% if active_variant.metafields.custom.variant_images != blank %}
+            {% for media in active_variant.metafields.custom.variant_images.value %}
+              <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+                <img
+                  src='{{ media | image_url: width: 1000 }}'
+                  alt='{{ product.title }}'
+                  class='tw-w-full tw-h-full tw-object-cover tw-object-center'
+                  width='100%'
+                  height='auto'
+                >
+              </div>
+            {% endfor %}
+          {% endif %}
         {% endif %}
 
         {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
