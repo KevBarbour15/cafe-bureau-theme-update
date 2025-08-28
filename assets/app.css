@@ -1196,6 +1196,14 @@ video {
   overflow-x: auto;
 }
 
+.tw-overflow-y-auto {
+  overflow-y: auto;
+}
+
+.tw-overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .tw-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1398,6 +1406,10 @@ video {
   padding-bottom: 8px;
 }
 
+.tw-pb-10 {
+  padding-bottom: 2.5rem;
+}
+
 .tw-pb-\[100\%\] {
   padding-bottom: 100%;
 }
@@ -1495,6 +1507,10 @@ video {
   font-size: 18px;
 }
 
+.tw-text-\[200px\] {
+  font-size: 200px;
+}
+
 .tw-text-\[24px\] {
   font-size: 24px;
 }
@@ -1506,38 +1522,6 @@ video {
 .tw-text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.tw-text-\[200px\] {
-  font-size: 200px;
-}
-
-.tw-text-\[1px\] {
-  font-size: 1px;
-}
-
-.tw-text-\[10px\] {
-  font-size: 10px;
-}
-
-.tw-text-\[100px\] {
-  font-size: 100px;
-}
-
-.tw-text-\[4px\] {
-  font-size: 4px;
-}
-
-.tw-text-\[48px\] {
-  font-size: 48px;
-}
-
-.tw-text-\[20px\] {
-  font-size: 20px;
-}
-
-.tw-text-\[2px\] {
-  font-size: 2px;
 }
 
 .tw-uppercase {
@@ -1572,12 +1556,17 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.tw-text-\[px\] {
-  color: px;
+.tw-text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 
 .tw-underline {
   text-decoration-line: underline;
+}
+
+.tw-line-through {
+  text-decoration-line: line-through;
 }
 
 .tw-underline-offset-4 {

@@ -47,13 +47,25 @@
         <div
           id='details-container'
           style='opacity: 0;'
-          class='card md:tw-w-1/2 tw-h-full tw-z-[2] tw-overflow-y-auto  {{ padding_top }}'
+          class='card md:tw-w-1/2 tw-h-full tw-z-[2]  {{ padding_top }}'
         >
           <div class='tw-w-full tw-block tw-pt-xl md:tw-pl-lg xl:tw-pl-xxl'>
-            {% if product.title != blank or product.price != blank %}
+            {% if product.title != blank %}
               <div class='tw-mb-lg'>
                 <p class='tw-mb-lg tw-uppercase tw-leading-none'>{{ product.title }}</p>
-                <p class='tw-leading-none'>{{ product.price | money }}</p>
+
+                {% if product.compare_at_price > product.price %}
+                  <div class='tw-flex tw-items-center tw-gap-4'>
+                    <p class='tw-uppercase tw-text-center tw-leading-none tw-line-through'>
+                      {{ product.compare_at_price | money }}
+                    </p>
+                    <p class='tw-uppercase tw-text-center tw-leading-none tw-text-red-500'>
+                      {{ product.price | money }}
+                    </p>
+                  </div>
+                {% else %}
+                  <p class='tw-leading-none'>{{ product.price | money }}</p>
+                {% endif %}
               </div>
             {% endif %}
 

@@ -67,6 +67,17 @@
         {{ product.title }}
       </p>
     </a>
-    <p class='caption tw-uppercase tw-text-center tw-leading-none'>{{ product.price | money }}</p>
+    {% if product.compare_at_price > product.price %}
+      <div class='tw-flex tw-items-center tw-gap-3'>
+        <span class='caption tw-uppercase tw-text-center tw-leading-none tw-line-through'>
+          {{ product.compare_at_price | money }}
+        </span>
+        <span class='caption tw-uppercase tw-text-center tw-leading-none tw-text-red-500'>
+          {{ product.price | money }}
+        </span>
+      </div>
+    {% else %}
+      <p class='caption tw-uppercase tw-text-center tw-leading-none'>{{ product.price | money }}</p>
+    {% endif %}
   </div>
 </div>
