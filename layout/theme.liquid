@@ -83,6 +83,7 @@
     <script src='{{ 'accordion.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'opacity-reveal.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'cookie-consent.js' | asset_url }}' type='module' defer='defer'></script>
+    <script src='{{ 'subscribe.js' | asset_url }}' type='module' defer='defer'></script>
     <script src='{{ 'loading.js' | asset_url }}' type='module' defer='defer'></script>
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
@@ -360,6 +361,7 @@
 
     <main role='main' tabindex='-1'>
       {% render 'cookie-consent' %}
+      {% render 'subscribe' %}
       <div class='tw-min-h-[calc(100svh-100px)]'>
         {{ content_for_layout }}
       </div>

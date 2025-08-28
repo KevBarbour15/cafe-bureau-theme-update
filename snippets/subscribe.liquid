@@ -1,0 +1,61 @@
+<subscribe-form>
+  <!-- Temporary test button -->
+  <button
+    id='test-subscribe-modal'
+    class='tw-fixed tw-top-4 tw-right-4 tw-bg-blue-500 tw-text-white tw-px-4 tw-py-2 tw-rounded tw-z-[9999]'
+    onclick='document.querySelector("subscribe-form").showContainer()'
+  >
+    Test Modal
+  </button>
+
+  <!-- Modal container -->
+  <div
+    id='subscribe-container'
+    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-z-50 tw-p-sm'
+    style='display: none; opacity: 0;'
+  >
+    <!-- Modal content -->
+    <div class='tw-bg-black/65 tw-border tw-border-black tw-backdrop-blur-md tw-shadow-2xl sm:tw-max-w-lg tw-w-full tw-mx-4 tw-overflow-hidden'>
+      <!-- Header -->
+      <div class='tw-bg-primary-black tw-p-lg tw-text-center'>
+        <h3 class='tw-text-primary-white tw-uppercase tw-text-xl tw-font-bold tw-mb-xs'>Stay Updated</h3>
+        <p class='tw-text-primary-white tw-text-sm tw-opacity-90'>
+          Get the latest news and exclusive offers delivered to your inbox
+        </p>
+      </div>
+
+      <!-- Body -->
+      <div class='tw-p-lg tw-text-center'>
+        <p class='tw-text-white tw-mb-lg'>
+          Join our community and be the first to know about new products, special events, and insider deals.
+        </p>
+
+        <!-- Email input field -->
+        <div class='tw-mb-lg'>
+          <input
+            type='email'
+            id='subscribe-email'
+            placeholder='Enter your email address'
+            class='tw-w-full tw-px-sm tw-py-xs tw-border tw-border-black tw-text-sm focus:tw-outline-none focus:tw-ring-primary-black focus:tw-border-transparent'
+          >
+        </div>
+
+        <!-- Buttons -->
+        <div class='tw-flex tw-flex-col sm:tw-flex-row tw-gap-xs tw-w-full'>
+          <button
+            id='dismiss-button'
+                   class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
+          >
+            Maybe Later
+          </button>
+          <button
+            id='subscribe-button'
+               class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300''
+          >
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</subscribe-form>
