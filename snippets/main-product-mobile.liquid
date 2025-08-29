@@ -111,7 +111,19 @@
     {% if product.title != blank or product.price != blank %}
       <div class='card tw-flex tw-flex-col tw-gap-sm tw-uppercase' style='opacity: 0;'>
         <p class=''>{{ product.title }}</p>
-        <p class=''>{{ product.price | money }}</p>
+
+        {% if product.compare_at_price > product.price %}
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <p class='tw-uppercase tw-text-center tw-leading-none tw-line-through'>
+              {{ product.compare_at_price | money }}
+            </p>
+            <p class='tw-uppercase tw-text-center tw-leading-none tw-text-red-500'>
+              {{ product.price | money }}
+            </p>
+          </div>
+        {% else %}
+          <p class='tw-leading-none'>{{ product.price | money }}</p>
+        {% endif %}
       </div>
     {% endif %}
     <accordion-component>
@@ -202,6 +214,30 @@
           style='opacity: 0;'
         >
           {{ product.metafields.custom.product_details | newline_to_br }}
+        </div>
+      {% endif %}
+      {% if product.metafields.custom.size_guide != blank %}
+        <div
+          class='accordion-header card tw-cursor-pointer tw-items-center tw-flex tw-flex-row tw-justify-between tw-border-b tw-border-black tw-py-xs'
+          style='opacity: 0;'
+        >
+          <p class='tw-uppercase p2'>Size Guide</p>
+          <div
+            class='down-icon'
+          >
+            {% render 'down-arrow', size: 20 %}
+          </div>
+        </div>
+        <div
+          class='accordion-content card tw-pr-sm md:tw-pr-md p2'
+          style='opacity: 0;'
+        >
+          <p class='tw-text-pretty p2 tw-pt-xs '>
+            All measurements are in inches and taken across the garment while laid flat.
+          </p>
+          <p class='tw-text-pretty p2 '>
+            {{ product.metafields.custom.size_guide }}
+          </p>
         </div>
       {% endif %}
       <div class='tw-mt-md card' style='opacity: 0;'>
