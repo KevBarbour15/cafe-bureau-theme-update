@@ -75,6 +75,7 @@
       "blocks": {
         "event_eJUKp8": {
           "type": "event",
+          "disabled": true,
           "settings": {
             "event_title": "NBD RADIO LIVE",
             "event_time": "5pm - 10pm",
@@ -88,6 +89,7 @@
       "block_order": [
         "event_eJUKp8"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Upcoming Events",
         "subheading": ""
