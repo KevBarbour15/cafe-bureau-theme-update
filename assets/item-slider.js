@@ -30,9 +30,9 @@ class ItemSlider extends HTMLElement {
       const showDots = this.dataset.showDots == '' && true;
       const showCount = this.dataset.showCount == '' && true;
 
-      const disabledAtMd = this.dataset.disabledAtMd === '' && true;
-      const disabledAtLg = this.dataset.disabledAtLg == '' && true;
-      const disabledAtXlg = this.dataset.disabledAtXlg == '' && true;
+      const disabledAtMd = this.dataset.disabledAtMd === 'true';
+      const disabledAtLg = this.dataset.disabledAtLg === 'true';
+      const disabledAtXlg = this.dataset.disabledAtXlg === 'true';
 
       const alignCenter = this.dataset.alignCenter == '' && true;
       const alignCenterAtMd = this.dataset.alignCenterAtMd == '' && true;

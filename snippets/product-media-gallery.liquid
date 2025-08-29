@@ -1,68 +1,95 @@
 {% assign active_variant = active_variant %}
 
 <div class='tw-h-full tw-z-[1] tw-pt-sm'>
-  {% if active_variant.metafields.custom.variant_product_video != blank %}
-    <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5; opacity: 0;'>
-      <video
-        src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
-        autoplay
-        muted
-        playsinline
-        loop
-        class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-      ></video>
-    </div>
-
-    {% if active_variant.metafields.custom.variant_front_image != blank %}
-      <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5; opacity: 0;'>
-        <img
-          src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
-          alt='{{ product.title }}'
-          class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-          width='100%'
-          height='auto'
-        >
-      </div>
-    {% endif %}
-
-    {% if active_variant.metafields.custom.variant_rear_image != blank %}
-      <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5; opacity: 0;'>
-        <img
-          src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
-          alt='{{ product.title }}'
-          class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-          width='100%'
-          height='auto'
-        >
-      </div>
-    {% endif %}
-  {% else %}
-    {% if active_variant.featured_media.preview_image != blank %}
-      <div class='card tw-w-full tw-h-auto tw-relative bg-red-500' style='aspect-ratio: 4/5; ;'>
-        <img
-          src='{{ active_variant.featured_media.preview_image | image_url: width: 1000 }}'
-          alt='{{ product.title }}'
-          class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-          width='100%'
-          height='auto'
-        >
-      </div>
-    {% endif %}
-
-    {% if active_variant.metafields.custom.variant_images != blank %}
-      <div class='tw-flex tw-flex-col tw-gap-sm'>
-        {% for media in active_variant.metafields.custom.variant_images.value %}
-          <div class='card tw-w-full tw-h-auto tw-relative' style='aspect-ratio: 4/5;'>
-            <img
-              src='{{ media | image_url: width: 1000 }}'
-              alt='{{ product.title }}'
-              class='tw-w-full tw-h-full tw-object-cover tw-object-center'
-              width='100%'
-              height='auto'
-            >
+  <item-slider data-show-buttons>
+    <div class='card embla tw-relative tw-h-auto' style='opacity: 0;'>
+      <div class='embla__container'>
+        {% if active_variant.metafields.custom.variant_product_video != blank %}
+          <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh] '>
+            <video
+              src='{{ active_variant.metafields.custom.variant_product_video | file_url }}'
+              autoplay
+              muted
+              playsinline
+              loop
+              disableRemotePlayback
+              class='tw-w-full tw-h-full tw-object-cover'
+            ></video>
           </div>
-        {% endfor %}
+
+          {% if active_variant.metafields.custom.variant_front_image != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+              <img
+                src='{{ active_variant.metafields.custom.variant_front_image | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover'
+                width='100%'
+                height='auto'
+              >
+            </div>
+          {% endif %}
+
+          {% if active_variant.metafields.custom.variant_rear_image != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+              <img
+                src='{{ active_variant.metafields.custom.variant_rear_image | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover'
+                width='100%'
+                height='auto'
+              >
+            </div>
+          {% endif %}
+        {% else %}
+          {% if active_variant.featured_media.preview_image != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+              <img
+                src='{{ active_variant.featured_media.preview_image | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover'
+                width='100%'
+                height='auto'
+              >
+            </div>
+          {% endif %}
+
+          {% if active_variant.metafields.custom.variant_images != blank %}
+            {% for media in active_variant.metafields.custom.variant_images.value %}
+              <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+                <img
+                  src='{{ media | image_url: width: 1000 }}'
+                  alt='{{ product.title }}'
+                  class='tw-w-full tw-h-full tw-object-cover tw-object-center'
+                  width='100%'
+                  height='auto'
+                >
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        {% if active_variant.metafields.custom.variant_details_mobile_video != blank %}
+          <div class='embla__slide tw-flex tw-items-center tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh] tw-p-8'>
+            <div class='tw-h-full tw-w-full'>
+              <video
+                src='{{ active_variant.metafields.custom.variant_details_mobile_video | file_url }}'
+                autoplay
+                muted
+                playsinline
+                loop
+                disableRemotePlayback
+                class='tw-object-center tw-object-cover tw-w-full tw-h-full tw-border-8 tw-border-black'
+              ></video>
+            </div>
+          </div>
+        {% endif %}
       </div>
-    {% endif %}
-  {% endif %}
+      <div class='embla__button embla__button--prev tw-absolute tw-top-1/2 tw-left-12 tw-mix-blend-difference tw-invert'>
+        {% render 'left-arrow', size: 32, style: 'tw-fill-black' %}
+      </div>
+      <div class='embla__button embla__button--next tw-absolute tw-top-1/2 tw-right-12 tw-mix-blend-difference tw-invert'>
+        {% render 'right-arrow', size: 32, style: 'tw-fill-black' %}
+      </div>
+    </div>
+  </item-slider>
 </div>
