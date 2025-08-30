@@ -1,75 +1,5 @@
 <input-animation>
   <footer class='tw-border-y tw-border-black z-[15] tw-text-black'>
-    <!-- Newsletter signup -->
-    {% comment %}
-      <div class='tw-border-b tw-border-black tw-py-lg tw-w-full'>
-        <div class='tw-flex tw-items-center tw-container'>
-          {%- if section.settings.newsletter_heading != blank -%}
-            <h2 class='tw-text-2xl tw-mr-lg  tw-hidden md:tw-block tw-whitespace-nowrap'>
-              {{ section.settings.newsletter_heading }}
-            </h2>
-          {%- endif -%}
-
-          {%- form 'customer', id: 'ContactFooter', class: 'tw-w-full' %}
-            <input type='hidden' name='contact[tags]' value='newsletter'>
-            <div class='tw-flex tw-w-full tw-gap-12'>
-              <input
-                id='NewsletterForm--{{ section.id }}'
-                type='email'
-                name='contact[email]'
-                class='subscribe-input tw-border-b tw-border-black tw-uppercase tw-flex-1'
-                value='{{ form.email }}'
-                aria-required='true'
-                autocorrect='off'
-                autocapitalize='off'
-                autocomplete='email'
-                {% if form.errors %}
-                  autofocus
-                  aria-invalid='true'
-                  aria-describedby='ContactFooter-error'
-                {% elsif form.posted_successfully? %}
-                  aria-describedby='ContactFooter-success'
-                {% endif %}
-                placeholder='Email Address'
-                required
-              >
-              {% render 'button', button_cta: 'Subscribe', button_type: 'submit' %}
-              {% comment %}
-                <button
-                  type='submit'
-                  name='commit'
-                  id='Subscribe'
-                  aria-label='Subscribe'
-                ></button>
-              {% endcomment %}
-
-              {%- if form.errors -%}
-                <small class='' id='ContactFooter-error'>
-                  <span class='svg-wrapper'>
-                    {{- 'icon-error.svg' | inline_asset_content -}}
-                  </span>
-                  {{- form.errors.translated_fields.email | capitalize }}
-                  {{ form.errors.messages.email -}}
-                </small>
-              {%- endif -%}
-            </div>
-            {%- if form.posted_successfully? -%}
-              <h3
-                id='ContactFooter-success'
-                tabindex='-1'
-                autofocus
-              >
-                <span class='svg-wrapper'>
-                  {{- 'icon-success.svg' | inline_asset_content -}}
-                </span>
-                {{- 'newsletter.success' | t }}
-              </h3>
-            {%- endif -%}
-          {%- endform -%}
-        </div>
-      </div>
-    {% endcomment %}
-    <!-- Footer bottom with links,contact and copyright -->
     <div class='tw-block md:tw-flex md:tw-items-end tw-py-md  tw-h-auto md:tw-justify-between tw-px-sm'>
       <div class='tw-block tw-pb-sm md:tw-hidden'>
         {% render 'social-icons', settings: section.settings %}
@@ -119,6 +49,24 @@
       "id": "newsletter_heading",
       "default": "FOR DEALS AND UPDATES:",
       "label": "Newsletter Heading"
+    },
+    {
+      "type": "text",
+      "id": "mailchimp_api_key",
+      "label": "Mailchimp API Key",
+      "info": "Enter your Mailchimp API key"
+    },
+    {
+      "type": "text",
+      "id": "mailchimp_list_id",
+      "label": "Mailchimp List ID",
+      "info": "Enter your Mailchimp audience/list ID"
+    },
+    {
+      "type": "text",
+      "id": "mailchimp_server",
+      "label": "Mailchimp Server",
+      "info": "Enter your Mailchimp server prefix (e.g., us1, us2, eu1)"
     },
     {
       "type": "link_list",

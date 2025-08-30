@@ -129,3 +129,22 @@ p {
     max-width: 1536px;
   }
 }
+
+.size-chart {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+}
+.size-chart th, .size-chart td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.size-chart th {
+  background: #f8f8f8;
+  font-weight: bold;
+}
+.size-chart tr:nth-child(even) {
+  background: #fafafa;
+}

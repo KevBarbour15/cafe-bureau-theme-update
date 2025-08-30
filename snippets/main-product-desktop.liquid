@@ -134,6 +134,30 @@
                 </p>
               </div>
             {% endif %}
+            {% comment %}
+              {% if product.metafields.custom.size_guide != blank %}
+                <div
+                  class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-py-sm tw-flex-row tw-justify-between tw-border-b tw-border-black tw-uppercase'
+                >
+                  <p class='tw-leading-none'>Size Guide</p>
+                  <div
+                    class='down-icon tw-transition-all tw-duration-300'
+                  >
+                    {% render 'down-arrow', size: 20 %}
+                  </div>
+                </div>
+                <div
+                  class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden '
+                >
+                  <p class='tw-text-pretty p2  tw-pt-xs'>
+                    All measurements are in inches and taken across the garment while laid flat.
+                  </p>
+                  <p class='tw-text-pretty p2 '>
+                    {{ product.metafields.custom.size_guide }}
+                  </p>
+                </div>
+              {% endif %}
+            {% endcomment %}
           </div>
         </div>
       </div>
