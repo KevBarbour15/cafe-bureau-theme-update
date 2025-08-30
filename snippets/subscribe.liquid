@@ -1,19 +1,8 @@
-<script async type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-<script type='text/javascript'>
-  (function ($) {
-    window.fnames = new Array();
-    window.ftypes = new Array();
-    fnames[0] = 'EMAIL';
-    ftypes[0] = 'email';
-  })(jQuery);
-  var $mcj = jQuery.noConflict(true);
-</script>
-
 <subscribe-form>
   <div
     id='subscribe-container'
-    style='display: none; opacity: 0;'
-    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-z-50 tw-p-sm'
+    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-p-sm'
+    style='z-index: 9999; display: none; opacity: 0;'
   >
     <div class='tw-bg-black/65 tw-border tw-border-black tw-backdrop-blur-md tw-shadow-2xl sm:tw-max-w-lg tw-w-full tw-mx-4 tw-overflow-hidden'>
       <div class='tw-bg-primary-black tw-p-md tw-text-center'>
@@ -66,7 +55,7 @@
                 >
                 <button
                   type='button'
-                  id='dismiss-button'
+                  id='decline-button'
                   class='tw-w-full tw-cursor-pointer p2 tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
                 >
                   Maybe Later
@@ -76,6 +65,20 @@
                   <div class='response tw-mt-xs' id='mce-success-response' c; style='display: none;'></div>
                 </div>
               </div>
+              <script
+                async
+                type='text/javascript'
+                src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'
+              ></script>
+              <script type='text/javascript'>
+                (function ($) {
+                  window.fnames = new Array();
+                  window.ftypes = new Array();
+                  fnames[0] = 'EMAIL';
+                  ftypes[0] = 'email';
+                })(jQuery);
+                var $mcj = jQuery.noConflict(true);
+              </script>
             </form>
           </div>
         </div>
