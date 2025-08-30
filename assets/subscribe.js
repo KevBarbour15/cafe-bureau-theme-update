@@ -5,20 +5,27 @@ class SubscribeForm extends HTMLElement {
 
   connectedCallback() {
     try {
+     
       let subscribeDismissed = localStorage.getItem('subscribeDismissed');
       this.subscribeContainer = document.getElementById('subscribe-container');
+      
+     
 
       if (subscribeDismissed !== null) {
+    
         this.hideContainer();
         return;
       }
 
       this.declineButton = document.getElementById('decline-button');
+      console.log('declineButton found:', this.declineButton);
 
       this.handleDecline = () => this.declineSubscribeConsent();
 
       this.declineButton.addEventListener('click', this.handleDecline);
+      console.log('Added click listener to decline button');
 
+      // Show immediately for testing
       this.showContainer();
     } catch (error) {
       console.error('Error initializing subscribe form:', error);
@@ -41,40 +48,31 @@ class SubscribeForm extends HTMLElement {
   }
 
   acceptSubscribeConsent() {
+    console.log('acceptSubscribeConsent called');
     localStorage.setItem('subscribeDismissed', 'true');
     this.hideContainer();
   }
 
   declineSubscribeConsent() {
+    console.log('declineSubscribeConsent called');
     localStorage.setItem('subscribeDismissed', 'true');
     this.hideContainer();
   }
 
   hideContainer() {
-    gsap.to(this.subscribeContainer, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        this.subscribeContainer.style.display = 'none';
-      }
-    });
+    console.log('hideContainer called');
+    // Simple hide without GSAP for testing
+    this.subscribeContainer.style.opacity = '0';
+    this.subscribeContainer.style.display = 'none';
+    console.log('Container hidden with simple method');
   }
 
   showContainer() {
-    gsap.set(this.subscribeContainer, {
-      opacity: 0,
-      display: "flex",
-      yPercent: 100,
-    });
-
-    gsap.to(this.subscribeContainer, {
-      delay: 1,
-      opacity: 1,
-      duration: 1,
-      ease: 'power4.inOut',
-      yPercent: 0,
-    });
+    console.log('showContainer called');
+    // Simple show without GSAP for testing
+    this.subscribeContainer.style.display = 'flex';
+    this.subscribeContainer.style.opacity = '1';
+    console.log('Container shown with simple method');
   }
 }
 
