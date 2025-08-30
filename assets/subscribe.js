@@ -14,17 +14,14 @@ class SubscribeForm extends HTMLElement {
       }
 
       this.declineButton = document.getElementById('decline-button');
-      this.acceptButton = document.getElementById('accept-button');
 
-      this.handleDecline = () => this.declineCookieConsent();
-      this.handleAccept = () => this.acceptCookieConsent();
+      this.handleDecline = () => this.declineSubscribeConsent();
 
       this.declineButton.addEventListener('click', this.handleDecline);
-      this.acceptButton.addEventListener('click', this.handleAccept);
 
       this.showContainer();
     } catch (error) {
-      console.error('Error initializing cookie consent:', error);
+      console.error('Error initializing subscribe form:', error);
     }
   }
 
@@ -32,27 +29,24 @@ class SubscribeForm extends HTMLElement {
     if (this.declineButton) {
       this.declineButton.removeEventListener('click', this.handleDecline);
     }
-    if (this.acceptButton) {
-      this.acceptButton.removeEventListener('click', this.handleAccept);
-    }
   }
 
   static getConsentStatus() {
     try {
       return localStorage.getItem('subscribeDismissed');
     } catch (error) {
-      console.error('Error reading cookie consent status:', error);
+      console.error('Error reading subscribe consent status:', error);
       return null;
     }
   }
 
-  acceptCookieConsent() {
+  acceptSubscribeConsent() {
     localStorage.setItem('subscribeDismissed', 'true');
     this.hideContainer();
   }
 
-  declineCookieConsent() {
-    localStorage.setItem('subscribeDismissed', 'false');
+  declineSubscribeConsent() {
+    localStorage.setItem('subscribeDismissed', 'true');
     this.hideContainer();
   }
 
