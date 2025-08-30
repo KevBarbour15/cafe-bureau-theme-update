@@ -1,59 +1,83 @@
-<subscribe-form>
-  <!-- Temporary test button -->
-  <button
-    id='test-subscribe-modal'
-    class='tw-fixed tw-top-4 tw-right-4 tw-bg-blue-500 tw-text-white tw-px-4 tw-py-2 tw-rounded tw-z-[9999]'
-    onclick='document.querySelector("subscribe-form").showContainer()'
-  >
-    Test Modal
-  </button>
+<script async type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+<script type='text/javascript'>
+  (function ($) {
+    window.fnames = new Array();
+    window.ftypes = new Array();
+    fnames[0] = 'EMAIL';
+    ftypes[0] = 'email';
+  })(jQuery);
+  var $mcj = jQuery.noConflict(true);
+</script>
 
-  <!-- Modal container -->
+<subscribe-form>
   <div
     id='subscribe-container'
-    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-z-50 tw-p-sm'
     style='display: none; opacity: 0;'
+    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-z-50 tw-p-sm'
   >
-    <!-- Modal content -->
     <div class='tw-bg-black/65 tw-border tw-border-black tw-backdrop-blur-md tw-shadow-2xl sm:tw-max-w-lg tw-w-full tw-mx-4 tw-overflow-hidden'>
-      <!-- Header -->
-      <div class='tw-bg-primary-black tw-p-lg tw-text-center'>
-        <h3 class='tw-text-primary-white tw-uppercase tw-text-xl tw-font-bold tw-mb-xs'>Stay Updated</h3>
-        <p class='tw-text-primary-white tw-text-sm tw-opacity-90'>
-          Get the latest news and exclusive offers delivered to your inbox
-        </p>
+      <div class='tw-bg-primary-black tw-p-md tw-text-center'>
+        <h2 class='h3 tw-text-primary-white tw-uppercase'>Stay Updated</h2>
       </div>
 
-      <!-- Body -->
-      <div class='tw-p-lg tw-text-center'>
-        <p class='tw-text-white tw-mb-lg'>
+      <div class='tw-p-md tw-text-center'>
+        <p class='tw-text-white tw-mb-md p2 tw-text-pretty'>
           Join our community and be the first to know about new products, special events, and insider deals.
         </p>
 
-        <!-- Email input field -->
-        <div class='tw-mb-lg'>
-          <input
-            type='email'
-            id='subscribe-email'
-            placeholder='Enter your email address'
-            class='tw-w-full tw-px-sm tw-py-xs tw-border tw-border-black tw-text-sm focus:tw-outline-none focus:tw-ring-primary-black focus:tw-border-transparent'
-          >
-        </div>
+        <div id='mc_embed_shell'>
+          <div id='mc_embed_signup'>
+            <form
+              action='https://cafe.us18.list-manage.com/subscribe/post?u=4f31a81e5766b3b529cc84e58&amp;id=06b4e2c4e3&amp;f_id=0044ade6f0'
+              method='post'
+              id='mc-embedded-subscribe-form'
+              name='mc-embedded-subscribe-form'
+              class='validate'
+              target='_blank'
+            >
+              <div class='mc-field-group'>
+                <input
+                  placeholder='Email Address'
+                  type='email'
+                  name='EMAIL'
+                  class='required email tw-border-b tw-border-black tw-h-20 tw-px-sm tw-uppercase p2 tw-w-full tw-mb-xs'
+                  id='mce-EMAIL'
+                  required=''
+                  value=''
+                >
+              </div>
 
-        <!-- Buttons -->
-        <div class='tw-flex tw-flex-col sm:tw-flex-row tw-gap-xs tw-w-full'>
-          <button
-            id='dismiss-button'
-                   class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
-          >
-            Maybe Later
-          </button>
-          <button
-            id='subscribe-button'
-               class='tw-w-full tw-cursor-pointer tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300''
-          >
-            Subscribe
-          </button>
+              <div aria-hidden='true' style='position: absolute; left: -5000px;'>
+                <input
+                  type='text'
+
+                  name='b_4f31a81e5766b3b529cc84e58_06b4e2c4e3'
+                  tabindex='-1'
+                  value=''
+                >
+              </div>
+              <div class='clear tw-flex tw-flex-col tw-gap-xs tw-w-full'>
+                <input
+                  type='submit'
+                  name='subscribe'
+                  id='mc-embedded-subscribe'
+                  class='tw-w-full tw-cursor-pointer tw-border p2 tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300 tw-font-bold'
+                  value='Subscribe'
+                >
+                <button
+                  type='button'
+                  id='dismiss-button'
+                  class='tw-w-full tw-cursor-pointer p2 tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
+                >
+                  Maybe Later
+                </button>
+                <div id='mce-responses' class='clear p1  tw-text-white'>
+                  <div class='response tw-mt-xs' id='mce-error-response' style='display: none;'></div>
+                  <div class='response tw-mt-xs' id='mce-success-response' c; style='display: none;'></div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -6,10 +6,18 @@ class SubscribeForm extends HTMLElement {
   connectedCallback() {
     try {
       let subscribeDismissed = localStorage.getItem('subscribeDismissed');
+      let lastVisitTime = localStorage.getItem('subscribeLastVisit');
       this.subscribeContainer = document.getElementById('subscribe-container');
       this.emailInput = document.getElementById('subscribe-email');
 
+      // Check if user has dismissed or subscribed
       if (subscribeDismissed !== null) {
+        this.hideContainer();
+        return;
+      }
+
+      // Check if enough time has passed since last visit (30 days)
+      if (lastVisitTime && !this.shouldShowPopup(lastVisitTime)) {
         this.hideContainer();
         return;
       }
@@ -29,6 +37,9 @@ class SubscribeForm extends HTMLElement {
       this.subscribeButton.addEventListener('click', this.handleSubscribe);
       document.addEventListener('keydown', this.handleEscapeKey);
 
+      // Record this visit time
+      this.recordVisit();
+      
       this.showContainer();
     } catch (error) {
       console.error('Error initializing subscribe form:', error);
@@ -43,6 +54,9 @@ class SubscribeForm extends HTMLElement {
       this.subscribeButton.removeEventListener('click', this.handleSubscribe);
     }
     document.removeEventListener('keydown', this.handleEscapeKey);
+    
+    // Ensure scroll is restored if component is removed
+    this.enableScroll();
   }
 
   static getSubscribeStatus() {
@@ -51,6 +65,32 @@ class SubscribeForm extends HTMLElement {
     } catch (error) {
       console.error('Error reading subscribe status:', error);
       return null;
+    }
+  }
+
+  shouldShowPopup(lastVisitTime) {
+    if (!lastVisitTime) {
+      return true; // First time visitor
+    }
+
+    try {
+      const lastVisit = new Date(parseInt(lastVisitTime));
+      const now = new Date();
+      const daysDiff = (now.getTime() - lastVisit.getTime()) / (1000 * 3600 * 24);
+      
+      // Show popup if more than 30 days have passed
+      return daysDiff >= 30;
+    } catch (error) {
+      console.error('Error calculating time difference:', error);
+      return true; // Show popup if there's an error
+    }
+  }
+
+  recordVisit() {
+    try {
+      localStorage.setItem('subscribeLastVisit', new Date().getTime().toString());
+    } catch (error) {
+      console.error('Error recording visit time:', error);
     }
   }
 
@@ -143,6 +183,7 @@ class SubscribeForm extends HTMLElement {
         ease: 'power2.inOut',
         onComplete: () => {
           this.subscribeContainer.style.display = 'none';
+          this.enableScroll(); // Re-enable scroll when hidden
         }
       });
     } else {
@@ -150,12 +191,16 @@ class SubscribeForm extends HTMLElement {
       this.subscribeContainer.style.opacity = '0';
       setTimeout(() => {
         this.subscribeContainer.style.display = 'none';
+        this.enableScroll(); // Re-enable scroll when hidden
       }, 300);
     }
   }
 
   showContainer() {
     console.log('showContainer called');
+    
+    // Disable scroll when popup opens
+    this.disableScroll();
     
     // Check if GSAP is available
     if (typeof gsap !== 'undefined') {
@@ -179,6 +224,38 @@ class SubscribeForm extends HTMLElement {
       setTimeout(() => {
         this.subscribeContainer.style.opacity = '1';
       }, 100);
+    }
+  }
+
+  disableScroll() {
+    try {
+      // Store current scroll position
+      this.scrollPosition = window.pageYOffset;
+      
+      // Add styles to prevent scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${this.scrollPosition}px`;
+      document.body.style.width = '100%';
+    } catch (error) {
+      console.error('Error disabling scroll:', error);
+    }
+  }
+
+  enableScroll() {
+    try {
+      // Remove scroll prevention styles
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      // Restore scroll position
+      if (this.scrollPosition !== undefined) {
+        window.scrollTo(0, this.scrollPosition);
+      }
+    } catch (error) {
+      console.error('Error enabling scroll:', error);
     }
   }
 }
