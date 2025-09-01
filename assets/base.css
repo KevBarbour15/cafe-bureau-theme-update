@@ -5,28 +5,6 @@
   font-style: normal
 }
 
-@font-face {
-  font-family: "Snell Roundhand";
-  src: url(Snell-Roundhand.otf);
-  font-weight: 400;
-  font-style: normal
-}
-
-
-@font-face {
-  font-family: "Tangerine";
-  src: url(Tangerine-Regular.ttf);
-  font-weight: 400;
-  font-style: normal
-}
-
-@font-face {
-  font-family: "Tangerine-Bold";
-  src: url(Tangerine-Bold.ttf);
-  font-weight: 700;
-  font-style: normal
-}
-
 :root {
   --gutter: 4px;
   --global-font: 'Atlas', 'Helvetica', sans-serif;

@@ -4,7 +4,7 @@ class InputAnimation extends HTMLElement {
   }
 
   connectedCallback() {
-    this.input = document.getElementsByClassName('subscribe-input');
+    this.input = document.getElementById('newsletter-heading');
 
 
     
@@ -13,14 +13,14 @@ class InputAnimation extends HTMLElement {
 
     this.inputAnimation = gsap.timeline({ repeat: -1 })
       .to(this.input, {
-        opacity: 0.3,
-        duration: 0.65,
-        ease: "power1.out"
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out"
       }, 0.25)
       .to(this.input, {
         opacity: 1,
-        duration: 0.65,
-        ease: "power1.in"
+        duration: 1,
+        ease: "power4.in"
       }, 0.95)
     
     

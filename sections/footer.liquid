@@ -1,5 +1,73 @@
 <input-animation>
   <footer class='tw-border-y tw-border-black z-[15] tw-text-black'>
+    <div class='tw-border-b tw-border-black tw-py-lg tw-w-full'>
+      <div class='tw-flex tw-items-center tw-justify-between md:tw-flex-row tw-flex-col tw-px-sm tw-w-full'>
+        <div class='tw-mb-lg md:tw-mb-0'>
+          <h3 id='newsletter-heading' class='tw-uppercase h3'>{{ section.settings.newsletter_heading }}</h3>
+        </div>
+        <div id='mc_embed_shell' class='tw-w-full md:tw-w-fit'>
+          <div id='mc_embed_signup' class='tw-w-full md:tw-w-fit'>
+            <form
+              action='https://cafe.us18.list-manage.com/subscribe/post?u=4f31a81e5766b3b529cc84e58&amp;id=06b4e2c4e3&amp;f_id=0044ade6f0'
+              method='post'
+              id='mc-embedded-subscribe-form'
+              name='mc-embedded-subscribe-form'
+              class='validate tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-gap-md md:tw-w-fit'
+              target='_blank'
+            >
+              <div class='mc-field-group tw-w-full md:tw-w-fit'>
+                <input
+                  placeholder='Email Address'
+                  type='email'
+                  name='EMAIL'
+                  class='required email tw-uppercase tw-flex-1 tw-w-full tw-h-full tw-px-sm tw-text-[16px] tw-min-h-[5.6rem] tw-bg-transparent tw-border-[1px] tw-border-black md:tw-mb-[unset] md:tw-w-[300px]'
+                  id='mce-EMAIL'
+                  required=''
+                  value=''
+                >
+              </div>
+
+              <div aria-hidden='true' style='position: absolute; left: -5000px;'>
+                <input
+                  type='text'
+                  name='b_4f31a81e5766b3b529cc84e58_06b4e2c4e3'
+                  tabindex='-1'
+                  value=''
+                >
+              </div>
+              <div class='tw-w-full md:tw-w-fit'>
+                <input
+                  type='submit'
+                  name='subscribe'
+                  id='mc-embedded-subscribe'
+                  class='tw-text-white p3 tw-bg-primary-black tw-border tw-cursor-pointer tw-border-primary-black hover:tw-text-primary-black hover:tw-bg-primary-white tw-transition tw-py-sm tw-px-md tw-uppercase tw-items-center tw-justify-center md:tw-w-fit tw-w-full'
+                  value='Subscribe'
+                >
+
+                <div id='mce-responses' class='clear p1  tw-text-white'>
+                  <div class='response tw-mt-xs' id='mce-error-response' style='display: none;'></div>
+                  <div class='response tw-mt-xs' id='mce-success-response' style='display: none;'></div>
+                </div>
+              </div>
+              <script
+                async
+                type='text/javascript'
+                src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'
+              ></script>
+              <script type='text/javascript'>
+                (function ($) {
+                  window.fnames = new Array();
+                  window.ftypes = new Array();
+                  fnames[0] = 'EMAIL';
+                  ftypes[0] = 'email';
+                })(jQuery);
+                var $mcj = jQuery.noConflict(true);
+              </script>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class='tw-block md:tw-flex md:tw-items-end tw-py-md  tw-h-auto md:tw-justify-between tw-px-sm'>
       <div class='tw-block tw-pb-sm md:tw-hidden'>
         {% render 'social-icons', settings: section.settings %}
