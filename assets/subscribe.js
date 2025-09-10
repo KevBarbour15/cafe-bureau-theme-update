@@ -21,12 +21,6 @@ class SubscribeForm extends HTMLElement {
       this.subscribeButton.addEventListener('click', () => this.handleSubscribe());
     }
 
-
-    // Show the container first
-    this.subscribeContainer.classList.remove('tw-opacity-0');
-    this.subscribeContainer.classList.remove('tw-hidden');
-    this.subscribeContainer.classList.add('tw-flex');
-
     // Animate the modal content
     const modalContent = this.querySelector('.modal-content');
     gsap.to(modalContent, {
