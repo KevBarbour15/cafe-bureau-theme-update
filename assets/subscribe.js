@@ -29,8 +29,15 @@ class SubscribeForm extends HTMLElement {
 
     // Animate the modal content
     const modalContent = this.querySelector('.modal-content');
-    gsap.set(modalContent, { opacity: 0, y: 100 });
-    
+    gsap.set(modalContent, {
+      opacity: 0, y: 100,
+      onComplete: () => {
+        this.subscribeContainer.classList.remove('tw-opacity-0');
+        this.subscribeContainer.classList.remove('tw-hidden');
+        this.subscribeContainer.classList.add('tw-flex');
+      }
+    });
+
     gsap.to(modalContent, {
       delay: 5,
       duration: 1,
@@ -38,11 +45,11 @@ class SubscribeForm extends HTMLElement {
       opacity: 1,
       y: 0,
       onComplete: () => {
-        document.body.classList.add('tw-overflow-hidden'); 
+        document.body.classList.add('tw-overflow-hidden');
       },
     });
 
-    
+
   }
 
   hideContainer() {
@@ -54,7 +61,7 @@ class SubscribeForm extends HTMLElement {
       ease: 'power2.inOut',
       onComplete: () => {
         this.subscribeContainer.style.display = 'none';
-        document.body.classList.remove('tw-overflow-hidden'); 
+        document.body.classList.remove('tw-overflow-hidden');
       },
     });
   }
