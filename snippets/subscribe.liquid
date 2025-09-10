@@ -1,87 +1,91 @@
-<subscribe-form>
-  <div
-    class='tw-fixed tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-p-sm'
-    style='z-index: 9999; display: none; opacity: 0;'
-  >
-    <div class='tw-bg-black/65 tw-border tw-border-black tw-backdrop-blur-md tw-shadow-2xl sm:tw-max-w-lg tw-w-full tw-mx-4 tw-overflow-hidden'>
-      <div class='tw-bg-primary-black tw-p-md tw-text-center'>
-        <h2 class='h3 tw-text-primary-white tw-uppercase'>Stay Updated</h2>
-      </div>
+{% if request.path != '/' %}
+  <subscribe-form>
+    <div
+      id='subscribe-container'
+      class='tw-fixed tw-inset-0 tw-hidden tw-items-center tw-justify-center tw-p-sm tw-z-[9999] tw-opacity-0'
+    >
+      <div
+        class='modal-content tw-relative tw-backdrop-blur-md tw-bg-primary-black/50  tw-border tw-border-black tw-shadow-2xl sm:tw-max-w-lg tw-w-full tw-mx-4'
+      >
+        <div class='tw-bg-primary-black tw-p-md tw-text-center'>
+          <h2 class='h3 tw-text-primary-white tw-uppercase'>Stay Updated</h2>
+        </div>
 
-      <div class='tw-p-md tw-text-center'>
-        <p class='tw-text-white tw-mb-md p2 tw-text-pretty'>
-          Join our community and be the first to know about new products, special events, and insider deals.
-        </p>
+        <div class='tw-p-md tw-text-center'>
+          <p class='tw-text-white tw-mb-md p2 tw-text-pretty'>
+            Join our community and be the first to know about new products, special events, and insider deals.
+          </p>
 
-        <div id='mc_embed_shell'>
-          <div id='mc_embed_signup'>
-            <form
-              action='https://cafe.us18.list-manage.com/subscribe/post?u=4f31a81e5766b3b529cc84e58&amp;id=06b4e2c4e3&amp;f_id=0044ade6f0'
-              method='post'
-              id='mc-embedded-subscribe-form'
-              name='mc-embedded-subscribe-form'
-              class='validate'
-              target='_blank'
-            >
-              <div class='mc-field-group'>
-                <input
-                  placeholder='Email Address'
-                  type='email'
-                  name='EMAIL'
-                  class='required email tw-border-b tw-border-black tw-h-20 tw-px-sm tw-uppercase p2 tw-w-full tw-mb-xs'
-                  id='mce-EMAIL'
-                  required=''
-                  value=''
-                >
-              </div>
-
-              <div aria-hidden='true' style='position: absolute; left: -5000px;'>
-                <input
-                  type='text'
-
-                  name='b_4f31a81e5766b3b529cc84e58_06b4e2c4e3'
-                  tabindex='-1'
-                  value=''
-                >
-              </div>
-              <div class='clear tw-flex tw-flex-col tw-gap-xs tw-w-full'>
-                <input
-                  type='submit'
-                  name='subscribe'
-                  id='mc-embedded-subscribe'
-                  class='tw-w-full tw-cursor-pointer tw-border p2 tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300 tw-font-bold'
-                  value='Subscribe'
-                >
-                <button
-                  type='button'
-                  id='decline-button'
-                  class='tw-w-full tw-cursor-pointer p2 tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
-                >
-                  Maybe Later
-                </button>
-                <div id='mce-responses' class='clear p1  tw-text-white'>
-                  <div class='response tw-mt-xs' id='mce-error-response' style='display: none;'></div>
-                  <div class='response tw-mt-xs' id='mce-success-response' style='display: none;'></div>
+          <div id='mc_embed_shell'>
+            <div id='mc_embed_signup'>
+              <form
+                action='https://cafe.us18.list-manage.com/subscribe/post?u=4f31a81e5766b3b529cc84e58&amp;id=06b4e2c4e3&amp;f_id=0044ade6f0'
+                method='post'
+                id='mc-embedded-subscribe-form'
+                name='mc-embedded-subscribe-form'
+                class='validate'
+                target='_blank'
+              >
+                <div class='mc-field-group'>
+                  <input
+                    placeholder='Email Address'
+                    type='email'
+                    name='EMAIL'
+                    class='required email tw-border-b tw-border-black tw-h-20 tw-px-sm tw-uppercase p2 tw-w-full tw-mb-xs'
+                    id='mce-EMAIL'
+                    required
+                    value=''
+                  >
                 </div>
-              </div>
-              <script
-                async
-                type='text/javascript'
-                src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'
-              ></script>
-              <script type='text/javascript'>
-                (function ($) {
-                  window.fnames = new Array();
-                  window.ftypes = new Array();
-                  fnames[0] = 'EMAIL';
-                  ftypes[0] = 'email';
-                })(jQuery);
-                var $mcj = jQuery.noConflict(true);
-              </script>
-            </form>
+
+                <div aria-hidden='true' style='position: absolute; left: -5000px;'>
+                  <input
+                    type='text'
+                    name='b_4f31a81e5766b3b529cc84e58_06b4e2c4e3'
+                    tabindex='-1'
+                    value=''
+                  >
+                </div>
+
+                <div class='clear tw-flex tw-flex-col tw-gap-xs tw-w-full'>
+                  <input
+                    id='subscribe-button'
+                    type='submit'
+                    name='subscribe'
+                    class='tw-w-full tw-cursor-pointer tw-border p2 tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300 tw-font-bold'
+                    value='Subscribe'
+                  >
+                  <button
+                    type='button'
+                    id='decline-button'
+                    class='tw-w-full tw-cursor-pointer p2 tw-border tw-border-black tw-bg-black tw-text-white tw-uppercase tw-py-sm md:hover:tw-bg-white md:hover:tw-text-black tw-transition-all tw-duration-300'
+                  >
+                    Maybe Later
+                  </button>
+                  <div id='mce-responses' class='clear p1 tw-text-white'>
+                    <div class='response tw-mt-xs' id='mce-error-response' style='display: none;'></div>
+                    <div class='response tw-mt-xs' id='mce-success-response' style='display: none;'></div>
+                  </div>
+                </div>
+                <script
+                  async
+                  type='text/javascript'
+                  src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'
+                ></script>
+                <script type='text/javascript'>
+                  (function ($) {
+                    window.fnames = new Array();
+                    window.ftypes = new Array();
+                    fnames[0] = 'EMAIL';
+                    ftypes[0] = 'email';
+                  })(jQuery);
+                  var $mcj = jQuery.noConflict(true);
+                </script>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</subscribe-form>
+  </subscribe-form>
+{% endif %}

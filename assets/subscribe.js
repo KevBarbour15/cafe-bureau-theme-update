@@ -1,78 +1,81 @@
 class SubscribeForm extends HTMLElement {
- constructor() {
-    super();
-  }
-
   connectedCallback() {
-    try {
-     
-      let subscribeDismissed = localStorage.getItem('subscribeDismissed');
-      this.subscribeContainer = document.getElementById('subscribe-container');
-      
-     
-
-      if (subscribeDismissed !== null) {
-    
-        this.hideContainer();
-        return;
-      }
-
-      this.declineButton = document.getElementById('decline-button');
-      console.log('declineButton found:', this.declineButton);
-
-      this.handleDecline = () => this.declineSubscribeConsent();
-
-      this.declineButton.addEventListener('click', this.handleDecline);
-      console.log('Added click listener to decline button');
-
-      // Show immediately for testing
-      this.showContainer();
-    } catch (error) {
-      console.error('Error initializing subscribe form:', error);
+    // Check if user already dismissed the popup
+    if (localStorage.getItem('subscribeDismissed') === 'true') {
+      //return;
     }
-  }
 
-  disconnectedCallback() {
+    this.subscribeContainer = this.querySelector('#subscribe-container');
+    this.declineButton = this.querySelector('#decline-button');
+    this.subscribeButton = this.querySelector('#subscribe-button');
+
+
+
     if (this.declineButton) {
-      this.declineButton.removeEventListener('click', this.handleDecline);
+      this.declineButton.addEventListener('click', () => {
+        localStorage.setItem('subscribeDismissed', 'true');
+        this.hideContainer();
+      });
     }
-  }
-
-  static getConsentStatus() {
-    try {
-      return localStorage.getItem('subscribeDismissed');
-    } catch (error) {
-      console.error('Error reading subscribe consent status:', error);
-      return null;
+    if (this.subscribeButton) {
+      this.subscribeButton.addEventListener('click', () => this.handleSubscribe());
     }
-  }
 
-  acceptSubscribeConsent() {
-    console.log('acceptSubscribeConsent called');
-    localStorage.setItem('subscribeDismissed', 'true');
-    this.hideContainer();
-  }
 
-  declineSubscribeConsent() {
-    console.log('declineSubscribeConsent called');
-    localStorage.setItem('subscribeDismissed', 'true');
-    this.hideContainer();
+    // Show the container first
+    this.subscribeContainer.classList.remove('tw-opacity-0');
+    this.subscribeContainer.classList.remove('tw-hidden');
+    this.subscribeContainer.classList.add('tw-flex');
+
+    // Animate the modal content
+    const modalContent = this.querySelector('.modal-content');
+    gsap.set(modalContent, { opacity: 0, y: 100 });
+    
+    gsap.to(modalContent, {
+      delay: 5,
+      duration: 1,
+      ease: 'power4.inOut',
+      opacity: 1,
+      y: 0,
+    });
+
+    document.body.classList.add('tw-overflow-hidden'); 
   }
 
   hideContainer() {
-    console.log('hideContainer called');
-    // Simple hide without GSAP for testing
-    this.subscribeContainer.style.opacity = '0';
-    this.subscribeContainer.style.display = 'none';
-    console.log('Container hidden with simple method');
+    const modalContent = this.querySelector('.modal-content');
+    gsap.to(modalContent, {
+      opacity: 0,
+      y: 100,
+      duration: 0.5,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        this.subscribeContainer.style.display = 'none';
+        document.body.classList.remove('tw-overflow-hidden'); 
+      },
+    });
   }
 
-  showContainer() {
-    console.log('showContainer called');
-    // Simple show without GSAP for testing
-    this.subscribeContainer.style.display = 'flex';
-    this.subscribeContainer.style.opacity = '1';
-    console.log('Container shown with simple method');
+  handleSubscribe() {
+    const successResponse = this.querySelector('#mce-success-response');
+    const errorResponse = this.querySelector('#mce-error-response');
+
+    const observer = new MutationObserver(() => {
+      if (successResponse && successResponse.style.display !== 'none') {
+        localStorage.setItem('subscribeDismissed', 'true');
+        setTimeout(() => this.hideContainer(), 3000);
+        observer.disconnect();
+      }
+      if (errorResponse && errorResponse.style.display !== 'none') {
+        observer.disconnect(); // keep modal open
+      }
+    });
+    observer.observe(this.querySelector('#mce-responses'), {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style'],
+    });
   }
 }
 
