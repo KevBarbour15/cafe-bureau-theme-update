@@ -29,17 +29,16 @@ class SubscribeForm extends HTMLElement {
 
     // Animate the modal content
     const modalContent = this.querySelector('.modal-content');
-    gsap.set(modalContent, {
+    gsap.to(modalContent, {
       opacity: 0, y: 100,
+      delay: 5,
       onComplete: () => {
         this.subscribeContainer.classList.remove('tw-opacity-0');
         this.subscribeContainer.classList.remove('tw-hidden');
         this.subscribeContainer.classList.add('tw-flex');
       }
-    });
-
-    gsap.to(modalContent, {
-      delay: 5,
+    }).to(modalContent, {
+      
       duration: 1,
       ease: 'power4.inOut',
       opacity: 1,
