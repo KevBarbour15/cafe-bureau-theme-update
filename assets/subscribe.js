@@ -37,9 +37,12 @@ class SubscribeForm extends HTMLElement {
       ease: 'power4.inOut',
       opacity: 1,
       y: 0,
+      onComplete: () => {
+        document.body.classList.add('tw-overflow-hidden'); 
+      },
     });
 
-    document.body.classList.add('tw-overflow-hidden'); 
+    
   }
 
   hideContainer() {
