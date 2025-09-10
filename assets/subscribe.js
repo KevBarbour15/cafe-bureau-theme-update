@@ -2,7 +2,7 @@ class SubscribeForm extends HTMLElement {
   connectedCallback() {
     // Check if user already dismissed the popup
     if (localStorage.getItem('subscribeDismissed') === 'true') {
-      //return;
+      return;
     }
 
     this.subscribeContainer = this.querySelector('#subscribe-container');
