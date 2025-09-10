@@ -21,27 +21,29 @@ class SubscribeForm extends HTMLElement {
       this.subscribeButton.addEventListener('click', () => this.handleSubscribe());
     }
 
+
+    
+
+
     // Animate the modal content
     const modalContent = this.querySelector('.modal-content');
-    gsap.to(modalContent, {
-      opacity: 0, y: 100,
-      delay: 5,
-      onComplete: () => {
-        this.subscribeContainer.classList.remove('tw-opacity-0');
-        this.subscribeContainer.classList.remove('tw-hidden');
-        this.subscribeContainer.classList.add('tw-flex');
-      }
-    }).to(modalContent, {
-      
-      duration: 1,
-      ease: 'power4.inOut',
-      opacity: 1,
-      y: 0,
-      onComplete: () => {
-        document.body.classList.add('tw-overflow-hidden');
-      },
-    });
+    setTimeout(() => {
+      this.subscribeContainer.classList.remove('tw-opacity-0');
+      this.subscribeContainer.classList.remove('tw-hidden');
+      this.subscribeContainer.classList.add('tw-flex');
 
+      gsap.set(modalContent, {
+        opacity: 0, y: 100,
+      })
+    
+      gsap.to(modalContent, {
+        duration: 1,
+        ease: 'power4.inOut',
+        opacity: 1,
+        y: 0,
+      });
+
+    }, 5000);
 
   }
 
@@ -53,7 +55,9 @@ class SubscribeForm extends HTMLElement {
       duration: 0.5,
       ease: 'power2.inOut',
       onComplete: () => {
-        this.subscribeContainer.style.display = 'none';
+        this.subscribeContainer.classList.add('tw-opacity-0');
+        this.subscribeContainer.classList.add('tw-hidden');
+        this.subscribeContainer.classList.remove('tw-flex');
         document.body.classList.remove('tw-overflow-hidden');
       },
     });
