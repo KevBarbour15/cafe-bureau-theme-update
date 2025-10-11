@@ -570,6 +570,10 @@ video {
   position: relative;
 }
 
+.tw-sticky {
+  position: sticky;
+}
+
 .tw-inset-0 {
   inset: 0px;
 }
@@ -644,6 +648,14 @@ video {
 
 .tw-top-\[7px\] {
   top: 7px;
+}
+
+.tw-top-\[120px\] {
+  top: 120px;
+}
+
+.tw-top-\[80px\] {
+  top: 80px;
 }
 
 .tw-z-50 {
@@ -910,6 +922,14 @@ video {
   max-height: 80vh;
 }
 
+.tw-max-h-\[calc\(100vh-80px\)\] {
+  max-height: calc(100vh - 80px);
+}
+
+.tw-max-h-\[calc\(100vh-120px\)\] {
+  max-height: calc(100vh - 120px);
+}
+
 .tw-min-h-\[4\.8rem\] {
   min-height: 4.8rem;
 }
@@ -936,6 +956,10 @@ video {
 
 .tw-min-h-svh {
   min-height: 100svh;
+}
+
+.tw-min-h-full {
+  min-height: 100%;
 }
 
 .tw-w-1\/2 {
@@ -1112,6 +1136,10 @@ video {
   flex-wrap: wrap;
 }
 
+.tw-items-start {
+  align-items: flex-start;
+}
+
 .tw-items-end {
   align-items: flex-end;
 }
@@ -1168,6 +1196,10 @@ video {
   gap: 4px;
 }
 
+.tw-gap-0 {
+  gap: 0px;
+}
+
 .tw-gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -1197,6 +1229,10 @@ video {
   row-gap: 24px;
 }
 
+.tw-self-start {
+  align-self: flex-start;
+}
+
 .tw-justify-self-end {
   justify-self: end;
 }
@@ -1211,6 +1247,10 @@ video {
 
 .tw-overflow-x-auto {
   overflow-x: auto;
+}
+
+.tw-overflow-y-auto {
+  overflow-y: auto;
 }
 
 .tw-overflow-x-hidden {
@@ -1472,6 +1512,10 @@ video {
 
 .tw-pt-xs {
   padding-top: 8px;
+}
+
+.tw-pb-xl {
+  padding-bottom: 48px;
 }
 
 .tw-text-left {

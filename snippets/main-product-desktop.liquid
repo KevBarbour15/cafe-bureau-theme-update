@@ -14,21 +14,27 @@
 {% endcomment %}
 
 {% assign padding_top = '' %}
+{% assign sticky_top = '' %}
+{% assign sticky_max_height = '' %}
 {% assign details_video_height = 'tw-h-[calc(100dvh-120px-64px)]' %}
 {% if subheader_enabled %}
   {% assign padding_top = 'tw-pt-[120px]' %}
+  {% assign sticky_top = 'tw-top-[120px]' %}
+  {% assign sticky_max_height = 'tw-max-h-[calc(100vh-120px)]' %}
 {% else %}
   {% assign padding_top = 'tw-pt-[80px]' %}
+  {% assign sticky_top = 'tw-top-[80px]' %}
+  {% assign sticky_max_height = 'tw-max-h-[calc(100vh-80px)]' %}
   {% assign details_video_height = 'tw-h-[calc(100dvh-80px-64px)]' %}
 {% endif %}
 
-<product-page-scroll>
-  <accordion-component>
+<product-page-scroll style='display: block;'>
+  <accordion-component style='display: block;'>
     <div class='tw-w-full tw-block tw-text-black'>
-      <div class='tw-w-full tw-flex tw-h-full'>
+      <div class='tw-w-full tw-flex tw-items-start tw-gap-0'>
         <div
           id='image-container'
-          class='tw-w-1/2 md:tw-pr-md xl:tw-pr-lg tw-pb-10 tw-relative tw-h-full {{ padding_top }}'
+          class='tw-w-1/2 md:tw-pr-md xl:tw-pr-lg tw-pb-10 tw-relative {{ padding_top }}'
         >
           {% render 'product-media-gallery', active_variant: active_variant %}
 
@@ -46,10 +52,10 @@
 
         <div
           id='details-container'
-          style='opacity: 0;'
-          class='card md:tw-w-1/2 tw-h-full tw-z-[2]  {{ padding_top }}'
+
+          class='md:tw-w-1/2 tw-sticky {{ sticky_top }} tw-z-[2] tw-self-start'
         >
-          <div class='tw-w-full tw-block tw-pt-xl md:tw-pl-lg xl:tw-pl-xxl'>
+          <div class='tw-w-full tw-block tw-pt-xl md:tw-pl-lg xl:tw-pl-xxl tw-pb-xl {{ sticky_max_height }} tw-overflow-y-auto'>
             {% if product.title != blank %}
               <div class='tw-mb-lg'>
                 <p class='tw-mb-lg tw-uppercase tw-leading-none'>{{ product.title }}</p>
@@ -134,30 +140,29 @@
                 </p>
               </div>
             {% endif %}
-            {% comment %}
-              {% if product.metafields.custom.size_guide != blank %}
+
+            {% if product.metafields.custom.size_guide != blank %}
+              <div
+                class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-py-sm tw-flex-row tw-justify-between tw-border-b tw-border-black tw-uppercase'
+              >
+                <p class='tw-leading-none'>Size Guide</p>
                 <div
-                  class='accordion-header tw-cursor-pointer tw-items-center tw-flex tw-py-sm tw-flex-row tw-justify-between tw-border-b tw-border-black tw-uppercase'
+                  class='down-icon tw-transition-all tw-duration-300'
                 >
-                  <p class='tw-leading-none'>Size Guide</p>
-                  <div
-                    class='down-icon tw-transition-all tw-duration-300'
-                  >
-                    {% render 'down-arrow', size: 20 %}
-                  </div>
+                  {% render 'down-arrow', size: 20 %}
                 </div>
-                <div
-                  class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden '
-                >
-                  <p class='tw-text-pretty p2  tw-pt-xs'>
-                    All measurements are in inches and taken across the garment while laid flat.
-                  </p>
-                  <p class='tw-text-pretty p2 '>
-                    {{ product.metafields.custom.size_guide }}
-                  </p>
-                </div>
-              {% endif %}
-            {% endcomment %}
+              </div>
+              <div
+                class='accordion-content tw-hidden tw-max-h-0 tw-opacity-0 tw-pr-sm md:tw-pr-md tw-border-b tw-border-transparent tw-overflow-hidden '
+              >
+                <p class='tw-text-pretty p2  tw-pt-xs'>
+                  All measurements are in inches and taken across the garment while laid flat.
+                </p>
+                <p class='tw-text-pretty p2 '>
+                  {{ product.metafields.custom.size_guide }}
+                </p>
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
