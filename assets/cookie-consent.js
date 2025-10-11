@@ -1,15 +1,18 @@
 class CookieConsent extends HTMLElement {
   constructor() {
     super();
+    this.consentStatus = null;
   }
 
   connectedCallback() {
     try {
-      let cookieConsent = localStorage.getItem('cookieConsent');
+      this.consentStatus = localStorage.getItem('cookieConsent');
       this.cookieConsentContainer = document.getElementById('cookie-consent-container');
 
-      if (cookieConsent !== null) {
+      // If consent already given, hide banner and load scripts
+      if (this.consentStatus !== null) {
         this.hideContainer();
+        this.loadScriptsBasedOnConsent();
         return;
       }
 
@@ -48,12 +51,16 @@ class CookieConsent extends HTMLElement {
 
   acceptCookieConsent() {
     localStorage.setItem('cookieConsent', 'true');
+    this.consentStatus = 'true';
     this.hideContainer();
+    this.loadScriptsBasedOnConsent();
   }
 
   declineCookieConsent() {
     localStorage.setItem('cookieConsent', 'false');
+    this.consentStatus = 'false';
     this.hideContainer();
+    this.loadScriptsBasedOnConsent();
   }
 
   hideContainer() {
@@ -81,6 +88,64 @@ class CookieConsent extends HTMLElement {
       ease: 'power4.inOut',
       yPercent: 0,
     });
+  }
+
+  loadScriptsBasedOnConsent() {
+    if (this.consentStatus === 'true') {
+      // Load tracking scripts when consent is given
+      this.loadTrackingScripts();
+      this.enableMailchimp();
+    } else {
+      // Block tracking scripts when consent is declined
+      this.blockTrackingScripts();
+      this.disableMailchimp();
+    }
+  }
+
+  loadTrackingScripts() {
+    // Load external CDN scripts
+    this.loadExternalScript('https://unpkg.com/embla-carousel/embla-carousel.umd.js');
+    this.loadExternalScript('https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js');
+    this.loadExternalScript('https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js');
+    
+    // Dispatch event to load Shopify tracking scripts
+    window.dispatchEvent(new CustomEvent('cookieConsentAccepted'));
+  }
+
+  blockTrackingScripts() {
+    // Block external scripts by removing them
+    const externalScripts = document.querySelectorAll('script[src*="unpkg.com"]');
+    externalScripts.forEach(script => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    });
+    
+    // Dispatch event to block Shopify tracking scripts
+    window.dispatchEvent(new CustomEvent('cookieConsentDeclined'));
+  }
+
+  loadExternalScript(src) {
+    const script = document.createElement('script');
+    script.src = src;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
+  enableMailchimp() {
+    // Enable Mailchimp newsletter signup
+    const subscribeContainer = document.getElementById('subscribe-form-container');
+    if (subscribeContainer) {
+      subscribeContainer.style.display = 'block';
+    }
+  }
+
+  disableMailchimp() {
+    // Disable Mailchimp newsletter signup
+    const subscribeContainer = document.getElementById('subscribe-form-container');
+    if (subscribeContainer) {
+      subscribeContainer.style.display = 'none';
+    }
   }
 }
 

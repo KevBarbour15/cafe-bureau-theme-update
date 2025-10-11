@@ -22,9 +22,6 @@ class SubscribeForm extends HTMLElement {
     }
 
 
-    
-
-
     // Animate the modal content
     const modalContent = this.querySelector('.modal-content');
     setTimeout(() => {
