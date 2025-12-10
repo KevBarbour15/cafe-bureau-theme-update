@@ -10,6 +10,8 @@ This is a Shopify theme that uses Tailwind CSS for styling. The theme includes v
 
 To run tailwindcss, use the following in a separate terminal:
 
+shopify theme dev --store the-dc-bureau.myshopify.com 
+
 ```npx tailwindcss -i ./assets/app-tailwind.css -o ./assets/app.css --watch```
 
 All tailwind classes should be used with the prefix "tw-".

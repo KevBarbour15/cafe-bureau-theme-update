@@ -56,6 +56,17 @@
               >
             </div>
           {% endif %}
+          {% if active_variant.metafields.custom.variant_model_image != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+              <img
+                src='{{ active_variant.metafields.custom.variant_model_image | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-full tw-h-full tw-object-cover tw-mx-auto'
+                width='100%'
+                height='auto'
+              >
+            </div>
+          {% endif %}
         {% else %}
           {% if active_variant.featured_media.preview_image != blank %}
             <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
