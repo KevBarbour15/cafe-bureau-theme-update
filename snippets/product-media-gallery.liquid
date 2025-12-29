@@ -51,6 +51,21 @@
         >
       </div>
     {% endif %}
+
+    {% if active_variant.metafields.custom.variant_model_image_2 != blank %}
+      <div
+        class='card tw-w-auto tw-max-h-[80vh] tw-relative tw-flex tw-items-center tw-justify-center'
+        style='aspect-ratio: 4/5; opacity: 0;'
+      >
+        <img
+          src='{{ active_variant.metafields.custom.variant_model_image_2 | image_url: width: 1000 }}'
+          alt='{{ product.title }}'
+          class='tw-w-auto tw-h-full tw-object-cover tw-object-center tw-mx-auto'
+          width='100%'
+          height='auto'
+        >
+      </div>
+    {% endif %}
   {% else %}
     {% if active_variant.featured_media.preview_image != blank %}
       <div class='card tw-w-auto tw-max-h-[80vh] tw-relative bg-red-500' style='aspect-ratio: 4/5; ;'>

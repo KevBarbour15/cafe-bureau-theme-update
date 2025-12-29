@@ -67,6 +67,17 @@
               >
             </div>
           {% endif %}
+          {% if active_variant.metafields.custom.variant_model_image_2 != blank %}
+            <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
+              <img
+                src='{{ active_variant.metafields.custom.variant_model_image_2 | image_url: width: 1000 }}'
+                alt='{{ product.title }}'
+                class='tw-w-auto tw-h-full tw-object-containtw-mx-auto'
+                width='auto'
+                height='100%'
+              >
+            </div>
+          {% endif %}
         {% else %}
           {% if active_variant.featured_media.preview_image != blank %}
             <div class='embla__slide tw-flex tw-justify-center tw-flex-[0_0_100%] tw-h-[75vh]'>
@@ -246,9 +257,11 @@
           <p class='tw-text-pretty p2 tw-pt-xs '>
             All measurements are in inches and taken across the garment while laid flat.
           </p>
-          <p class='tw-text-pretty p2 '>
-            {{ product.metafields.custom.size_guide }}
-          </p>
+          <div class='tw-overflow-x-auto tw-max-w-full tw-mt-xs md:tw-overflow-x-visible'>
+            <div class='tw-min-w-max md:tw-min-w-0'>
+              {{ product.metafields.custom.size_guide }}
+            </div>
+          </div>
         </div>
       {% endif %}
       <div class='tw-mt-md card' style='opacity: 0;'>
