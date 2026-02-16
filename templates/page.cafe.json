@@ -86,12 +86,11 @@
         },
         "event_eJUKp8": {
           "type": "event",
-          "disabled": true,
           "settings": {
-            "event_title": "NBD RADIO LIVE",
-            "event_time": "5pm - 10pm",
-            "event_date": "August 2nd , 2025",
-            "event_description": "<p>NBD LIVE - Featuring ALESKA, MISHA SAVAGE, CHELSEA, VV$, KWEKU, KC</p>",
+            "event_title": "Tote Painting Workshop",
+            "event_time": "6-10pm",
+            "event_date": "2/19/26",
+            "event_description": "",
             "event_link_text": "",
             "event_link": ""
           }
