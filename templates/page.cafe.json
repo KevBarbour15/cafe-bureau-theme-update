@@ -73,6 +73,17 @@
     "main_cafe_upcoming_events_JrXjPY": {
       "type": "main-cafe-upcoming-events",
       "blocks": {
+        "event_6px4YY": {
+          "type": "event",
+          "settings": {
+            "event_title": "Gone Swimming - Wednesday Night Pool Club",
+            "event_time": "6-10pm",
+            "event_date": "2/18/26",
+            "event_description": "",
+            "event_link_text": "",
+            "event_link": ""
+          }
+        },
         "event_eJUKp8": {
           "type": "event",
           "disabled": true,
@@ -87,9 +98,9 @@
         }
       },
       "block_order": [
+        "event_6px4YY",
         "event_eJUKp8"
       ],
-      "disabled": true,
       "settings": {
         "heading": "Upcoming Events",
         "subheading": ""
